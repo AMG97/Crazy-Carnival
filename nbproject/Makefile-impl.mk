@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Crazy_Carnival
+PROJECTNAME=Crazy-Carnival
 
 # Active Configuration
 DEFAULTCONF=Debug

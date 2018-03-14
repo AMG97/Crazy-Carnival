@@ -47,7 +47,7 @@
           <standard>11</standard>
           <incDir>
             <pElem>/usr/include/SFML</pElem>
-            <pElem>../../Desktop/FV/Proyectos NetBeans/Crazy_Carnival/Box2D</pElem>
+            <pElem>Box2D</pElem>
             <pElem>tinyxml</pElem>
           </incDir>
         </ccTool>
@@ -59,7 +59,7 @@
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-graphics.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-system.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-window.so</linkerLibFileItem>
-            <linkerLibFileItem>../../Desktop/FV/Proyectos NetBeans/Crazy_Carnival/libbox2d.a</linkerLibFileItem>
+            <linkerLibFileItem>libbox2d.a</linkerLibFileItem>
             <linkerLibFileItem>libtinyxml.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>

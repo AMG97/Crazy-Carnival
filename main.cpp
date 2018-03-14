@@ -26,8 +26,8 @@ string floatToStr(float number);
 float framesPS(sf::Clock &);
 
 int main() {
-    /*TiXmlDocument doc( "demo.xml" );
-    doc.LoadFile();*/
+    TiXmlDocument doc( "demo.xml" );
+    doc.LoadFile();
     sf::RenderWindow app(sf::VideoMode(800,600,32),"Application");
 
     b2Vec2 gravity(0.0f, 9.8f);
