@@ -19,8 +19,13 @@ public:
     Player();
     Player(const Player& orig);
     virtual ~Player();
-private:
-
+    float curar(float vRecuperada);
+    float danyo(float vPerdida);
+protected:
+    float vida;
+    float enfriamiento;
+    float totalVida;
+    float totalEnfriamiento;
 };
 
 #endif /* PLAYER_H */

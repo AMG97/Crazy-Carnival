@@ -14,6 +14,11 @@
 #include "player.h"
 
 Player::Player() {
+    //pruebas jugador, variables
+    vida = 60.0;
+    enfriamiento = 0.0;
+    totalVida = vida;
+    totalEnfriamiento = 30.0;
 }
 
 Player::Player(const Player& orig) {

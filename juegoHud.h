@@ -14,14 +14,18 @@
 #ifndef JUEGOHUD_H
 #define JUEGOHUD_H
 
-class JuegoHud {
+class JuegoHud{
 public:
     JuegoHud();
     //JuegoHud(const JuegoHud& orig);
     virtual ~JuegoHud();
     sf::Texture establecerTexturas(sf::String direccion);
+    void loop(sf::RenderWindow &window);
+    
 private:
-
+    Hud *hud;
+    sf::Clock *reloj;
+    sf::Time *tiempo;
 };
 
 #endif /* JUEGOHUD_H */
