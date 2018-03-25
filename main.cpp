@@ -26,6 +26,10 @@ string floatToStr(float number);
 float framesPS(sf::Clock &);
 
 int main() {
+    
+    //Variables HUD
+    Hud *hud = new Hud();
+    //END Variables HUD
     TiXmlDocument doc( "demo.xml" );
     doc.LoadFile();
     sf::RenderWindow app(sf::VideoMode(800,600,32),"Application");
