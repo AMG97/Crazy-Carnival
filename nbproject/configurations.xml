@@ -4,6 +4,14 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Estado.hpp</itemPath>
+      <itemPath>EstadoMenu.hpp</itemPath>
+      <itemPath>EstadosManager.hpp</itemPath>
+      <itemPath>Juego.hpp</itemPath>
+      <itemPath>Recursos.hpp</itemPath>
+      <itemPath>Texto.cpp</itemPath>
+      <itemPath>Texto.hpp</itemPath>
+      <itemPath>Ventana.hpp</itemPath>
       <itemPath>box.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -13,6 +21,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>EstadoMenu.cpp</itemPath>
+      <itemPath>EstadosManager.cpp</itemPath>
+      <itemPath>Juego.cpp</itemPath>
+      <itemPath>Recursos.cpp</itemPath>
+      <itemPath>Ventana.cpp</itemPath>
       <itemPath>box.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -64,6 +77,32 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Texto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ventana.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="box.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
@@ -91,6 +130,32 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Texto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ventana.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="box.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
