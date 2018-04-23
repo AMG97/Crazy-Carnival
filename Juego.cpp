@@ -28,9 +28,12 @@ namespace Crazy
         _ventana = Ventana::Instance();
         _ventana->CrearVentana(ancho, alto, titulo);
         
+        // Cargar fuentes
+        recursos.CargarFuente("DK","resources/font/dk-face-your-fears.ttf");
+        recursos.CargarFuente("Z","resources/font/zombified.ttf");
+        
+        
         maquina.Anyadir(new EstadoMenu(), true);
-        
-        
         
         while (_ventana->EstaAbierta())
         {

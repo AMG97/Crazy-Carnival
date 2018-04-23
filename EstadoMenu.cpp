@@ -1,4 +1,6 @@
 #include "EstadoMenu.hpp"
+#include "Texto.hpp"
+using namespace Motor;
 
 namespace Crazy
 {
@@ -26,6 +28,10 @@ namespace Crazy
     
     void EstadoMenu::Init()
     {
+        text.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        text.CambiarTexto("Crazy Carnival");
+        text.CambiarTamanyo(50);
+        text.CambiarPosicion(_juego->ancho/2, 100);
         
     }
     
@@ -41,6 +47,10 @@ namespace Crazy
     
     void EstadoMenu::Dibujar(float tiempoActual)
     {
+        _juego->_ventana->Limpiar();
         
+        _juego->_ventana->draw(text);
+        
+        _juego->_ventana->Mostrar();
     }
 }
