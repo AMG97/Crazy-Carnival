@@ -25,13 +25,15 @@ namespace Crazy
         ancho = 1024;
         alto = 720;
         titulo = "Crazy Carnival";
-                
+        _ventana = Ventana::Instance();
+        _ventana->CrearVentana(ancho, alto, titulo);
+        
         maquina.Anyadir(new EstadoMenu(), true);
         
         
         
-        /*while (motor->ventana->EstaAbierta())
-        {*/
+        while (_ventana->EstaAbierta())
+        {
             //tiempoActual = motor->RestartMiliseconds();
             
             maquina.ProcesarPilaEstados();
@@ -45,6 +47,6 @@ namespace Crazy
             
             // Actualiza siempre
             maquina.GetEstadoActivo()->Dibujar(tiempoActual);
-        //}
+        }
     }
 }

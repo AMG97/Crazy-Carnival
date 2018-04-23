@@ -1,8 +1,12 @@
 #pragma once
 
 #include <iostream>
-#include "EstadosManager.hpp"
 using namespace std;
+
+#include "EstadosManager.hpp"
+
+#include "Ventana.hpp"
+using namespace Motor;
 
 namespace Crazy
 {
@@ -11,6 +15,7 @@ namespace Crazy
         static Juego* Instance();
         
         EstadosManager maquina;
+        Ventana* _ventana;
         
         void Iniciar();
         
