@@ -24,6 +24,8 @@ namespace Crazy
         static EstadoMenu* _pinstance;
         
         Juego* _juego;
-        Texto text;
+        Texto t_titulo;
+        Texto t_jugar;
+        Texto t_ayuda;
     };
 }

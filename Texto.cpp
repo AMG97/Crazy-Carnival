@@ -5,7 +5,7 @@ namespace Motor
     {
     }
     
-    void Texto::CambiarFuente(sf::Font fon)
+    void Texto::CambiarFuente(sf::Font& fon)
     {
         setFont(fon);
     }
@@ -23,5 +23,30 @@ namespace Motor
     void Texto::CambiarPosicion(float x, float y)
     {
         setPosition(x, y);
+    }
+    
+    void Texto::CambiarOrigen(float x, float y)
+    {
+        setOrigin(x, y);
+    }
+    
+    float Texto::GetAncho()
+    {
+        return getGlobalBounds().width;
+    }
+    
+    float Texto::GetAlto()
+    {
+        return getGlobalBounds().height;
+    }
+    
+    float Texto::GetX()
+    {
+        return getPosition().x;
+    }
+    
+    float Texto::GetY()
+    {
+        return getPosition().y;
     }
 }

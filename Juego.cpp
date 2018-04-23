@@ -33,6 +33,7 @@ namespace Crazy
         recursos.CargarFuente("Z","resources/font/zombified.ttf");
         
         
+        
         maquina.Anyadir(new EstadoMenu(), true);
         
         while (_ventana->EstaAbierta())
