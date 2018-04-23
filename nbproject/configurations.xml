@@ -5,6 +5,9 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>box.h</itemPath>
+      <itemPath>hud.hpp</itemPath>
+      <itemPath>juegoHud.hpp</itemPath>
+      <itemPath>player.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -14,7 +17,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>box.cpp</itemPath>
-      <itemPath>main.cpp</itemPath>
+      <itemPath>hud.cpp</itemPath>
+      <itemPath>juegoHud.cpp</itemPath>
+      <itemPath>mainHudPlayers.cpp</itemPath>
+      <itemPath>player.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -68,7 +74,19 @@
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="hud.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="juegoHud.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="juegoHud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="mainHudPlayers.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -95,7 +113,19 @@
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="hud.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="juegoHud.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="juegoHud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="mainHudPlayers.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -15,9 +15,9 @@
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
 #include <ctime>
-#include "player.h"
-#include "hud.h"
-#include "juegoHud.h"
+#include "player.hpp"
+#include "hud.hpp"
+#include "juegoHud.hpp"
 
 using namespace std;
 

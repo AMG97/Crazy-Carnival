@@ -36,7 +36,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/box.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/hud.o \
+	${OBJECTDIR}/juegoHud.o \
+	${OBJECTDIR}/mainHudPlayers.o \
+	${OBJECTDIR}/player.o
 
 
 # C Compiler Flags
@@ -68,10 +71,25 @@ ${OBJECTDIR}/box.o: box.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/box.o box.cpp
 
-${OBJECTDIR}/main.o: main.cpp 
+${OBJECTDIR}/hud.o: hud.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hud.o hud.cpp
+
+${OBJECTDIR}/juegoHud.o: juegoHud.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/juegoHud.o juegoHud.cpp
+
+${OBJECTDIR}/mainHudPlayers.o: mainHudPlayers.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mainHudPlayers.o mainHudPlayers.cpp
+
+${OBJECTDIR}/player.o: player.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/player.o player.cpp
 
 # Subprojects
 .build-subprojects:
