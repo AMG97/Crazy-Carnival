@@ -99,6 +99,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         //Controles para mover el personaje
                         case sf::Keyboard::Left:
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+                            //jugador->actualizarFisica();
                             if(jugador->getSprite().getScale().x > 0.0)
                             {
                                 jugador->setDireccion(true);
@@ -132,7 +133,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             //jugador->update(reloj);
                             break;
                         case sf::Keyboard::Up:
-                            jugador->setVelocidadSalto(200);
+                            jugador->setVelocidadSalto(-0.2);
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
                             /*if(!pararSalto)
                             {
@@ -166,8 +167,8 @@ void JuegoHud::loop(sf::RenderWindow &window){
                                 }
                             }*/
                             //}
-                            //jugador->update(reloj);
-                            //break;
+                            jugador->update(reloj);
+                            break;
                         /*case sf::Keyboard::Down:
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
                             jugador->setVelocidad(0.2);
@@ -202,9 +203,10 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         }
                         jugador->update(reloj);
                         window.clear();
+                        jugador->actualizarFisica();
+                        window.draw(spriteFondo);
                         hud->draw(window);
                         jugador->draw(window);
-                        window.draw(spriteFondo);
                         window.display();
                         cout << "decelera" << endl;
                         cout<<jugador->getVelocidadSalto()<<endl;}
@@ -213,6 +215,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
         }
         window.clear();
         jugador->update(reloj);
+        jugador->actualizarFisica();
         window.draw(spriteFondo);
         hud->draw(window);
         jugador->draw(window);

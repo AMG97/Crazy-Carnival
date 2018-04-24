@@ -49,7 +49,7 @@ Player::Player() {
     velocidad.y = 0.0;
     mundo = new b2World(b2Vec2(0.0, 9.81));
     jugadorDef.type = b2BodyType::b2_dynamicBody;
-    jugadorDef.position = b2Vec2(640/2, 480/2);
+    jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
     jugador = mundo->CreateBody(&jugadorDef);
     shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
     fixJugadorDef.shape = &shapeJugador;
@@ -65,8 +65,11 @@ Player::Player(const Player& orig) {
 Player::~Player() {
 }
 void Player::update(sf::Clock *clock){
-    jugador->ApplyForce(b2Vec2(personaje.getPosition().x + velocidad.x, personaje.getPosition().y + velocidad.y), b2Vec2(personaje.getPosition().x, personaje.getPosition().y), false);
-    personaje.setPosition(jugador->GetPosition().x +velocidad.x, jugador->GetPosition().y);
+    //this->actualizarFisica();
+    //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x + velocidad.x*10, jugador->GetPosition().y + velocidad.y), jugador->GetPosition(), false);
+    jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + velocidad.y*jugador->GetGravityScale());
+    jugador = mundo->CreateBody(&jugadorDef);
+    personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
 }
 void Player::draw(sf::RenderWindow& window){
     window.draw(personaje);
@@ -105,10 +108,10 @@ void Player::setDireccion(bool direccion)
 }
 //Funciones que se quedarán en player
 void Player::setVelocidadSalto(float modificacionVelocidad)
-{   b2Vec2 velocidadSalto = b2Vec2(velocidad.x, modificacionVelocidad);
-    b2Vec2 posicion = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
-    jugador->ApplyAngularImpulse(200.0, false);
-/*    //bool maximoAlcanzado = topeSalto;
+{   
+    //b2Vec2 velocidadSalto = b2Vec2(velocidad.x, modificacionVelocidad);
+    //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x, jugador->GetPosition().y + 2000.0), jugador->GetPosition(), false);
+//bool maximoAlcanzado = topeSalto;
     if(velocidad.y <= 2.0 && velocidad.y >= -2.0)
     {
         if(modificacionVelocidad == 0.0)
@@ -128,7 +131,7 @@ void Player::setVelocidadSalto(float modificacionVelocidad)
             cout <<"el 3"<< endl;
             velocidad.y += modificacionVelocidad;
         }
-    }*/
+    }
 }
 float Player::getVelocidadSalto()
 {
