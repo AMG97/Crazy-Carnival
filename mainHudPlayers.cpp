@@ -18,6 +18,7 @@
 #include "player.hpp"
 #include "hud.hpp"
 #include "juegoHud.hpp"
+#include "Juego.hpp"
 
 using namespace std;
 
@@ -33,6 +34,8 @@ int main(int argc, char** argv) {
     sf::Time tiempo;
     
     //Pruebas HUD
+    Juego::Instance();
+    Juego::Instance()->Iniciar();
     sf::RenderWindow ventanaJuego(sf::VideoMode(640,480), "Crazy Carnival");
     
     juego->loop(ventanaJuego);
