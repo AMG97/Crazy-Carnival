@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Juego.o \
+	${OBJECTDIR}/Ventana.o \
 	${OBJECTDIR}/box.o \
 	${OBJECTDIR}/hud.o \
 	${OBJECTDIR}/juegoHud.o \
@@ -77,10 +77,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/Juego.o: Juego.cpp 
+${OBJECTDIR}/Ventana.o: Ventana.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Juego.o Juego.cpp
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ventana.o Ventana.cpp
 
 ${OBJECTDIR}/box.o: box.cpp 
 	${MKDIR} -p ${OBJECTDIR}
