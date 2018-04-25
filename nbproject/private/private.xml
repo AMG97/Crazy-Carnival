@@ -6,6 +6,15 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Juego.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/main.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/player.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/box.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/hud.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Makefile</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/juegoHud.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Juego.hpp</file>
+        </group>
     </open-files>
 </project-private>

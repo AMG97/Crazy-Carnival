@@ -13,11 +13,14 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "player.h"
-#include "hud.h"
-#include "juegoHud.h"
+#include "player.hpp"
+#include "hud.hpp"
+#include "juegoHud.hpp"
 
 using namespace std;
+
+    sf::Sprite Hud::spVida;
+    sf::Sprite Hud::spEnfriamiento;
 
 Hud::Hud() {
     

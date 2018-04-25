@@ -4,7 +4,17 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Estado.hpp</itemPath>
+      <itemPath>EstadoMenu.hpp</itemPath>
+      <itemPath>EstadosManager.hpp</itemPath>
+      <itemPath>Juego.hpp</itemPath>
+      <itemPath>Recursos.hpp</itemPath>
+      <itemPath>Texto.hpp</itemPath>
+      <itemPath>Ventana.hpp</itemPath>
       <itemPath>box.h</itemPath>
+      <itemPath>hud.hpp</itemPath>
+      <itemPath>juegoHud.hpp</itemPath>
+      <itemPath>player.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,8 +23,17 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>EstadoMenu.cpp</itemPath>
+      <itemPath>EstadosManager.cpp</itemPath>
+      <itemPath>Juego.cpp</itemPath>
+      <itemPath>Recursos.cpp</itemPath>
+      <itemPath>Texto.cpp</itemPath>
+      <itemPath>Ventana.cpp</itemPath>
       <itemPath>box.cpp</itemPath>
+      <itemPath>hud.cpp</itemPath>
+      <itemPath>juegoHud.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>player.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -28,6 +47,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -64,11 +86,49 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Texto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ventana.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="box.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="hud.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="hud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="juegoHud.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="juegoHud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="player.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -91,11 +151,39 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="box.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Texto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Ventana.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="hud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="juegoHud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="player.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
