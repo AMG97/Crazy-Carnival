@@ -2,7 +2,6 @@
 using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Texto.hpp"
 
 namespace Motor
 {
@@ -16,7 +15,7 @@ namespace Motor
         bool EstaAbierta();
         void Limpiar();
         void Mostrar();
-        sf::RenderWindow& GetVentana();
+        void Cerrar();
         
     private:
         Ventana() { };

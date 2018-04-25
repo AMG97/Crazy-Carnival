@@ -1,7 +1,4 @@
 #include "EstadoMenu.hpp"
-#include "Texto.hpp"
-using namespace Motor;
-
 
 namespace Crazy
 {
@@ -23,6 +20,8 @@ namespace Crazy
     
     EstadoMenu::~EstadoMenu()
     {
+        delete _input;
+        _input = NULL;
         delete _pinstance;
         _pinstance = NULL;
     }
@@ -46,11 +45,20 @@ namespace Crazy
         t_ayuda.CambiarTamanyo(50);
         t_ayuda.CambiarOrigen(t_ayuda.GetAncho()/2, t_ayuda.GetAlto()/2);
         t_ayuda.CambiarPosicion((_juego->ancho/2), t_jugar.GetY()+75);
+        
+        _input = new Input();
+        opcion = 0;
     }
     
     void EstadoMenu::ManejarEventos()
     {
+        opcion = _input->BucleEventosMenu();
         
+        // Esto esta de prueba
+        if (opcion > 0)
+        {
+            Jugar();
+        }
     }
     
     void EstadoMenu::Actualizar(float tiempoActual)
@@ -67,5 +75,10 @@ namespace Crazy
         _juego->_ventana->draw(t_ayuda);
         
         _juego->_ventana->Mostrar();
+    }
+    
+    void EstadoMenu::Jugar()
+    {
+        _juego->maquina.Anyadir(new EstadoJuego());
     }
 }
