@@ -2,10 +2,11 @@
 using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Texto.hpp"
 
 namespace Motor
 {
-    class Ventana
+    class Ventana : public sf::RenderWindow
     {
     public:
         static Ventana* Instance();
@@ -15,13 +16,12 @@ namespace Motor
         bool EstaAbierta();
         void Limpiar();
         void Mostrar();
+        sf::RenderWindow& GetVentana();
         
     private:
         Ventana() { };
         Ventana(const Ventana &);
         Ventana &operator=(const Ventana &);
         static Ventana* _pinstance;
-        
-        sf::RenderWindow window;
     };
 }

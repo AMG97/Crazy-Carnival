@@ -3,6 +3,9 @@
 #include "Estado.hpp"
 #include "Juego.hpp"
 
+#include "Texto.hpp"
+using namespace Motor;
+
 namespace Crazy
 {
     class EstadoMenu : public Estado
@@ -21,6 +24,8 @@ namespace Crazy
         static EstadoMenu* _pinstance;
         
         Juego* _juego;
-        
+        Texto t_titulo;
+        Texto t_jugar;
+        Texto t_ayuda;
     };
 }
