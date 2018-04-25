@@ -35,13 +35,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/EstadoMenu.o \
+	${OBJECTDIR}/EstadosManager.o \
+	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Recursos.o \
 	${OBJECTDIR}/Texto.o \
-	${OBJECTDIR}/box.o \
-	${OBJECTDIR}/hud.o \
-	${OBJECTDIR}/juegoHud.o \
-	${OBJECTDIR}/mainHudPlayers.o \
-	${OBJECTDIR}/player.o
+	${OBJECTDIR}/Ventana.o
 
 
 # C Compiler Flags
@@ -68,6 +67,21 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/EstadoMenu.o: EstadoMenu.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMenu.o EstadoMenu.cpp
+
+${OBJECTDIR}/EstadosManager.o: EstadosManager.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadosManager.o EstadosManager.cpp
+
+${OBJECTDIR}/Juego.o: Juego.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Juego.o Juego.cpp
+
 ${OBJECTDIR}/Recursos.o: Recursos.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -78,30 +92,10 @@ ${OBJECTDIR}/Texto.o: Texto.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Texto.o Texto.cpp
 
-${OBJECTDIR}/box.o: box.cpp 
+${OBJECTDIR}/Ventana.o: Ventana.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/box.o box.cpp
-
-${OBJECTDIR}/hud.o: hud.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hud.o hud.cpp
-
-${OBJECTDIR}/juegoHud.o: juegoHud.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/juegoHud.o juegoHud.cpp
-
-${OBJECTDIR}/mainHudPlayers.o: mainHudPlayers.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mainHudPlayers.o mainHudPlayers.cpp
-
-${OBJECTDIR}/player.o: player.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/player.o player.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ventana.o Ventana.cpp
 
 # Subprojects
 .build-subprojects:
