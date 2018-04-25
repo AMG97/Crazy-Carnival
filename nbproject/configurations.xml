@@ -70,6 +70,16 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="box.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
@@ -81,6 +91,8 @@
       <item path="juegoHud.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="juegoHud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="mainHudPlayers.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -109,6 +121,16 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="box.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
@@ -120,6 +142,8 @@
       <item path="juegoHud.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="juegoHud.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="mainHudPlayers.cpp" ex="false" tool="1" flavor2="0">
       </item>
