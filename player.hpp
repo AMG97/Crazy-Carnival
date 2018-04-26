@@ -26,6 +26,8 @@ public:
     void draw(sf::RenderWindow& window);
     void modificarSpriteCorrer();
     void modificarSpriteReposo();
+    void modificarSpriteAtaque1();
+    void modificarSpriteAtaque2();
     sf::Sprite getSprite();
     void setDireccion(bool direccion);
     void actualizarFisica();
@@ -37,6 +39,10 @@ public:
     float getVelocidad();
     void recibirDanyo(float danyo);
     void curar(float cura);
+    bool getAtaque1();
+    void setAtaque1(bool b);
+    bool getAtaque2();
+    void setAtaque2(bool b);
 
 protected:
     JuegoHud *juego;
@@ -46,7 +52,11 @@ protected:
     sf::Sprite personaje;
     int contadorSpriteReposo;
     int contadorSpriteCorrer;
+    int contadorSpriteAtaque1;
+    int contadorSpriteAtaque2;
     bool direccionIzquierda;
+    bool Ataque1;
+    bool Ataque2;
     float static vida;
     float static enfriamiento;
     float static totalVida;

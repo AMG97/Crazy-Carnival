@@ -33,8 +33,7 @@ int main() {
     sf::Time tiempo;
     
     //Pruebas HUD
-    Crazy::Juego::Instance();
-    Crazy::Juego::Instance()->Iniciar();
+
     sf::RenderWindow ventanaJuego(sf::VideoMode(640,480), "Crazy Carnival");
     
     juego->loop(ventanaJuego);

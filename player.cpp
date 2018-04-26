@@ -30,9 +30,9 @@ Player::Player() {
     //pruebas jugador, variables
     elegirSprite = true;
     if(elegirSprite)
-        texturaPj = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/Sprite-espadachina.png");
+        texturaPj = juego->establecerTexturas("resources/espadachina.png");
     else
-        texturaPj = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/Sprite-espadachina.png");
+        texturaPj = juego->establecerTexturas("resources/espadachina.png");
     personaje.setTexture(texturaPj);
     personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     personaje.setOrigin(60/2, 80/2);
@@ -44,6 +44,10 @@ Player::Player() {
     
     contadorSpriteReposo = 0;
     contadorSpriteCorrer = 0;
+    contadorSpriteAtaque1= 0;
+    contadorSpriteAtaque2= 0;
+    Ataque1=false;
+    Ataque2=false;
     direccionIzquierda = false;
     velocidad.x = 0.0;
     velocidad.y = 0.0;
@@ -76,16 +80,41 @@ void Player::draw(sf::RenderWindow& window){
 }
 void Player::modificarSpriteCorrer()
 {
-    personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*65, 1*85, 60, 80));
+    personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*60, 1*80, 60, 80));
     contadorSpriteCorrer++;
     if(contadorSpriteCorrer == 6)
     {
         contadorSpriteCorrer = 0;
     }
 }
+
+void Player::modificarSpriteAtaque2()
+{
+    personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque2*100, 370, 100, 80));
+    contadorSpriteAtaque2++;
+    if(contadorSpriteAtaque2 == 8)
+    {
+        Ataque2=false;
+        contadorSpriteAtaque2 = 0;
+    }
+    else if(contadorSpriteAtaque2==5){
+        //lanzar proyectil
+    }
+}
+
+void Player::modificarSpriteAtaque1()
+{
+    personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque1*100, 2*80, 100, 90));
+    contadorSpriteAtaque1++;
+    if(contadorSpriteAtaque1 == 5)
+    {
+        Ataque1=false;
+        contadorSpriteAtaque1 = 0;
+    }
+}
 void Player::modificarSpriteReposo()
 {
-    personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*85, 60, 80));
+    personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*80, 60, 80));
     contadorSpriteReposo++;
     if(contadorSpriteReposo == 8)
     {
@@ -177,3 +206,16 @@ void Player::actualizarFisica(){
     mundo->ClearForces();
 }
 
+void Player::setAtaque1(bool b){
+    Ataque1=b;
+}
+void Player::setAtaque2(bool b){
+    Ataque2=b;
+}
+
+bool Player::getAtaque1(){
+    return Ataque1;
+}
+bool Player::getAtaque2(){
+    return Ataque2;
+}

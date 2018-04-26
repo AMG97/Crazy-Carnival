@@ -29,7 +29,7 @@ JuegoHud::JuegoHud() {
     tiempoDesplazamiento = new sf::Time();
     pararSalto = false;
     
-    fondo = this->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/MicroMachines-Fondo.png");
+    fondo = this->establecerTexturas("resources/MicroMachines-Fondo.png");
     spriteFondo.setTexture(fondo);
     spriteFondo.setOrigin(2000/2, 4000/2);
 }
@@ -72,6 +72,22 @@ void JuegoHud::loop(sf::RenderWindow &window){
                 case sf::Event::Closed:
                     window.close();
                     break;
+                /*MIO*/
+                case sf::Event::MouseButtonPressed:
+                    switch(event.key.code){
+                        case sf::Mouse::Left:
+                            jugador->setAtaque1(true);
+                            *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
+                            jugador->update(relojDesplazamiento);
+                        break;
+                        
+                        case sf::Mouse::Right:
+                            jugador->setAtaque2(true);
+                            *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
+                            jugador->update(relojDesplazamiento);
+                        break;
+                    }
+                    
                     
                 //Se establecen las teclas del juego y su función
                 case sf::Event::KeyPressed:
@@ -224,10 +240,17 @@ void JuegoHud::loop(sf::RenderWindow &window){
             reloj->restart();
             hud->cambiarTexturaContador();
         }
-        if(tiempoDesplazamiento->asSeconds() >= 0.25 && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
+        if(tiempoDesplazamiento->asSeconds() >= 0.1 && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
         {
             relojDesplazamiento->restart();
+            if(jugador->getAtaque1()){
+                jugador->modificarSpriteAtaque1();
+            }else if(jugador->getAtaque2()){
+                jugador->modificarSpriteAtaque2();
+            }
+            else{
             jugador->modificarSpriteReposo();
+            }
         }
         *tiempo = reloj->getElapsedTime();
         *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
