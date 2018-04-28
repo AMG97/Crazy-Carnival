@@ -20,7 +20,12 @@
 #include "juegoHud.hpp"
 #include "Juego.hpp"
 
+#include "fsMath.hpp"
+#include "fsWorld.hpp"
+#include "fsBody.hpp"
 
+
+using namespace std;
 /*
  * 
  */
@@ -31,6 +36,17 @@ int main() {
     JuegoHud *juego = new JuegoHud();
     sf::Clock reloj;
     sf::Time tiempo;
+    
+    fs::fsVec2 gravedad(0,-9.8);
+    fs::fsWorld mundo(gravedad);
+    
+    fs::fsBody body();
+    
+    //body.getAngle();
+    
+    
+    b2Body cuerpo(NULL, &mundo);
+    //cout<<  <<endl;
     
     //Pruebas HUD
     Crazy::Juego::Instance();

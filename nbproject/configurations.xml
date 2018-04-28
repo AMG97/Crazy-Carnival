@@ -12,6 +12,9 @@
       <itemPath>Texto.hpp</itemPath>
       <itemPath>Ventana.hpp</itemPath>
       <itemPath>box.h</itemPath>
+      <itemPath>fsBody.hpp</itemPath>
+      <itemPath>fsMath.hpp</itemPath>
+      <itemPath>fsWorld.hpp</itemPath>
       <itemPath>hud.hpp</itemPath>
       <itemPath>juegoHud.hpp</itemPath>
       <itemPath>player.hpp</itemPath>
@@ -116,6 +119,12 @@
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="fsBody.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fsMath.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fsWorld.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="hud.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="hud.hpp" ex="false" tool="3" flavor2="0">
@@ -178,6 +187,12 @@
       <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fsBody.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fsMath.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fsWorld.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="hud.hpp" ex="false" tool="3" flavor2="0">
       </item>
