@@ -30,7 +30,7 @@ build/Debug/GNU-Linux/main.o: main.cpp player.hpp Box2D/Box2D/Box2D.h \
  Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h hud.hpp juegoHud.hpp \
  Juego.hpp EstadosManager.hpp Estado.hpp Ventana.hpp Texto.hpp \
- Recursos.hpp
+ Recursos.hpp Reloj.hpp
 
 player.hpp:
 
@@ -123,3 +123,5 @@ Ventana.hpp:
 Texto.hpp:
 
 Recursos.hpp:
+
+Reloj.hpp:

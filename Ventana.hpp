@@ -16,7 +16,7 @@ namespace Motor
         bool EstaAbierta();
         void Limpiar();
         void Mostrar();
-        sf::RenderWindow& GetVentana();
+        void Cerrar();
         
     private:
         Ventana() { };

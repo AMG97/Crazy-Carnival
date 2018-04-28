@@ -1,7 +1,4 @@
 #include "EstadoMenu.hpp"
-#include "Texto.hpp"
-using namespace Motor;
-
 
 namespace Crazy
 {
@@ -23,6 +20,8 @@ namespace Crazy
     
     EstadoMenu::~EstadoMenu()
     {
+        delete _input;
+        _input = NULL;
         delete _pinstance;
         _pinstance = NULL;
     }
@@ -46,16 +45,58 @@ namespace Crazy
         t_ayuda.CambiarTamanyo(50);
         t_ayuda.CambiarOrigen(t_ayuda.GetAncho()/2, t_ayuda.GetAlto()/2);
         t_ayuda.CambiarPosicion((_juego->ancho/2), t_jugar.GetY()+75);
+        
+        _input = new Input();
+        opcion = JUGAR;
+        teclaPulsada = false;
+        
+        flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
+        flecha.CambiarOrigen();
+        CambiarFlecha(t_jugar);
+        flecha.CambiarColorRojo();
+        flecha.Escalar(80.0f, 80.0f); // Escalar al 80%
     }
     
     void EstadoMenu::ManejarEventos()
     {
+        teclaPulsada = _input->BucleEventos();
         
+        if (teclaPulsada) {
+            if (_input->GetPressed().Arriba) {
+                opcion--;
+                if (opcion < JUGAR)
+                {
+                    opcion = AYUDA;
+                }
+            }
+
+            if (_input->GetPressed().Abajo) {
+                opcion++;
+                if (opcion > AYUDA)
+                {
+                    opcion = JUGAR;
+                }
+            }
+            
+            if (_input->GetPressed().Enter) {
+                CambiarEstado();
+            }
+            
+            teclaPulsada = false;
+        }
     }
     
     void EstadoMenu::Actualizar(float tiempoActual)
     {
-        
+        switch (opcion)
+        {
+            case JUGAR:
+                CambiarFlecha(t_jugar);
+                break;
+            case AYUDA:
+                CambiarFlecha(t_ayuda);
+                break;
+        }
     }
     
     void EstadoMenu::Dibujar(float tiempoActual)
@@ -66,6 +107,32 @@ namespace Crazy
         _juego->_ventana->draw(t_jugar);
         _juego->_ventana->draw(t_ayuda);
         
+        _juego->_ventana->draw(flecha);
+        
         _juego->_ventana->Mostrar();
+    }
+    
+    void EstadoMenu::Jugar()
+    {
+        _juego->maquina.Anyadir(new EstadoJuego());
+    }
+    
+    void EstadoMenu::CambiarFlecha(Texto texto)
+    {
+        flecha.CambiarPosicion(texto.GetLeft()-10,texto.GetY()+texto.GetOrigenY()/2);
+    }
+    
+    void EstadoMenu::CambiarEstado()
+    {
+        switch (opcion)
+        {
+            case JUGAR:
+                _juego->maquina.Anyadir(new EstadoJuego());
+                break;
+            case AYUDA:
+                //_juego->maquina.Anyadir(new EstadoAyuda());
+                cout <<"AYUDA";
+                break;
+        }
     }
 }

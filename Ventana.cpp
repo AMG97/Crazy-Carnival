@@ -39,4 +39,9 @@ namespace Motor
     {
         display();
     }
+    
+    void Ventana::Cerrar()
+    {
+        close();
+    }
 }

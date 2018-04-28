@@ -30,6 +30,16 @@ namespace Motor
         setOrigin(x, y);
     }
     
+    float Texto::GetOrigenX()
+    {
+        return getOrigin().x;
+    }
+    
+    float Texto::GetOrigenY()
+    {
+        return getOrigin().y;
+    }
+    
     float Texto::GetAncho()
     {
         return getGlobalBounds().width;
@@ -38,6 +48,16 @@ namespace Motor
     float Texto::GetAlto()
     {
         return getGlobalBounds().height;
+    }
+    
+    float Texto::GetTop()
+    {
+        return getGlobalBounds().top;
+    }
+    
+    float Texto::GetLeft()
+    {
+        return getGlobalBounds().left;
     }
     
     float Texto::GetX()
@@ -49,4 +69,5 @@ namespace Motor
     {
         return getPosition().y;
     }
+    
 }
