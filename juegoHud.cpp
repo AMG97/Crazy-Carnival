@@ -65,7 +65,8 @@ void JuegoHud::loop(sf::RenderWindow &window){
         sf::Event event;
         while (window.pollEvent(event))
         {
-            
+            sf::Vector2i ratonpos;
+            bool dire;
             switch(event.type){
                 
                 //Si se recibe el evento de cerrar la ventana la cierro
@@ -76,13 +77,25 @@ void JuegoHud::loop(sf::RenderWindow &window){
                 case sf::Event::MouseButtonPressed:
                     switch(event.key.code){
                         case sf::Mouse::Left:
-                            jugador->setAtaque1(true);
+                            ratonpos=(sf::Mouse::getPosition(window));
+                            if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
+                                jugador->setDireccion(false);
+                            }else if(!jugador->getDireccion() && jugador->getSprite().getPosition().x>ratonpos.x){
+                                jugador->setDireccion(true);
+                            }
+                            jugador->setAtaque1(true,ratonpos);
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->update(relojDesplazamiento);
                         break;
                         
                         case sf::Mouse::Right:
-                            jugador->setAtaque2(true);
+                            ratonpos=(sf::Mouse::getPosition(window));
+                            if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
+                                jugador->setDireccion(false);
+                            }else if(!jugador->getDireccion() && jugador->getSprite().getPosition().x>ratonpos.x){
+                                jugador->setDireccion(true);
+                            }
+                            jugador->setAtaque2(true,ratonpos);
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->update(relojDesplazamiento);
                         break;
@@ -91,8 +104,8 @@ void JuegoHud::loop(sf::RenderWindow &window){
                     
                 //Se establecen las teclas del juego y su función
                 case sf::Event::KeyPressed:
+                    
                     switch (event.key.code){
-                        
                         case sf::Keyboard::Q:
                             window.close();
                             exit(0);
@@ -128,14 +141,18 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->setVelocidad(-0.2);
                             jugador->update(relojDesplazamiento);
-                            cout << "acelera izquierda" << endl;//}
+                            //cout << "acelera izquierda" << endl;//}
                             //jugador->update(reloj);
+                            if(jugador->getAtaque1())
+                                jugador->reposo(1);
+                            else if(jugador->getAtaque2())
+                                jugador->reposo(2);
                             break;
                         case sf::Keyboard::Right:
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
                             if(jugador->getSprite().getScale().x < 0.0)
                             {
-                                jugador->setDireccion(true);
+                                jugador->setDireccion(false);
                             }
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
@@ -145,8 +162,12 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->setVelocidad(0.2);
                             jugador->update(relojDesplazamiento);
-                            cout << "acelera derecha" << endl;//}
+                            //cout << "acelera derecha" << endl;//}
                             //jugador->update(reloj);
+                            if(jugador->getAtaque1())
+                                jugador->reposo(1);
+                            else if(jugador->getAtaque2())
+                                jugador->reposo(2);
                             break;
                         case sf::Keyboard::Up:
                             jugador->setVelocidadSalto(-0.2);
@@ -184,6 +205,10 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             }*/
                             //}
                             jugador->update(reloj);
+                            if(jugador->getAtaque1())
+                                jugador->reposo(1);
+                            else if(jugador->getAtaque2())
+                                jugador->reposo(2);
                             break;
                         /*case sf::Keyboard::Down:
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
@@ -215,7 +240,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             jugador->setVelocidadSalto(0.0);
                             jugador->getSprite().setPosition(jugador->getSprite().getPosition().x, 240);
                             pararSalto = false;
-                            cout << "no tiene sentido" << endl;
+                            //cout << "no tiene sentido" << endl;
                         }
                         jugador->update(reloj);
                         window.clear();
@@ -224,8 +249,9 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         hud->draw(window);
                         jugador->draw(window);
                         window.display();
-                        cout << "decelera" << endl;
-                        cout<<jugador->getVelocidadSalto()<<endl;}
+                        //cout << "decelera" << endl;
+                        //cout<<jugador->getVelocidadSalto()<<endl;
+                    }
                         break;
             }
         }
@@ -254,7 +280,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
         }
         *tiempo = reloj->getElapsedTime();
         *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
-        cout<<jugador->getVelocidad()<<endl;
+        //cout<<jugador->getVelocidad()<<endl;
         window.display();
     }
 }

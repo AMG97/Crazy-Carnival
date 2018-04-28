@@ -18,6 +18,7 @@
 #include "iostream"
 #include "hud.hpp"
 #include <Box2D/Box2D.h>
+#include "Arma.hpp"
 
 using namespace std;
 
@@ -30,9 +31,9 @@ Player::Player() {
     //pruebas jugador, variables
     elegirSprite = true;
     if(elegirSprite)
-        texturaPj = juego->establecerTexturas("resources/espadachina.png");
+        texturaPj = juego->establecerTexturas("resources/espadachina-sin.png");
     else
-        texturaPj = juego->establecerTexturas("resources/espadachina.png");
+        texturaPj = juego->establecerTexturas("resources/espadachina-sin.png");
     personaje.setTexture(texturaPj);
     personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     personaje.setOrigin(60/2, 80/2);
@@ -41,13 +42,15 @@ Player::Player() {
     enfriamiento = 0.0;
     totalVida = vida;
     totalEnfriamiento = 30.0;
-    
+    posraton=sf::Vector2i(0,0);
     contadorSpriteReposo = 0;
     contadorSpriteCorrer = 0;
     contadorSpriteAtaque1= 0;
     contadorSpriteAtaque2= 0;
     Ataque1=false;
     Ataque2=false;
+    arma= new Arma(2);
+    angulo=0;
     direccionIzquierda = false;
     velocidad.x = 0.0;
     velocidad.y = 0.0;
@@ -74,13 +77,16 @@ void Player::update(sf::Clock *clock){
     jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + velocidad.y*jugador->GetGravityScale());
     jugador = mundo->CreateBody(&jugadorDef);
     personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
+    arma->setPosicion(personaje.getPosition());
 }
 void Player::draw(sf::RenderWindow& window){
     window.draw(personaje);
+    window.draw(arma->getSprite());
 }
 void Player::modificarSpriteCorrer()
 {
     personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*60, 1*80, 60, 80));
+    arma->modificarSpriteCorrer(contadorSpriteCorrer, personaje.getPosition());
     contadorSpriteCorrer++;
     if(contadorSpriteCorrer == 6)
     {
@@ -90,31 +96,99 @@ void Player::modificarSpriteCorrer()
 
 void Player::modificarSpriteAtaque2()
 {
-    personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque2*100, 370, 100, 80));
+    float x=personaje.getPosition().x;
+    float y=personaje.getPosition().y;
+    personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque2*100, 360, 100, 80));
+    if(contadorSpriteAtaque2==0){
+            personaje.setOrigin(100/2,80/2);
+            if(!direccionIzquierda)
+                personaje.setPosition(x,y-10);
+            else
+                personaje.setPosition(x,y-10);
+            jugadorDef.type = b2BodyType::b2_dynamicBody;
+            jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
+            jugador = mundo->CreateBody(&jugadorDef);
+            shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
+            fixJugadorDef.shape = &shapeJugador;
+            fixJugador = jugador->CreateFixture(&fixJugadorDef);
+        }
+    arma->modificarSpriteAtaque2(contadorSpriteAtaque2, personaje.getPosition());
     contadorSpriteAtaque2++;
-    if(contadorSpriteAtaque2 == 8)
+    if(contadorSpriteAtaque2 == 9)
     {
-        Ataque2=false;
-        contadorSpriteAtaque2 = 0;
+        reposo(2);
     }
     else if(contadorSpriteAtaque2==5){
+        float x=personaje.getPosition().x;
+        float y=personaje.getPosition().y;
+        sf::Vector2f diferencia=sf::Vector2f(posraton.x-x,posraton.y-y);
+        float angulo=atan2(diferencia.x,diferencia.y);
         //lanzar proyectil
     }
 }
 
 void Player::modificarSpriteAtaque1()
 {
-    personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque1*100, 2*80, 100, 90));
-    contadorSpriteAtaque1++;
-    if(contadorSpriteAtaque1 == 5)
-    {
-        Ataque1=false;
-        contadorSpriteAtaque1 = 0;
+    float x=personaje.getPosition().x;
+    float y=personaje.getPosition().y;
+    sf::Vector2f diferencia=sf::Vector2f(posraton.x-x,posraton.y-y);
+    if(contadorSpriteAtaque1==0){
+        angulo=atan2(diferencia.x,diferencia.y)*180/3.141592;
+        if(angulo<0)
+            angulo=-angulo;
+    }
+    cout<<angulo<<endl;
+    if(angulo>135){
+        personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque1*90, 240, 90, 120));
+        if(contadorSpriteAtaque1==0){
+            personaje.setOrigin(90/2,120/2);
+            if(!direccionIzquierda)
+                personaje.setPosition(x+15,y-30);
+            else
+                personaje.setPosition(x-15,y-30);
+            jugadorDef.type = b2BodyType::b2_dynamicBody;
+            jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
+            jugador = mundo->CreateBody(&jugadorDef);
+            shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
+            fixJugadorDef.shape = &shapeJugador;
+            fixJugador = jugador->CreateFixture(&fixJugadorDef);
+        }
+        arma->modificarSpriteAtaque1(contadorSpriteAtaque1,1, personaje.getPosition());
+        contadorSpriteAtaque1++;
+        
+        if(contadorSpriteAtaque1 == 5)
+        {
+            reposo(1);
+        }
+        
+    }else{
+        personaje.setTextureRect(sf::IntRect(contadorSpriteAtaque1*100, 150, 100, 90));
+        if(contadorSpriteAtaque1==0){
+            personaje.setOrigin(100/2,90/2);
+            if(!direccionIzquierda)
+                personaje.setPosition(x,y-15);
+            else
+                personaje.setPosition(x,y-15);
+            jugadorDef.type = b2BodyType::b2_dynamicBody;
+            jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
+            jugador = mundo->CreateBody(&jugadorDef);
+            shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
+            fixJugadorDef.shape = &shapeJugador;
+            fixJugador = jugador->CreateFixture(&fixJugadorDef);
+        }
+        arma->modificarSpriteAtaque1(contadorSpriteAtaque1,2, personaje.getPosition());
+        contadorSpriteAtaque1++;
+        if(contadorSpriteAtaque1 == 6)
+        {
+            reposo(1);
+        }
+        
     }
 }
 void Player::modificarSpriteReposo()
 {
     personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*80, 60, 80));
+    arma->modificarSpriteReposo(contadorSpriteReposo,personaje.getPosition());
     contadorSpriteReposo++;
     if(contadorSpriteReposo == 8)
     {
@@ -128,12 +202,15 @@ sf::Sprite Player::getSprite()
 void Player::setDireccion(bool direccion)
 {
     direccionIzquierda = direccion;
-    if(direccionIzquierda){
+    std::cout<<personaje.getScale().x<<std::endl;
+    if(direccionIzquierda && personaje.getScale().x==1.0){
         personaje.scale(-1.0, 1.0);
-        direccionIzquierda = false;
+        arma->scale(-1.0,1.0);
     }
-    else if(!direccionIzquierda)
-        personaje.scale(1.0, 1.0);
+    else if(!direccionIzquierda && personaje.getScale().x==-1.0){
+        personaje.scale(-1.0, 1.0);
+        arma->scale(-1.0, 1.0);
+    }
 }
 //Funciones que se quedarán en player
 void Player::setVelocidadSalto(float modificacionVelocidad)
@@ -206,11 +283,13 @@ void Player::actualizarFisica(){
     mundo->ClearForces();
 }
 
-void Player::setAtaque1(bool b){
+void Player::setAtaque1(bool b, sf::Vector2i posra){
     Ataque1=b;
+    posraton=posra;
 }
-void Player::setAtaque2(bool b){
+void Player::setAtaque2(bool b, sf::Vector2i posra){
     Ataque2=b;
+    posraton=posra;
 }
 
 bool Player::getAtaque1(){
@@ -218,4 +297,40 @@ bool Player::getAtaque1(){
 }
 bool Player::getAtaque2(){
     return Ataque2;
+}
+
+bool Player::getDireccion(){
+    return direccionIzquierda;
+}
+
+void Player::reposo(int n){
+    personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
+    float x=personaje.getPosition().x;
+    float y=personaje.getPosition().y;
+    personaje.setOrigin(60/2,80/2);
+    if(n==1){
+            Ataque1=false;
+            contadorSpriteAtaque1 = 0;
+            if(angulo>135){
+                if(!direccionIzquierda)
+                    personaje.setPosition(x-15,y+30);
+                else
+                    personaje.setPosition(x+15,y+30);
+            }else{
+                    personaje.setPosition(x,y+15);
+            }
+    }else{
+        Ataque2=false;
+        contadorSpriteAtaque2 = 0;
+        personaje.setPosition(x,y+10);
+        
+    }
+    posraton=sf::Vector2i(0,0);
+    jugadorDef.type = b2BodyType::b2_dynamicBody;
+    jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
+    jugador = mundo->CreateBody(&jugadorDef);
+    shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
+    fixJugadorDef.shape = &shapeJugador;
+    fixJugador = jugador->CreateFixture(&fixJugadorDef);
+    
 }

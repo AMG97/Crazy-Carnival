@@ -17,6 +17,7 @@
 
 class Hud;
 class JuegoHud;
+class Arma;
 class Player {
 public:
     Player();
@@ -30,6 +31,7 @@ public:
     void modificarSpriteAtaque2();
     sf::Sprite getSprite();
     void setDireccion(bool direccion);
+    bool getDireccion();
     void actualizarFisica();
     
     //Estas sí son de player
@@ -40,9 +42,10 @@ public:
     void recibirDanyo(float danyo);
     void curar(float cura);
     bool getAtaque1();
-    void setAtaque1(bool b);
+    void setAtaque1(bool b,sf::Vector2i posra);
     bool getAtaque2();
-    void setAtaque2(bool b);
+    void setAtaque2(bool b,sf::Vector2i posra);
+    void reposo(int n);
 
 protected:
     JuegoHud *juego;
@@ -54,9 +57,12 @@ protected:
     int contadorSpriteCorrer;
     int contadorSpriteAtaque1;
     int contadorSpriteAtaque2;
+    sf::Vector2i posraton;
     bool direccionIzquierda;
     bool Ataque1;
     bool Ataque2;
+    float angulo;
+    Arma *arma;
     float static vida;
     float static enfriamiento;
     float static totalVida;
