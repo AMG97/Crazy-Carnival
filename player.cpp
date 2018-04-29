@@ -30,9 +30,9 @@ Player::Player() {
     //pruebas jugador, variables
     elegirSprite = true;
     if(elegirSprite)
-        texturaPj = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/Sprite-espadachina.png");
+        texturaPj = juego->establecerTexturas("./resources/Sprite-espadachina.png");
     else
-        texturaPj = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/Sprite-espadachina.png");
+        texturaPj = juego->establecerTexturas("./resources/Sprite-espadachina.png");
     personaje.setTexture(texturaPj);
     personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     personaje.setOrigin(60/2, 80/2);
@@ -44,7 +44,7 @@ Player::Player() {
     
     contadorSpriteReposo = 0;
     contadorSpriteCorrer = 0;
-    direccionIzquierda = false;
+    estadoPersonaje = 0;
     velocidad.x = 0.0;
     velocidad.y = 0.0;
     mundo = new b2World(b2Vec2(0.0, 9.81));
@@ -67,7 +67,7 @@ Player::~Player() {
 void Player::update(sf::Clock *clock){
     //this->actualizarFisica();
     //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x + velocidad.x*10, jugador->GetPosition().y + velocidad.y), jugador->GetPosition(), false);
-    jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + velocidad.y*jugador->GetGravityScale());
+    jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + jugador->GetAngularVelocity()*jugador->GetGravityScale());
     jugador = mundo->CreateBody(&jugadorDef);
     personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
 }
@@ -96,23 +96,39 @@ sf::Sprite Player::getSprite()
 {
     return personaje;
 }
-void Player::setDireccion(bool direccion)
+void Player::setEstadoPersonaje(int direccion)
 {
-    direccionIzquierda = direccion;
-    if(direccionIzquierda){
+    estadoPersonaje = direccion;
+    if((estadoPersonaje == 2 || estadoPersonaje == 4) && personaje.getScale().x > 0.0){
         personaje.scale(-1.0, 1.0);
-        direccionIzquierda = false;
     }
-    else if(!direccionIzquierda)
-        personaje.scale(1.0, 1.0);
+    else if((estadoPersonaje == 1 || estadoPersonaje == 3) && personaje.getScale().x < 0.0)
+        personaje.scale(-1.0, 1.0);
+}
+//Devuelve el entero que indica el estado del personaje
+int Player::getEstadoPersonaje()
+{
+    return estadoPersonaje;
 }
 //Funciones que se quedarán en player
 void Player::setVelocidadSalto(float modificacionVelocidad)
 {   
+    //int contador;
+    if(modificacionVelocidad < 0.0){
+        //contador = 0;
+        //while(modificacionVelocidad < 0.0){
+        jugador->SetAngularVelocity(modificacionVelocidad);
+        /*    modificacionVelocidad++;
+        }*/
+    }
+    else
+    {
+        jugador->SetAngularVelocity(jugador->GetGravityScale() + modificacionVelocidad);
+    }
     //b2Vec2 velocidadSalto = b2Vec2(velocidad.x, modificacionVelocidad);
     //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x, jugador->GetPosition().y + 2000.0), jugador->GetPosition(), false);
 //bool maximoAlcanzado = topeSalto;
-    if(velocidad.y <= 2.0 && velocidad.y >= -2.0)
+    /*if(velocidad.y <= 2.0 && velocidad.y >= -2.0)
     {
         if(modificacionVelocidad == 0.0)
         {
@@ -131,7 +147,7 @@ void Player::setVelocidadSalto(float modificacionVelocidad)
             cout <<"el 3"<< endl;
             velocidad.y += modificacionVelocidad;
         }
-    }
+    }*/
 }
 float Player::getVelocidadSalto()
 {
@@ -139,23 +155,7 @@ float Player::getVelocidadSalto()
 }
 void Player::setVelocidad(float modificacionVelocidad)
 {
-    if(velocidad.x <= 2.0 && velocidad.x >= -2.0)
-    {
-        if(velocidad.x < 2.0 && velocidad.x > 1.8 && modificacionVelocidad > 0.0)
-            velocidad.x = 2.0;
-        else if(velocidad.x > -2.0 && velocidad.x < -1.8 && modificacionVelocidad < 0.0)
-            velocidad.x = -2.0;
-        else if((velocidad.x < 2.0 && modificacionVelocidad > 0.0) || (velocidad.x > -2.0 && modificacionVelocidad < 0.0))
-            velocidad.x += modificacionVelocidad;
-        else if(modificacionVelocidad == 0.0){
-            if((velocidad.x > 0.0 && velocidad.x < 0.2) || ((velocidad.x < 0.0 && velocidad.x > 0.2)))
-                velocidad.x = 0.0;
-            else if(velocidad.x > 0.0)
-                velocidad.x -= 0.2;
-            else if(velocidad.x < 0.0)
-                velocidad.x += 0.2;
-        }
-    }
+    velocidad.x = modificacionVelocidad;
 }
 float Player::getVelocidad()
 {
@@ -175,5 +175,16 @@ void Player::curar(float cura){
 void Player::actualizarFisica(){
     mundo->Step(1/60, 8, 8);
     mundo->ClearForces();
+}
+b2Body *Player::getCuerpo(){
+    return jugador;
+}
+float Player::getEnfriamiento()
+{
+    return enfriamiento;
+}
+float Player::getTotalEnfriamiento()
+{
+    return totalEnfriamiento;
 }
 

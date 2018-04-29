@@ -27,14 +27,19 @@ public:
     void modificarSpriteCorrer();
     void modificarSpriteReposo();
     sf::Sprite getSprite();
-    void setDireccion(bool direccion);
+    void setEstadoPersonaje(int direccion);
     void actualizarFisica();
     
     //Estas sí son de player
+    int getEstadoPersonaje();
     void setVelocidadSalto(float altura);
     float getVelocidadSalto();
     void setVelocidad(float modificacionVelocidad);
     float getVelocidad();
+    float getEnfriamiento();
+    float getTotalEnfriamiento();
+    
+    b2Body *getCuerpo();
     void recibirDanyo(float danyo);
     void curar(float cura);
 
@@ -44,9 +49,10 @@ protected:
     bool elegirSprite;
     sf::Texture texturaPj;
     sf::Sprite personaje;
+    int estadoPersonaje;
     int contadorSpriteReposo;
     int contadorSpriteCorrer;
-    bool direccionIzquierda;
+    //bool direccionIzquierda;
     float static vida;
     float static enfriamiento;
     float static totalVida;

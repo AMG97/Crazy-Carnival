@@ -27,6 +27,7 @@ Hud::Hud() {
     //Inicializar variables
     contrarreloj = false;
     elixir = false;
+    ataqueEspecial = false;
     texturaHud = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/HUD.png");
     spRecipVida.setTexture(texturaHud);
     spVida.setTexture(texturaHud);
@@ -110,6 +111,17 @@ void Hud::draw(sf::RenderWindow& window){
         }
     }   
 }
+void Hud::dibujar(sf::RenderWindow &window, bool color)
+{
+    if(color)
+    {
+        spRecipVida.setColor(sf::Color(50, 125, 255, 255));
+    }
+    else
+    {
+        spRecipVida.setColor(sf::Color(255, 255, 255, 255));
+    }
+}
 void Hud::cambiarTexturaContador(){
     
     if(spriteTimerSeg == 0){
@@ -151,6 +163,10 @@ void Hud::modificarEnfriamiento(float modificador){
     {
         enfriamiento = totalEnfriamiento;
     }
+    else if(enfriamiento < 0.0)
+    {
+        enfriamiento = 0.0;
+    }
     spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, porcentBarra * 97, 2));
 }
 void Hud::modoContrarreloj(){
@@ -168,4 +184,14 @@ void Hud::elixirEncontrado(){
     else{
         elixir = true;
     }
+}
+void Hud::setAtaqueEspecial(bool ataque){
+    ataqueEspecial = ataque;
+}
+sf::Sprite Hud::getSpriteRecipienteVida()
+{
+    return spRecipVida;
+}
+bool Hud::getAtaqueEspecial(){
+    return ataqueEspecial;
 }

@@ -25,15 +25,18 @@ public:
     virtual ~JuegoHud();
     sf::Texture establecerTexturas(sf::String direccion);
     void loop(sf::RenderWindow &window);
-    
+    void render(sf::RenderWindow &window);    
 private:
     Hud *hud;
     Player *jugador;
     sf::Clock *reloj;
+    sf::Clock *relojAtaqueEspecial;
     sf::Clock *relojDesplazamiento;
     sf::Time *tiempo;
+    sf::Time *tiempoAtaqueEspecial;
     sf::Time *tiempoDesplazamiento;
-    bool pararSalto;
+    bool inercia;
+    int contador;
     
     //box2D
     sf::Texture fondo;

@@ -28,6 +28,7 @@ private:
     sf::Sprite spContador [5];
     bool contrarreloj;
     bool elixir;
+    bool ataqueEspecial;
     int spriteTimerSeg;
     int spriteTimerSeg1;
     int spriteTimerMin;
@@ -37,11 +38,15 @@ public:
     Hud(const Hud& orig);
     virtual ~Hud();
     void draw(sf::RenderWindow &window);
+    void dibujar(sf::RenderWindow &window, bool color);
     void cambiarTexturaContador();
     static void modificarVida(float modificador);
     static void modificarEnfriamiento(float modificador);
     void modoContrarreloj();
     void elixirEncontrado();
+    void setAtaqueEspecial(bool ataque);
+    sf::Sprite getSpriteRecipienteVida();
+    bool getAtaqueEspecial();
 };
 
 #endif /* HUD_HPP */

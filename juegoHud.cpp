@@ -17,6 +17,7 @@
 #include "hud.hpp"
 #include "juegoHud.hpp"
 #include "box.h"
+#include <math.h>
 
 using namespace std;
 
@@ -24,10 +25,13 @@ JuegoHud::JuegoHud() {
     hud = new Hud();
     jugador = new Player();
     reloj = new sf::Clock();
+    relojAtaqueEspecial = new sf::Clock();
     relojDesplazamiento = new sf::Clock();
     tiempo = new sf::Time();
+    tiempoAtaqueEspecial = new sf::Time();
     tiempoDesplazamiento = new sf::Time();
-    pararSalto = false;
+    inercia = false;
+    contador = 0;
     
     fondo = this->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/MicroMachines-Fondo.png");
     spriteFondo.setTexture(fondo);
@@ -55,10 +59,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
     int i = 0;
     window.setFramerateLimit(60);
     
-   //Generamos la cámara
-   /* sf::View camara (sf::Vector2f(coches[0]->getSpriteCoche().getPosition().x,
-            coches[0]->getSpriteCoche().getPosition().y), sf::Vector2f(640, 480));*/
-
     //Bucle del juego (necesario para cargar la ventana)
     while (window.isOpen()){
         
@@ -88,7 +88,15 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             break;
                         case sf::Keyboard::C:
                             jugador->recibirDanyo(3);
+                            if(jugador->getEnfriamiento() == jugador->getTotalEnfriamiento())
+                            {
+                                hud->setAtaqueEspecial(true);
+                            }
                             break;
+                        case sf::Keyboard::F:
+                            hud->setAtaqueEspecial(false);
+                            hud->dibujar(window, false);
+                            hud->modificarEnfriamiento(-jugador->getTotalEnfriamiento());
                         case sf::Keyboard::R:
                             hud->modoContrarreloj();
                             break;
@@ -98,140 +106,119 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         
                         //Controles para mover el personaje
                         case sf::Keyboard::Left:
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-                            //jugador->actualizarFisica();
-                            if(jugador->getSprite().getScale().x > 0.0)
-                            {
-                                jugador->setDireccion(true);
-                            }
+                            
+                            jugador->setEstadoPersonaje(2);
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
                                 jugador->modificarSpriteCorrer();
                             }
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
-                            jugador->setVelocidad(-0.2);
+                            jugador->setVelocidad(-2.0);
                             jugador->update(relojDesplazamiento);
-                            cout << "acelera izquierda" << endl;//}
-                            //jugador->update(reloj);
+                            cout << "acelera izquierda" << endl;
                             break;
                         case sf::Keyboard::Right:
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                            if(jugador->getSprite().getScale().x < 0.0)
-                            {
-                                jugador->setDireccion(true);
-                            }
+                            jugador->setEstadoPersonaje(1);
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
                                 jugador->modificarSpriteCorrer();
                             }
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
-                            jugador->setVelocidad(0.2);
+                            jugador->setVelocidad(2.0);
                             jugador->update(relojDesplazamiento);
                             cout << "acelera derecha" << endl;//}
                             //jugador->update(reloj);
                             break;
                         case sf::Keyboard::Up:
-                            jugador->setVelocidadSalto(-0.2);
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-                            /*if(!pararSalto)
+                            contador = 0;  
+                            if(jugador->getEstadoPersonaje() != 3 && jugador->getEstadoPersonaje() != 4)
                             {
-                                if(jugador->getVelocidadSalto() > -5.0)
+                                if(jugador->getEstadoPersonaje() == 1 || jugador->getSprite().getScale().x > 0.0)
                                 {
-                                    if(jugador->getVelocidadSalto() == 0)
-                                        jugador->setVelocidadSalto(-3.0);
-                                    else
-                                        jugador->setVelocidadSalto(jugador->getVelocidadSalto()/2);
-                                    jugador->update(reloj);
-                                    cout << "salta" << endl;
-                                    cout<<jugador->getVelocidadSalto()<<endl;
+                                    jugador->setEstadoPersonaje(3);
                                 }
-                                else
-                                    pararSalto = true;
+                                else if(jugador->getEstadoPersonaje() == 2 || jugador->getSprite().getScale().x < 0.0)
+                                {
+                                    jugador->setEstadoPersonaje(4);
+                                }
+                                
                             }
-                            else
-                            {
-                                if((int) jugador->getSprite().getPosition().y < 240)
-                                {
-                                    if(jugador->getVelocidadSalto() < 5.0 && (int) jugador->getSprite().getPosition().y < 240)
-                                    {
-                                        jugador->setVelocidadSalto(0.6);
-                                    }                            
-                                }
-                                else if((int) jugador->getSprite().getPosition().y <= 242 || (int) jugador->getSprite().getPosition().y >= 238)
-                                {
-                                    jugador->setVelocidadSalto(0.0);
-                                    jugador->getSprite().setPosition(jugador->getSprite().getPosition().x, 240);
-                                    pararSalto = false;
-                                }
-                            }*/
-                            //}
                             jugador->update(reloj);
                             break;
-                        /*case sf::Keyboard::Down:
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                            jugador->setVelocidad(0.2);
-                            jugador->update(reloj);
-                            cout << "acelera derecha" << endl;//}
-                            //jugador->update(reloj);
-                            break;*/
+                        
                     }
                     break;
                     
                 //El jugador debe frenar salvo que se pulse alguna tecla de movimiento.
                 //Igualmente, el lapso de tiempo de deceleración es mínimo.
                 case sf::Event::KeyReleased:
-                    while((!sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) && (jugador->getVelocidad() != 0.0 || jugador->getVelocidadSalto() != 0.0)){
-                        if(jugador->getVelocidad() != 0.0)
+                    while((jugador->getSprite().getPosition().y < 240 || jugador->getEstadoPersonaje() > 0)){
+                        
+                        if(jugador->getVelocidad() != 0.0 && (jugador->getEstadoPersonaje() != 3 || jugador->getEstadoPersonaje() != 4))
                         {
                             jugador->setVelocidad(0.0);
                         }
-                        if((int) jugador->getSprite().getPosition().y < 240)
+                                                
+                        if(jugador->getEstadoPersonaje() == 3 || jugador->getEstadoPersonaje() == 4)
                         {
-                            if(jugador->getVelocidadSalto() < 5.0 && (int) jugador->getSprite().getPosition().y < 240)
-                            {
-                                jugador->setVelocidadSalto(0.6);
-                            }                            
+                            jugador->setVelocidadSalto(-20.0 + contador);
+                            contador += 2;
                         }
-                        else if((int) jugador->getSprite().getPosition().y <= 242 || (int) jugador->getSprite().getPosition().y >= 238)
+                        this->render(window);
+                        if(jugador->getCuerpo()->GetPosition().y >= 240 && jugador->getVelocidad() == 0.0)
                         {
-                            jugador->setVelocidadSalto(0.0);
-                            jugador->getSprite().setPosition(jugador->getSprite().getPosition().x, 240);
-                            pararSalto = false;
-                            cout << "no tiene sentido" << endl;
+                            jugador->setEstadoPersonaje(0);
                         }
+                    }
+                    //SE CAMBIARÁ CUANDO HAYAN PLATAFORMAS
+                    if((int) jugador->getSprite().getPosition().y <= 250 || (int) jugador->getSprite().getPosition().y >= 235)
+                    {
+                        //jugador->setVelocidadSalto(0.0);
+                        jugador->getCuerpo()->SetAngularVelocity((abs(jugador->getSprite().getPosition().y - 240)) * (-1));
                         jugador->update(reloj);
-                        window.clear();
-                        jugador->actualizarFisica();
-                        window.draw(spriteFondo);
-                        hud->draw(window);
-                        jugador->draw(window);
-                        window.display();
-                        cout << "decelera" << endl;
-                        cout<<jugador->getVelocidadSalto()<<endl;}
-                        break;
+                        inercia = false;
+                        cout << "no tiene sentido" << endl;
+                    }
+                    break;
             }
         }
-        window.clear();
-        jugador->update(reloj);
-        jugador->actualizarFisica();
-        window.draw(spriteFondo);
-        hud->draw(window);
-        jugador->draw(window);
-        if((int) tiempo->asSeconds() == 1)
-        {
-            reloj->restart();
-            hud->cambiarTexturaContador();
-        }
-        if(tiempoDesplazamiento->asSeconds() >= 0.25 && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) && (!sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
-        {
-            relojDesplazamiento->restart();
-            jugador->modificarSpriteReposo();
-        }
-        *tiempo = reloj->getElapsedTime();
-        *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
-        cout<<jugador->getVelocidad()<<endl;
-        window.display();
+        this->render(window);
     }
+}
+void JuegoHud::render(sf::RenderWindow &window){
+    window.clear();
+    jugador->update(reloj);
+    jugador->actualizarFisica();
+    window.draw(spriteFondo);
+    if((int) tiempo->asSeconds() == 1)
+    {
+        reloj->restart();
+        hud->cambiarTexturaContador();
+    }
+    if(tiempoDesplazamiento->asSeconds() >= 0.25 && (jugador->getEstadoPersonaje()) == 0)
+    {
+        jugador->modificarSpriteReposo();
+        relojDesplazamiento->restart();
+    }
+    if(tiempoAtaqueEspecial->asSeconds() >= 0.1 && hud->getAtaqueEspecial())
+    {
+        if(hud->getSpriteRecipienteVida().getColor() != sf::Color(50, 125, 255, 255))
+        {
+            hud->dibujar(window, true);
+        }
+        else
+        {
+            hud->dibujar(window, false);
+        }
+        relojAtaqueEspecial->restart();
+    }
+    hud->draw(window);
+    jugador->draw(window);
+    window.display();
+    *tiempo = reloj->getElapsedTime();
+    *tiempoAtaqueEspecial = relojAtaqueEspecial->getElapsedTime();
+    *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
 }
