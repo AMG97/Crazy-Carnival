@@ -11,6 +11,7 @@ namespace Motor
         void CambiarTexto(string text);
         void CambiarTamanyo(int tam);
         void CambiarPosicion(float x, float y);
+        void CentrarOrigen();
         void CambiarOrigen(float x, float y);
         
         float GetOrigenX();

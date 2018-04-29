@@ -8,6 +8,8 @@ namespace Motor
         bool Arriba;
         bool Abajo;
         bool Enter;
+        bool BackSpace;
+        bool Escape;
     };
 
     class Input

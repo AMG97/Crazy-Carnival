@@ -7,6 +7,8 @@ namespace Motor
         t.Arriba = false;
         t.Abajo = false;
         t.Enter = false;
+        t.BackSpace = false;
+        t.Escape = false;
     }
     
     void Input::CerrarVentana()
@@ -32,25 +34,29 @@ namespace Motor
                     
                     //Verifico si se pulsa alguna tecla
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                        CerrarVentana();
+                        t.Escape=true;
+                    } else {
+                        t.Escape=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
                         t.Arriba=true;
-                        //cout << "Pa arriba - " << event.key.code << endl;
                     } else {
                         t.Arriba=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                         t.Abajo=true;
-                        //cout << "Pa abajo - " << event.key.code << endl;
                     } else {
                         t.Abajo=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                         t.Enter=true;
-                        //cout << "enter - " << event.key.code << endl;
                     } else {
                         t.Enter=false;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
+                        t.BackSpace=true;
+                    } else {
+                        t.BackSpace=false;
                     }
                     return true;
                 break;

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Estado.hpp"
-#include "EstadoMenuPartidas.hpp"
-#include "EstadoAyuda.hpp"
+#include "EstadoMenu.hpp"
+#include "EstadoJuego.hpp"
 #include "Juego.hpp"
 
 // Includes del motor
@@ -12,40 +12,47 @@
 using namespace Motor;
 
 // Constantes
-#define JUGAR 0
-#define AYUDA 1
+#define NUEVA 0
+#define CARGAR 1
+#define BORRAR 2
 
 namespace Crazy
 {
-    class EstadoMenu : public Estado
+    class EstadoMenuPartidas : public Estado
     {
     public:
-        EstadoMenu();
-        static EstadoMenu* Instance();
+        EstadoMenuPartidas();
+        static EstadoMenuPartidas* Instance();
         
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
         void Dibujar(float tiempoActual);
         
-        ~EstadoMenu();
+        ~EstadoMenuPartidas();
     private:
-        static EstadoMenu* _pinstance;
+        static EstadoMenuPartidas* _pinstance;
         
         Juego* _juego;
         Input* _input;
         Texto t_titulo;
-        Texto t_jugar;
-        Texto t_ayuda;
-        Texto t_explicar;
-        Texto t_explicar2;
+        
+        Texto t_nueva;
+        Texto t_cargar;
+        Texto t_borrar;
+        Texto t_atras;
         SpriteM flecha;
-        SpriteM flechas;
+        SpriteM flechaAtras;
         
         short int opcion;
         bool teclaPulsada;
         
         void CambiarFlecha(Texto texto);
         void CambiarEstado();
+        
+        void NuevaPartida();
+        void CargarPartida();
+        void BorrarPartida();
+        void Atras();
     };
 }

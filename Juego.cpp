@@ -33,6 +33,7 @@ namespace Crazy
         recursos.CargarFuente("Z","resources/font/zombified.ttf");
         
         recursos.CargarTextura("Flecha","resources/flecha.png");
+        recursos.CargarTextura("Flechas","resources/flechas.png");
         
         maquina.Anyadir(new EstadoMenu(), true);
         

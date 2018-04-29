@@ -1,33 +1,39 @@
 #pragma once
 
 #include "Estado.hpp"
+#include "EstadoMenu.hpp"
 #include "Juego.hpp"
 
 // Includes del motor
 #include "Texto.hpp"
 #include "Input.hpp"
+#include "SpriteM.hpp"
 using namespace Motor;
 
 namespace Crazy
 {
-    class EstadoJuego : public Estado
+    class EstadoAyuda : public Estado
     {
     public:
-        EstadoJuego();
-        static EstadoJuego* Instance();
+        EstadoAyuda();
+        static EstadoAyuda* Instance();
         
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
         void Dibujar(float tiempoActual);
         
-        ~EstadoJuego();
+        ~EstadoAyuda();
     private:
-        static EstadoJuego* _pinstance;
+        static EstadoAyuda* _pinstance;
         
         Juego* _juego;
         Input* _input;
         Texto t_titulo;
+        Texto t_atras;
+        SpriteM flecha;
+        
         bool teclaPulsada;
+        void Atras();
     };
 }

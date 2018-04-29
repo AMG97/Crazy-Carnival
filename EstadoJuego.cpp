@@ -1,11 +1,9 @@
 #include "EstadoJuego.hpp"
-
 namespace Crazy
 {
     EstadoJuego::EstadoJuego()
     {
         _juego = Juego::Instance();
-        _input = new Input();
     }
     
     EstadoJuego* EstadoJuego::_pinstance=0;
@@ -29,6 +27,9 @@ namespace Crazy
     
     void EstadoJuego::Init()
     {
+        _input = new Input();
+        teclaPulsada = false;
+        
         t_titulo.CambiarFuente(_juego->recursos.GetFuente("Z"));
         t_titulo.CambiarTexto("Jugar");
         t_titulo.CambiarTamanyo(100);
@@ -39,7 +40,15 @@ namespace Crazy
     
     void EstadoJuego::ManejarEventos()
     {
-        _input->BucleEventos();
+        teclaPulsada = _input->BucleEventos();
+        
+        if (teclaPulsada) {
+            if (_input->GetPressed().Escape)
+            {
+                _input->CerrarVentana();
+            }
+            teclaPulsada = false;
+        }
     }
     
     void EstadoJuego::Actualizar(float tiempoActual)
@@ -55,5 +64,4 @@ namespace Crazy
         
         _juego->_ventana->Mostrar();
     }
-    
 }

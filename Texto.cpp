@@ -25,6 +25,11 @@ namespace Motor
         setPosition(x, y);
     }
     
+    void Texto::CentrarOrigen()
+    {
+        setOrigin(GetAncho()/2, GetAlto()/2);
+    }
+    
     void Texto::CambiarOrigen(float x, float y)
     {
         setOrigin(x, y);
