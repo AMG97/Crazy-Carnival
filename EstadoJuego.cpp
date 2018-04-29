@@ -47,6 +47,17 @@ namespace Crazy
             {
                 _input->CerrarVentana();
             }
+            
+            if (_input->GetPressed().RatonIzq)
+            {
+                cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
+            }
+            
+            if (_input->GetPressed().RatonDer)
+            {
+                cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
+            }
+            
             teclaPulsada = false;
         }
     }

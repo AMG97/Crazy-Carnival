@@ -7,9 +7,13 @@ namespace Motor
     struct Teclas {
         bool Arriba;
         bool Abajo;
+        bool Izq;
+        bool Der;
         bool Enter;
         bool BackSpace;
         bool Escape;
+        bool RatonIzq;
+        bool RatonDer;
     };
 
     class Input
@@ -19,6 +23,8 @@ namespace Motor
         void CerrarVentana();
         bool BucleEventos();
         Teclas GetPressed();
+        float GetPosicionRatonX();
+        float GetPosicionRatonY();
         
     private:
         Ventana* _ventana;

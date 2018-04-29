@@ -6,9 +6,13 @@ namespace Motor
         _ventana = Ventana::Instance();
         t.Arriba = false;
         t.Abajo = false;
+        t.Izq = false;
+        t.Der = false;
         t.Enter = false;
         t.BackSpace = false;
         t.Escape = false;
+        t.RatonIzq = false;
+        t.RatonDer = false;
     }
     
     void Input::CerrarVentana()
@@ -48,6 +52,16 @@ namespace Motor
                     } else {
                         t.Abajo=false;
                     }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                        t.Izq=true;
+                    } else {
+                        t.Izq=false;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                        t.Der=true;
+                    } else {
+                        t.Der=false;
+                    }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                         t.Enter=true;
                     } else {
@@ -60,6 +74,21 @@ namespace Motor
                     }
                     return true;
                 break;
+                
+                //Se pulsó una tecla, imprimo su codigo
+                case sf::Event::MouseButtonPressed:
+                    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                        t.RatonIzq=true;
+                    } else {
+                        t.RatonIzq=false;
+                    }
+                    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+                        t.RatonDer=true;
+                    } else {
+                        t.RatonDer=false;
+                    }
+                    return true;
+                break;
             }
         }
         return false;
@@ -68,5 +97,17 @@ namespace Motor
     Teclas Input::GetPressed()
     {
         return t;
+    }
+    
+    float Input::GetPosicionRatonX()
+    {
+        //return sf::Mouse::getPosition(_ventana).x;
+        return 0;
+    }
+    
+    float Input::GetPosicionRatonY()
+    {
+        //return sf::Mouse::getPosition(_ventana).y;
+        return 0;
     }
 }
