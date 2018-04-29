@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/EstadoAyuda.o \
+	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
 	${OBJECTDIR}/EstadoMenuPartidas.o \
@@ -77,6 +78,11 @@ ${OBJECTDIR}/EstadoAyuda.o: EstadoAyuda.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoAyuda.o EstadoAyuda.cpp
+
+${OBJECTDIR}/EstadoEstadisticas.o: EstadoEstadisticas.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoEstadisticas.o EstadoEstadisticas.cpp
 
 ${OBJECTDIR}/EstadoJuego.o: EstadoJuego.cpp 
 	${MKDIR} -p ${OBJECTDIR}

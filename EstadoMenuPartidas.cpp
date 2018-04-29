@@ -55,6 +55,13 @@ namespace Crazy
         t_borrar.CentrarOrigen();
         t_borrar.CambiarPosicion((_juego->ancho/2), t_cargar.GetY()+75);
         
+        t_estadisticas.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_estadisticas.CambiarTexto("Estadisticas");
+        t_estadisticas.CambiarTamanyo(50);
+        t_estadisticas.CentrarOrigen();
+        t_estadisticas.CambiarPosicion((_juego->ancho/2), t_borrar.GetY()+75);
+        
+        
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
         CambiarFlecha(t_nueva);
@@ -83,13 +90,13 @@ namespace Crazy
                 opcion--;
                 if (opcion < NUEVA)
                 {
-                    opcion = BORRAR;
+                    opcion = ESTADISTICAS;
                 }
             }
 
             if (_input->GetPressed().Abajo) {
                 opcion++;
-                if (opcion > BORRAR)
+                if (opcion > ESTADISTICAS)
                 {
                     opcion = NUEVA;
                 }
@@ -122,6 +129,9 @@ namespace Crazy
             case BORRAR:
                 CambiarFlecha(t_borrar);
                 break;
+            case ESTADISTICAS:
+                CambiarFlecha(t_estadisticas);
+                break;
         }
     }
     
@@ -133,6 +143,7 @@ namespace Crazy
         _juego->_ventana->draw(t_nueva);
         _juego->_ventana->draw(t_cargar);
         _juego->_ventana->draw(t_borrar);
+        _juego->_ventana->draw(t_estadisticas);
         _juego->_ventana->draw(flecha);
         _juego->_ventana->draw(t_atras);
         _juego->_ventana->draw(flechaAtras);
@@ -158,6 +169,9 @@ namespace Crazy
             case BORRAR:
                 BorrarPartida();
                 break;
+            case ESTADISTICAS:
+                Estadisticas();
+                break;
         }
     }
     
@@ -174,6 +188,11 @@ namespace Crazy
     void EstadoMenuPartidas::BorrarPartida()
     {
         cout<<"Borrar"<<endl;
+    }
+    
+    void EstadoMenuPartidas::Estadisticas()
+    {
+        _juego->maquina.Anyadir(new EstadoEstadisticas());
     }
     
     void EstadoMenuPartidas::Atras()

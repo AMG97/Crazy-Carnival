@@ -3,6 +3,7 @@
 #include "Estado.hpp"
 #include "EstadoMenu.hpp"
 #include "EstadoJuego.hpp"
+#include "EstadoEstadisticas.hpp"
 #include "Juego.hpp"
 
 // Includes del motor
@@ -15,6 +16,7 @@ using namespace Motor;
 #define NUEVA 0
 #define CARGAR 1
 #define BORRAR 2
+#define ESTADISTICAS 3
 
 namespace Crazy
 {
@@ -40,6 +42,7 @@ namespace Crazy
         Texto t_nueva;
         Texto t_cargar;
         Texto t_borrar;
+        Texto t_estadisticas;
         Texto t_atras;
         SpriteM flecha;
         SpriteM flechaAtras;
@@ -53,6 +56,7 @@ namespace Crazy
         void NuevaPartida();
         void CargarPartida();
         void BorrarPartida();
+        void Estadisticas();
         void Atras();
     };
 }
