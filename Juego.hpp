@@ -19,21 +19,22 @@ namespace Crazy
         EstadosManager maquina;
         Ventana* _ventana;
         Recursos recursos;
-        
-        int ancho;
-        int alto;
-        string titulo;
-        
         void Iniciar();
-        
+        int GetAncho();
+        int GetAlto();
+        string GetTitulo();
         ~Juego();
+        
     private:
         Juego() { };
         Juego(const Juego &);
         Juego &operator=(const Juego &);
         static Juego* _pinstance;
         
-        Reloj reloj;
+        int ancho;
+        int alto;
+        string titulo;
         float tiempoActual;
+        Reloj reloj;
     };
 }

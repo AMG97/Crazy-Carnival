@@ -1,10 +1,6 @@
 #include "Texto.hpp"
 namespace Motor
-{
-    Texto::Texto()
-    {
-    }
-    
+{    
     void Texto::CambiarFuente(sf::Font& fon)
     {
         setFont(fon);
@@ -74,5 +70,4 @@ namespace Motor
     {
         return getPosition().y;
     }
-    
 }

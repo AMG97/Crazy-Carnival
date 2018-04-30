@@ -3,9 +3,14 @@
 
 namespace Motor
 {
-    float Reloj::RestartMiliseconds()
+    float Reloj::ReiniciarMilisegundos()
     {
         return restart().asMilliseconds();
+    }
+    
+    float Reloj::ReiniciarSegundos()
+    {
+        return restart().asSeconds();
     }
     
     float Reloj::GetSegundos()

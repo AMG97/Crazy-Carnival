@@ -6,7 +6,7 @@ namespace Motor
 {
     class Texto : public sf::Text {
     public:
-        Texto();
+        Texto() { };
         void CambiarFuente(sf::Font& fuente);
         void CambiarTexto(string text);
         void CambiarTamanyo(int tam);
@@ -22,7 +22,5 @@ namespace Motor
         float GetLeft();
         float GetX();
         float GetY();
-        
-    private:
     };
 }

@@ -7,9 +7,6 @@
 // Includes del motor
 #include "Texto.hpp"
 #include "Input.hpp"
-
-#include "Reloj.hpp"
-
 using namespace Motor;
 
 namespace Crazy

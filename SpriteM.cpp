@@ -1,10 +1,6 @@
 #include "SpriteM.hpp"
 namespace Motor
-{
-    SpriteM::SpriteM()
-    {
-    }
-    
+{    
     void SpriteM::CambiarTextura(sf::Texture &textura)
     {
         setTexture(textura);

@@ -4,16 +4,16 @@ namespace Motor
     Input::Input()
     {
         _ventana = Ventana::Instance();
-        t.Pausar = false;
-        t.Arriba = false;
-        t.Abajo = false;
-        t.Izq = false;
-        t.Der = false;
-        t.Enter = false;
-        t.BackSpace = false;
-        t.Escape = false;
-        t.RatonIzq = false;
-        t.RatonDer = false;
+        teclas.Pausar = false;
+        teclas.Arriba = false;
+        teclas.Abajo = false;
+        teclas.Izq = false;
+        teclas.Der = false;
+        teclas.Enter = false;
+        teclas.BackSpace = false;
+        teclas.Escape = false;
+        teclas.RatonIzq = false;
+        teclas.RatonDer = false;
     }
     
     void Input::CerrarVentana()
@@ -39,67 +39,67 @@ namespace Motor
                     
                     //Verifico cual se pulsa
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                        t.Escape=true;
+                        teclas.Escape=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                        t.Arriba=true;
+                        teclas.Arriba=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                        t.Abajo=true;
+                        teclas.Abajo=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                        t.Izq=true;
+                        teclas.Izq=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                        t.Der=true;
+                        teclas.Der=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-                        t.Enter=true;
+                        teclas.Enter=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
-                        t.BackSpace=true;
+                        teclas.BackSpace=true;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
-                        t.Pausar=true;
+                        teclas.Pausar=true;
                     }
                     return true;
                 break;
                 
                 case sf::Event::KeyReleased:
-                    t.Pausar = false;
-                    t.Escape=false;
-                    t.Arriba=false;
-                    t.Abajo=false;
-                    t.Izq=false;
-                    t.Der=false;
-                    t.Enter=false;
-                    t.BackSpace=false;
+                    teclas.Pausar = false;
+                    teclas.Escape=false;
+                    teclas.Arriba=false;
+                    teclas.Abajo=false;
+                    teclas.Izq=false;
+                    teclas.Der=false;
+                    teclas.Enter=false;
+                    teclas.BackSpace=false;
                 break;
                     
                 // Pulsar boton raton
                 case sf::Event::MouseButtonPressed:
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                        t.RatonIzq=true;
+                        teclas.RatonIzq=true;
                     }
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-                        t.RatonDer=true;
+                        teclas.RatonDer=true;
                     }
                     return true;
                 break;
                 
                 // Soltar boton raton
                 case sf::Event::MouseButtonReleased:
-                        t.RatonIzq=false;
-                        t.RatonDer=false;
+                        teclas.RatonIzq=false;
+                        teclas.RatonDer=false;
                 break;
             }
         }
         return false;
     }
     
-    Teclas Input::GetTeclas()
+    Input::Teclas Input::GetTeclas()
     {
-        return t;
+        return teclas;
     }
     
     float Input::GetPosicionRatonX()

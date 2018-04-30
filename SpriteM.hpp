@@ -6,7 +6,7 @@ namespace Motor
 {
     class SpriteM : public sf::Sprite {
     public:
-        SpriteM();
+        SpriteM() { };
         void CambiarTextura(sf::Texture &textura);
         void CambiarPosicion(float x, float y);
         void CentrarOrigen();
@@ -20,7 +20,5 @@ namespace Motor
         float GetAlto();
         float GetX();
         float GetY();
-        
-    private:
     };
 }

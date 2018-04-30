@@ -39,7 +39,7 @@ namespace Crazy
         
         while (_ventana->EstaAbierta())
         {
-            tiempoActual = reloj.RestartMiliseconds();
+            tiempoActual = reloj.ReiniciarMilisegundos();
             
             maquina.ProcesarPilaEstados();
             maquina.GetEstadoActivo()->ManejarEventos();
@@ -47,11 +47,26 @@ namespace Crazy
             // Actualiza 15 veces por segundo
             if (tiempoActual >= (1/15)) {
                 maquina.GetEstadoActivo()->Actualizar(tiempoActual);
-                tiempoActual = reloj.RestartMiliseconds();
+                tiempoActual = reloj.ReiniciarMilisegundos();
             }
             
             // Actualiza siempre
             maquina.GetEstadoActivo()->Dibujar(tiempoActual);
         }
+    }
+    
+    int Juego::GetAlto()
+    {
+        return alto;
+    }
+    
+    int Juego::GetAncho()
+    {
+        return ancho;
+    }
+    
+    string Juego::GetTitulo()
+    {
+        return titulo;
     }
 }

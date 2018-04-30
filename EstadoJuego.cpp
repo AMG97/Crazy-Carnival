@@ -34,7 +34,7 @@ namespace Crazy
         t_titulo.CambiarTexto("Jugar");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CambiarOrigen(t_titulo.GetAncho()/2, t_titulo.GetAlto()/2);
-        t_titulo.CambiarPosicion((_juego->ancho/2), 150);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
     }
     
