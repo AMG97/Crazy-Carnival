@@ -30,9 +30,9 @@ Player::Player() {
     //pruebas jugador, variables
     elegirSprite = true;
     if(elegirSprite)
-        texturaPj = juego->establecerTexturas("./resources/Sprite-espadachina.png");
+        texturaPj = juego->establecerTexturas("./resources/espadachina.png");
     else
-        texturaPj = juego->establecerTexturas("./resources/Sprite-espadachina.png");
+        texturaPj = juego->establecerTexturas("./resources/espadachina.png");
     personaje.setTexture(texturaPj);
     personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     personaje.setOrigin(60/2, 80/2);
@@ -44,6 +44,7 @@ Player::Player() {
     
     contadorSpriteReposo = 0;
     contadorSpriteCorrer = 0;
+    contadorSpriteSalto = 0;
     estadoPersonaje = 0;
     velocidad.x = 0.0;
     velocidad.y = 0.0;
@@ -65,31 +66,41 @@ Player::Player(const Player& orig) {
 Player::~Player() {
 }
 void Player::update(sf::Clock *clock){
-    //this->actualizarFisica();
-    //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x + velocidad.x*10, jugador->GetPosition().y + velocidad.y), jugador->GetPosition(), false);
-    jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + jugador->GetAngularVelocity()*jugador->GetGravityScale());
+    jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + jugador->GetAngularVelocity());
     jugador = mundo->CreateBody(&jugadorDef);
     personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
 }
 void Player::draw(sf::RenderWindow& window){
     window.draw(personaje);
 }
-void Player::modificarSpriteCorrer()
+void Player::modificarSprite()
 {
-    personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*65, 1*85, 60, 80));
-    contadorSpriteCorrer++;
-    if(contadorSpriteCorrer == 6)
+    if(estadoPersonaje == 1 || estadoPersonaje == 2)
     {
-        contadorSpriteCorrer = 0;
+        personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*65, 1*80, 65, 80));
+        contadorSpriteCorrer++;
+        if(contadorSpriteCorrer == 6)
+        {
+            contadorSpriteCorrer = 0;
+        }
     }
-}
-void Player::modificarSpriteReposo()
-{
-    personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*85, 60, 80));
-    contadorSpriteReposo++;
-    if(contadorSpriteReposo == 8)
+    else if(estadoPersonaje == 3 || estadoPersonaje == 4)
     {
-        contadorSpriteReposo = 0;
+        personaje.setTextureRect(sf::IntRect(contadorSpriteSalto*65, 7*80, 65, 90));
+        contadorSpriteSalto++;
+        if(contadorSpriteSalto == 3)
+        {
+            contadorSpriteSalto = 0;
+        }
+    }
+    else if(estadoPersonaje == 0)
+    {
+        personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*80, 60, 80));
+        contadorSpriteReposo++;
+        if(contadorSpriteReposo == 8)
+        {
+            contadorSpriteReposo = 0;
+        }
     }
 }
 sf::Sprite Player::getSprite()
@@ -114,45 +125,18 @@ int Player::getEstadoPersonaje()
 void Player::setVelocidadSalto(float modificacionVelocidad)
 {   
     //int contador;
-    if(modificacionVelocidad < 0.0){
-        //contador = 0;
-        //while(modificacionVelocidad < 0.0){
+    /*if(modificacionVelocidad < 0.0){
         jugador->SetAngularVelocity(modificacionVelocidad);
-        /*    modificacionVelocidad++;
-        }*/
     }
     else
-    {
-        jugador->SetAngularVelocity(jugador->GetGravityScale() + modificacionVelocidad);
-    }
-    //b2Vec2 velocidadSalto = b2Vec2(velocidad.x, modificacionVelocidad);
-    //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x, jugador->GetPosition().y + 2000.0), jugador->GetPosition(), false);
-//bool maximoAlcanzado = topeSalto;
-    /*if(velocidad.y <= 2.0 && velocidad.y >= -2.0)
-    {
-        if(modificacionVelocidad == 0.0)
-        {
-            cout <<"el 4"<< endl;
-            velocidad.y = 0.0;
-        }
-        else if(velocidad.y > -2.0 && velocidad.y < -1.6 && modificacionVelocidad < 0.0){
-            cout <<"el 2"<< endl;
-            velocidad.y = -2.0;
-        }
-        else if(velocidad.y < 2.0 && velocidad.y > 1.6 && modificacionVelocidad > 0.0){
-            cout <<"el 1"<< endl;
-            velocidad.y = 2.0;
-        }
-        else if((velocidad.y < 2.0 && modificacionVelocidad > 0.0) || (velocidad.y > -2.0 && modificacionVelocidad < 0.0)){
-            cout <<"el 3"<< endl;
-            velocidad.y += modificacionVelocidad;
-        }
-    }*/
+    {*/
+        jugador->SetAngularVelocity(mundo->GetGravity().y + modificacionVelocidad);
+    //}
 }
-float Player::getVelocidadSalto()
+/*float Player::getVelocidadSalto()
 {
     return velocidad.y;
-}
+}*/
 void Player::setVelocidad(float modificacionVelocidad)
 {
     velocidad.x = modificacionVelocidad;

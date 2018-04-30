@@ -111,7 +111,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
-                                jugador->modificarSpriteCorrer();
+                                jugador->modificarSprite();
                             }
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->setVelocidad(-2.0);
@@ -124,7 +124,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
-                                jugador->modificarSpriteCorrer();
+                                jugador->modificarSprite();
                             }
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->setVelocidad(2.0);
@@ -144,8 +144,8 @@ void JuegoHud::loop(sf::RenderWindow &window){
                                 {
                                     jugador->setEstadoPersonaje(4);
                                 }
-                                
                             }
+                            jugador->modificarSprite();
                             jugador->update(reloj);
                             break;
                         
@@ -164,7 +164,15 @@ void JuegoHud::loop(sf::RenderWindow &window){
                                                 
                         if(jugador->getEstadoPersonaje() == 3 || jugador->getEstadoPersonaje() == 4)
                         {
-                            jugador->setVelocidadSalto(-20.0 + contador);
+                            jugador->setVelocidadSalto(-36.0 + contador);
+                            if(contador - 36 == 10.0)
+                            {
+                                jugador->modificarSprite();
+                            }
+                            else if(contador - 36 == -10.0)
+                            {
+                                jugador->modificarSprite();
+                            }
                             contador += 2;
                         }
                         this->render(window);
@@ -200,7 +208,7 @@ void JuegoHud::render(sf::RenderWindow &window){
     }
     if(tiempoDesplazamiento->asSeconds() >= 0.25 && (jugador->getEstadoPersonaje()) == 0)
     {
-        jugador->modificarSpriteReposo();
+        jugador->modificarSprite();
         relojDesplazamiento->restart();
     }
     if(tiempoAtaqueEspecial->asSeconds() >= 0.1 && hud->getAtaqueEspecial())

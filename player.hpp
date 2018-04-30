@@ -24,7 +24,7 @@ public:
     virtual ~Player();
     void update(sf::Clock *clock);
     void draw(sf::RenderWindow& window);
-    void modificarSpriteCorrer();
+    void modificarSprite();
     void modificarSpriteReposo();
     sf::Sprite getSprite();
     void setEstadoPersonaje(int direccion);
@@ -52,6 +52,7 @@ protected:
     int estadoPersonaje;
     int contadorSpriteReposo;
     int contadorSpriteCorrer;
+    int contadorSpriteSalto;
     //bool direccionIzquierda;
     float static vida;
     float static enfriamiento;
