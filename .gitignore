@@ -1,0 +1,10 @@
+
+build/Debug/GNU-Linux/juegoHud\.o
+
+*.o
+
+*.xml
+
+dist/Debug/GNU-Linux/crazy-carnival
+
+build/Debug/GNU-Linux/
