@@ -8,6 +8,7 @@
       <itemPath>EstadoMenu.hpp</itemPath>
       <itemPath>EstadosManager.hpp</itemPath>
       <itemPath>Juego.hpp</itemPath>
+      <itemPath>Objeto.hpp</itemPath>
       <itemPath>Recursos.hpp</itemPath>
       <itemPath>Texto.hpp</itemPath>
       <itemPath>Ventana.hpp</itemPath>
@@ -26,6 +27,7 @@
       <itemPath>EstadoMenu.cpp</itemPath>
       <itemPath>EstadosManager.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
+      <itemPath>Objeto.cpp</itemPath>
       <itemPath>Recursos.cpp</itemPath>
       <itemPath>Texto.cpp</itemPath>
       <itemPath>Ventana.cpp</itemPath>
@@ -100,6 +102,10 @@
       </item>
       <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
@@ -164,6 +170,10 @@
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
       </item>

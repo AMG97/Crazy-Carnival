@@ -25,6 +25,14 @@ using namespace std;
     float Player::enfriamiento;
     float Player::totalVida = vida;
     float Player::totalEnfriamiento;
+    
+Player* Player::pinstance = 0;
+Player* Player::Instance() {
+    if (pinstance == 0){
+        pinstance = new Player;
+    }
+    return pinstance;
+}
 
 Player::Player() {
     //pruebas jugador, variables
@@ -41,6 +49,9 @@ Player::Player() {
     enfriamiento = 0.0;
     totalVida = vida;
     totalEnfriamiento = 30.0;
+    puntuacion = 0;
+    elixir = false;
+    godMode = false;
     
     contadorSpriteReposo = 0;
     contadorSpriteCorrer = 0;
@@ -96,6 +107,12 @@ sf::Sprite Player::getSprite()
 {
     return personaje;
 }
+
+sf::FloatRect Player::getGlobalBounds() {
+    return personaje.getGlobalBounds();
+}
+
+
 void Player::setDireccion(bool direccion)
 {
     direccionIzquierda = direccion;
@@ -177,3 +194,39 @@ void Player::actualizarFisica(){
     mundo->ClearForces();
 }
 
+void Player::addPoints(int puntos) {
+    puntuacion+=puntos;
+}
+
+int Player::getPuntos() {
+    return puntuacion;
+}
+
+void Player::setPoints(int puntos) {
+    puntuacion = puntos;
+}
+
+float Player::getEnfriamiento() {
+    return enfriamiento;
+}
+
+void Player::setEnfriamiento(float cooldown) {
+    enfriamiento = cooldown;
+}
+
+void Player::addEnfriamiento(float cooldown) {
+    enfriamiento+=cooldown;
+}
+
+void Player::setElixir(bool e) {
+    elixir = e;
+}
+
+bool Player::getElixir() {
+    return elixir;
+}
+
+bool Player::changeGodMode() {
+    godMode = !godMode;
+    return godMode;
+}

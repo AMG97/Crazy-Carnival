@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoMenu.o \
 	${OBJECTDIR}/EstadosManager.o \
 	${OBJECTDIR}/Juego.o \
+	${OBJECTDIR}/Objeto.o \
 	${OBJECTDIR}/Recursos.o \
 	${OBJECTDIR}/Texto.o \
 	${OBJECTDIR}/Ventana.o
@@ -81,6 +82,11 @@ ${OBJECTDIR}/Juego.o: Juego.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Juego.o Juego.cpp
+
+${OBJECTDIR}/Objeto.o: Objeto.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
 
 ${OBJECTDIR}/Recursos.o: Recursos.cpp 
 	${MKDIR} -p ${OBJECTDIR}
