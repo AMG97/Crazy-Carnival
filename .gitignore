@@ -1,0 +1,12 @@
+
+build/Debug/GNU-Linux/EstadoAyuda\.o
+
+*.o
+
+*.d
+
+dist/Debug/GNU-Linux/crazy-carnival
+
+*.xml
+
+nbproject/private/
