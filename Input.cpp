@@ -24,7 +24,7 @@ namespace Motor
     {
         //Bucle de obtención de eventos
         sf::Event event;
-        while (_ventana->pollEvent(event))
+        while (_ventana->GetVentana().pollEvent(event))
         {
             switch(event.type)
             {
@@ -94,20 +94,23 @@ namespace Motor
         return false;
     }
     
-    Teclas Input::GetPressed()
+    Teclas Input::GetTeclas()
     {
         return t;
     }
     
     float Input::GetPosicionRatonX()
     {
-        //return sf::Mouse::getPosition(_ventana).x;
-        return 0;
+        return sf::Mouse::getPosition(_ventana->GetVentana()).x;
     }
     
     float Input::GetPosicionRatonY()
     {
-        //return sf::Mouse::getPosition(_ventana).y;
-        return 0;
+       return sf::Mouse::getPosition(_ventana->GetVentana()).y;
+    }
+    
+    void Input::DesactivarTecla(bool tecla)
+    {
+        tecla = false;
     }
 }

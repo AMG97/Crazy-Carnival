@@ -55,8 +55,8 @@ namespace Crazy
         teclaPulsada = _input->BucleEventos();
         
         if (teclaPulsada) {
-            if (_input->GetPressed().BackSpace
-                || _input->GetPressed().Escape)
+            if (_input->GetTeclas().BackSpace
+                || _input->GetTeclas().Escape)
             {
                 Atras();
             }
@@ -73,9 +73,9 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->draw(t_titulo);
-        _juego->_ventana->draw(t_atras);
-        _juego->_ventana->draw(flecha);
+        _juego->_ventana->Dibujar(t_titulo);
+        _juego->_ventana->Dibujar(t_atras);
+        _juego->_ventana->Dibujar(flecha);
         
         _juego->_ventana->Mostrar();
     }

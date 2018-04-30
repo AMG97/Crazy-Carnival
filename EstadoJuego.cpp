@@ -43,18 +43,22 @@ namespace Crazy
         teclaPulsada = _input->BucleEventos();
         
         if (teclaPulsada) {
-            if (_input->GetPressed().Escape)
+            if (_input->GetTeclas().Escape)
             {
                 _input->CerrarVentana();
+                _input->DesactivarTecla(_input->GetTeclas().Escape);
+                cout << "ESCAPE";
             }
             
-            if (_input->GetPressed().RatonIzq)
+            if (_input->GetTeclas().RatonIzq)
             {
+                _input->DesactivarTecla(_input->GetTeclas().RatonIzq);
                 cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
-            if (_input->GetPressed().RatonDer)
+            if (_input->GetTeclas().RatonDer)
             {
+                _input->DesactivarTecla(_input->GetTeclas().RatonDer);
                 cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
@@ -71,7 +75,7 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->draw(t_titulo);
+        _juego->_ventana->Dibujar(t_titulo);
         
         _juego->_ventana->Mostrar();
     }

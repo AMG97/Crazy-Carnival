@@ -79,7 +79,7 @@ namespace Crazy
         teclaPulsada = _input->BucleEventos();
         
         if (teclaPulsada) {
-            if (_input->GetPressed().Arriba) {
+            if (_input->GetTeclas().Arriba) {
                 opcion--;
                 if (opcion < JUGAR)
                 {
@@ -87,7 +87,7 @@ namespace Crazy
                 }
             }
 
-            if (_input->GetPressed().Abajo) {
+            if (_input->GetTeclas().Abajo) {
                 opcion++;
                 if (opcion > AYUDA)
                 {
@@ -95,11 +95,11 @@ namespace Crazy
                 }
             }
             
-            if (_input->GetPressed().Enter) {
+            if (_input->GetTeclas().Enter) {
                 CambiarEstado();
             }
             
-            if (_input->GetPressed().Escape) {
+            if (_input->GetTeclas().Escape) {
                 _input->CerrarVentana();
             }
             
@@ -124,13 +124,13 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->draw(t_titulo);
-        _juego->_ventana->draw(t_jugar);
-        _juego->_ventana->draw(t_ayuda);
-        _juego->_ventana->draw(flecha);
-        _juego->_ventana->draw(t_explicar);
-        _juego->_ventana->draw(flechas);
-        _juego->_ventana->draw(t_explicar2);
+        _juego->_ventana->Dibujar(t_titulo);
+        _juego->_ventana->Dibujar(t_jugar);
+        _juego->_ventana->Dibujar(t_ayuda);
+        _juego->_ventana->Dibujar(flecha);
+        _juego->_ventana->Dibujar(t_explicar);
+        _juego->_ventana->Dibujar(flechas);
+        _juego->_ventana->Dibujar(t_explicar2);
         
         _juego->_ventana->Mostrar();
     }

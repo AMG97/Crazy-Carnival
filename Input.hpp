@@ -22,9 +22,10 @@ namespace Motor
         Input();
         void CerrarVentana();
         bool BucleEventos();
-        Teclas GetPressed();
+        Teclas GetTeclas();
         float GetPosicionRatonX();
         float GetPosicionRatonY();
+        void DesactivarTecla(bool tecla);
         
     private:
         Ventana* _ventana;

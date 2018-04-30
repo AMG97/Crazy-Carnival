@@ -19,29 +19,44 @@ namespace Motor
     }
     
     void Ventana::CrearVentana(int ancho, int alto, string titulo) {
-        create(sf::VideoMode(ancho, alto), titulo);
+        window.create(sf::VideoMode(ancho, alto), titulo);
 
         //Activa la sincronizacion vertical (60 fps)
-        setVerticalSyncEnabled(true); 
-        setFramerateLimit(60);
+        window.setVerticalSyncEnabled(true); 
+        window.setFramerateLimit(60);
     }
     
     bool Ventana::EstaAbierta() {
-        return isOpen();
+        return window.isOpen();
     }
     
     void Ventana::Limpiar()
     {
-        clear();
+        window.clear();
     }
     
     void Ventana::Mostrar()
     {
-        display();
+        window.display();
     }
     
     void Ventana::Cerrar()
     {
-        close();
+        window.close();
+    }
+    
+    void Ventana::Dibujar(Texto txt)
+    {
+        window.draw(txt);
+    }
+    
+    void Ventana::Dibujar(SpriteM sprite)
+    {
+        window.draw(sprite);
+    }
+    
+    sf::RenderWindow& Ventana::GetVentana()
+    {
+        return window;
     }
 }
