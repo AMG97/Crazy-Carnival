@@ -5,6 +5,7 @@
 namespace Motor
 {
     struct Teclas {
+        bool Pausar;
         bool Arriba;
         bool Abajo;
         bool Izq;

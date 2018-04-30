@@ -58,6 +58,11 @@ namespace Crazy
                 cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
+            if (_input->GetTeclas().Pausar)
+            {
+                Pausar();
+            }
+            
             teclaPulsada = false;
         }
     }
@@ -74,5 +79,15 @@ namespace Crazy
         _juego->_ventana->Dibujar(t_titulo);
         
         _juego->_ventana->Mostrar();
+    }
+    
+    void EstadoJuego::Pausar()
+    {
+        _juego->maquina.Anyadir(new EstadoPausa(), false);
+    }
+    
+    void EstadoJuego::Reanudar()
+    {
+        cout << "REANUDADO";
     }
 }

@@ -4,6 +4,7 @@ namespace Motor
     Input::Input()
     {
         _ventana = Ventana::Instance();
+        t.Pausar = false;
         t.Arriba = false;
         t.Abajo = false;
         t.Izq = false;
@@ -58,10 +59,14 @@ namespace Motor
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
                         t.BackSpace=true;
                     }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+                        t.Pausar=true;
+                    }
                     return true;
                 break;
                 
                 case sf::Event::KeyReleased:
+                    t.Pausar = false;
                     t.Escape=false;
                     t.Arriba=false;
                     t.Abajo=false;

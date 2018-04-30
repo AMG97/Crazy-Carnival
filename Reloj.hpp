@@ -6,9 +6,9 @@ namespace Motor
 {
     class Reloj : public sf::Clock {
     public:
-        Reloj();
+        Reloj() { };
         float RestartMiliseconds();
-    private:
-        
+        float GetSegundos();
+        float GetMilisegundos();
     };
 }
