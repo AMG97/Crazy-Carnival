@@ -5,10 +5,19 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>Estado.hpp</itemPath>
+      <itemPath>EstadoAyuda.hpp</itemPath>
+      <itemPath>EstadoEstadisticas.hpp</itemPath>
+      <itemPath>EstadoJuego.hpp</itemPath>
       <itemPath>EstadoMenu.hpp</itemPath>
+      <itemPath>EstadoMenuPartidas.hpp</itemPath>
+      <itemPath>EstadoPausa.hpp</itemPath>
       <itemPath>EstadosManager.hpp</itemPath>
+      <itemPath>Input.hpp</itemPath>
       <itemPath>Juego.hpp</itemPath>
+      <itemPath>Objeto.hpp</itemPath>
       <itemPath>Recursos.hpp</itemPath>
+      <itemPath>Reloj.hpp</itemPath>
+      <itemPath>SpriteM.hpp</itemPath>
       <itemPath>Texto.hpp</itemPath>
       <itemPath>Ventana.hpp</itemPath>
       <itemPath>box.h</itemPath>
@@ -23,10 +32,19 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>EstadoAyuda.cpp</itemPath>
+      <itemPath>EstadoEstadisticas.cpp</itemPath>
+      <itemPath>EstadoJuego.cpp</itemPath>
       <itemPath>EstadoMenu.cpp</itemPath>
+      <itemPath>EstadoMenuPartidas.cpp</itemPath>
+      <itemPath>EstadoPausa.cpp</itemPath>
       <itemPath>EstadosManager.cpp</itemPath>
+      <itemPath>Input.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
+      <itemPath>Objeto.cpp</itemPath>
       <itemPath>Recursos.cpp</itemPath>
+      <itemPath>Reloj.cpp</itemPath>
+      <itemPath>SpriteM.cpp</itemPath>
       <itemPath>Texto.cpp</itemPath>
       <itemPath>Ventana.cpp</itemPath>
       <itemPath>box.cpp</itemPath>
@@ -88,21 +106,57 @@
       </compileType>
       <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="EstadoAyuda.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoAyuda.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoEstadisticas.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoEstadisticas.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoJuego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoJuego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenuPartidas.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenuPartidas.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoPausa.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoPausa.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Input.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Input.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Reloj.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Reloj.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SpriteM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SpriteM.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -153,21 +207,57 @@
       </compileType>
       <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="EstadoAyuda.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoAyuda.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoEstadisticas.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoEstadisticas.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoJuego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoJuego.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoMenuPartidas.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoMenuPartidas.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoPausa.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoPausa.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Input.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Input.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Reloj.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Reloj.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SpriteM.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SpriteM.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
       </item>

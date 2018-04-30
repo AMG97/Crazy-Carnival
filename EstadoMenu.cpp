@@ -1,7 +1,4 @@
 #include "EstadoMenu.hpp"
-#include "Texto.hpp"
-using namespace Motor;
-
 
 namespace Crazy
 {
@@ -23,49 +20,136 @@ namespace Crazy
     
     EstadoMenu::~EstadoMenu()
     {
+        delete _input;
+        _input = NULL;
         delete _pinstance;
         _pinstance = NULL;
     }
     
     void EstadoMenu::Init()
     {
+        _input = new Input();
+        opcion = JUGAR;
+        teclaPulsada = false;
+        
         t_titulo.CambiarFuente(_juego->recursos.GetFuente("Z"));
         t_titulo.CambiarTexto("Crazy Carnival");
         t_titulo.CambiarTamanyo(100);
-        t_titulo.CambiarOrigen(t_titulo.GetAncho()/2, t_titulo.GetAlto()/2);
+        t_titulo.CentrarOrigen();
         t_titulo.CambiarPosicion((_juego->ancho/2), 150);
         
         t_jugar.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_jugar.CambiarTexto("Jugar");
         t_jugar.CambiarTamanyo(50);
-        t_jugar.CambiarOrigen(t_jugar.GetAncho()/2, t_jugar.GetAlto()/2);
+        t_jugar.CentrarOrigen();
         t_jugar.CambiarPosicion((_juego->ancho/2), t_titulo.GetY()+200);
         
         t_ayuda.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_ayuda.CambiarTexto("Ayuda");
         t_ayuda.CambiarTamanyo(50);
-        t_ayuda.CambiarOrigen(t_ayuda.GetAncho()/2, t_ayuda.GetAlto()/2);
+        t_ayuda.CentrarOrigen();
         t_ayuda.CambiarPosicion((_juego->ancho/2), t_jugar.GetY()+75);
+        
+        flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
+        flecha.CambiarOrigen();
+        CambiarFlecha(t_jugar);
+        flecha.CambiarColorRojo();
+        flecha.Escalar(80.0f, 80.0f); // Escalar al 80%
+        
+        t_explicar.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_explicar.CambiarTexto("Utiliza las");
+        t_explicar.CambiarTamanyo(40);
+        t_explicar.CentrarOrigen();
+        t_explicar.CambiarPosicion(_juego->ancho/2-120, _juego->alto-50);
+        
+        flechas.CambiarTextura(_juego->recursos.GetTextura("Flechas"));
+        flechas.CentrarOrigen();
+        flechas.CambiarPosicion(_juego->ancho/2, t_explicar.GetY()+8);
+        flechas.Escalar(50.0f, 50.0f); // Escalar al 50%
+        
+        t_explicar2.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_explicar2.CambiarTexto("para elegir");
+        t_explicar2.CambiarTamanyo(40);
+        t_explicar2.CentrarOrigen();
+        t_explicar2.CambiarPosicion(flechas.GetX()+flechas.GetAncho()+70, t_explicar.GetY());
     }
     
     void EstadoMenu::ManejarEventos()
     {
+        teclaPulsada = _input->BucleEventos();
         
+        if (teclaPulsada) {
+            if (_input->GetTeclas().Arriba) {
+                opcion--;
+                if (opcion < JUGAR)
+                {
+                    opcion = AYUDA;
+                }
+            }
+
+            if (_input->GetTeclas().Abajo) {
+                opcion++;
+                if (opcion > AYUDA)
+                {
+                    opcion = JUGAR;
+                }
+            }
+            
+            if (_input->GetTeclas().Enter) {
+                CambiarEstado();
+            }
+            
+            if (_input->GetTeclas().Escape) {
+                _input->CerrarVentana();
+            }
+            
+            teclaPulsada = false;
+        }
     }
     
     void EstadoMenu::Actualizar(float tiempoActual)
     {
-        
+        switch (opcion)
+        {
+            case JUGAR:
+                CambiarFlecha(t_jugar);
+                break;
+            case AYUDA:
+                CambiarFlecha(t_ayuda);
+                break;
+        }
     }
     
     void EstadoMenu::Dibujar(float tiempoActual)
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->draw(t_titulo);
-        _juego->_ventana->draw(t_jugar);
-        _juego->_ventana->draw(t_ayuda);
+        _juego->_ventana->Dibujar(t_titulo);
+        _juego->_ventana->Dibujar(t_jugar);
+        _juego->_ventana->Dibujar(t_ayuda);
+        _juego->_ventana->Dibujar(flecha);
+        _juego->_ventana->Dibujar(t_explicar);
+        _juego->_ventana->Dibujar(flechas);
+        _juego->_ventana->Dibujar(t_explicar2);
         
         _juego->_ventana->Mostrar();
+    }
+    
+    void EstadoMenu::CambiarFlecha(Texto texto)
+    {
+        flecha.CambiarPosicion(texto.GetLeft()-10,texto.GetY()+texto.GetOrigenY()/2);
+    }
+    
+    void EstadoMenu::CambiarEstado()
+    {
+        switch (opcion)
+        {
+            case JUGAR:
+                _juego->maquina.Anyadir(new EstadoMenuPartidas());
+                break;
+            case AYUDA:
+                _juego->maquina.Anyadir(new EstadoAyuda());
+                break;
+        }
     }
 }

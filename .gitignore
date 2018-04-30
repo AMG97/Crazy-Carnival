@@ -1,10 +1,12 @@
 
-build/Debug/GNU-Linux/juegoHud\.o
+build/Debug/GNU-Linux/EstadoAyuda\.o
 
 *.o
 
-*.xml
+*.d
 
 dist/Debug/GNU-Linux/crazy-carnival
 
-build/Debug/GNU-Linux/
+*.xml
+
+nbproject/private/

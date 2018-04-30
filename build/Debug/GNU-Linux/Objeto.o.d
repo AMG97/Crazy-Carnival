@@ -1,6 +1,7 @@
-build/Debug/GNU-Linux/main.o: main.cpp player.hpp Box2D/Box2D/Box2D.h \
- Box2D/Box2D/Common/b2Settings.h Box2D/Box2D/Common/b2Draw.h \
- Box2D/Box2D/Common/b2Math.h Box2D/Box2D/Common/b2Timer.h \
+build/Debug/GNU-Linux/Objeto.o: Objeto.cpp Objeto.hpp player.hpp \
+ Box2D/Box2D/Box2D.h Box2D/Box2D/Common/b2Settings.h \
+ Box2D/Box2D/Common/b2Draw.h Box2D/Box2D/Common/b2Math.h \
+ Box2D/Box2D/Common/b2Timer.h \
  Box2D/Box2D/Collision/Shapes/b2CircleShape.h \
  Box2D/Box2D/Collision/Shapes/b2Shape.h \
  Box2D/Box2D/Common/b2BlockAllocator.h \
@@ -28,9 +29,9 @@ build/Debug/GNU-Linux/main.o: main.cpp player.hpp Box2D/Box2D/Box2D.h \
  Box2D/Box2D/Dynamics/Joints/b2RevoluteJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2RopeJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h \
- Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h hud.hpp juegoHud.hpp \
- Juego.hpp EstadosManager.hpp Estado.hpp Ventana.hpp Texto.hpp \
- SpriteM.hpp Recursos.hpp Reloj.hpp
+ Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h
+
+Objeto.hpp:
 
 player.hpp:
 
@@ -107,23 +108,3 @@ Box2D/Box2D/Dynamics/Joints/b2RopeJoint.h:
 Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h:
 
 Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h:
-
-hud.hpp:
-
-juegoHud.hpp:
-
-Juego.hpp:
-
-EstadosManager.hpp:
-
-Estado.hpp:
-
-Ventana.hpp:
-
-Texto.hpp:
-
-SpriteM.hpp:
-
-Recursos.hpp:
-
-Reloj.hpp:

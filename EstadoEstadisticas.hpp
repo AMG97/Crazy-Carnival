@@ -2,7 +2,6 @@
 
 #include "Estado.hpp"
 #include "EstadoMenuPartidas.hpp"
-#include "EstadoAyuda.hpp"
 #include "Juego.hpp"
 
 // Includes del motor
@@ -11,41 +10,31 @@
 #include "SpriteM.hpp"
 using namespace Motor;
 
-// Constantes
-#define JUGAR 0
-#define AYUDA 1
-
 namespace Crazy
 {
-    class EstadoMenu : public Estado
+    class EstadoEstadisticas : public Estado
     {
     public:
-        EstadoMenu();
-        static EstadoMenu* Instance();
+        EstadoEstadisticas();
+        static EstadoEstadisticas* Instance();
         
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
         void Dibujar(float tiempoActual);
         
-        ~EstadoMenu();
+        ~EstadoEstadisticas();
     private:
-        static EstadoMenu* _pinstance;
+        static EstadoEstadisticas* _pinstance;
         
         Juego* _juego;
         Input* _input;
         Texto t_titulo;
-        Texto t_jugar;
-        Texto t_ayuda;
-        Texto t_explicar;
-        Texto t_explicar2;
+        Texto t_atras;
         SpriteM flecha;
-        SpriteM flechas;
         
-        short int opcion;
         bool teclaPulsada;
-        
-        void CambiarFlecha(Texto texto);
-        void CambiarEstado();
+        void CargarEstadisticas();
+        void Atras();
     };
 }

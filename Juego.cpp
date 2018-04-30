@@ -32,21 +32,22 @@ namespace Crazy
         recursos.CargarFuente("DK","resources/font/dk-face-your-fears.ttf");
         recursos.CargarFuente("Z","resources/font/zombified.ttf");
         
-        
+        recursos.CargarTextura("Flecha","resources/flecha.png");
+        recursos.CargarTextura("Flechas","resources/flechas.png");
         
         maquina.Anyadir(new EstadoMenu(), true);
         
         while (_ventana->EstaAbierta())
         {
-            //tiempoActual = motor->RestartMiliseconds();
+            tiempoActual = reloj.RestartMiliseconds();
             
             maquina.ProcesarPilaEstados();
             maquina.GetEstadoActivo()->ManejarEventos();
             
-            // Actualiza 15 veces por segunto
+            // Actualiza 15 veces por segundo
             if (tiempoActual >= (1/15)) {
                 maquina.GetEstadoActivo()->Actualizar(tiempoActual);
-                //tiempoActual = motor->RestartMiliseconds();
+                tiempoActual = reloj.RestartMiliseconds();
             }
             
             // Actualiza siempre

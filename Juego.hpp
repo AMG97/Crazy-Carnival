@@ -7,6 +7,7 @@ using namespace std;
 
 #include "Ventana.hpp"
 #include "Recursos.hpp"
+#include "Reloj.hpp"
 using namespace Motor;
 
 namespace Crazy
@@ -32,7 +33,7 @@ namespace Crazy
         Juego &operator=(const Juego &);
         static Juego* _pinstance;
         
-        
+        Reloj reloj;
         float tiempoActual;
     };
 }
