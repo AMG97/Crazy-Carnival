@@ -46,19 +46,15 @@ namespace Crazy
             if (_input->GetTeclas().Escape)
             {
                 _input->CerrarVentana();
-                _input->DesactivarTecla(_input->GetTeclas().Escape);
-                cout << "ESCAPE";
             }
             
             if (_input->GetTeclas().RatonIzq)
             {
-                _input->DesactivarTecla(_input->GetTeclas().RatonIzq);
                 cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
             if (_input->GetTeclas().RatonDer)
             {
-                _input->DesactivarTecla(_input->GetTeclas().RatonDer);
                 cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             

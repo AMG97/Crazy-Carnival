@@ -25,7 +25,6 @@ namespace Motor
         Teclas GetTeclas();
         float GetPosicionRatonX();
         float GetPosicionRatonY();
-        void DesactivarTecla(bool tecla);
         
     private:
         Ventana* _ventana;

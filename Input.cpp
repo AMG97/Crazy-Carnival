@@ -33,61 +33,59 @@ namespace Motor
                     CerrarVentana();
                 break;
                     
-                //Se pulsó una tecla, imprimo su codigo
+                // Pulsar una tecla
                 case sf::Event::KeyPressed:
                     
-                    //Verifico si se pulsa alguna tecla
+                    //Verifico cual se pulsa
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
                         t.Escape=true;
-                    } else {
-                        t.Escape=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
                         t.Arriba=true;
-                    } else {
-                        t.Arriba=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                         t.Abajo=true;
-                    } else {
-                        t.Abajo=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
                         t.Izq=true;
-                    } else {
-                        t.Izq=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
                         t.Der=true;
-                    } else {
-                        t.Der=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                         t.Enter=true;
-                    } else {
-                        t.Enter=false;
                     }
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
                         t.BackSpace=true;
-                    } else {
-                        t.BackSpace=false;
                     }
                     return true;
                 break;
                 
-                //Se pulsó una tecla, imprimo su codigo
+                case sf::Event::KeyReleased:
+                    t.Escape=false;
+                    t.Arriba=false;
+                    t.Abajo=false;
+                    t.Izq=false;
+                    t.Der=false;
+                    t.Enter=false;
+                    t.BackSpace=false;
+                break;
+                    
+                // Pulsar boton raton
                 case sf::Event::MouseButtonPressed:
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
                         t.RatonIzq=true;
-                    } else {
-                        t.RatonIzq=false;
                     }
                     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
                         t.RatonDer=true;
-                    } else {
-                        t.RatonDer=false;
                     }
                     return true;
+                break;
+                
+                // Soltar boton raton
+                case sf::Event::MouseButtonReleased:
+                        t.RatonIzq=false;
+                        t.RatonDer=false;
                 break;
             }
         }
@@ -107,10 +105,5 @@ namespace Motor
     float Input::GetPosicionRatonY()
     {
        return sf::Mouse::getPosition(_ventana->GetVentana()).y;
-    }
-    
-    void Input::DesactivarTecla(bool tecla)
-    {
-        tecla = false;
     }
 }
