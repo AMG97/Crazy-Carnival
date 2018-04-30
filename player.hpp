@@ -48,7 +48,6 @@ public:
     void addPoints(int puntos);
     void setPoints(int puntos);
     int getPuntos();
-    float getEnfriamiento();
     void setEnfriamiento(float cooldown);
     void addEnfriamiento(float cooldown);
     bool getElixir();

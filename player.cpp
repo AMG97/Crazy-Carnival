@@ -202,10 +202,6 @@ void Player::setPoints(int puntos) {
     puntuacion = puntos;
 }
 
-float Player::getEnfriamiento() {
-    return enfriamiento;
-}
-
 void Player::setEnfriamiento(float cooldown) {
     enfriamiento = cooldown;
 }
