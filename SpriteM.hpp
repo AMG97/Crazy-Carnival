@@ -4,22 +4,20 @@ using namespace std;
 
 namespace Motor
 {
-    class Texto : public sf::Text {
+    class SpriteM : public sf::Sprite {
     public:
-        Texto();
-        void CambiarFuente(sf::Font& fuente);
-        void CambiarTexto(string text);
-        void CambiarTamanyo(int tam);
+        SpriteM();
+        void CambiarTextura(sf::Texture &textura);
         void CambiarPosicion(float x, float y);
         void CentrarOrigen();
+        void CambiarOrigen();
         void CambiarOrigen(float x, float y);
+        void CambiarColorRojo();
+        void Rotar(float angulo);
+        void Escalar(float x, float y);
         
-        float GetOrigenX();
-        float GetOrigenY();
         float GetAncho();
         float GetAlto();
-        float GetTop();
-        float GetLeft();
         float GetX();
         float GetY();
         
