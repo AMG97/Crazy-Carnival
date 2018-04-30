@@ -36,7 +36,8 @@ Player::Player() {
     personaje.setTexture(texturaPj);
     personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     personaje.setOrigin(60/2, 80/2);
-    personaje.setPosition(640/2, 480/2);
+    personaje.setPosition(1024/2, 720/2);
+    personaje.setScale(1.5, 1.5);
     vida = 60.0;
     enfriamiento = 0.0;
     totalVida = vida;

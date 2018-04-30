@@ -35,7 +35,7 @@ int main() {
     //Pruebas HUD
     //Crazy::Juego::Instance();
     //Crazy::Juego::Instance()->Iniciar();
-    sf::RenderWindow ventanaJuego(sf::VideoMode(640,480), "Crazy Carnival");
+    sf::RenderWindow ventanaJuego(sf::VideoMode(1024,720), "Crazy Carnival");
     
     juego->loop(ventanaJuego);
     

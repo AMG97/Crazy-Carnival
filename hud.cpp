@@ -46,19 +46,23 @@ Hud::Hud() {
     spRecipVida.setTextureRect(sf::IntRect(0*210, 0*40, 210, 40));
     //Se sitúa el centro del sprite y su ubicación
     spRecipVida.setOrigin(210/2, 40/2);
-    spRecipVida.setPosition(210/2, 40/2);
+    spRecipVida.setPosition(315/2, 60/2);
+    spRecipVida.setScale(1.5, 1.5);
     
     spVida.setTextureRect(sf::IntRect(3*13, 2*20, 136, 4));
     spVida.setOrigin(136/2, 4/2);
-    spVida.setPosition(212/2, 22/2);
+    spVida.setPosition(318/2, 33/2);
+    spVida.setScale(1.5, 1.5);
     
     spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, 0*97, 2));
     spEnfriamiento.setOrigin(98/2, 2/2);
-    spEnfriamiento.setPosition(174/2, 42/2);
+    spEnfriamiento.setPosition(261/2, 63/2);
+    spEnfriamiento.setScale(1.5, 1.5);
     
     spElixir.setTextureRect(sf::IntRect(1*13, 4*15.5, 12, 15));
     spElixir.setOrigin(12/2, 16/2);
-    spElixir.setPosition(34/2, 48/2);
+    spElixir.setPosition(51/2, 72/2);
+    spElixir.setScale(1.5, 1.5);
     
     for(int i = 0; i < 5; i++)
     {
