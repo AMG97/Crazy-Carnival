@@ -33,7 +33,7 @@ JuegoHud::JuegoHud() {
     inercia = false;
     contador = 0;
     
-    fondo = this->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/MicroMachines-Fondo.png");
+    fondo = this->establecerTexturas("./resources/MicroMachines-Fondo.png");
     spriteFondo.setTexture(fondo);
     spriteFondo.setOrigin(2000/2, 4000/2);
 }
@@ -111,11 +111,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             {
                                 *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                                 jugador->setEstadoPersonaje(2);
-                                /*if(tiempoDesplazamiento->asSeconds() >= 0.10)
-                                {
-                                    relojDesplazamiento->restart();
-                                    jugador->modificarSprite();
-                                }*/
                                 jugador->setVelocidad(-2.0);
                                 jugador->update(relojDesplazamiento);
                             }
@@ -130,11 +125,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             {
                                 *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                                 jugador->setEstadoPersonaje(1);
-                                /*if(tiempoDesplazamiento->asSeconds() >= 0.10)
-                                {
-                                    relojDesplazamiento->restart();
-                                    jugador->modificarSprite();
-                                }*/
                                 jugador->setVelocidad(2.0);
                                 jugador->update(relojDesplazamiento);
                             }
@@ -166,7 +156,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                 //El jugador debe frenar salvo que se pulse alguna tecla de movimiento.
                 //Igualmente, el lapso de tiempo de deceleración es mínimo.
                 case sf::Event::KeyReleased:
-                    if(contador == 0)
+                    if(contador == 0 && (jugador->getEstadoPersonaje() == 4 || jugador->getEstadoPersonaje() == 3))
                     {
                         jugador->setVelocidadSalto(-36.0 + contador);
                         jugador->update(relojDesplazamiento);
@@ -205,7 +195,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         }
                     }
                     //SE CAMBIARÁ CUANDO HAYAN PLATAFORMAS
-                    if((int) jugador->getSprite().getPosition().y <= 250 || (int) jugador->getSprite().getPosition().y >= 235)
+                    if((int) jugador->getSprite().getPosition().y <= 370 || (int) jugador->getSprite().getPosition().y >= 350)
                     {
                         //jugador->setVelocidadSalto(0.0);
                         jugador->getCuerpo()->SetAngularVelocity((abs(jugador->getSprite().getPosition().y - 360)) * (-1));
