@@ -12,14 +12,8 @@
       <itemPath>EstadoMenuPartidas.hpp</itemPath>
       <itemPath>EstadoPausa.hpp</itemPath>
       <itemPath>EstadosManager.hpp</itemPath>
-      <itemPath>Input.hpp</itemPath>
       <itemPath>Juego.hpp</itemPath>
-      <itemPath>Objeto.hpp</itemPath>
-      <itemPath>Recursos.hpp</itemPath>
-      <itemPath>Reloj.hpp</itemPath>
-      <itemPath>SpriteM.hpp</itemPath>
-      <itemPath>Texto.hpp</itemPath>
-      <itemPath>Ventana.hpp</itemPath>
+      <itemPath>Motor.hpp</itemPath>
       <itemPath>box.h</itemPath>
       <itemPath>hud.hpp</itemPath>
       <itemPath>juegoHud.hpp</itemPath>
@@ -39,14 +33,8 @@
       <itemPath>EstadoMenuPartidas.cpp</itemPath>
       <itemPath>EstadoPausa.cpp</itemPath>
       <itemPath>EstadosManager.cpp</itemPath>
-      <itemPath>Input.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
-      <itemPath>Objeto.cpp</itemPath>
-      <itemPath>Recursos.cpp</itemPath>
-      <itemPath>Reloj.cpp</itemPath>
-      <itemPath>SpriteM.cpp</itemPath>
-      <itemPath>Texto.cpp</itemPath>
-      <itemPath>Ventana.cpp</itemPath>
+      <itemPath>Motor.cpp</itemPath>
       <itemPath>box.cpp</itemPath>
       <itemPath>hud.cpp</itemPath>
       <itemPath>juegoHud.cpp</itemPath>
@@ -134,37 +122,13 @@
       </item>
       <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Input.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Input.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Reloj.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Reloj.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="SpriteM.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="SpriteM.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Texto.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Ventana.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Motor.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="box.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -235,37 +199,13 @@
       </item>
       <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Input.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Input.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Motor.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Recursos.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Recursos.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Reloj.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Reloj.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="SpriteM.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="SpriteM.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Texto.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Texto.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Ventana.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Ventana.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Motor.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -4,15 +4,10 @@
 #include "EstadoMenu.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-#include "SpriteM.hpp"
-using namespace Motor;
-
 // Constantes
-#define MENU 0
-#define SALIR 1
+#define ABANDONAR 0
+#define OP1 1
+#define OP2 2
 
 namespace Crazy
 {
@@ -34,16 +29,21 @@ namespace Crazy
         Juego* _juego;
         Input* _input;
         Texto t_titulo;
-        Texto t_menu;
-        Texto t_salir;
+        Texto t_frase;
+        Texto t_frase2;
+        Texto t_op;
+        Texto t_op2;
         Texto t_atras;
         SpriteM flecha;
         SpriteM flechaAtras;
         
         short int opcion;
         bool teclaPulsada;
+        bool abandonar;
         void Atras();
         void CambiarFlecha(Texto texto);
         void CambiarEstado();
+        void Abandonar();
+        void Confirmar();
     };
 }

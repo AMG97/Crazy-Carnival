@@ -35,31 +35,31 @@ namespace Crazy
         t_titulo.CambiarTexto("Crazy Carnival");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CentrarOrigen();
-        t_titulo.CambiarPosicion((_juego->ancho/2), 150);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
         t_nueva.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_nueva.CambiarTexto("Nueva partida");
         t_nueva.CambiarTamanyo(50);
         t_nueva.CentrarOrigen();
-        t_nueva.CambiarPosicion((_juego->ancho/2), t_titulo.GetY()+200);
+        t_nueva.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+200);
         
         t_cargar.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_cargar.CambiarTexto("Cargar partida");
         t_cargar.CambiarTamanyo(50);
         t_cargar.CentrarOrigen();
-        t_cargar.CambiarPosicion((_juego->ancho/2), t_nueva.GetY()+75);
+        t_cargar.CambiarPosicion((_juego->GetAncho()/2), t_nueva.GetY()+75);
         
         t_borrar.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_borrar.CambiarTexto("Borrar partida");
         t_borrar.CambiarTamanyo(50);
         t_borrar.CentrarOrigen();
-        t_borrar.CambiarPosicion((_juego->ancho/2), t_cargar.GetY()+75);
+        t_borrar.CambiarPosicion((_juego->GetAncho()/2), t_cargar.GetY()+75);
         
         t_estadisticas.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_estadisticas.CambiarTexto("Estadisticas");
         t_estadisticas.CambiarTamanyo(50);
         t_estadisticas.CentrarOrigen();
-        t_estadisticas.CambiarPosicion((_juego->ancho/2), t_borrar.GetY()+75);
+        t_estadisticas.CambiarPosicion((_juego->GetAncho()/2), t_borrar.GetY()+75);
         
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
@@ -72,7 +72,7 @@ namespace Crazy
         t_atras.CambiarTexto("Volver");
         t_atras.CambiarTamanyo(50);
         t_atras.CentrarOrigen();
-        t_atras.CambiarPosicion(100, (_juego->alto-100));
+        t_atras.CambiarPosicion(100, (_juego->GetAlto()-100));
         
         flechaAtras.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flechaAtras.CambiarOrigen();
@@ -192,7 +192,7 @@ namespace Crazy
     
     void EstadoMenuPartidas::Estadisticas()
     {
-        _juego->maquina.Anyadir(new EstadoEstadisticas());
+        _juego->maquina.Anyadir(new EstadoEstadisticas(), false);
     }
     
     void EstadoMenuPartidas::Atras()

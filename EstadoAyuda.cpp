@@ -35,13 +35,13 @@ namespace Crazy
         t_titulo.CambiarTexto("Ayuda");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CentrarOrigen();
-        t_titulo.CambiarPosicion((_juego->ancho/2), 150);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
         t_atras.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_atras.CambiarTexto("Volver");
         t_atras.CambiarTamanyo(50);
         t_atras.CentrarOrigen();
-        t_atras.CambiarPosicion(100, (_juego->alto-100));
+        t_atras.CambiarPosicion(100, (_juego->GetAlto()-100));
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();

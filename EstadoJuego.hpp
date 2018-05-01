@@ -4,14 +4,6 @@
 #include "EstadoPausa.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-
-#include "Reloj.hpp"
-
-using namespace Motor;
-
 namespace Crazy
 {
     class EstadoJuego : public Estado

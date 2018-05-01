@@ -6,12 +6,6 @@
 #include "EstadoEstadisticas.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-#include "SpriteM.hpp"
-using namespace Motor;
-
 // Constantes
 #define NUEVA 0
 #define CARGAR 1

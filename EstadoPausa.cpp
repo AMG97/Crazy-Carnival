@@ -29,37 +29,25 @@ namespace Crazy
     void EstadoPausa::Init()
     {
         _input = new Input();
-        opcion = MENU;
+        opcion = ABANDONAR;
         teclaPulsada = false;
+        abandonar = false;
         
         t_titulo.CambiarFuente(_juego->recursos.GetFuente("Z"));
         t_titulo.CambiarTexto("Pausa");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CentrarOrigen();
-        t_titulo.CambiarPosicion((_juego->ancho/2), 150);
-        
-        t_menu.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_menu.CambiarTexto("Menu");
-        t_menu.CambiarTamanyo(50);
-        t_menu.CentrarOrigen();
-        t_menu.CambiarPosicion((_juego->ancho/2), t_titulo.GetY()+200);
-        
-        t_salir.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_salir.CambiarTexto("Salir");
-        t_salir.CambiarTamanyo(50);
-        t_salir.CentrarOrigen();
-        t_salir.CambiarPosicion((_juego->ancho/2), t_menu.GetY()+75);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
         t_atras.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_atras.CambiarTexto("Volver");
         t_atras.CambiarTamanyo(50);
         t_atras.CentrarOrigen();
-        t_atras.CambiarPosicion(100, (_juego->alto-100));
+        t_atras.CambiarPosicion(100, (_juego->GetAlto()-100));
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
         flecha.CambiarColorRojo();
-        flecha.CambiarPosicion(60, t_atras.GetY()-30);
         flecha.Escalar(80.0f, 80.0f); // Escalar al 80%
         
         flechaAtras.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
@@ -67,6 +55,16 @@ namespace Crazy
         flechaAtras.Rotar(180.0f);
         flechaAtras.CambiarPosicion(60, t_atras.GetY()-30);
         flechaAtras.Escalar(70.0f, 70.0f); // Escalar al 70%
+        
+        t_frase.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_frase.CambiarTamanyo(50);
+        t_frase.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+200);
+        Abandonar();
+        
+        t_frase2.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_frase2.CambiarTamanyo(40);
+        t_frase2.CambiarTexto("Perderas los progresos que no se hayan guardado.");
+        t_frase2.CentrarOrigen();
     }
     
     void EstadoPausa::ManejarEventos()
@@ -80,19 +78,21 @@ namespace Crazy
                 Atras();
             }
             
-            if (_input->GetTeclas().Arriba) {
-                opcion--;
-                if (opcion < MENU)
-                {
-                    opcion = SALIR;
+            if (abandonar) {
+                if (_input->GetTeclas().Arriba) {
+                    opcion--;
+                    if (opcion < OP1)
+                    {
+                        opcion = OP2;
+                    }
                 }
-            }
 
-            if (_input->GetTeclas().Abajo) {
-                opcion++;
-                if (opcion > SALIR)
-                {
-                    opcion = MENU;
+                if (_input->GetTeclas().Abajo) {
+                    opcion++;
+                    if (opcion > OP2)
+                    {
+                        opcion = OP1;
+                    }
                 }
             }
             
@@ -105,14 +105,17 @@ namespace Crazy
     
     void EstadoPausa::Actualizar(float tiempoActual)
     {
-        switch (opcion)
+        if (abandonar)
         {
-            case MENU:
-                CambiarFlecha(t_menu);
-                break;
-            case SALIR:
-                CambiarFlecha(t_salir);
-                break;
+            switch (opcion)
+            {
+                case OP1:
+                    CambiarFlecha(t_op);
+                    break;
+                case OP2:
+                    CambiarFlecha(t_op2);
+                    break;
+            }
         }
     }
     
@@ -121,18 +124,36 @@ namespace Crazy
         _juego->_ventana->Limpiar();
         
         _juego->_ventana->Dibujar(t_titulo);
-        _juego->_ventana->Dibujar(t_menu);
-        _juego->_ventana->Dibujar(t_salir);
-        _juego->_ventana->Dibujar(t_atras);
+        _juego->_ventana->Dibujar(t_frase);
         _juego->_ventana->Dibujar(flecha);
-        _juego->_ventana->Dibujar(flechaAtras);
+        
+        if (!abandonar)
+        {
+            _juego->_ventana->Dibujar(t_atras);
+            _juego->_ventana->Dibujar(flechaAtras);
+        }
+        else
+        {
+            _juego->_ventana->Dibujar(t_op);
+            _juego->_ventana->Dibujar(t_op2);
+            _juego->_ventana->Dibujar(t_frase2);
+        }
         
         _juego->_ventana->Mostrar();
     }
     
     void EstadoPausa::Atras()
     {
-        _juego->maquina.Eliminar();
+        if (abandonar)
+        {
+            abandonar = false;
+            opcion = ABANDONAR;
+            Abandonar();
+        }
+        else
+        {
+            _juego->maquina.Eliminar();
+        }
     }
     
     void EstadoPausa::CambiarFlecha(Texto texto)
@@ -144,14 +165,48 @@ namespace Crazy
     {
         switch (opcion)
         {
-            case MENU:
+            case ABANDONAR:
+                abandonar = true;
+                opcion = OP1;
+                Confirmar();
+                break;
+            case OP1:
                 _juego->maquina.Eliminar();
                 _juego->maquina.Anyadir(new EstadoMenu());
-                
                 break;
-            case SALIR:
-                _input->CerrarVentana();
+            case OP2:
+                abandonar = false;
+                opcion = ABANDONAR;
+                Abandonar();
                 break;
         }
+    }
+    
+    void EstadoPausa::Abandonar()
+    {
+        t_frase.CambiarTexto("Abandonar partida");
+        t_frase.CentrarOrigen();
+        CambiarFlecha(t_frase);
+    }
+    
+    void EstadoPausa::Confirmar()
+    {
+        t_frase.CambiarTexto("Seguro que quieres salir?");
+        t_frase.CentrarOrigen();
+        
+        t_op.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_op.CambiarTexto("Si");
+        t_op.CambiarTamanyo(50);
+        t_op.CentrarOrigen();
+        t_op.CambiarPosicion((_juego->GetAncho()/2), t_frase.GetY()+75);
+        CambiarFlecha(t_op);
+        
+        t_op2.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_op2.CambiarTexto("No");
+        t_op2.CambiarTamanyo(50);
+        t_op2.CentrarOrigen();
+        t_op2.CambiarPosicion((_juego->GetAncho()/2), t_op.GetY()+75);
+        
+        t_frase2.CambiarPosicion((_juego->GetAncho()/2), t_op2.GetY()+100);
     }
 }

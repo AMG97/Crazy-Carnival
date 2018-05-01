@@ -5,15 +5,10 @@
 #include "EstadoAyuda.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-#include "SpriteM.hpp"
-using namespace Motor;
-
 // Constantes
 #define JUGAR 0
 #define AYUDA 1
+#define SALIR 2
 
 namespace Crazy
 {
@@ -37,6 +32,7 @@ namespace Crazy
         Texto t_titulo;
         Texto t_jugar;
         Texto t_ayuda;
+        Texto t_salir;
         Texto t_explicar;
         Texto t_explicar2;
         SpriteM flecha;

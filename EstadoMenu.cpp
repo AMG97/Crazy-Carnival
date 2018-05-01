@@ -36,19 +36,25 @@ namespace Crazy
         t_titulo.CambiarTexto("Crazy Carnival");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CentrarOrigen();
-        t_titulo.CambiarPosicion((_juego->ancho/2), 150);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
         t_jugar.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_jugar.CambiarTexto("Jugar");
         t_jugar.CambiarTamanyo(50);
         t_jugar.CentrarOrigen();
-        t_jugar.CambiarPosicion((_juego->ancho/2), t_titulo.GetY()+200);
+        t_jugar.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+200);
         
         t_ayuda.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_ayuda.CambiarTexto("Ayuda");
         t_ayuda.CambiarTamanyo(50);
         t_ayuda.CentrarOrigen();
-        t_ayuda.CambiarPosicion((_juego->ancho/2), t_jugar.GetY()+75);
+        t_ayuda.CambiarPosicion((_juego->GetAncho()/2), t_jugar.GetY()+75);
+        
+        t_salir.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_salir.CambiarTexto("Salir");
+        t_salir.CambiarTamanyo(50);
+        t_salir.CentrarOrigen();
+        t_salir.CambiarPosicion((_juego->GetAncho()/2), t_ayuda.GetY()+75);
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
@@ -60,11 +66,11 @@ namespace Crazy
         t_explicar.CambiarTexto("Utiliza las");
         t_explicar.CambiarTamanyo(40);
         t_explicar.CentrarOrigen();
-        t_explicar.CambiarPosicion(_juego->ancho/2-120, _juego->alto-50);
+        t_explicar.CambiarPosicion(_juego->GetAncho()/2-120, _juego->GetAlto()-50);
         
         flechas.CambiarTextura(_juego->recursos.GetTextura("Flechas"));
         flechas.CentrarOrigen();
-        flechas.CambiarPosicion(_juego->ancho/2, t_explicar.GetY()+8);
+        flechas.CambiarPosicion(_juego->GetAncho()/2, t_explicar.GetY()+8);
         flechas.Escalar(50.0f, 50.0f); // Escalar al 50%
         
         t_explicar2.CambiarFuente(_juego->recursos.GetFuente("DK"));
@@ -83,13 +89,13 @@ namespace Crazy
                 opcion--;
                 if (opcion < JUGAR)
                 {
-                    opcion = AYUDA;
+                    opcion = SALIR;
                 }
             }
 
             if (_input->GetTeclas().Abajo) {
                 opcion++;
-                if (opcion > AYUDA)
+                if (opcion > SALIR)
                 {
                     opcion = JUGAR;
                 }
@@ -100,7 +106,7 @@ namespace Crazy
             }
             
             if (_input->GetTeclas().Escape) {
-                _input->CerrarVentana();
+                _juego->_ventana->Cerrar();
             }
             
             teclaPulsada = false;
@@ -117,6 +123,9 @@ namespace Crazy
             case AYUDA:
                 CambiarFlecha(t_ayuda);
                 break;
+            case SALIR:
+                CambiarFlecha(t_salir);
+                break;
         }
     }
     
@@ -127,6 +136,7 @@ namespace Crazy
         _juego->_ventana->Dibujar(t_titulo);
         _juego->_ventana->Dibujar(t_jugar);
         _juego->_ventana->Dibujar(t_ayuda);
+        _juego->_ventana->Dibujar(t_salir);
         _juego->_ventana->Dibujar(flecha);
         _juego->_ventana->Dibujar(t_explicar);
         _juego->_ventana->Dibujar(flechas);
@@ -149,6 +159,9 @@ namespace Crazy
                 break;
             case AYUDA:
                 _juego->maquina.Anyadir(new EstadoAyuda());
+                break;
+            case SALIR:
+                _juego->_ventana->Cerrar();
                 break;
         }
     }
