@@ -45,6 +45,12 @@ namespace Crazy
         
         if (teclaPulsada)
         {
+            if (_input->GetTeclas().Pausar ||
+                _input->GetTeclas().Escape)
+            {
+                Pausar();
+            }
+            
             if (_input->GetTeclas().RatonIzq)
             {
                 cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
@@ -55,10 +61,40 @@ namespace Crazy
                 cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
-            if (_input->GetTeclas().Pausar ||
-                _input->GetTeclas().Escape)
+            if (_input->GetTeclas().D)
             {
-                Pausar();
+                _jugador->Curar(6);
+                _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
+                
+                cout << "Curar\n"<<endl;
+                cout <<_jugador->GetVida()<<", "<<_jugador->GetTotalVida()<<endl;
+            }
+            
+            if (_input->GetTeclas().C)
+            {
+                _jugador->RecibirDanyo(3);
+                _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
+                _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
+                
+                cout << "Daño\n"<<endl;
+                cout <<_jugador->GetVida()<<", "<<_jugador->GetTotalVida()<<endl;
+                cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
+            }
+            
+            if (_input->GetTeclas().F)
+            {
+                _jugador->SetAtaqueEspecial(false);
+                _jugador->ModificarEnfriamiento(-_jugador->GetTotalEnfriamiento());
+            }
+            
+            if (_input->GetTeclas().R)
+            {
+                _hud->ModoContrarreloj();
+            }
+            
+            if (_input->GetTeclas().E)
+            {
+                _hud->ElixirEncontrado();
             }
             
             teclaPulsada = false;
