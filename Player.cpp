@@ -4,16 +4,17 @@ namespace Crazy
 {
     Player::Player()
     {
+        //this->Comportamiento();
         vida = 200.0f;
     }
     
-    float Player::GetVida()
+    float Player::GetEnfriamiento()
     {
-        return vida;
+        return enfriamiento;
     }
     
-    void Player::SetVida(float v)
+    void Player::SetEnfriamiento(float e)
     {
-        vida = v;
+        enfriamiento = e;
     }
 }

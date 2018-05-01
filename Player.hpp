@@ -1,13 +1,16 @@
+#pragma once
+#include "Comportamiento.hpp"
+
 namespace Crazy
 {
-    class Player
+    class Player : public Comportamiento
     {
     public:
         Player();
-        float GetVida();
-        void SetVida(float v);
+        float GetEnfriamiento();
+        void SetEnfriamiento(float e);
         
     private:
-        float vida;
+        float enfriamiento;
     };
 }
