@@ -130,6 +130,13 @@ namespace Motor
             bool Escape;
             bool RatonIzq;
             bool RatonDer;
+			
+			//Pruebas
+            bool D;
+            bool C;
+            bool F;
+            bool R;
+            bool E;
         };
         Input();
         void CerrarVentana();

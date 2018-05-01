@@ -37,6 +37,14 @@ namespace Crazy
         _hud = new Hud();
         teclaPulsada = false;
         
+        /*reloj = new sf::Clock();
+        relojAtaqueEspecial = new sf::Clock();
+        relojDesplazamiento = new sf::Clock();
+        tiempo = new sf::Time();
+        tiempoAtaqueEspecial = new sf::Time();
+        tiempoDesplazamiento = new sf::Time();*/
+        inercia = false;
+        contador = 0;
     }
     
     void EstadoJuego::ManejarEventos()
@@ -45,6 +53,12 @@ namespace Crazy
         
         if (teclaPulsada)
         {
+            if (_input->GetTeclas().Pausar ||
+                _input->GetTeclas().Escape)
+            {
+                Pausar();
+            }
+            
             if (_input->GetTeclas().RatonIzq)
             {
                 cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
@@ -55,10 +69,46 @@ namespace Crazy
                 cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
-            if (_input->GetTeclas().Pausar ||
-                _input->GetTeclas().Escape)
+            if (_input->GetTeclas().D)
             {
-                Pausar();
+                _jugador->Curar(6);
+                _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
+                
+                cout << "Curar\n"<<endl;
+                cout <<_jugador->GetVida()<<", "<<_jugador->GetTotalVida()<<endl;
+            }
+            
+            if (_input->GetTeclas().C)
+            {
+                _jugador->RecibirDanyo(3);
+                if(_jugador->AtaqueEspecialActivado())
+                {
+                    _jugador->SetAtaqueEspecial(true);
+                }
+                
+                _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
+                _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
+                
+                cout << "Daño\n"<<endl;
+                cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
+            }
+            
+            if (_input->GetTeclas().F)
+            {
+                _jugador->SetAtaqueEspecial(false);
+                _hud->Parpadear(false);
+                _jugador->SetEnfriamiento(0.0f);
+                _hud->EnfriamientoVacio();
+            }
+            
+            if (_input->GetTeclas().R)
+            {
+                _hud->ModoContrarreloj();
+            }
+            
+            if (_input->GetTeclas().E)
+            {
+                _hud->ElixirEncontrado();
             }
             
             teclaPulsada = false;
@@ -74,6 +124,19 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
+        
+        if(tiempoAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
+        {
+            if(_hud->GetAtaqueEspecial())
+            {
+                _hud->Parpadear(true);
+            }
+            else
+            {
+                _hud->Parpadear(false);
+            }
+            relojAtaqueEspecial.ReiniciarSegundos();
+        }
         _hud->Dibujar();
         
         _juego->_ventana->Mostrar();

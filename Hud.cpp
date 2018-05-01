@@ -9,7 +9,7 @@ namespace Crazy
         contrarreloj = true;
         elixir = true;
         ataqueEspecial = true;
-
+        
         spRecipVida.CambiarTextura(_juego->recursos.GetTextura("Hud"));
         spVida.CambiarTextura(_juego->recursos.GetTextura("Hud"));
         spEnfriamiento.CambiarTextura(_juego->recursos.GetTextura("Hud"));
@@ -36,11 +36,12 @@ namespace Crazy
         spVida.CambiarPosicion(318/2, 33/2);
         spVida.EscalarProporcion(1.5, 1.5);
 
-        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, 0*97, 2));
+        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, 1*97, 2));
         spEnfriamiento.CambiarOrigen(spEnfriamiento.GetAncho()/2, spEnfriamiento.GetAlto()/2);
         spEnfriamiento.CambiarPosicion(261/2, 63/2);
         spEnfriamiento.EscalarProporcion(1.5, 1.5);
-
+        EnfriamientoVacio();
+        
         spElixir.setTextureRect(sf::IntRect(1*13, 4*15.5, 12, 15));
         spElixir.CambiarOrigen(spElixir.GetAncho()/2, spElixir.GetAlto()/2);
         spElixir.CambiarPosicion(51/2, 70/2);
@@ -102,6 +103,7 @@ namespace Crazy
     
     void Hud::Parpadear(bool parpadeo)
     {
+        SetAtaqueEspecial(!parpadeo);
         spRecipVida.Parpadear(parpadeo);
     }
     
@@ -127,36 +129,21 @@ namespace Crazy
         spContador[4].setTextureRect(sf::IntRect(106 + spriteTimerSeg, 60, 9, 11));
     }
     
-    void Hud::ModificarVida(float modificador){
-        float porcentBarra;
-
-        /*float vida = jugador.GetVida();
-        
-        vida += modificador;
-        porcentBarra = vida / totalVida;
-        if(vida > totalVida)
-        {
-            vida = totalVida;
-        }
-
-        spVida.setTextureRect(sf::IntRect(3*13, 2*20, porcentBarra * 136, 4));
-    */}
+    void Hud::ModificarVida(float vida, float totalVida){
+        float porcentaje = vida/totalVida;
+        spVida.setTextureRect(sf::IntRect(3*13, 2*20, porcentaje * 136, 4));
+    }
     
-    void Hud::ModificarEnfriamiento(float modificador){
-        float porcentBarra;
-        
-        /*enfriamiento += modificador;
-        porcentBarra = enfriamiento / totalEnfriamiento;
-        if(enfriamiento > totalEnfriamiento)
-        {
-            enfriamiento = totalEnfriamiento;
-        }
-        else if(enfriamiento < 0.0)
-        {
-            enfriamiento = 0.0;
-        }
-        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, porcentBarra * 97, 2));
-    */}
+    void Hud::ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento)
+    {
+        float porcentaje = enfriamiento/totalEnfriamiento;
+        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, porcentaje * 97, 2));
+    }
+    
+    void Hud::EnfriamientoVacio()
+    {
+        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, 0, 2));
+    }
     
     void Hud::ModoContrarreloj(){
         if(contrarreloj){
@@ -180,10 +167,6 @@ namespace Crazy
         ataqueEspecial = ataque;
     }
     
-    SpriteM Hud::GetSpriteRecipienteVida()
-    {
-        return spRecipVida;
-    }
     bool Hud::GetAtaqueEspecial(){
         return ataqueEspecial;
     }

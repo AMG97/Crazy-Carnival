@@ -313,6 +313,13 @@ namespace Motor
         teclas.Escape = false;
         teclas.RatonIzq = false;
         teclas.RatonDer = false;
+		
+        //Pruebas
+        teclas.D = false;
+        teclas.C = false;
+        teclas.F = false;
+        teclas.R = false;
+        teclas.E = false;
     }
     
     void Input::CerrarVentana()
@@ -361,6 +368,23 @@ namespace Motor
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
                         teclas.Pausar=true;
                     }
+					
+                    //Pruebas
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                        teclas.D=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+                        teclas.C=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+                        teclas.F=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+                        teclas.R=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                        teclas.E=true;
+                    }
                     return true;
                 break;
                 
@@ -373,6 +397,13 @@ namespace Motor
                     teclas.Der=false;
                     teclas.Enter=false;
                     teclas.BackSpace=false;
+					
+                    //Pruebas
+                    teclas.D = false;
+                    teclas.C = false;
+                    teclas.F = false;
+                    teclas.R = false;
+                    teclas.E = false;
                 break;
                     
                 // Pulsar boton raton

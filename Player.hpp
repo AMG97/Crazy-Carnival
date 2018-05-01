@@ -8,9 +8,22 @@ namespace Crazy
     public:
         Player();
         float GetEnfriamiento();
+        float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);
         
+        void ModificarEnfriamiento(float modificador);
+        
+        bool GetAtaqueEspecial();
+        void SetAtaqueEspecial(bool ataque);
+        bool AtaqueEspecialActivado();
+        
+        void Curar(float cura);
+        void RecibirDanyo(float danyo);
+        
+        
     private:
+        float totalEnfriamiento;
         float enfriamiento;
+        bool ataqueEspecial;
     };
 }
