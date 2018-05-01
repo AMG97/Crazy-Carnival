@@ -24,6 +24,8 @@
 /*
  * 
  */
+using namespace Crazy;
+
 int main() {
 
      //Variables HUD

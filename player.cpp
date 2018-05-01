@@ -12,6 +12,10 @@
  */
 
 #include <SFML/Graphics.hpp>
+#include "Recursos.hpp"
+
+using namespace std;
+using namespace Motor;
 
 #include "juegoHud.hpp"
 #include "player.hpp"
@@ -19,206 +23,213 @@
 #include "hud.hpp"
 #include <Box2D/Box2D.h>
 
-using namespace std;
+namespace Crazy{
 
     float Player::vida;
     float Player::enfriamiento;
     float Player::totalVida = vida;
     float Player::totalEnfriamiento;
-    
-Player* Player::pinstance = 0;
-Player* Player::Instance() {
-    if (pinstance == 0){
-        pinstance = new Player;
-    }
-    return pinstance;
-}
 
-Player::Player() {
-    //pruebas jugador, variables
-    elegirSprite = true;
-    if(elegirSprite)
-        texturaPj = juego->establecerTexturas("./resources/espadachina.png");
-    else
-        texturaPj = juego->establecerTexturas("./resources/espadachina.png");
-    personaje.setTexture(texturaPj);
-    personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
-    personaje.setOrigin(60/2, 80/2);
-    personaje.setPosition(1024/2, 720/2);
-    personaje.setScale(1.5, 1.5);
-    vida = 60.0;
-    enfriamiento = 0.0;
-    totalVida = vida;
-    totalEnfriamiento = 30.0;
-    puntuacion = 0;
-    elixir = false;
-    godMode = false;
-    
-    contadorSpriteReposo = 0;
-    contadorSpriteCorrer = 0;
-    contadorSpriteSalto = 0;
-    estadoPersonaje = 0;
-    velocidad.x = 0.0;
-    velocidad.y = 0.0;
-    mundo = new b2World(b2Vec2(0.0, 9.81));
-    jugadorDef.type = b2BodyType::b2_dynamicBody;
-    jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
-    jugador = mundo->CreateBody(&jugadorDef);
-    shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
-    fixJugadorDef.shape = &shapeJugador;
-    fixJugadorDef.density = 1.0;
-    fixJugadorDef.friction = 0.0;
-    fixJugadorDef.restitution = 0.0;
-    fixJugador = jugador->CreateFixture(&fixJugadorDef);
-}
-
-Player::Player(const Player& orig) {
-}
-
-Player::~Player() {
-}
-void Player::update(sf::Clock *clock){
-    jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + jugador->GetAngularVelocity());
-    jugador = mundo->CreateBody(&jugadorDef);
-    personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
-}
-void Player::draw(sf::RenderWindow& window){
-    window.draw(personaje);
-}
-void Player::modificarSprite()
-{
-    if(estadoPersonaje == 1 || estadoPersonaje == 2)
+    Player* Player::_pinstance = 0;
+    Player* Player::Instance() 
     {
-        personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*65, 1*80, 65, 80));
-        contadorSpriteCorrer++;
-        if(contadorSpriteCorrer == 6)
+        if (_pinstance == 0){
+            _pinstance = new Player;
+        }
+        return _pinstance;
+    }
+
+    Player::Player() {
+        //pruebas jugador, variables
+        elegirSprite = true;
+        /*if(elegirSprite)
+            texturaPj = juego->establecerTexturas("./resources/espadachina.png");
+        else
+            texturaPj = juego->establecerTexturas("./resources/espadachina.png");*/
+        recurso.CargarTextura("texturaPj", "./resources/espadachina.png");
+        texturaPj = recurso.GetTextura("texturaPj");
+        personaje.setTexture(texturaPj);
+        personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
+        personaje.setOrigin(60/2, 80/2);
+        personaje.setPosition(1024/2, 720/2);
+        personaje.setScale(1.5, 1.5);
+        vida = 60.0;
+        enfriamiento = 0.0;
+        totalVida = vida;
+        totalEnfriamiento = 30.0;
+        puntuacion = 0;
+        elixir = false;
+        godMode = false;
+
+        contadorSpriteReposo = 0;
+        contadorSpriteCorrer = 0;
+        contadorSpriteSalto = 0;
+        estadoPersonaje = 0;
+        velocidad.x = 0.0;
+        velocidad.y = 0.0;
+        mundo = new b2World(b2Vec2(0.0, 9.81));
+        jugadorDef.type = b2BodyType::b2_dynamicBody;
+        jugadorDef.position = b2Vec2(personaje.getPosition().x, personaje.getPosition().y);
+        jugador = mundo->CreateBody(&jugadorDef);
+        shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
+        fixJugadorDef.shape = &shapeJugador;
+        fixJugadorDef.density = 1.0;
+        fixJugadorDef.friction = 0.0;
+        fixJugadorDef.restitution = 0.0;
+        fixJugador = jugador->CreateFixture(&fixJugadorDef);
+    }
+
+    Player::Player(const Player& orig) {
+
+    }
+
+    Player::~Player() {
+        delete _pinstance;
+        _pinstance = NULL;
+    }
+    void Player::update(sf::Clock *clock){
+        jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + jugador->GetAngularVelocity());
+        jugador = mundo->CreateBody(&jugadorDef);
+        personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
+    }
+    void Player::draw(sf::RenderWindow& window){
+        window.draw(personaje);
+    }
+    void Player::modificarSprite()
+    {
+        if(estadoPersonaje == 1 || estadoPersonaje == 2)
         {
-            contadorSpriteCorrer = 0;
+            personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*65, 1*80, 65, 80));
+            contadorSpriteCorrer++;
+            if(contadorSpriteCorrer == 6)
+            {
+                contadorSpriteCorrer = 0;
+            }
+        }
+        else if(estadoPersonaje == 3 || estadoPersonaje == 4)
+        {
+            personaje.setTextureRect(sf::IntRect(contadorSpriteSalto*65, 7*80, 65, 90));
+            contadorSpriteSalto++;
+            if(contadorSpriteSalto == 3)
+            {
+                contadorSpriteSalto = 0;
+            }
+        }
+        else if(estadoPersonaje == 0)
+        {
+            personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*80, 60, 80));
+            contadorSpriteReposo++;
+            if(contadorSpriteReposo == 8)
+            {
+                contadorSpriteReposo = 0;
+            }
         }
     }
-    else if(estadoPersonaje == 3 || estadoPersonaje == 4)
+    sf::Sprite Player::getSprite()
     {
-        personaje.setTextureRect(sf::IntRect(contadorSpriteSalto*65, 7*80, 65, 90));
-        contadorSpriteSalto++;
-        if(contadorSpriteSalto == 3)
-        {
-            contadorSpriteSalto = 0;
-        }
+        return personaje;
     }
-    else if(estadoPersonaje == 0)
+
+    sf::FloatRect Player::getGlobalBounds() {
+        return personaje.getGlobalBounds();
+    }
+
+
+    void Player::setEstadoPersonaje(int direccion)
     {
-        personaje.setTextureRect(sf::IntRect(contadorSpriteReposo*60, 0*80, 60, 80));
-        contadorSpriteReposo++;
-        if(contadorSpriteReposo == 8)
-        {
-            contadorSpriteReposo = 0;
+        estadoPersonaje = direccion;
+        if((estadoPersonaje == 2 || estadoPersonaje == 4) && personaje.getScale().x > 0.0){
+            personaje.scale(-1.0, 1.0);
         }
+        else if((estadoPersonaje == 1 || estadoPersonaje == 3) && personaje.getScale().x < 0.0)
+            personaje.scale(-1.0, 1.0);
     }
-}
-sf::Sprite Player::getSprite()
-{
-    return personaje;
-}
-
-sf::FloatRect Player::getGlobalBounds() {
-    return personaje.getGlobalBounds();
-}
-
-
-void Player::setEstadoPersonaje(int direccion)
-{
-    estadoPersonaje = direccion;
-    if((estadoPersonaje == 2 || estadoPersonaje == 4) && personaje.getScale().x > 0.0){
-        personaje.scale(-1.0, 1.0);
+    //Devuelve el entero que indica el estado del personaje
+    int Player::getEstadoPersonaje()
+    {
+        return estadoPersonaje;
     }
-    else if((estadoPersonaje == 1 || estadoPersonaje == 3) && personaje.getScale().x < 0.0)
-        personaje.scale(-1.0, 1.0);
-}
-//Devuelve el entero que indica el estado del personaje
-int Player::getEstadoPersonaje()
-{
-    return estadoPersonaje;
-}
-//Funciones que se quedarán en player
-void Player::setVelocidadSalto(float modificacionVelocidad)
-{   
-    //int contador;
-    /*if(modificacionVelocidad < 0.0){
-        jugador->SetAngularVelocity(modificacionVelocidad);
+    //Funciones que se quedarán en player
+    void Player::setVelocidadSalto(float modificacionVelocidad)
+    {   
+        //int contador;
+        /*if(modificacionVelocidad < 0.0){
+            jugador->SetAngularVelocity(modificacionVelocidad);
+        }
+        else
+        {*/
+            jugador->SetAngularVelocity(mundo->GetGravity().y + modificacionVelocidad);
+        //}
     }
-    else
-    {*/
-        jugador->SetAngularVelocity(mundo->GetGravity().y + modificacionVelocidad);
-    //}
-}
-/*float Player::getVelocidadSalto()
-{
-    return velocidad.y;
-}*/
-void Player::setVelocidad(float modificacionVelocidad)
-{
-    velocidad.x = modificacionVelocidad;
-}
-float Player::getVelocidad()
-{
-    return velocidad.x;
-}
-void Player::recibirDanyo(float danyo){
-    vida -= danyo;
-    enfriamiento += danyo * 0.75;
-    Hud::modificarVida(-danyo);
-    Hud::modificarEnfriamiento(danyo * 0.75);
-    cout << "Daño" <<endl;
-}
-void Player::curar(float cura){
-    vida += cura;
-    Hud::modificarVida(cura);
-}
-void Player::actualizarFisica(){
-    mundo->Step(1/60, 8, 8);
-    mundo->ClearForces();
-}
-b2Body *Player::getCuerpo(){
-    return jugador;
-}
-float Player::getEnfriamiento()
-{
-    return enfriamiento;
-}
-float Player::getTotalEnfriamiento()
-{
-    return totalEnfriamiento;
-}
+    /*float Player::getVelocidadSalto()
+    {
+        return velocidad.y;
+    }*/
+    void Player::setVelocidad(float modificacionVelocidad)
+    {
+        velocidad.x = modificacionVelocidad;
+    }
+    float Player::getVelocidad()
+    {
+        return velocidad.x;
+    }
+    void Player::recibirDanyo(float danyo){
+        vida -= danyo;
+        enfriamiento += danyo * 0.75;
+        Hud::modificarVida(-danyo);
+        Hud::modificarEnfriamiento(danyo * 0.75);
+        cout << "Daño" <<endl;
+    }
+    void Player::curar(float cura){
+        vida += cura;
+        Hud::modificarVida(cura);
+    }
+    void Player::actualizarFisica(){
+        mundo->Step(1/60, 8, 8);
+        mundo->ClearForces();
+    }
+    b2Body *Player::getCuerpo(){
+        return jugador;
+    }
+    float Player::getEnfriamiento()
+    {
+        return enfriamiento;
+    }
+    float Player::getTotalEnfriamiento()
+    {
+        return totalEnfriamiento;
+    }
 
-void Player::addPoints(int puntos) {
-    puntuacion+=puntos;
-}
+    void Player::addPoints(int puntos) {
+        puntuacion+=puntos;
+    }
 
-int Player::getPuntos() {
-    return puntuacion;
-}
+    int Player::getPuntos() {
+        return puntuacion;
+    }
 
-void Player::setPoints(int puntos) {
-    puntuacion = puntos;
-}
+    void Player::setPoints(int puntos) {
+        puntuacion = puntos;
+    }
 
-void Player::setEnfriamiento(float cooldown) {
-    enfriamiento = cooldown;
-}
+    void Player::setEnfriamiento(float cooldown) {
+        enfriamiento = cooldown;
+    }
 
-void Player::addEnfriamiento(float cooldown) {
-    enfriamiento+=cooldown;
-}
+    void Player::addEnfriamiento(float cooldown) {
+        enfriamiento+=cooldown;
+    }
 
-void Player::setElixir(bool e) {
-    elixir = e;
-}
+    void Player::setElixir(bool e) {
+        elixir = e;
+    }
 
-bool Player::getElixir() {
-    return elixir;
-}
+    bool Player::getElixir() {
+        return elixir;
+    }
 
-bool Player::changeGodMode() {
-    godMode = !godMode;
-    return godMode;
+    bool Player::changeGodMode() {
+        godMode = !godMode;
+        return godMode;
+    }
 }

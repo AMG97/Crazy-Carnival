@@ -13,9 +13,9 @@
 
 #ifndef OBJETO_HPP
 #define OBJETO_HPP
-
 #include "player.hpp"
 
+using namespace Crazy;
 
 struct Objeto {
 public:
