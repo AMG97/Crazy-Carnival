@@ -14,7 +14,7 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 #include <Box2D/Box2D.h>
-#include "Recursos.hpp"
+#include "Motor.hpp"
 
 using namespace Motor;
 

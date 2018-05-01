@@ -12,10 +12,8 @@
  */
 
 #include <SFML/Graphics.hpp>
-#include "Recursos.hpp"
 
 using namespace std;
-using namespace Motor;
 
 #include "juegoHud.hpp"
 #include "player.hpp"

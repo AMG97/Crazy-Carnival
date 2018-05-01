@@ -13,6 +13,8 @@
 
 #ifndef HUD_HPP
 #define HUD_HPP
+#include "Motor.hpp"
+using namespace Motor;
 
 namespace Crazy{
     class JuegoHud;
@@ -20,13 +22,18 @@ namespace Crazy{
     class Hud : public Player {
 
     private:
+        
+        //TEMPORAL
+        Recursos recurso;
+        //!TEMPORAL
+        
         JuegoHud *juego;
         sf::Texture texturaHud;
-        sf::Sprite spRecipVida;
-        sf::Sprite static spVida;
-        sf::Sprite static spEnfriamiento;
-        sf::Sprite spElixir;
-        sf::Sprite spContador [5];
+        SpriteM spRecipVida;
+        SpriteM static spVida;
+        SpriteM static spEnfriamiento;
+        SpriteM spElixir;
+        SpriteM spContador [5];
         bool contrarreloj;
         bool elixir;
         bool ataqueEspecial;
@@ -39,7 +46,9 @@ namespace Crazy{
         Hud(const Hud& orig);
         virtual ~Hud();
         void draw(sf::RenderWindow &window);
-        void dibujar(sf::RenderWindow &window, bool color);
+        
+        void parpadear(bool parpadeo);
+        
         void cambiarTexturaContador();
         static void modificarVida(float modificador);
         static void modificarEnfriamiento(float modificador);

@@ -95,7 +95,7 @@ namespace Crazy{
                                 break;
                             case sf::Keyboard::F:
                                 hud->setAtaqueEspecial(false);
-                                hud->dibujar(window, false);
+                                hud->parpadear(false);
                                 hud->modificarEnfriamiento(-jugador->getTotalEnfriamiento());
                             case sf::Keyboard::R:
                                 hud->modoContrarreloj();
@@ -228,11 +228,11 @@ namespace Crazy{
         {
             if(hud->getSpriteRecipienteVida().getColor() != sf::Color(50, 125, 255, 255))
             {
-                hud->dibujar(window, true);
+                hud->parpadear(true);
             }
             else
             {
-                hud->dibujar(window, false);
+                hud->parpadear(false);
             }
             relojAtaqueEspecial->restart();
         }

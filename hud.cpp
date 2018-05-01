@@ -19,8 +19,8 @@
 
 using namespace std;
 namespace Crazy{
-        sf::Sprite Hud::spVida;
-        sf::Sprite Hud::spEnfriamiento;
+        SpriteM Hud::spVida;
+        SpriteM Hud::spEnfriamiento;
 
     Hud::Hud() {
 
@@ -28,26 +28,28 @@ namespace Crazy{
         contrarreloj = false;
         elixir = false;
         ataqueEspecial = false;
-        texturaHud = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/HUD.png");
-        spRecipVida.setTexture(texturaHud);
-        spVida.setTexture(texturaHud);
-        spEnfriamiento.setTexture(texturaHud);
-        spElixir.setTexture(texturaHud);
+        recurso.CargarTextura("texturaRecipVida", "./resources/HUD.png");
+        texturaHud = recurso.GetTextura("texturaRecipVida");
+        //texturaHud = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/HUD.png");
+        spRecipVida.CambiarTextura(texturaHud);
+        spVida.CambiarTextura(texturaHud);
+        spEnfriamiento.CambiarTextura(texturaHud);
+        spElixir.CambiarTextura(texturaHud);
         spriteTimerSeg = 0;
         spriteTimerSeg1 = 0;
         spriteTimerMin = 36;
 
         for(int i = 0; i < 5; i++)
         {
-            spContador[i].setTexture(texturaHud);
+            spContador[i].CambiarTextura(texturaHud);
         }
 
         //Se elige el sprite del sheet
         spRecipVida.setTextureRect(sf::IntRect(0*210, 0*40, 210, 40));
         //Se sitúa el centro del sprite y su ubicación
-        spRecipVida.setOrigin(210/2, 40/2);
-        spRecipVida.setPosition(315/2, 60/2);
-        spRecipVida.setScale(1.5, 1.5);
+        spRecipVida.CentrarOrigen();
+        spRecipVida.CambiarPosicion(315/2, 60/2);
+        spRecipVida.Escalar(150, 150);
 
         spVida.setTextureRect(sf::IntRect(3*13, 2*20, 136, 4));
         spVida.setOrigin(136/2, 4/2);
@@ -115,16 +117,9 @@ namespace Crazy{
             }
         }   
     }
-    void Hud::dibujar(sf::RenderWindow &window, bool color)
+    void Hud::parpadear(bool parpadeo)
     {
-        if(color)
-        {
-            spRecipVida.setColor(sf::Color(50, 125, 255, 255));
-        }
-        else
-        {
-            spRecipVida.setColor(sf::Color(255, 255, 255, 255));
-        }
+        
     }
     void Hud::cambiarTexturaContador(){
 
