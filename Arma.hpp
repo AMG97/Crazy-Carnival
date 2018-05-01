@@ -20,7 +20,7 @@
 
 class Arma {
 public:
-    Arma(int n);
+    Arma(int n, sf::Vector2f pos);
     Arma(const Arma& orig);
     virtual ~Arma();
     void draw(sf::RenderWindow& window);

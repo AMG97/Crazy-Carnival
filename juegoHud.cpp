@@ -17,12 +17,14 @@
 #include "hud.hpp"
 #include "juegoHud.hpp"
 #include "box.h"
+#include "Enemigo.hpp"
 
 using namespace std;
 
 JuegoHud::JuegoHud() {
     hud = new Hud();
     jugador = new Player();
+    enemigo= new Enemigo();
     reloj = new sf::Clock();
     relojDesplazamiento = new sf::Clock();
     tiempo = new sf::Time();
@@ -186,6 +188,15 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         }
                     }
                         break;
+                        
+                    window.clear();
+                    jugador->update(reloj);
+                    jugador->actualizarFisica();
+                    enemigo->update(jugador->getSprite().getPosition());
+                    window.draw(spriteFondo);
+                    hud->draw(window);
+                    jugador->draw(window);
+                    enemigo->draw(window);
             }
         }
         ratonpos=(sf::Mouse::getPosition(window));
@@ -199,9 +210,11 @@ void JuegoHud::loop(sf::RenderWindow &window){
         window.clear();
         jugador->update(reloj);
         jugador->actualizarFisica();
+        enemigo->update(jugador->getSprite().getPosition());
         window.draw(spriteFondo);
         hud->draw(window);
         jugador->draw(window);
+        enemigo->draw(window);
         if((int) tiempo->asSeconds() == 1)
         {
             reloj->restart();

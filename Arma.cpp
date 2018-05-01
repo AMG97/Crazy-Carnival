@@ -13,17 +13,19 @@
 
 #include "Arma.hpp"
 
-Arma::Arma(int n) {
+Arma::Arma(int n, sf::Vector2f pos) {
     if(n==1){
         texturaArma=juego->establecerTexturas("resources/espada1.png");
     }else if(n==2){
         texturaArma=juego->establecerTexturas("resources/espada2.png");
+    }else if(n==0){
+        texturaArma=juego->establecerTexturas("resources/enemigo-pistola.png");
     }
     tipo=n;
     arma.setTexture(texturaArma);
     arma.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     arma.setOrigin(60/2, 80/2);
-    arma.setPosition(640/2, 480/2);
+    arma.setPosition(pos);
 }
 
 void Arma::modificarSpriteReposo(int n, sf::Vector2f pos){
@@ -65,6 +67,7 @@ void Arma::scale(float nx, float ny){
 }
 
 void Arma::draw(sf::RenderWindow& window){
+    if(tipo!=0)
     window.draw(arma);
     for(int i=0;i<proyectiles.size();i++){
         proyectiles[i]->draw(window);
@@ -87,7 +90,8 @@ void Arma::disparar(float angulo){
     int t;
     if(tipo==1 || tipo==2){
         t=1;
-    }
+    }else
+        t=2;
     Proyectil *p=new Proyectil(t, danyo, angulo, arma);
     proyectiles.push_back(p);
 }

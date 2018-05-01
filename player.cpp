@@ -49,7 +49,7 @@ Player::Player() {
     contadorSpriteAtaque2= 0;
     Ataque1=false;
     Ataque2=false;
-    arma= new Arma(2);
+    arma= new Arma(2,personaje.getPosition());
     angulo=0;
     direccionIzquierda = false;
     velocidad.x = 0.0;

@@ -17,6 +17,7 @@
 //#include <SFML/Graphics.hpp>
 
 class Player;
+class Enemigo;
 class Hud;
 class JuegoHud{
 public:
@@ -29,6 +30,7 @@ public:
 private:
     Hud *hud;
     Player *jugador;
+    Enemigo *enemigo;
     sf::Clock *reloj;
     sf::Clock *relojDesplazamiento;
     sf::Time *tiempo;
