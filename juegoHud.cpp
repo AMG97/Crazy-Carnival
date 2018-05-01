@@ -136,17 +136,16 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
-                                jugador->modificarSpriteCorrer();
+                                if(!jugador->getAtaque1() && !jugador->getAtaque2())
+                                    jugador->modificarSpriteCorrer();
+                                else if(jugador->getAtaque1())
+                                    jugador->modificarSpriteAtaque1();
+                                else
+                                    jugador->modificarSpriteAtaque2();
                             }
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->setVelocidad(-0.2);
                             jugador->update(relojDesplazamiento);
-                            //cout << "acelera izquierda" << endl;//}
-                            //jugador->update(reloj);
-                            if(jugador->getAtaque1())
-                                jugador->reposo(1);
-                            else if(jugador->getAtaque2())
-                                jugador->reposo(2);
                             break;
                         case sf::Keyboard::Right:
                             //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
@@ -157,66 +156,17 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
-                                jugador->modificarSpriteCorrer();
+                                if(!jugador->getAtaque1() && !jugador->getAtaque2())
+                                    jugador->modificarSpriteCorrer();
+                                else if(jugador->getAtaque1())
+                                    jugador->modificarSpriteAtaque1();
+                                else
+                                    jugador->modificarSpriteAtaque2();
                             }
                             *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                             jugador->setVelocidad(0.2);
                             jugador->update(relojDesplazamiento);
-                            //cout << "acelera derecha" << endl;//}
-                            //jugador->update(reloj);
-                            if(jugador->getAtaque1())
-                                jugador->reposo(1);
-                            else if(jugador->getAtaque2())
-                                jugador->reposo(2);
                             break;
-                        case sf::Keyboard::Up:
-                            jugador->setVelocidadSalto(-0.2);
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-                            /*if(!pararSalto)
-                            {
-                                if(jugador->getVelocidadSalto() > -5.0)
-                                {
-                                    if(jugador->getVelocidadSalto() == 0)
-                                        jugador->setVelocidadSalto(-3.0);
-                                    else
-                                        jugador->setVelocidadSalto(jugador->getVelocidadSalto()/2);
-                                    jugador->update(reloj);
-                                    cout << "salta" << endl;
-                                    cout<<jugador->getVelocidadSalto()<<endl;
-                                }
-                                else
-                                    pararSalto = true;
-                            }
-                            else
-                            {
-                                if((int) jugador->getSprite().getPosition().y < 240)
-                                {
-                                    if(jugador->getVelocidadSalto() < 5.0 && (int) jugador->getSprite().getPosition().y < 240)
-                                    {
-                                        jugador->setVelocidadSalto(0.6);
-                                    }                            
-                                }
-                                else if((int) jugador->getSprite().getPosition().y <= 242 || (int) jugador->getSprite().getPosition().y >= 238)
-                                {
-                                    jugador->setVelocidadSalto(0.0);
-                                    jugador->getSprite().setPosition(jugador->getSprite().getPosition().x, 240);
-                                    pararSalto = false;
-                                }
-                            }*/
-                            //}
-                            jugador->update(reloj);
-                            if(jugador->getAtaque1())
-                                jugador->reposo(1);
-                            else if(jugador->getAtaque2())
-                                jugador->reposo(2);
-                            break;
-                        /*case sf::Keyboard::Down:
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                            jugador->setVelocidad(0.2);
-                            jugador->update(reloj);
-                            cout << "acelera derecha" << endl;//}
-                            //jugador->update(reloj);
-                            break;*/
                     }
                     break;
                     

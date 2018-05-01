@@ -29,7 +29,8 @@ build/Debug/GNU-Linux/player.o: player.cpp juegoHud.hpp player.hpp \
  Box2D/Box2D/Dynamics/Joints/b2RevoluteJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2RopeJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h \
- Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h hud.hpp Arma.hpp
+ Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h hud.hpp Arma.hpp \
+ Proyectil.hpp
 
 juegoHud.hpp:
 
@@ -112,3 +113,5 @@ Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h:
 hud.hpp:
 
 Arma.hpp:
+
+Proyectil.hpp:
