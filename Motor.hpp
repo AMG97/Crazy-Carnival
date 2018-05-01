@@ -64,6 +64,7 @@ namespace Motor
         void CambiarColorRojo();
         void Rotar(float angulo);
         void Escalar(float x, float y);
+        void EscalarProporcion(float x, float y);
         void Parpadear(bool parpadeo);
         
         float GetAncho();
@@ -72,6 +73,7 @@ namespace Motor
         float GetY();
     };
     
+    class Camara;
     class Ventana
     {
     public:
@@ -85,6 +87,7 @@ namespace Motor
         void Cerrar();
         void Dibujar(Texto txt);
         void Dibujar(SpriteM sprite);
+        void setCamara(Camara &camara);
         sf::RenderWindow& GetVentana();
         
     private:
@@ -94,6 +97,23 @@ namespace Motor
         static Ventana* _pinstance;
         
         sf::RenderWindow window;
+    };
+    
+    class Camara
+    {
+    public:
+        static Camara* Instance();
+        ~Camara();
+        void CrearCamara(float centroX, float centroY, float ancho, float alto);
+        sf::View& GetCamara();
+        
+    private:
+        Camara() { };
+        Camara(const Camara &);
+        Camara &operator=(const Camara &);
+        static Camara* _pinstance2;
+        
+        sf::View camara;
     };
     
     class Input

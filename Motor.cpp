@@ -172,6 +172,10 @@ namespace Motor
     {
         scale(x/getTexture()->getSize().x, y/getTexture()->getSize().y);
     }
+    void SpriteM::EscalarProporcion(float x, float y)
+    {
+        scale(x, y);
+    }
     
     void SpriteM::Parpadear(bool parpadeo)
     {
@@ -259,12 +263,42 @@ namespace Motor
     {
         window.draw(sprite);
     }
+    void Ventana::setCamara(Camara &camara)
+    {
+        window.setView(camara.GetCamara());
+    }
     
     sf::RenderWindow& Ventana::GetVentana()
     {
         return window;
     }
+// Cámara
+    Camara* Camara::_pinstance2=0;
     
+    Camara* Camara::Instance()
+    {
+        if (_pinstance2 == 0)
+        {
+            _pinstance2 = new Camara();
+        }
+        return _pinstance2;
+    }
+    
+    Camara::~Camara()
+    {
+        delete _pinstance2;
+        _pinstance2 = NULL;
+    }
+    
+    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    {
+        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+    }
+            
+    sf::View& Camara::GetCamara()
+    {
+        return camara;
+    }
 // Input
     Input::Input()
     {
