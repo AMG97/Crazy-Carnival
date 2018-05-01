@@ -1,4 +1,4 @@
-#include "Hud.hpp"
+#include "Hud-caca.hpp"
 
 namespace Crazy
 {
@@ -81,10 +81,10 @@ namespace Crazy
     void Hud::Dibujar()
     {
         _juego->_ventana->Dibujar(spVida);
-        //_juego->_ventana->Dibujar(spEnfriamiento);
+        _juego->_ventana->Dibujar(spEnfriamiento);
         _juego->_ventana->Dibujar(spRecipVida);
         
-        /*if(elixir)
+        if(elixir)
             _juego->_ventana->Dibujar(spElixir);
         if(contrarreloj)
         {
@@ -92,7 +92,7 @@ namespace Crazy
             {
                 _juego->_ventana->Dibujar(spContador[i]);
             }
-        }*/
+        }
     }
     
     void Hud::Parpadear(bool parpadeo)
@@ -122,36 +122,15 @@ namespace Crazy
         spContador[4].setTextureRect(sf::IntRect(106 + spriteTimerSeg, 60, 9, 11));
     }
     
-    void Hud::ModificarVida(float modificador){
-        float porcentBarra;
-
-        /*float vida = jugador.GetVida();
-        
-        vida += modificador;
-        porcentBarra = vida / totalVida;
-        if(vida > totalVida)
-        {
-            vida = totalVida;
-        }
-
-        spVida.setTextureRect(sf::IntRect(3*13, 2*20, porcentBarra * 136, 4));
-    */}
+    void Hud::ModificarVida(float vida, float totalVida)
+    {
+        spVida.setTextureRect(sf::IntRect(3*13, 2*20, (vida/totalVida) * 136, 4));
+    }
     
-    void Hud::ModificarEnfriamiento(float modificador){
-        float porcentBarra;
-        
-        /*enfriamiento += modificador;
-        porcentBarra = enfriamiento / totalEnfriamiento;
-        if(enfriamiento > totalEnfriamiento)
-        {
-            enfriamiento = totalEnfriamiento;
-        }
-        else if(enfriamiento < 0.0)
-        {
-            enfriamiento = 0.0;
-        }
-        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, porcentBarra * 97, 2));
-    */}
+    void Hud::ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento)
+    {
+        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, (enfriamiento/totalEnfriamiento) * 97, 2));
+    }
     
     void Hud::ModoContrarreloj(){
         if(contrarreloj){

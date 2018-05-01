@@ -3,8 +3,8 @@
 
 namespace Crazy
 {
-    /*SpriteM Hud::spVida;
-    SpriteM Hud::spEnfriamiento;*/
+    /*SpriteM spVida;
+    SpriteM spEnfriamiento;*/
     
     class Hud
     {
@@ -14,8 +14,8 @@ namespace Crazy
         void Parpadear(bool parpadeo);
         
         void CambiarTexturaContador();
-        void ModificarVida(float modificador);
-        void ModificarEnfriamiento(float modificador);
+        void ModificarVida(float vida, float totalVida);
+        void ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento);
         void ModoContrarreloj();
         void ElixirEncontrado();
         void SetAtaqueEspecial(bool ataque);
