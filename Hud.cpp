@@ -1,4 +1,4 @@
-#include "Hud-caca.hpp"
+#include "Hud.hpp"
 
 namespace Crazy
 {
@@ -97,6 +97,7 @@ namespace Crazy
     
     void Hud::Parpadear(bool parpadeo)
     {
+        SetAtaqueEspecial(!parpadeo);
         spRecipVida.Parpadear(parpadeo);
     }
     
@@ -124,12 +125,14 @@ namespace Crazy
     
     void Hud::ModificarVida(float vida, float totalVida)
     {
-        spVida.setTextureRect(sf::IntRect(3*13, 2*20, (vida/totalVida) * 136, 4));
+        float porcentaje = vida/totalVida;
+        spVida.setTextureRect(sf::IntRect(3*13, 2*20, porcentaje * 136, 4));
     }
     
     void Hud::ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento)
     {
-        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, (enfriamiento/totalEnfriamiento) * 97, 2));
+        float porcentaje = enfriamiento/totalEnfriamiento;
+        spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, porcentaje * 97, 2));
     }
     
     void Hud::ModoContrarreloj(){
@@ -154,10 +157,6 @@ namespace Crazy
         ataqueEspecial = ataque;
     }
     
-    SpriteM Hud::GetSpriteRecipienteVida()
-    {
-        return spRecipVida;
-    }
     bool Hud::GetAtaqueEspecial(){
         return ataqueEspecial;
     }

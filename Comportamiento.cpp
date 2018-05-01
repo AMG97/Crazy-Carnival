@@ -25,7 +25,11 @@ namespace Crazy
     void Comportamiento::ModificarVida(float modificador)
     {
         vida += modificador;
-        if(vida > totalVida)
+        if (vida < 0)
+        {
+            vida = 0;
+        }
+        else if (vida > totalVida)
         {
             vida = totalVida;
         }

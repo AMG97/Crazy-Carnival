@@ -37,6 +37,14 @@ namespace Crazy
         _hud = new Hud();
         teclaPulsada = false;
         
+        /*reloj = new sf::Clock();
+        relojAtaqueEspecial = new sf::Clock();
+        relojDesplazamiento = new sf::Clock();
+        tiempo = new sf::Time();
+        tiempoAtaqueEspecial = new sf::Time();
+        tiempoDesplazamiento = new sf::Time();*/
+        inercia = false;
+        contador = 0;
     }
     
     void EstadoJuego::ManejarEventos()
@@ -73,18 +81,23 @@ namespace Crazy
             if (_input->GetTeclas().C)
             {
                 _jugador->RecibirDanyo(3);
+                if(_jugador->AtaqueEspecialActivado())
+                {
+                    _jugador->SetAtaqueEspecial(true);
+                }
+                
                 _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
-                _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
+                //_hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
                 
                 cout << "Daño\n"<<endl;
-                cout <<_jugador->GetVida()<<", "<<_jugador->GetTotalVida()<<endl;
                 cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
             }
             
             if (_input->GetTeclas().F)
             {
                 _jugador->SetAtaqueEspecial(false);
-                _jugador->ModificarEnfriamiento(-_jugador->GetTotalEnfriamiento());
+                _hud->Parpadear(false);
+               // _hud->ModificarEnfriamiento(-_jugador->GetTotalEnfriamiento());
             }
             
             if (_input->GetTeclas().R)
@@ -111,6 +124,18 @@ namespace Crazy
         _juego->_ventana->Limpiar();
         
         _hud->Dibujar();
+        if(tiempoAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
+    {
+        if(_hud->GetAtaqueEspecial())
+        {
+            _hud->Parpadear(true);
+        }
+        else
+        {
+            _hud->Parpadear(false);
+        }
+        relojAtaqueEspecial.ReiniciarSegundos();
+    }
         
         _juego->_ventana->Mostrar();
     }

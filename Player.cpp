@@ -59,13 +59,14 @@ namespace Crazy
     }
     
     void Player::Curar(float cura){
-        vida += cura;
+        ModificarVida(cura);
     }
     
     void Player::RecibirDanyo(float danyo)
     {
-        vida -= danyo;
-        enfriamiento += danyo * 0.75;
+        ModificarVida(-danyo);
+        float c = danyo * 0.75f;
+        ModificarEnfriamiento(c);
     }
     
 }
