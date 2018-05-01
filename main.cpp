@@ -24,20 +24,22 @@
 /*
  * 
  */
+using namespace Crazy;
+
 int main() {
 
      //Variables HUD
-    /*Hud *hud = new Hud();
+    Hud *hud = new Hud();
     JuegoHud *juego = new JuegoHud();
     sf::Clock reloj;
-    sf::Time tiempo;*/
+    sf::Time tiempo;
     
     //Pruebas HUD
-    Crazy::Juego::Instance();
-    Crazy::Juego::Instance()->Iniciar();
-    //sf::RenderWindow ventanaJuego(sf::VideoMode(640,480), "Crazy Carnival");
+    //Crazy::Juego::Instance();
+    //Crazy::Juego::Instance()->Iniciar();
+    sf::RenderWindow ventanaJuego(sf::VideoMode(1024,720), "Crazy Carnival");
     
-    //juego->loop(ventanaJuego);
+    juego->loop(ventanaJuego);
     
     return 0;
 }
