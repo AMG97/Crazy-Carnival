@@ -16,6 +16,7 @@ namespace Crazy
         void CambiarTexturaContador();
         void ModificarVida(float vida, float totalVida);
         void ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento);
+        void EnfriamientoVacio();
         void ModoContrarreloj();
         void ElixirEncontrado();
         void SetAtaqueEspecial(bool ataque);

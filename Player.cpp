@@ -7,6 +7,7 @@ namespace Crazy
         totalVida = 60.0f;
         vida = totalVida;
         enfriamiento = 0.0f;
+        totalEnfriamiento = 30.0f;
         ataqueEspecial = false;
     }
     
@@ -65,8 +66,7 @@ namespace Crazy
     void Player::RecibirDanyo(float danyo)
     {
         ModificarVida(-danyo);
-        float c = danyo * 0.75f;
-        ModificarEnfriamiento(c);
+        ModificarEnfriamiento(danyo * 0.75f);
     }
     
 }

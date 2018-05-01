@@ -87,7 +87,7 @@ namespace Crazy
                 }
                 
                 _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
-                //_hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
+                _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
                 
                 cout << "Daño\n"<<endl;
                 cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
@@ -97,7 +97,8 @@ namespace Crazy
             {
                 _jugador->SetAtaqueEspecial(false);
                 _hud->Parpadear(false);
-               // _hud->ModificarEnfriamiento(-_jugador->GetTotalEnfriamiento());
+                _jugador->SetEnfriamiento(0.0f);
+                _hud->EnfriamientoVacio();
             }
             
             if (_input->GetTeclas().R)
@@ -123,19 +124,20 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _hud->Dibujar();
+        
         if(tiempoAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
-    {
-        if(_hud->GetAtaqueEspecial())
         {
-            _hud->Parpadear(true);
+            if(_hud->GetAtaqueEspecial())
+            {
+                _hud->Parpadear(true);
+            }
+            else
+            {
+                _hud->Parpadear(false);
+            }
+            relojAtaqueEspecial.ReiniciarSegundos();
         }
-        else
-        {
-            _hud->Parpadear(false);
-        }
-        relojAtaqueEspecial.ReiniciarSegundos();
-    }
+        _hud->Dibujar();
         
         _juego->_ventana->Mostrar();
     }
