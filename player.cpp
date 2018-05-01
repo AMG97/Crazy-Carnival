@@ -77,20 +77,28 @@ void Player::update(sf::Clock *clock){
     jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + velocidad.y*jugador->GetGravityScale());
     jugador = mundo->CreateBody(&jugadorDef);
     personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
-    arma->setPosicion(personaje.getPosition());
+    arma->update(personaje.getPosition());
 }
 void Player::draw(sf::RenderWindow& window){
     window.draw(personaje);
-    window.draw(arma->getSprite());
+    arma->draw(window);
 }
 void Player::modificarSpriteCorrer()
 {
     personaje.setTextureRect(sf::IntRect(contadorSpriteCorrer*60, 1*80, 60, 80));
     arma->modificarSpriteCorrer(contadorSpriteCorrer, personaje.getPosition());
-    contadorSpriteCorrer++;
-    if(contadorSpriteCorrer == 6)
-    {
-        contadorSpriteCorrer = 0;
+    if((velocidad.x>0 && direccionIzquierda) ||(velocidad.x<0 && !direccionIzquierda)){
+        contadorSpriteCorrer--;
+        if(contadorSpriteCorrer == -1)
+        {
+            contadorSpriteCorrer = 5;
+        }
+    }else{
+        contadorSpriteCorrer++;
+        if(contadorSpriteCorrer == 6)
+        {
+            contadorSpriteCorrer = 0;
+        }
     }
 }
 
@@ -123,7 +131,7 @@ void Player::modificarSpriteAtaque2()
         float y=personaje.getPosition().y;
         sf::Vector2f diferencia=sf::Vector2f(posraton.x-x,posraton.y-y);
         float angulo=atan2(diferencia.x,diferencia.y);
-        //lanzar proyectil
+        arma->disparar(angulo);
     }
 }
 
@@ -202,7 +210,6 @@ sf::Sprite Player::getSprite()
 void Player::setDireccion(bool direccion)
 {
     direccionIzquierda = direccion;
-    std::cout<<personaje.getScale().x<<std::endl;
     if(direccionIzquierda && personaje.getScale().x==1.0){
         personaje.scale(-1.0, 1.0);
         arma->scale(-1.0,1.0);

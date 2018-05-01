@@ -61,11 +61,10 @@ void JuegoHud::loop(sf::RenderWindow &window){
 
     //Bucle del juego (necesario para cargar la ventana)
     while (window.isOpen()){
-        
+        sf::Vector2i ratonpos;
         sf::Event event;
         while (window.pollEvent(event))
         {
-            sf::Vector2i ratonpos;
             bool dire;
             switch(event.type){
                 
@@ -77,27 +76,31 @@ void JuegoHud::loop(sf::RenderWindow &window){
                 case sf::Event::MouseButtonPressed:
                     switch(event.key.code){
                         case sf::Mouse::Left:
-                            ratonpos=(sf::Mouse::getPosition(window));
-                            if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
-                                jugador->setDireccion(false);
-                            }else if(!jugador->getDireccion() && jugador->getSprite().getPosition().x>ratonpos.x){
-                                jugador->setDireccion(true);
+                            if(!jugador->getAtaque1() && !jugador->getAtaque2()){
+                                ratonpos=(sf::Mouse::getPosition(window));
+                                if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
+                                    jugador->setDireccion(false);
+                                }else if(!jugador->getDireccion() && jugador->getSprite().getPosition().x>ratonpos.x){
+                                    jugador->setDireccion(true);
+                                }
+                                jugador->setAtaque1(true,ratonpos);
+                                *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
+                                jugador->update(relojDesplazamiento);
                             }
-                            jugador->setAtaque1(true,ratonpos);
-                            *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
-                            jugador->update(relojDesplazamiento);
                         break;
                         
                         case sf::Mouse::Right:
-                            ratonpos=(sf::Mouse::getPosition(window));
-                            if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
-                                jugador->setDireccion(false);
-                            }else if(!jugador->getDireccion() && jugador->getSprite().getPosition().x>ratonpos.x){
-                                jugador->setDireccion(true);
+                            if(!jugador->getAtaque1() && !jugador->getAtaque2()){
+                                ratonpos=(sf::Mouse::getPosition(window));
+                                if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
+                                    jugador->setDireccion(false);
+                                }else if(!jugador->getDireccion() && jugador->getSprite().getPosition().x>ratonpos.x){
+                                    jugador->setDireccion(true);
+                                }
+                                jugador->setAtaque2(true,ratonpos);
+                                *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
+                                jugador->update(relojDesplazamiento);
                             }
-                            jugador->setAtaque2(true,ratonpos);
-                            *tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
-                            jugador->update(relojDesplazamiento);
                         break;
                     }
                     
@@ -127,12 +130,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         
                         //Controles para mover el personaje
                         case sf::Keyboard::Left:
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-                            //jugador->actualizarFisica();
-                            if(jugador->getSprite().getScale().x > 0.0)
-                            {
-                                jugador->setDireccion(true);
-                            }
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
@@ -148,11 +145,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             jugador->update(relojDesplazamiento);
                             break;
                         case sf::Keyboard::Right:
-                            //while(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-                            if(jugador->getSprite().getScale().x < 0.0)
-                            {
-                                jugador->setDireccion(false);
-                            }
                             if(tiempoDesplazamiento->asSeconds() >= 0.10)
                             {
                                 relojDesplazamiento->restart();
@@ -192,17 +184,16 @@ void JuegoHud::loop(sf::RenderWindow &window){
                             pararSalto = false;
                             //cout << "no tiene sentido" << endl;
                         }
-                        jugador->update(reloj);
-                        window.clear();
-                        jugador->actualizarFisica();
-                        window.draw(spriteFondo);
-                        hud->draw(window);
-                        jugador->draw(window);
-                        window.display();
-                        //cout << "decelera" << endl;
-                        //cout<<jugador->getVelocidadSalto()<<endl;
                     }
                         break;
+            }
+        }
+        ratonpos=(sf::Mouse::getPosition(window));
+        if(!jugador->getAtaque1() && !jugador->getAtaque2()){
+            if(ratonpos.x>jugador->getSprite().getPosition().x){
+                jugador->setDireccion(false);
+            }else{
+                jugador->setDireccion(true);
             }
         }
         window.clear();

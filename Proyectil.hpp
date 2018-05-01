@@ -13,14 +13,25 @@
 
 #ifndef PROYECTIL_HPP
 #define PROYECTIL_HPP
+#include <iostream>
+using namespace std;
 
 class Proyectil {
 public:
-    Proyectil();
+    Proyectil(int n, float dan, float ang, sf::Sprite sf);
+    bool update();
+    void draw(sf::RenderWindow &window);
     Proyectil(const Proyectil& orig);
     virtual ~Proyectil();
 private:
-
+    sf::Texture texturaProyectil;
+    sf::Sprite proyectil;
+    int alcance;
+    float danyo;
+    float angulo;
+    int velocidad;
+    sf::Vector2f posini;
+    sf::Vector2f pos;
 };
 
 #endif /* PROYECTIL_HPP */

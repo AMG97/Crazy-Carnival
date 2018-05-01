@@ -23,18 +23,19 @@ public:
     Arma(int n);
     Arma(const Arma& orig);
     virtual ~Arma();
+    void draw(sf::RenderWindow& window);
+    void update(sf::Vector2f pos);
     void modificarSpriteCorrer(int n, sf::Vector2f pos);
     void modificarSpriteReposo(int n, sf::Vector2f pos);
     void modificarSpriteAtaque1(int n, int n2, sf::Vector2f pos);
     void modificarSpriteAtaque2(int n, sf::Vector2f pos);
-    void setPosicion(sf::Vector2f pos);
     void scale(float nx, float ny);
     sf::Sprite getSprite();
+    void disparar(float angulo);
     void setDanyo();
     float getDanyo();
 private:
     float danyo;
-    float sen,cos;
     sf::Texture texturaArma;
     sf::Sprite arma;
     JuegoHud *juego;

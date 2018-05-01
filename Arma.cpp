@@ -55,9 +55,6 @@ void Arma::modificarSpriteAtaque1(int n, int n2, sf::Vector2f pos){
         arma.setOrigin(50,45);
     }
 }
-void Arma::setPosicion(sf::Vector2f pos){
-    arma.setPosition(pos.x,pos.y-10);
-}
 
 sf::Sprite Arma::getSprite(){
     return arma;
@@ -65,6 +62,34 @@ sf::Sprite Arma::getSprite(){
 
 void Arma::scale(float nx, float ny){
     arma.scale(nx,ny);
+}
+
+void Arma::draw(sf::RenderWindow& window){
+    window.draw(arma);
+    for(int i=0;i<proyectiles.size();i++){
+        proyectiles[i]->draw(window);
+    }
+}
+
+void Arma::update(sf::Vector2f pos){
+    arma.setPosition(pos.x,pos.y-10);
+    for(int i=0;i<proyectiles.size();i++){
+        bool b=proyectiles[i]->update();
+        if(!b){
+            Proyectil *tmp=proyectiles[i];
+            proyectiles.erase(proyectiles.begin()+i);
+            delete tmp;
+        }
+    }
+}
+
+void Arma::disparar(float angulo){
+    int t;
+    if(tipo==1 || tipo==2){
+        t=1;
+    }
+    Proyectil *p=new Proyectil(t, danyo, angulo, arma);
+    proyectiles.push_back(p);
 }
 
 Arma::Arma(const Arma& orig) {
