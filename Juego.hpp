@@ -1,13 +1,8 @@
 #pragma once
 
-#include <iostream>
-using namespace std;
-
 #include "EstadosManager.hpp"
 
-#include "Ventana.hpp"
-#include "Recursos.hpp"
-#include "Reloj.hpp"
+#include "Motor.hpp"
 using namespace Motor;
 
 namespace Crazy

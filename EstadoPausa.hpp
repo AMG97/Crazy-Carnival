@@ -4,12 +4,6 @@
 #include "EstadoMenu.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-#include "SpriteM.hpp"
-using namespace Motor;
-
 // Constantes
 #define ABANDONAR 0
 #define OP1 1

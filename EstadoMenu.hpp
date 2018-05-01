@@ -5,12 +5,6 @@
 #include "EstadoAyuda.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-#include "SpriteM.hpp"
-using namespace Motor;
-
 // Constantes
 #define JUGAR 0
 #define AYUDA 1

@@ -4,12 +4,6 @@
 #include "EstadoMenuPartidas.hpp"
 #include "Juego.hpp"
 
-// Includes del motor
-#include "Texto.hpp"
-#include "Input.hpp"
-#include "SpriteM.hpp"
-using namespace Motor;
-
 namespace Crazy
 {
     class EstadoEstadisticas : public Estado

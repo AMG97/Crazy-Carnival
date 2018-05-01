@@ -42,12 +42,8 @@ namespace Crazy
     {
         teclaPulsada = _input->BucleEventos();
         
-        if (teclaPulsada) {
-            if (_input->GetTeclas().Escape)
-            {
-                _input->CerrarVentana();
-            }
-            
+        if (teclaPulsada)
+        {
             if (_input->GetTeclas().RatonIzq)
             {
                 cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
@@ -58,7 +54,8 @@ namespace Crazy
                 cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
-            if (_input->GetTeclas().Pausar)
+            if (_input->GetTeclas().Pausar ||
+                _input->GetTeclas().Escape)
             {
                 Pausar();
             }
