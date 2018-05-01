@@ -1,45 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+#include "Hud.hpp"
 
-/* 
- * File:   hud.cpp
- * Author: fv
- * 
- * Created on March 24, 2018, 12:03 PM
- */
-
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "player.hpp"
-#include "hud.hpp"
-#include "juegoHud.hpp"
-
-using namespace std;
-namespace Crazy{
-        sf::Sprite Hud::spVida;
-        sf::Sprite Hud::spEnfriamiento;
-
-    Hud::Hud() {
-
+namespace Crazy
+{
+    Hud::Hud()
+    {
         //Inicializar variables
+        _juego = Juego::Instance();
         contrarreloj = false;
         elixir = false;
         ataqueEspecial = false;
-        texturaHud = juego->establecerTexturas("/home/fv/NetBeansProjects/Crazy-Carnival/resources/HUD.png");
-        spRecipVida.setTexture(texturaHud);
-        spVida.setTexture(texturaHud);
-        spEnfriamiento.setTexture(texturaHud);
-        spElixir.setTexture(texturaHud);
+
+        spRecipVida.CambiarTextura(_juego->recursos.GetTextura("Hud"));
+        spVida.CambiarTextura(_juego->recursos.GetTextura("Hud"));
+        spEnfriamiento.CambiarTextura(_juego->recursos.GetTextura("Hud"));
+        spElixir.CambiarTextura(_juego->recursos.GetTextura("Hud"));
+
         spriteTimerSeg = 0;
         spriteTimerSeg1 = 0;
         spriteTimerMin = 36;
 
         for(int i = 0; i < 5; i++)
         {
-            spContador[i].setTexture(texturaHud);
+            spContador[i].CambiarTextura(_juego->recursos.GetTextura("Hud"));
         }
 
         //Se elige el sprite del sheet
@@ -95,39 +77,31 @@ namespace Crazy{
             }
         }
     }
-
-    Hud::Hud(const Hud& orig) {
-    }
-
-    Hud::~Hud() {
-    }
-    void Hud::draw(sf::RenderWindow& window){
-        window.draw(spVida);
-        window.draw(spEnfriamiento);
-        window.draw(spRecipVida);
-        if(elixir)
-            window.draw(spElixir);
+    
+    void Hud::Dibujar()
+    {
+        _juego->_ventana->Dibujar(spVida);
+        //_juego->_ventana->Dibujar(spEnfriamiento);
+        _juego->_ventana->Dibujar(spRecipVida);
+        
+        /*if(elixir)
+            _juego->_ventana->Dibujar(spElixir);
         if(contrarreloj)
         {
             for(int i = 0; i < 5; i++)
             {
-                window.draw(spContador[i]);
+                _juego->_ventana->Dibujar(spContador[i]);
             }
-        }   
+        }*/
     }
-    void Hud::dibujar(sf::RenderWindow &window, bool color)
+    
+    void Hud::Parpadear(bool parpadeo)
     {
-        if(color)
-        {
-            spRecipVida.setColor(sf::Color(50, 125, 255, 255));
-        }
-        else
-        {
-            spRecipVida.setColor(sf::Color(255, 255, 255, 255));
-        }
+        spRecipVida.Parpadear(parpadeo);
     }
-    void Hud::cambiarTexturaContador(){
-
+    
+    void Hud::CambiarTexturaContador(){
+    
         if(spriteTimerSeg == 0){
             spriteTimerSeg = 81;
             if(spriteTimerSeg1 == 0){
@@ -147,9 +121,12 @@ namespace Crazy{
         }
         spContador[4].setTextureRect(sf::IntRect(106 + spriteTimerSeg, 60, 9, 11));
     }
-    void Hud::modificarVida(float modificador){
+    
+    void Hud::ModificarVida(float modificador){
         float porcentBarra;
 
+        /*float vida = jugador.GetVida();
+        
         vida += modificador;
         porcentBarra = vida / totalVida;
         if(vida > totalVida)
@@ -158,10 +135,12 @@ namespace Crazy{
         }
 
         spVida.setTextureRect(sf::IntRect(3*13, 2*20, porcentBarra * 136, 4));
-    }
-    void Hud::modificarEnfriamiento(float modificador){
+    */}
+    
+    void Hud::ModificarEnfriamiento(float modificador){
         float porcentBarra;
-        enfriamiento += modificador;
+        
+        /*enfriamiento += modificador;
         porcentBarra = enfriamiento / totalEnfriamiento;
         if(enfriamiento > totalEnfriamiento)
         {
@@ -172,8 +151,9 @@ namespace Crazy{
             enfriamiento = 0.0;
         }
         spEnfriamiento.setTextureRect(sf::IntRect(2*19, 2*25, porcentBarra * 97, 2));
-    }
-    void Hud::modoContrarreloj(){
+    */}
+    
+    void Hud::ModoContrarreloj(){
         if(contrarreloj){
             contrarreloj = false;
         }
@@ -181,7 +161,8 @@ namespace Crazy{
             contrarreloj = true;
         }
     }
-    void Hud::elixirEncontrado(){
+    
+    void Hud::ElixirEncontrado(){
         if(elixir){
             elixir = false;
         }
@@ -189,14 +170,16 @@ namespace Crazy{
             elixir = true;
         }
     }
-    void Hud::setAtaqueEspecial(bool ataque){
+    
+    void Hud::SetAtaqueEspecial(bool ataque){
         ataqueEspecial = ataque;
     }
-    sf::Sprite Hud::getSpriteRecipienteVida()
+    
+    SpriteM Hud::GetSpriteRecipienteVida()
     {
         return spRecipVida;
     }
-    bool Hud::getAtaqueEspecial(){
+    bool Hud::GetAtaqueEspecial(){
         return ataqueEspecial;
     }
 }

@@ -173,6 +173,18 @@ namespace Motor
         scale(x/getTexture()->getSize().x, y/getTexture()->getSize().y);
     }
     
+    void SpriteM::Parpadear(bool parpadeo)
+    {
+        if (parpadeo)
+        {
+            setColor(sf::Color(50, 125, 255, 255));
+        }
+        else
+        {
+            setColor(sf::Color(255, 255, 255, 255));
+        }
+    }
+    
     float SpriteM::GetAncho()
     {
         return getGlobalBounds().width;

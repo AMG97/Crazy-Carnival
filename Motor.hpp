@@ -64,6 +64,7 @@ namespace Motor
         void CambiarColorRojo();
         void Rotar(float angulo);
         void Escalar(float x, float y);
+        void Parpadear(bool parpadeo);
         
         float GetAncho();
         float GetAlto();

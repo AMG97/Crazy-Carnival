@@ -4,6 +4,9 @@
 #include "EstadoPausa.hpp"
 #include "Juego.hpp"
 
+#include "Player.hpp"
+#include "Hud.hpp"
+
 namespace Crazy
 {
     class EstadoJuego : public Estado
@@ -11,6 +14,9 @@ namespace Crazy
     public:
         EstadoJuego();
         static EstadoJuego* Instance();
+        
+        Juego* _juego;
+        Player* _jugador;
         
         void Init();
         void ManejarEventos();
@@ -23,9 +29,9 @@ namespace Crazy
     private:
         static EstadoJuego* _pinstance;
         
-        Juego* _juego;
         Input* _input;
-        Texto t_titulo;
         bool teclaPulsada;
+        
+        Hud* _hud;
     };
 }

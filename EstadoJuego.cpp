@@ -1,4 +1,5 @@
 #include "EstadoJuego.hpp"
+#include "Hud.hpp"
 namespace Crazy
 {
     EstadoJuego::EstadoJuego()
@@ -21,6 +22,10 @@ namespace Crazy
     {
         delete _input;
         _input = NULL;
+        delete _hud;
+        _hud = NULL;
+        delete _jugador;
+        _jugador = NULL;
         delete _pinstance;
         _pinstance = NULL;
     }
@@ -28,13 +33,9 @@ namespace Crazy
     void EstadoJuego::Init()
     {
         _input = new Input();
+        _jugador = new Player();
+        _hud = new Hud();
         teclaPulsada = false;
-        
-        t_titulo.CambiarFuente(_juego->recursos.GetFuente("Z"));
-        t_titulo.CambiarTexto("Jugar");
-        t_titulo.CambiarTamanyo(100);
-        t_titulo.CambiarOrigen(t_titulo.GetAncho()/2, t_titulo.GetAlto()/2);
-        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
     }
     
@@ -73,7 +74,7 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->Dibujar(t_titulo);
+        _hud->Dibujar();
         
         _juego->_ventana->Mostrar();
     }
