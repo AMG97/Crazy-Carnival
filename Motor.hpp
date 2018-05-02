@@ -69,6 +69,8 @@ namespace Motor
         
         float GetAncho();
         float GetAlto();
+        float GeEscalarX();
+        float GeEscalarY();
         float GetX();
         float GetY();
     };
@@ -137,6 +139,8 @@ namespace Motor
             bool F;
             bool R;
             bool E;
+            
+            
         };
         Input();
         void CerrarVentana();

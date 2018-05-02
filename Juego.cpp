@@ -36,6 +36,7 @@ namespace Crazy
         recursos.CargarTextura("Flechas","resources/flechas.png");
         recursos.CargarTextura("Hud","resources/HUD.png");
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
+        //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");        
         
         maquina.Anyadir(new EstadoMenu(), true);
         

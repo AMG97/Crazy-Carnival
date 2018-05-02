@@ -17,6 +17,9 @@ namespace Crazy
         void SetAtaqueEspecial(bool ataque);
         bool AtaqueEspecialActivado();
         
+        int GetEstadoPersonaje();
+        void SetEstadoPersonaje(int estado);
+        
         void Curar(float cura);
         void RecibirDanyo(float danyo);
         
@@ -25,5 +28,9 @@ namespace Crazy
         float totalEnfriamiento;
         float enfriamiento;
         bool ataqueEspecial;
+        
+        int contadorSpriteReposo;
+        int contadorSpriteCorrer;
+        int contadorSpriteSalto;
     };
 }

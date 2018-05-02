@@ -2,6 +2,7 @@
 
 #include "EstadosManager.hpp"
 
+#include <Box2D/Box2D.h>
 #include "Motor.hpp"
 using namespace Motor;
 

@@ -199,6 +199,16 @@ namespace Motor
         return getGlobalBounds().height;
     }
     
+    float SpriteM::GeEscalarX()
+    {
+        return getScale().x;
+    }
+    
+    float SpriteM::GeEscalarY()
+    {
+        return getScale().y;
+    }
+    
     float SpriteM::GetX()
     {
         return getPosition().x;
@@ -404,6 +414,7 @@ namespace Motor
                     teclas.F = false;
                     teclas.R = false;
                     teclas.E = false;
+                    return false;
                 break;
                     
                 // Pulsar boton raton

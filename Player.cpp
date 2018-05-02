@@ -9,6 +9,9 @@ namespace Crazy
         enfriamiento = 0.0f;
         totalEnfriamiento = 30.0f;
         ataqueEspecial = false;
+        contadorSpriteReposo = 0;
+        contadorSpriteCorrer = 0;
+        contadorSpriteSalto = 0;
     }
     
     float Player::GetEnfriamiento()
@@ -59,6 +62,16 @@ namespace Crazy
         return ataqueEspecial;
     }
     
+    int Player::GetEstadoPersonaje()
+    {
+        return estadoPersonaje;
+    }
+    
+    void Player::SetEstadoPersonaje(int estado)
+    {
+        estadoPersonaje = estado;
+    }
+        
     void Player::Curar(float cura){
         ModificarVida(cura);
     }
