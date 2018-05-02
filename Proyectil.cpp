@@ -49,6 +49,14 @@ bool Proyectil::update(){
     return true;
 }
 
+sf::Sprite Proyectil::getProyectil(){
+    return  proyectil;
+}
+
+float Proyectil::getDanyo(){
+    return danyo;
+}
+
 Proyectil::Proyectil(const Proyectil& orig) {
 }
 

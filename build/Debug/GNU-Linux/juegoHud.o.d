@@ -30,7 +30,7 @@ build/Debug/GNU-Linux/juegoHud.o: juegoHud.cpp player.hpp \
  Box2D/Box2D/Dynamics/Joints/b2RopeJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h hud.hpp juegoHud.hpp box.h \
- Enemigo.hpp
+ Enemigo.hpp Arma.hpp Proyectil.hpp
 
 player.hpp:
 
@@ -115,3 +115,7 @@ juegoHud.hpp:
 box.h:
 
 Enemigo.hpp:
+
+Arma.hpp:
+
+Proyectil.hpp:

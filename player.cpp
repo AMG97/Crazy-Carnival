@@ -38,7 +38,7 @@ Player::Player() {
     personaje.setTextureRect(sf::IntRect(0*60, 0*80, 60, 80));
     personaje.setOrigin(60/2, 80/2);
     personaje.setPosition(640/2, 480/2);
-    vida = 60.0;
+    vida = 300.0;
     enfriamiento = 0.0;
     totalVida = vida;
     totalEnfriamiento = 30.0;
@@ -77,7 +77,6 @@ void Player::update(sf::Clock *clock){
     jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + velocidad.y*jugador->GetGravityScale());
     jugador = mundo->CreateBody(&jugadorDef);
     personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
-    arma->update(personaje.getPosition());
 }
 void Player::draw(sf::RenderWindow& window){
     window.draw(personaje);
@@ -275,11 +274,15 @@ float Player::getVelocidad()
     return velocidad.x;
 }
 void Player::recibirDanyo(float danyo){
-    vida -= danyo;
     enfriamiento += danyo * 0.75;
     Hud::modificarVida(-danyo);
     Hud::modificarEnfriamiento(danyo * 0.75);
-    cout << "Daño" <<endl;
+    if(vida<0){
+        //cout<<"Jugador muerto"<<endl;
+    }else{
+        //cout<<"Jugador recibe danyo:"<<danyo<<endl;
+    }
+    cout<<"Vida jugador: "<<vida<<endl;
 }
 void Player::curar(float cura){
     vida += cura;
@@ -340,4 +343,8 @@ void Player::reposo(int n){
     fixJugadorDef.shape = &shapeJugador;
     fixJugador = jugador->CreateFixture(&fixJugadorDef);
     
+}
+
+Arma* Player::getArma(){
+    return arma;
 }

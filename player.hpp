@@ -34,7 +34,6 @@ public:
     bool getDireccion();
     void actualizarFisica();
     
-    //Estas sí son de player
     void setVelocidadSalto(float altura);
     float getVelocidadSalto();
     void setVelocidad(float modificacionVelocidad);
@@ -46,6 +45,7 @@ public:
     bool getAtaque2();
     void setAtaque2(bool b,sf::Vector2i posra);
     void reposo(int n);
+    Arma* getArma();
 
 protected:
     JuegoHud *juego;

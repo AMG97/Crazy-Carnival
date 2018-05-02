@@ -12,13 +12,18 @@
  */
 
 #include "Arma.hpp"
+#include "player.hpp"
+#include "Enemigo.hpp"
 
 Arma::Arma(int n, sf::Vector2f pos) {
     if(n==1){
         texturaArma=juego->establecerTexturas("resources/espada1.png");
+        danyo=50;
     }else if(n==2){
         texturaArma=juego->establecerTexturas("resources/espada2.png");
+        danyo=60;
     }else if(n==0){
+        danyo=70;
         texturaArma=juego->establecerTexturas("resources/enemigo-pistola.png");
     }
     tipo=n;
@@ -74,14 +79,34 @@ void Arma::draw(sf::RenderWindow& window){
     }
 }
 
-void Arma::update(sf::Vector2f pos){
+void Arma::update(sf::Vector2f pos, vector<Enemigo*>e){
     arma.setPosition(pos.x,pos.y-10);
     for(int i=0;i<proyectiles.size();i++){
         bool b=proyectiles[i]->update();
         if(!b){
-            Proyectil *tmp=proyectiles[i];
-            proyectiles.erase(proyectiles.begin()+i);
-            delete tmp;
+            borrarProyectil(i);
+        }
+        else{ 
+            for(int j=0;j<e.size();j++){
+                if(proyectiles[i]->getProyectil().getGlobalBounds().intersects(e[j]->getSprite().getGlobalBounds())){
+                    e[j]->recibirDanyo(proyectiles[i]->getDanyo());
+                    borrarProyectil(i);
+                }
+            }
+        }
+    }
+}
+
+void Arma::update(sf::Vector2f pos, Player* p){
+    arma.setPosition(pos.x,pos.y-10);
+    for(int i=0;i<proyectiles.size();i++){
+        bool b=proyectiles[i]->update();
+        if(!b){
+            borrarProyectil(i);
+        }
+        else if(proyectiles[i]->getProyectil().getGlobalBounds().intersects(p->getSprite().getGlobalBounds())){
+            p->recibirDanyo(proyectiles[i]->getDanyo());
+            borrarProyectil(i);
         }
     }
 }
@@ -94,6 +119,12 @@ void Arma::disparar(float angulo){
         t=2;
     Proyectil *p=new Proyectil(t, danyo, angulo, arma);
     proyectiles.push_back(p);
+}
+
+void Arma::borrarProyectil(int i){
+    Proyectil *tmp=proyectiles[i];
+    proyectiles.erase(proyectiles.begin()+i);
+    delete tmp;
 }
 
 Arma::Arma(const Arma& orig) {

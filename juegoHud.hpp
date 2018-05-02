@@ -15,6 +15,8 @@
 #define JUEGOHUD_HPP
 //#include <Box2D/Box2D/Box2D.h>
 //#include <SFML/Graphics.hpp>
+#include <iostream>
+using namespace std;
 
 class Player;
 class Enemigo;
@@ -26,11 +28,13 @@ public:
     virtual ~JuegoHud();
     sf::Texture establecerTexturas(sf::String direccion);
     void loop(sf::RenderWindow &window);
+    Player* getPlayer();
+    vector<Enemigo*> getEnemigos();
     
 private:
     Hud *hud;
     Player *jugador;
-    Enemigo *enemigo;
+    vector<Enemigo*>enemigos;
     sf::Clock *reloj;
     sf::Clock *relojDesplazamiento;
     sf::Time *tiempo;

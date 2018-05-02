@@ -11,20 +11,20 @@
  * Created on March 24, 2018, 12:14 PM
  */
 
-#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "player.hpp"
 #include "hud.hpp"
 #include "juegoHud.hpp"
 #include "box.h"
 #include "Enemigo.hpp"
+#include "Arma.hpp"
 
-using namespace std;
 
 JuegoHud::JuegoHud() {
     hud = new Hud();
     jugador = new Player();
-    enemigo= new Enemigo();
+    Enemigo *enemigo= new Enemigo();
+    enemigos.push_back(enemigo);
     reloj = new sf::Clock();
     relojDesplazamiento = new sf::Clock();
     tiempo = new sf::Time();
@@ -188,15 +188,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         }
                     }
                         break;
-                        
-                    window.clear();
-                    jugador->update(reloj);
-                    jugador->actualizarFisica();
-                    enemigo->update(jugador->getSprite().getPosition());
-                    window.draw(spriteFondo);
-                    hud->draw(window);
-                    jugador->draw(window);
-                    enemigo->draw(window);
             }
         }
         ratonpos=(sf::Mouse::getPosition(window));
@@ -209,12 +200,18 @@ void JuegoHud::loop(sf::RenderWindow &window){
         }
         window.clear();
         jugador->update(reloj);
+        jugador->getArma()->update(jugador->getSprite().getPosition(),enemigos);
         jugador->actualizarFisica();
-        enemigo->update(jugador->getSprite().getPosition());
+        for(int i=0;i<enemigos.size();i++){
+            enemigos[i]->update(jugador->getSprite().getPosition());
+            enemigos[i]->getArma()->update(enemigos[i]->getSprite().getPosition(),jugador);
+        }
         window.draw(spriteFondo);
         hud->draw(window);
         jugador->draw(window);
-        enemigo->draw(window);
+        for(int i=0;i<enemigos.size();i++){
+            enemigos[i]->draw(window);
+        }
         if((int) tiempo->asSeconds() == 1)
         {
             reloj->restart();

@@ -22,9 +22,11 @@ class Arma {
 public:
     Arma(int n, sf::Vector2f pos);
     Arma(const Arma& orig);
+    void borrarProyectil(int i);
     virtual ~Arma();
     void draw(sf::RenderWindow& window);
-    void update(sf::Vector2f pos);
+    void update(sf::Vector2f pos,vector<Enemigo*>e);
+    void update(sf::Vector2f pos, Player* p);
     void modificarSpriteCorrer(int n, sf::Vector2f pos);
     void modificarSpriteReposo(int n, sf::Vector2f pos);
     void modificarSpriteAtaque1(int n, int n2, sf::Vector2f pos);

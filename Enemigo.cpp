@@ -23,7 +23,7 @@ Enemigo::Enemigo() {
     enemigo.setPosition(600, 480/2);
     posini=enemigo.getPosition();
     pos=posini;
-    vida = 60.0;
+    vida = 200.0;
     contadorSpriteCorrer = 0;
     contadorSpriteAtaque1= 0;
     Ataque1=false;
@@ -71,10 +71,8 @@ void Enemigo::setDireccion(bool direccion)
 void Enemigo::update(sf::Vector2f posplayer){
     sf::Vector2f diferencia=sf::Vector2f(posplayer.x-pos.x,posplayer.y-pos.y);
     angulo=atan2(diferencia.x,diferencia.y);
-    arma->update(pos);
     bool mov=false;
     if(abs(diferencia.x)<alcance.x && abs(diferencia.y)<alcance.y){
-        cout<<tDesp.getElapsedTime().asSeconds()<<endl;
         if(posplayer.x>pos.x && posplayer.x-pos.x>100){
             if(direccionIzquierda)
                 setDireccion(false);
@@ -144,6 +142,24 @@ void Enemigo::update(sf::Vector2f posplayer){
 void Enemigo::draw(sf::RenderWindow& window){
     window.draw(enemigo);
     arma->draw(window);
+}
+Arma* Enemigo::getArma(){
+    return arma;
+}
+sf::Sprite Enemigo::getSprite(){
+    return enemigo;
+}
+
+void Enemigo::recibirDanyo(float dan){
+    cout<<"Danyo recibido: "<<dan;
+    cout<<"Vida antes: "<<vida;
+    vida-=dan;
+    cout<<"Vida despues:"<<vida;
+    if(vida<0){
+        cout<<"Enemigo muerto"<<endl;
+    }else{
+        cout<<"Enemigo recibe danyo:"<<dan<<endl;
+    }
 }
 
 Enemigo::Enemigo(const Enemigo& orig) {

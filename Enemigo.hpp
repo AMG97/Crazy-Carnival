@@ -28,6 +28,9 @@ public:
     void modificarSpriteCorrer();
     void modificarSpriteAtaque1();
     void setDireccion(bool direccion);
+    Arma* getArma();
+    sf::Sprite getSprite();
+    void recibirDanyo(float dan);
 private:
     sf::Texture texturaEnemigo;
     sf::Sprite enemigo;

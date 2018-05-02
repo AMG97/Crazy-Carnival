@@ -20,6 +20,8 @@ class Proyectil {
 public:
     Proyectil(int n, float dan, float ang, sf::Sprite sf);
     bool update();
+    sf::Sprite getProyectil();
+    float getDanyo();
     void draw(sf::RenderWindow &window);
     Proyectil(const Proyectil& orig);
     virtual ~Proyectil();
