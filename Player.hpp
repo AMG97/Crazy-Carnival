@@ -6,7 +6,7 @@ namespace Crazy
     class Player : public Comportamiento
     {
     public:
-        Player();
+        Player(string textura);
         float GetEnfriamiento();
         float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);

@@ -335,6 +335,7 @@ namespace Motor
         teclas.F = false;
         teclas.R = false;
         teclas.E = false;
+        teclas.Q = false;
     }
     
     void Input::CerrarVentana()
@@ -400,6 +401,9 @@ namespace Motor
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
                         teclas.E=true;
                     }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+                        teclas.Q=true;
+                    }
                     return true;
                 break;
                 
@@ -419,6 +423,7 @@ namespace Motor
                     teclas.F = false;
                     teclas.R = false;
                     teclas.E = false;
+                    teclas.Q = false;
                 break;
                     
                 // Pulsar boton raton

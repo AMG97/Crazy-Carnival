@@ -1,14 +1,20 @@
 #include "Player.hpp"
+#include "Motor.hpp"
 
 namespace Crazy
 {
-    Player::Player()
+    Player::Player(string textura)
     {
         totalVida = 60.0f;
         vida = totalVida;
         enfriamiento = 0.0f;
         totalEnfriamiento = 30.0f;
         ataqueEspecial = false;
+        
+        sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
+        sprite.CambiarTextRect(0*60, 0*80, 60, 80);
+        
+        
     }
     
     float Player::GetEnfriamiento()

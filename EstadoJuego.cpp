@@ -33,7 +33,9 @@ namespace Crazy
     void EstadoJuego::Init()
     {
         _input = new Input();
-        _jugador = new Player();
+        
+        //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
+        _jugador = new Player("Espadachina");
         _hud = new Hud();
         teclaPulsada = false;
         
@@ -111,6 +113,11 @@ namespace Crazy
                 _hud->ElixirEncontrado();
             }
             
+            if (_input->GetTeclas().Q)
+            {
+                _juego->_ventana->Cerrar();
+            }
+            
             teclaPulsada = false;
         }
     }
@@ -137,6 +144,8 @@ namespace Crazy
             relojAtaqueEspecial.ReiniciarSegundos();
         }
         _hud->Dibujar();
+        
+        _jugador->Dibujar();
         
         _juego->_ventana->Mostrar();
     }

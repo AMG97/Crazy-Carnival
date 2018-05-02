@@ -140,6 +140,7 @@ namespace Motor
             bool F;
             bool R;
             bool E;
+            bool Q;
         };
         Input();
         void CerrarVentana();
