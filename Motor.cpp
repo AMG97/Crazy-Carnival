@@ -137,6 +137,11 @@ namespace Motor
     {
         setTexture(textura);
     }
+
+    void SpriteM::CambiarTextRect(int x, int y, int width, int height) {
+        setTextureRect(sf::IntRect(x,y,width,height));
+    }
+
     
     void SpriteM::CambiarPosicion(float x, float y)
     {
@@ -171,6 +176,10 @@ namespace Motor
     void SpriteM::Escalar(float x, float y)
     {
         scale(x/getTexture()->getSize().x, y/getTexture()->getSize().y);
+    }
+    void SpriteM::EscalarProporcion(float x, float y)
+    {
+        scale(x, y);
     }
     
     void SpriteM::Parpadear(bool parpadeo)
@@ -229,6 +238,7 @@ namespace Motor
         //Activa la sincronizacion vertical (60 fps)
         window.setVerticalSyncEnabled(true); 
         window.setFramerateLimit(60);
+        background = sf::Color(0,0,0);
     }
     
     bool Ventana::EstaAbierta() {
@@ -237,7 +247,7 @@ namespace Motor
     
     void Ventana::Limpiar()
     {
-        window.clear();
+        window.clear(background);
     }
     
     void Ventana::Mostrar()
@@ -259,12 +269,53 @@ namespace Motor
     {
         window.draw(sprite);
     }
+    void Ventana::setCamara(Camara &camara)
+    {
+        window.setView(camara.GetCamara());
+    }
     
     sf::RenderWindow& Ventana::GetVentana()
     {
         return window;
     }
+    void Ventana::setBackground(int r, int g, int b) {
+        background = sf::Color(r,g,b);
+    }
+
     
+// Cámara
+    Camara* Camara::_pinstance2=0;
+    
+    Camara* Camara::Instance()
+    {
+        if (_pinstance2 == 0)
+        {
+            _pinstance2 = new Camara();
+        }
+        return _pinstance2;
+    }
+    
+    Camara::~Camara()
+    {
+        delete _pinstance2;
+        _pinstance2 = NULL;
+    }
+    
+    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    {
+        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+    }
+            
+    sf::View& Camara::GetCamara()
+    {
+        return camara;
+    }
+    
+    ///Define el tamaño de la cámara
+    void Camara::setTam(float x, float y) {
+        camara.setSize(x,y);
+    }
+
 // Input
     Input::Input()
     {
@@ -279,6 +330,13 @@ namespace Motor
         teclas.Escape = false;
         teclas.RatonIzq = false;
         teclas.RatonDer = false;
+		
+        //Pruebas
+        teclas.D = false;
+        teclas.C = false;
+        teclas.F = false;
+        teclas.R = false;
+        teclas.E = false;
     }
     
     void Input::CerrarVentana()
@@ -327,6 +385,23 @@ namespace Motor
                     if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
                         teclas.Pausar=true;
                     }
+					
+                    //Pruebas
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                        teclas.D=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+                        teclas.C=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+                        teclas.F=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+                        teclas.R=true;
+                    }
+                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+                        teclas.E=true;
+                    }
                     return true;
                 break;
                 
@@ -339,6 +414,13 @@ namespace Motor
                     teclas.Der=false;
                     teclas.Enter=false;
                     teclas.BackSpace=false;
+					
+                    //Pruebas
+                    teclas.D = false;
+                    teclas.C = false;
+                    teclas.F = false;
+                    teclas.R = false;
+                    teclas.E = false;
                 break;
                     
                 // Pulsar boton raton

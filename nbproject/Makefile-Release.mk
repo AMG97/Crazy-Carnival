@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/EstadoAyuda.o \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
@@ -42,8 +43,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoMenuPartidas.o \
 	${OBJECTDIR}/EstadoPausa.o \
 	${OBJECTDIR}/EstadosManager.o \
+	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
-	${OBJECTDIR}/Motor.o
+	${OBJECTDIR}/Motor.o \
+	${OBJECTDIR}/Nivel.o \
+	${OBJECTDIR}/Player.o
 
 
 # C Compiler Flags
@@ -69,6 +73,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/Comportamiento.o: Comportamiento.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Comportamiento.o Comportamiento.cpp
 
 ${OBJECTDIR}/EstadoAyuda.o: EstadoAyuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -105,6 +114,11 @@ ${OBJECTDIR}/EstadosManager.o: EstadosManager.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadosManager.o EstadosManager.cpp
 
+${OBJECTDIR}/Hud.o: Hud.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Hud.o Hud.cpp
+
 ${OBJECTDIR}/Juego.o: Juego.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -114,6 +128,16 @@ ${OBJECTDIR}/Motor.o: Motor.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Motor.o Motor.cpp
+
+${OBJECTDIR}/Nivel.o: Nivel.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nivel.o Nivel.cpp
+
+${OBJECTDIR}/Player.o: Player.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
 
 # Subprojects
 .build-subprojects:

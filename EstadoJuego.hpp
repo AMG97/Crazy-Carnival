@@ -6,6 +6,7 @@
 
 #include "Player.hpp"
 #include "Hud.hpp"
+#include "Nivel.hpp"
 
 namespace Crazy
 {
@@ -33,5 +34,6 @@ namespace Crazy
         bool teclaPulsada;
         
         Hud* _hud;
+        Nivel* _level;
     };
 }

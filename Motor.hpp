@@ -57,6 +57,7 @@ namespace Motor
     public:
         SpriteM() { };
         void CambiarTextura(sf::Texture &textura);
+        void CambiarTextRect(int x, int y, int width, int height);
         void CambiarPosicion(float x, float y);
         void CentrarOrigen();
         void CambiarOrigen();
@@ -64,12 +65,31 @@ namespace Motor
         void CambiarColorRojo();
         void Rotar(float angulo);
         void Escalar(float x, float y);
+        void EscalarProporcion(float x, float y);
         void Parpadear(bool parpadeo);
         
         float GetAncho();
         float GetAlto();
         float GetX();
         float GetY();
+    };
+    
+    class Camara
+    {
+    public:
+        static Camara* Instance();
+        ~Camara();
+        void CrearCamara(float centroX, float centroY, float ancho, float alto);
+        sf::View& GetCamara();
+        void setTam(float x, float y);
+
+    private:
+        Camara() { };
+        Camara(const Camara &);
+        Camara &operator=(const Camara &);
+        static Camara* _pinstance2;
+        
+        sf::View camara;
     };
     
     class Ventana
@@ -85,6 +105,8 @@ namespace Motor
         void Cerrar();
         void Dibujar(Texto txt);
         void Dibujar(SpriteM sprite);
+        void setCamara(Camara &camara);
+        void setBackground(int r, int g, int b);
         sf::RenderWindow& GetVentana();
         
     private:
@@ -94,6 +116,7 @@ namespace Motor
         static Ventana* _pinstance;
         
         sf::RenderWindow window;
+        sf::Color background;
     };
     
     class Input
@@ -110,6 +133,13 @@ namespace Motor
             bool Escape;
             bool RatonIzq;
             bool RatonDer;
+			
+			//Pruebas
+            bool D;
+            bool C;
+            bool F;
+            bool R;
+            bool E;
         };
         Input();
         void CerrarVentana();

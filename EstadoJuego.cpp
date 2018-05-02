@@ -5,6 +5,8 @@ namespace Crazy
     EstadoJuego::EstadoJuego()
     {
         _juego = Juego::Instance();
+        _level = new Nivel();
+        _level->cargarNivel(1);
     }
     
     EstadoJuego* EstadoJuego::_pinstance=0;
@@ -73,8 +75,15 @@ namespace Crazy
     void EstadoJuego::Dibujar(float tiempoActual)
     {
         _juego->_ventana->Limpiar();
+        _level->update();
+        _level->draw("Fondo");
+        _level->draw("Trasera");
+        _level->draw("Collisionable");
+        _level->draw("Objetos");
+        _level->draw("Delante");
         
         _hud->Dibujar();
+        
         
         _juego->_ventana->Mostrar();
     }

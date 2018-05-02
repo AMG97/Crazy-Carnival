@@ -5,9 +5,25 @@ namespace Crazy
     public:
         Comportamiento();
         float GetVida();
+        float GetTotalVida();
         void SetVida(float v);
+        void ModificarVida(float modificador);
+        float GetPosIniX();
+        float GetPosIniY();
+        void SetPosIniX(float x);
+        void SetPosIniY(float y);
+
         
+        float GetPosX();
+        float GetPosY();
+        void SetPosX(float x);
+        void SetPosY(float y);
     protected:
         float vida;
+        float totalVida;
+        float posIniX;
+        float posIniY;
+        float posX;
+        float posY;
     };
 }
