@@ -124,8 +124,7 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        
-        if(tiempoAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
+        if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
         {
             if(_hud->GetAtaqueEspecial())
             {

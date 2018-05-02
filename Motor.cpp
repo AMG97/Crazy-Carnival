@@ -137,6 +137,10 @@ namespace Motor
     {
         setTexture(textura);
     }
+
+    void SpriteM::CambiarTextRect(int x, int y, int width, int height) {
+        setTextureRect(sf::IntRect(x,y,width,height));
+    }
     
     void SpriteM::CambiarPosicion(float x, float y)
     {
@@ -233,6 +237,7 @@ namespace Motor
         //Activa la sincronizacion vertical (60 fps)
         window.setVerticalSyncEnabled(true); 
         window.setFramerateLimit(60);
+        background = sf::Color(0,0,0);
     }
     
     bool Ventana::EstaAbierta() {
@@ -241,7 +246,7 @@ namespace Motor
     
     void Ventana::Limpiar()
     {
-        window.clear();
+        window.clear(background);
     }
     
     void Ventana::Mostrar()
@@ -272,6 +277,10 @@ namespace Motor
     {
         return window;
     }
+    void Ventana::setBackground(int r, int g, int b) {
+        background = sf::Color(r,g,b);
+    }
+
 // Cámara
     Camara* Camara::_pinstance2=0;
     
@@ -299,6 +308,12 @@ namespace Motor
     {
         return camara;
     }
+    
+    ///Define el tamaño de la cámara
+    void Camara::setTam(float x, float y) {
+        camara.setSize(x,y);
+    }
+
 // Input
     Input::Input()
     {
