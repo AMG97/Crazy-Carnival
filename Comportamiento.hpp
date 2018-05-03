@@ -7,10 +7,15 @@ namespace Crazy
     {
     public:
         Comportamiento();
+        ~Comportamiento() { };
         float GetVida();
         float GetTotalVida();
         void SetVida(float v);
         void ModificarVida(float modificador);
+        float GetVelocidad();
+        void SetVelocidad(float vel);
+        //float GetVelocidadSalto();
+        //void SetVelocidadSalto(float vel);
         
         float GetPosIniX();
         float GetPosIniY();
@@ -23,10 +28,14 @@ namespace Crazy
         void SetPosY(float y);
         
         void Dibujar();
+        virtual void ModificarSprite() = 0;
+        void CambiarDireccionDer();
+        void CambiarDireccionIzq();
         
     protected:
         float vida;
         float totalVida;
+        float velocidad;
         float posIniX;
         float posIniY;
         float posX;
@@ -34,5 +43,8 @@ namespace Crazy
         
         Juego* _juego;
         SpriteM sprite;
+        Reloj relojAnim;
+        
+        bool direccionIzq;
     };
 }

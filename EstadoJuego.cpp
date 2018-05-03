@@ -118,6 +118,18 @@ namespace Crazy
                 _juego->_ventana->Cerrar();
             }
             
+            if (_input->GetTeclas().Der)
+            {
+                _jugador->SetEstado(_jugador->GetCorrerDer());
+                _jugador->CambiarDireccion();
+            }
+            
+            if (_input->GetTeclas().Izq)
+            {
+                _jugador->SetEstado(_jugador->GetCorrerIzq());
+                _jugador->CambiarDireccion();
+            }
+            
             teclaPulsada = false;
         }
     }
@@ -143,8 +155,10 @@ namespace Crazy
             }
             relojAtaqueEspecial.ReiniciarSegundos();
         }
+        
         _hud->Dibujar();
         
+        _jugador->ModificarSprite();
         _jugador->Dibujar();
         
         _juego->_ventana->Mostrar();

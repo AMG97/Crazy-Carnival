@@ -38,6 +38,16 @@ namespace Crazy
             vida = totalVida;
         }
     }
+    
+    float Comportamiento::GetVelocidad()
+    {
+        return velocidad;
+    }
+    
+    void Comportamiento::SetVelocidad(float vel)
+    {
+        velocidad = vel;
+    }
 
     float Comportamiento::GetPosIniX()
     {
@@ -82,5 +92,17 @@ namespace Crazy
     void Comportamiento::Dibujar()
     {
         _juego->_ventana->Dibujar(sprite);
+    }
+    
+    void Comportamiento::CambiarDireccionDer()
+    {
+        direccionIzq = false;
+        sprite.EscalarProporcion(-1.0, 1.0);
+    }
+    
+    void Comportamiento::CambiarDireccionIzq()
+    {
+        direccionIzq = true;
+        sprite.EscalarProporcion(-1.0, 1.0);
     }
 }
