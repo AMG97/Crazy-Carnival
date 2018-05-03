@@ -46,6 +46,8 @@ public:
     void setAtaque2(bool b,sf::Vector2i posra);
     void reposo(int n);
     Arma* getArma();
+    bool EnfriamientoLleno();
+    float gettAtaque2();
 
 protected:
     JuegoHud *juego;
@@ -61,6 +63,8 @@ protected:
     bool direccionIzquierda;
     bool Ataque1;
     bool Ataque2;
+    bool Atacado2;
+    sf::Clock tAtaque2;
     float angulo;
     Arma *arma;
     float static vida;

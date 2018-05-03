@@ -30,7 +30,7 @@ Enemigo::Enemigo() {
     arma= new Arma(0, pos);
     angulo=0;
     setDireccion(true);
-    velocidad= 2.1;
+    velocidad= 1.5;
     alcance=sf::Vector2f(300,50);
     movimiento=200;
     tAtaque.restart();
@@ -87,7 +87,7 @@ void Enemigo::update(sf::Vector2f posplayer){
             pos=enemigo.getPosition();
             mov=true;
         }
-        if(tAtaque.getElapsedTime().asSeconds()>1.5){
+        if(tAtaque.getElapsedTime().asSeconds()>2.5){
             Ataque1=true;
         }
         if(tDesp.getElapsedTime().asSeconds()>0.1){

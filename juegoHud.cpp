@@ -67,7 +67,6 @@ void JuegoHud::loop(sf::RenderWindow &window){
         sf::Event event;
         while (window.pollEvent(event))
         {
-            bool dire;
             switch(event.type){
                 
                 //Si se recibe el evento de cerrar la ventana la cierro
@@ -92,7 +91,7 @@ void JuegoHud::loop(sf::RenderWindow &window){
                         break;
                         
                         case sf::Mouse::Right:
-                            if(!jugador->getAtaque1() && !jugador->getAtaque2()){
+                            if(!jugador->getAtaque1() && !jugador->getAtaque2() && (jugador->EnfriamientoLleno() || jugador->gettAtaque2()<4)){
                                 ratonpos=(sf::Mouse::getPosition(window));
                                 if(jugador->getDireccion() && jugador->getSprite().getPosition().x<ratonpos.x){
                                     jugador->setDireccion(false);

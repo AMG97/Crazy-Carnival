@@ -41,7 +41,7 @@ Player::Player() {
     vida = 300.0;
     enfriamiento = 0.0;
     totalVida = vida;
-    totalEnfriamiento = 30.0;
+    totalEnfriamiento = 50.0;
     posraton=sf::Vector2i(0,0);
     contadorSpriteReposo = 0;
     contadorSpriteCorrer = 0;
@@ -49,6 +49,7 @@ Player::Player() {
     contadorSpriteAtaque2= 0;
     Ataque1=false;
     Ataque2=false;
+    Atacado2=false;
     arma= new Arma(2,personaje.getPosition());
     angulo=0;
     direccionIzquierda = false;
@@ -72,8 +73,6 @@ Player::Player(const Player& orig) {
 Player::~Player() {
 }
 void Player::update(sf::Clock *clock){
-    //this->actualizarFisica();
-    //jugador->ApplyForce(b2Vec2(jugador->GetPosition().x + velocidad.x*10, jugador->GetPosition().y + velocidad.y), jugador->GetPosition(), false);
     jugadorDef.position = b2Vec2(jugador->GetPosition().x + velocidad.x, jugador->GetPosition().y + velocidad.y*jugador->GetGravityScale());
     jugador = mundo->CreateBody(&jugadorDef);
     personaje.setPosition(jugador->GetPosition().x, jugador->GetPosition().y);
@@ -118,6 +117,10 @@ void Player::modificarSpriteAtaque2()
             shapeJugador.SetAsBox(personaje.getGlobalBounds().width / 2, personaje.getGlobalBounds().height / 2);
             fixJugadorDef.shape = &shapeJugador;
             fixJugador = jugador->CreateFixture(&fixJugadorDef);
+            if(this->EnfriamientoLleno()){
+                tAtaque2.restart();
+                Hud::modificarEnfriamiento(-50.0);
+            }
         }
     arma->modificarSpriteAtaque2(contadorSpriteAtaque2, personaje.getPosition());
     contadorSpriteAtaque2++;
@@ -274,9 +277,8 @@ float Player::getVelocidad()
     return velocidad.x;
 }
 void Player::recibirDanyo(float danyo){
-    enfriamiento += danyo * 0.75;
     Hud::modificarVida(-danyo);
-    Hud::modificarEnfriamiento(danyo * 0.75);
+    Hud::modificarEnfriamiento(danyo * 0.25);
     if(vida<0){
         //cout<<"Jugador muerto"<<endl;
     }else{
@@ -300,6 +302,7 @@ void Player::setAtaque1(bool b, sf::Vector2i posra){
 void Player::setAtaque2(bool b, sf::Vector2i posra){
     Ataque2=b;
     posraton=posra;
+    Atacado2=true;
 }
 
 bool Player::getAtaque1(){
@@ -347,4 +350,18 @@ void Player::reposo(int n){
 
 Arma* Player::getArma(){
     return arma;
+}
+
+bool Player::EnfriamientoLleno(){
+    if(enfriamiento>=totalEnfriamiento)
+        return true;
+    else 
+        return false;
+}
+
+float Player::gettAtaque2(){
+    if(!Atacado2)
+        return 5;
+    else
+    return tAtaque2.getElapsedTime().asSeconds();
 }
