@@ -82,34 +82,31 @@ namespace Crazy
     
     void EstadoMenu::ManejarEventos()
     {
-        teclaPulsada = _input->BucleEventos();
-        
-        if (teclaPulsada) {
-            if (_input->GetTeclas().Arriba) {
+        if (_input->GetTipoEvento() == _input->Evento().KeyPressed)
+        {
+            if (_input->Enter()) {
+                CambiarEstado();
+            }
+            
+            if (_input->Escape()) {
+                _juego->_ventana->Cerrar();
+            }
+            
+            if (_input->Arriba()) {
                 opcion--;
                 if (opcion < JUGAR)
                 {
                     opcion = SALIR;
                 }
             }
-
-            if (_input->GetTeclas().Abajo) {
+            
+            if (_input->Abajo()) {
                 opcion++;
                 if (opcion > SALIR)
                 {
                     opcion = JUGAR;
                 }
             }
-            
-            if (_input->GetTeclas().Enter) {
-                CambiarEstado();
-            }
-            
-            if (_input->GetTeclas().Escape) {
-                _juego->_ventana->Cerrar();
-            }
-            
-            teclaPulsada = false;
         }
     }
     

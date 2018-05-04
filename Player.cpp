@@ -16,10 +16,14 @@ namespace Crazy
         contadorSpriteReposo = 0;
         contadorSpriteSalto = 0;
         
+        posIniX = 60;
+        posIniY = _juego->GetAlto()/2;
+        
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
-        
-        
+        sprite.CambiarOrigen(60/2, 80/2);
+        sprite.CambiarPosicion(posIniX, posIniY);
+        sprite.EscalarProporcion(1.5, 1.5);
     }
     
     float Player::GetEnfriamiento()

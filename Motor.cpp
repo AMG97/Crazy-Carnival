@@ -212,7 +212,45 @@ namespace Motor
     {
         return getPosition().y;
     }
+    
+    void SpriteM::Mover(float v)
+    {
+        move(v, 0);
+    }
 
+// Cámara
+    Camara* Camara::_pinstance2=0;
+    
+    Camara* Camara::Instance()
+    {
+        if (_pinstance2 == 0)
+        {
+            _pinstance2 = new Camara();
+        }
+        return _pinstance2;
+    }
+    
+    Camara::~Camara()
+    {
+        delete _pinstance2;
+        _pinstance2 = NULL;
+    }
+    
+    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    {
+        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+    }
+            
+    sf::View& Camara::GetCamara()
+    {
+        return camara;
+    }
+    
+    ///Define el tamaño de la cámara
+    void Camara::setTam(float x, float y) {
+        camara.setSize(x,y);
+    }
+    
 // Ventana
     Ventana* Ventana::_pinstance=0;
     
@@ -231,7 +269,8 @@ namespace Motor
         _pinstance = NULL;
     }
     
-    void Ventana::CrearVentana(int ancho, int alto, string titulo) {
+    void Ventana::CrearVentana(int ancho, int alto, string titulo)
+    {
         window.create(sf::VideoMode(ancho, alto), titulo);
 
         //Activa la sincronizacion vertical (60 fps)
@@ -277,179 +316,21 @@ namespace Motor
     {
         return window;
     }
+    
     void Ventana::setBackground(int r, int g, int b) {
         background = sf::Color(r,g,b);
-    }
-
-// Cámara
-    Camara* Camara::_pinstance2=0;
-    
-    Camara* Camara::Instance()
-    {
-        if (_pinstance2 == 0)
-        {
-            _pinstance2 = new Camara();
-        }
-        return _pinstance2;
-    }
-    
-    Camara::~Camara()
-    {
-        delete _pinstance2;
-        _pinstance2 = NULL;
-    }
-    
-    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
-    {
-        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
-    }
-            
-    sf::View& Camara::GetCamara()
-    {
-        return camara;
-    }
-    
-    ///Define el tamaño de la cámara
-    void Camara::setTam(float x, float y) {
-        camara.setSize(x,y);
     }
 
 // Input
     Input::Input()
     {
         _ventana = Ventana::Instance();
-        teclas.Pausar = false;
-        teclas.Arriba = false;
-        teclas.Abajo = false;
-        teclas.Izq = false;
-        teclas.Der = false;
-        teclas.Enter = false;
-        teclas.BackSpace = false;
-        teclas.Escape = false;
-        teclas.RatonIzq = false;
-        teclas.RatonDer = false;
-		
-        //Pruebas
-        teclas.D = false;
-        teclas.C = false;
-        teclas.F = false;
-        teclas.R = false;
-        teclas.E = false;
-        teclas.Q = false;
-    }
-    
-    void Input::CerrarVentana()
-    {
-        _ventana->Cerrar();
-    }
-    
-    bool Input::BucleEventos()
-    {
-        //Bucle de obtención de eventos
-        sf::Event event;
-        while (_ventana->GetVentana().pollEvent(event))
-        {
-            switch(event.type)
-            {
-                //Si se recibe el evento de cerrar la ventana la cierro
-                case sf::Event::Closed:
-                    CerrarVentana();
-                break;
-                    
-                // Pulsar una tecla
-                case sf::Event::KeyPressed:
-                    
-                    //Verifico cual se pulsa
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                        teclas.Escape=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                        teclas.Arriba=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                        teclas.Abajo=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-                        teclas.Izq=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-                        teclas.Der=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-                        teclas.Enter=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace)) {
-                        teclas.BackSpace=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
-                        teclas.Pausar=true;
-                    }
-					
-                    //Pruebas
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                        teclas.D=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
-                        teclas.C=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-                        teclas.F=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-                        teclas.R=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
-                        teclas.E=true;
-                    }
-                    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-                        teclas.Q=true;
-                    }
-                    return true;
-                break;
-                
-                case sf::Event::KeyReleased:
-                    teclas.Pausar = false;
-                    teclas.Escape=false;
-                    teclas.Arriba=false;
-                    teclas.Abajo=false;
-                    teclas.Izq=false;
-                    teclas.Der=false;
-                    teclas.Enter=false;
-                    teclas.BackSpace=false;
-					
-                    //Pruebas
-                    teclas.D = false;
-                    teclas.C = false;
-                    teclas.F = false;
-                    teclas.R = false;
-                    teclas.E = false;
-                    teclas.Q = false;
-                break;
-                    
-                // Pulsar boton raton
-                case sf::Event::MouseButtonPressed:
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-                        teclas.RatonIzq=true;
-                    }
-                    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-                        teclas.RatonDer=true;
-                    }
-                    return true;
-                break;
-                
-                // Soltar boton raton
-                case sf::Event::MouseButtonReleased:
-                        teclas.RatonIzq=false;
-                        teclas.RatonDer=false;
-                break;
-            }
-        }
-        return false;
-    }
-    
-    Input::Teclas Input::GetTeclas()
-    {
-        return teclas;
+        
+        eventos.Closed = 1;
+        eventos.KeyPressed = 2;
+        eventos.KeyReleased = 3;
+        eventos.MouseButtonPressed = 4;
+        eventos.MouseButtonReleased = 5;
     }
     
     float Input::GetPosicionRatonX()
@@ -460,5 +341,135 @@ namespace Motor
     float Input::GetPosicionRatonY()
     {
        return sf::Mouse::getPosition(_ventana->GetVentana()).y;
+    }
+    
+    Input::Eventos Input::Evento()
+    {
+        return eventos;
+    }
+    
+    short int Input::GetTipoEvento()
+    {
+        sf::Event event;
+        while (_ventana->GetVentana().pollEvent(event))
+        {
+            switch(event.type)
+            {
+                case sf::Event::Closed:
+                    _ventana->Cerrar();
+                    return eventos.Closed;
+
+                case sf::Event::KeyPressed:
+                    return eventos.KeyPressed;
+
+                case sf::Event::KeyReleased:
+                    return eventos.KeyReleased;
+
+                case sf::Event::MouseButtonPressed:
+                    return eventos.MouseButtonPressed;
+
+                case sf::Event::MouseButtonReleased:
+                    return eventos.MouseButtonReleased;
+
+                default:
+                    return 0;
+            }
+        }
+    }
+    
+    bool Input::RatonPulsado(sf::Mouse::Button boton)
+    {
+        if (sf::Mouse::isButtonPressed(boton)) {
+            return  true;
+        }
+        return  false;
+    }
+    
+    bool Input::TeclaPulsada(sf::Keyboard::Key key)
+    {
+        if (sf::Keyboard::isKeyPressed(key)) {
+            return  true;
+        }
+        return  false;
+    }
+    
+    bool Input::RatonDer()
+    {
+        return RatonPulsado(sf::Mouse::Button::Right);
+    }
+    
+    bool Input::RatonIzq()
+    {
+        return RatonPulsado(sf::Mouse::Button::Left);
+    }
+    
+    bool Input::Der()
+    {
+        return TeclaPulsada(sf::Keyboard::Right);
+    }
+    
+    bool Input::Izq()
+    {
+        return TeclaPulsada(sf::Keyboard::Left);
+    }
+    
+    bool Input::Arriba()
+    {
+        return TeclaPulsada(sf::Keyboard::Up);
+    }
+    
+    bool Input::Abajo()
+    {
+        return TeclaPulsada(sf::Keyboard::Down);
+    }
+    
+    bool Input::Escape()
+    {
+        return TeclaPulsada(sf::Keyboard::Escape);
+    }
+    
+    bool Input::BackSpace()
+    {
+        return TeclaPulsada(sf::Keyboard::BackSpace);
+    }
+    
+    bool Input::Enter()
+    {
+        return TeclaPulsada(sf::Keyboard::Return);
+    }
+    
+    bool Input::P()
+    {
+        return TeclaPulsada(sf::Keyboard::P);
+    }
+    
+    bool Input::D()
+    {
+        return TeclaPulsada(sf::Keyboard::D);
+    }
+    
+    bool Input::C()
+    {
+        return TeclaPulsada(sf::Keyboard::C);
+    }
+    
+    bool Input::F()
+    {
+        return TeclaPulsada(sf::Keyboard::F);
+    }
+    
+    bool Input::R()
+    {
+        return TeclaPulsada(sf::Keyboard::R);
+    }
+    
+    bool Input::E()
+    {
+        return TeclaPulsada(sf::Keyboard::E);
+    }
+    
+    bool Input::Q()
+    {
+        return TeclaPulsada(sf::Keyboard::Q);
     }
 }

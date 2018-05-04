@@ -72,6 +72,7 @@ namespace Motor
         float GetAlto();
         float GetX();
         float GetY();
+        void Mover(float v);
     };
     
     class Camara
@@ -117,40 +118,48 @@ namespace Motor
         
         sf::RenderWindow window;
         sf::Color background;
+        
     };
     
     class Input
     {
     public:
-        struct Teclas {
-            bool Pausar;
-            bool Arriba;
-            bool Abajo;
-            bool Izq;
-            bool Der;
-            bool Enter;
-            bool BackSpace;
-            bool Escape;
-            bool RatonIzq;
-            bool RatonDer;
-			
-            //Pruebas
-            bool D;
-            bool C;
-            bool F;
-            bool R;
-            bool E;
-            bool Q;
+        struct Eventos {
+            short int Closed;
+            short int KeyPressed;
+            short int KeyReleased;
+            short int MouseButtonPressed;
+            short int MouseButtonReleased;
         };
+        
         Input();
-        void CerrarVentana();
-        bool BucleEventos();
-        Teclas GetTeclas();
         float GetPosicionRatonX();
         float GetPosicionRatonY();
         
+        Eventos Evento();
+        short int GetTipoEvento();
+        bool RatonPulsado(sf::Mouse::Button boton);
+        bool TeclaPulsada(sf::Keyboard::Key key);
+        
+        bool RatonDer();
+        bool RatonIzq();
+        bool Der();
+        bool Izq();
+        bool Arriba();
+        bool Abajo();
+        bool Escape();
+        bool BackSpace();
+        bool Enter();
+        bool P();
+        bool D();
+        bool C();
+        bool F();
+        bool R();
+        bool E();
+        bool Q();
+        
     private:
         Ventana* _ventana;
-        Teclas teclas;
+        Eventos eventos;
     };
 }

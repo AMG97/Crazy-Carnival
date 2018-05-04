@@ -83,10 +83,15 @@ namespace Crazy
     
     void EstadoMenuPartidas::ManejarEventos()
     {
-        teclaPulsada = _input->BucleEventos();
-        
-        if (teclaPulsada) {
-            if (_input->GetTeclas().Arriba) {
+        if (_input->GetTipoEvento() == _input->Evento().KeyPressed)
+        {
+            if (_input->BackSpace()
+                || _input->Escape())
+            {
+                Atras();
+            }
+            
+            if (_input->Arriba()) {
                 opcion--;
                 if (opcion < NUEVA)
                 {
@@ -94,7 +99,7 @@ namespace Crazy
                 }
             }
 
-            if (_input->GetTeclas().Abajo) {
+            if (_input->Abajo()) {
                 opcion++;
                 if (opcion > ESTADISTICAS)
                 {
@@ -102,17 +107,9 @@ namespace Crazy
                 }
             }
             
-            if (_input->GetTeclas().Enter) {
+            if (_input->Enter()) {
                 CambiarEstado();
             }
-            
-            if (_input->GetTeclas().BackSpace
-                || _input->GetTeclas().Escape)
-            {
-                Atras();
-            }
-            
-            teclaPulsada = false;
         }
     }
     

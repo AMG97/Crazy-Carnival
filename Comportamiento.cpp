@@ -5,10 +5,6 @@ namespace Crazy
     Comportamiento::Comportamiento()
     {
         _juego = Juego::Instance();
-        
-        sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
-        sprite.CambiarPosicion(_juego->GetAncho()/2, _juego->GetAlto()/2);
-        sprite.EscalarProporcion(1.5, 1.5);
     }
 
     float Comportamiento::GetVida()
@@ -104,5 +100,15 @@ namespace Crazy
     {
         direccionIzq = true;
         sprite.EscalarProporcion(-1.0, 1.0);
+    }
+    
+    void Comportamiento::Mover()
+    {
+        sprite.Mover(velocidad);
+    }
+    
+    void Comportamiento::CambiarPosicion(float x, float y)
+    {
+        sprite.CambiarPosicion(x, y);
     }
 }

@@ -31,6 +31,8 @@ namespace Crazy
         virtual void ModificarSprite() = 0;
         void CambiarDireccionDer();
         void CambiarDireccionIzq();
+        void Mover();
+        void CambiarPosicion(float x, float y);
         
     protected:
         float vida;

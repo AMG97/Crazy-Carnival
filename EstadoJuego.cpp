@@ -51,27 +51,34 @@ namespace Crazy
     
     void EstadoJuego::ManejarEventos()
     {
-        teclaPulsada = _input->BucleEventos();
-        
-        if (teclaPulsada)
+        short int evento = _input->GetTipoEvento();
+        // Pulsar tecla
+        if (evento == _input->Evento().KeyPressed)
         {
-            if (_input->GetTeclas().Pausar ||
-                _input->GetTeclas().Escape)
+            if (_input->P() ||
+                _input->Escape())
             {
                 Pausar();
             }
             
-            if (_input->GetTeclas().RatonIzq)
+            if (_input->Der())
             {
-                cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
+                _jugador->SetEstado(_jugador->GetCorrerDer());
+                _jugador->CambiarDireccion();
+                _jugador->SetVelocidad(4.0f);
+                _jugador->Mover();
+            }
+
+            if (_input->Izq())
+            {
+                _jugador->SetEstado(_jugador->GetCorrerIzq());
+                _jugador->CambiarDireccion();
+                _jugador->SetVelocidad(-4.0f);
+                _jugador->Mover();
             }
             
-            if (_input->GetTeclas().RatonDer)
-            {
-                cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
-            }
-            
-            if (_input->GetTeclas().D)
+            // Pruebas
+            if (_input->D())
             {
                 _jugador->Curar(6);
                 _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
@@ -80,7 +87,7 @@ namespace Crazy
                 cout <<_jugador->GetVida()<<", "<<_jugador->GetTotalVida()<<endl;
             }
             
-            if (_input->GetTeclas().C)
+            if (_input->C())
             {
                 _jugador->RecibirDanyo(3);
                 if(_jugador->AtaqueEspecialActivado())
@@ -95,7 +102,7 @@ namespace Crazy
                 cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
             }
             
-            if (_input->GetTeclas().F)
+            if (_input->F())
             {
                 _jugador->SetAtaqueEspecial(false);
                 _hud->Parpadear(false);
@@ -103,34 +110,47 @@ namespace Crazy
                 _hud->EnfriamientoVacio();
             }
             
-            if (_input->GetTeclas().R)
+            if (_input->R())
             {
                 _hud->ModoContrarreloj();
             }
             
-            if (_input->GetTeclas().E)
+            if (_input->E())
             {
                 _hud->ElixirEncontrado();
             }
             
-            if (_input->GetTeclas().Q)
+            if (_input->Q())
             {
                 _juego->_ventana->Cerrar();
             }
-            
-            if (_input->GetTeclas().Der)
+        }
+        
+        // Soltar tecla
+        if (evento == _input->Evento().KeyReleased)
+        {
+            _jugador->SetVelocidad(0.0);
+            _jugador->SetEstado(_jugador->GetReposo());
+        }
+        
+        // Pulsar raton
+        if (evento == _input->Evento().MouseButtonPressed)
+        {
+            if (_input->RatonIzq())
             {
-                _jugador->SetEstado(_jugador->GetCorrerDer());
-                _jugador->CambiarDireccion();
+                cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
             
-            if (_input->GetTeclas().Izq)
+            if (_input->RatonDer())
             {
-                _jugador->SetEstado(_jugador->GetCorrerIzq());
-                _jugador->CambiarDireccion();
+                cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
             }
+        }
+        
+        // Soltar raton
+        if (evento == _input->Evento().MouseButtonReleased)
+        {
             
-            teclaPulsada = false;
         }
     }
     
