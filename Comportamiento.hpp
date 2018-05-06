@@ -14,8 +14,6 @@ namespace Crazy
         void ModificarVida(float modificador);
         float GetVelocidad();
         void SetVelocidad(float vel);
-        //float GetVelocidadSalto();
-        //void SetVelocidadSalto(float vel);
         
         float GetPosIniX();
         float GetPosIniY();
@@ -31,6 +29,7 @@ namespace Crazy
         virtual void ModificarSprite() = 0;
         void CambiarDireccionDer();
         void CambiarDireccionIzq();
+        bool GetDireccionIzq();
         void Mover();
         void CambiarPosicion(float x, float y);
         

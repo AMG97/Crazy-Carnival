@@ -21,9 +21,27 @@ namespace Crazy
         
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
-        sprite.CambiarOrigen(60/2, 80/2);
+        sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
         sprite.CambiarPosicion(posIniX, posIniY);
         sprite.EscalarProporcion(1.5, 1.5);
+        
+        //TO DO: Box2d + façade
+        _mundo = new b2World(b2Vec2(0.0, 9.8));
+        cuerpoDef.type = b2BodyType::b2_dynamicBody;
+        cuerpoDef.position = b2Vec2(sprite.GetX(), sprite.GetY());
+        _cuerpo = _mundo->CreateBody(&cuerpoDef);
+        
+        cout <<"Ancho :"<<sprite.GetAncho()<<endl;
+        cout <<"Alto :"<<sprite.GetAlto()<<endl;
+        
+        formaCuerpo.SetAsBox(sprite.GetAncho() / 2, sprite.GetAlto() / 2);
+        fixCuerpoDef.shape = &formaCuerpo;
+        fixCuerpoDef.density = 1.0;
+        fixCuerpoDef.friction = 0.0;
+        fixCuerpoDef.restitution = 0.0;
+        _fixCuerpo = _cuerpo->CreateFixture(&fixCuerpoDef);
+        
+        guardado = false;
     }
     
     float Player::GetEnfriamiento()
@@ -124,10 +142,11 @@ namespace Crazy
         return velocidad;
     }*/
     
-    /*void Player::SetVelocidadSalto(float velS)
+    void Player::SetVelocidadSalto(float velS)
     {
-        //_cuerpo->SetAngularVelocity(_mundo->GetGravity().y + velS);
-    }*/
+        velSalto = velS;
+        _cuerpo->SetAngularVelocity(_mundo->GetGravity().y + velS);
+    }
     
     void Player::ModificarSprite()
     {
@@ -184,4 +203,67 @@ namespace Crazy
         }
     }
     
+    b2World* Player::GetMundo()
+    {
+        return _mundo;
+    }
+    
+    b2Body* Player::GetCuerpo()
+    {
+        return _cuerpo;
+    }
+    
+    void Player::SetCuerpo()
+    {
+        _cuerpo = _mundo->CreateBody(&cuerpoDef);
+    }
+    
+    b2BodyDef Player::GetCuerpoDefinicion()
+    {
+        return cuerpoDef;
+    }
+    
+    void Player::SetCuerpoDefinicionPosicion(float32 posX, float32 posY)
+    {
+        cuerpoDef.position = b2Vec2(posX + velocidad, posY + _cuerpo->GetAngularVelocity());
+    }
+       
+    b2Fixture* Player::GetFixtureCuerpo()
+    {
+        return _fixCuerpo;
+    }
+    
+    b2FixtureDef Player::GetFixtureCuerpoDefinicion()
+    {
+        return fixCuerpoDef;
+    }
+    b2PolygonShape Player::GetForma()
+    {
+        return formaCuerpo;
+    }
+    
+    void Player::SetAhora()
+    {
+        if (!guardado)
+        {
+            xAhora = sprite.GetX();
+            yAhora = sprite.GetY();
+            guardado = true;
+        }
+    }
+    
+    float Player::GetXAhora()
+    {
+        return xAhora;
+    }
+    
+    float Player::GetYAhora()
+    {
+        return yAhora;
+    }
+    
+    void Player::Saltar()
+    {
+        sprite.move(0, velSalto);
+    }
 }

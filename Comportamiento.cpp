@@ -67,12 +67,12 @@ namespace Crazy
     
     float Comportamiento::GetPosX()
     {
-        return posX;
+        return sprite.GetX();
     }
 
     float Comportamiento::GetPosY()
     {
-        return posY;
+        return sprite.GetY();
     }
 
     void Comportamiento::SetPosX(float x)
@@ -100,6 +100,11 @@ namespace Crazy
     {
         direccionIzq = true;
         sprite.EscalarProporcion(-1.0, 1.0);
+    }
+    
+    bool Comportamiento::GetDireccionIzq()
+    {
+        return direccionIzq;
     }
     
     void Comportamiento::Mover()

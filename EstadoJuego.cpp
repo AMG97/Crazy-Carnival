@@ -77,6 +77,27 @@ namespace Crazy
                 _jugador->Mover();
             }
             
+            if (_input->Arriba())
+            {
+                // Guarda la x y la y de ahora
+                _jugador->SetAhora();
+                
+                /*contador = 0;  
+                _jugador->SetVelocidadSalto(-36.0 + contador);*/
+                
+                if(!_jugador->GetDireccionIzq())        // Derecha
+                {
+                    cout << "Salto der \n"<<endl;
+                    _jugador->SetEstado(_jugador->GetSaltarDer());
+                }
+                else if(_jugador->GetDireccionIzq())        // Izquierda
+                {
+                    cout << "Salto izq....\n"<<endl;
+                    _jugador->SetEstado(_jugador->GetSaltarIzq());
+                }
+            }
+            
+            
             // Pruebas
             if (_input->D())
             {
@@ -129,8 +150,13 @@ namespace Crazy
         // Soltar tecla
         if (evento == _input->Evento().KeyReleased)
         {
-            _jugador->SetVelocidad(0.0);
-            _jugador->SetEstado(_jugador->GetReposo());
+            // Poner al personaje en reposo
+            if ((_jugador->GetEstado() == _jugador->GetCorrerDer()) ||
+                    (_jugador->GetEstado() == _jugador->GetCorrerIzq()))
+            {
+                _jugador->SetVelocidad(0.0);
+                _jugador->SetEstado(_jugador->GetReposo());
+            }
         }
         
         // Pulsar raton
@@ -156,6 +182,19 @@ namespace Crazy
     
     void EstadoJuego::Actualizar(float tiempoActual)
     {
+        // Si el personaje esta saltando
+        
+        if ((_jugador->GetEstado() == _jugador->GetSaltarDer())
+            || (_jugador->GetEstado() == _jugador->GetSaltarIzq()))
+        {
+            
+            // Suelo
+            /*if (_jugador->GetYAhora() == _jugador->GetPosY())
+            {
+                _jugador->SetEstado(_jugador->GetReposo());
+            }*/
+        }
+        
         
     }
     
