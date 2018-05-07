@@ -3,7 +3,7 @@
 #include "tinyxml.h"
 #include "tinystr.h"
 
-#define INT_MAX 2147483647
+#define INT_MAX 2147483648
 
 using namespace std;
 
@@ -17,8 +17,10 @@ class Nivel {
         void cargarNivel(unsigned short int l);
         void update();
         void draw(string capa);
+        void clear();
     private:
         map<string,SpriteM***> tilemap;
+        vector<string> layers;
         int width, height;
         Juego* instance;
         Camara* camera;

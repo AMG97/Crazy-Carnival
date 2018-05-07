@@ -315,6 +315,16 @@ namespace Motor
     void Camara::setTam(float x, float y) {
         camara.setSize(x,y);
     }
+    
+    void Camara::mover(int x, int y) {
+        camara.move(x,y);
+    }
+
+    void Camara::setCentro(int x, int y) {
+        camara.setCenter(x,y);
+    }
+
+    
 
 // Input
     Input::Input()

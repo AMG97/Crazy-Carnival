@@ -22,7 +22,24 @@ namespace Crazy{
     }
 
     Nivel::~Nivel() {
+        clear();        
     }
+    ///Elimina todo el contenido del nivel
+    void Nivel::clear() {
+        for (auto l : layers) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
+                    if(tilemap[l][i][j]!=0)
+                        delete tilemap[l][i][j];
+                }
+                delete[] tilemap[l][i];
+            }
+            delete tilemap[l];
+            tilemap.erase(l);
+        }
+        layers.clear();
+    }
+
     
     void Nivel::cargarNivel(unsigned short int l) {
         instance = Juego::Instance();
@@ -68,8 +85,15 @@ namespace Crazy{
                         for (int j = 0; j < mapX; j++) {                            
                             int value=0;
                             tile->QueryIntAttribute("gid",&value);
+                            
                             value = abs(value);
-                            if(value>50000)value = value-INT_MAX-1;
+                            if(value<0){
+                                //value = 0;
+                                cout<<value<<endl;
+                            }
+                            
+                            if(value>50000)value = value-INT_MAX;
+                            
                             
                             if(value==0) tilemap[name][i][j] = 0;
                             else tilemap[name][i][j] = new SpriteM();
@@ -77,21 +101,24 @@ namespace Crazy{
                             if(tilemap[name][i][j]!=0){
                                 int tileV = abs(value)-1, limit = 1, change;
                                 map->FirstChild()->NextSiblingElement()->QueryIntAttribute("firstgid",&change);
+                                if(i==16&&j==1)cout<<abs(value)<<endl;
+                                
                                 if(abs(value) < change){
                                     tilemap[name][i][j]->CambiarTextura(*mapa);
                                     sprite.FirstChildElement()->QueryIntAttribute("columns",&limit);
+                                    if(i==16&&j==1)cout<<"Entra aquí"<<endl;
                                 }else{
                                     tilemap[name][i][j]->CambiarTextura(instance->recursos.GetTextura("Objetos"));
                                     tileV-=change-1;
                                     objects.FirstChildElement()->QueryIntAttribute("columns",&limit);
                                 }
+                                                                
                                 tilemap[name][i][j]->CambiarPosicion(48*j,48*i);
                                 tilemap[name][i][j]->CambiarOrigen(48/2,48/2);
 
 
                                 tilemap[name][i][j]->CambiarTextRect(48*(tileV%limit),48*(tileV/limit),48,48);
                                 if(value<0)tilemap[name][i][j]->EscalarProporcion(-1,1);
-
 
                             }
                             if((i+1)*(j+1)<mapX*mapY)tile = tile->NextSiblingElement();
@@ -116,7 +143,9 @@ namespace Crazy{
     }
 
     void Nivel::update() {
-        camera->setTam(300,300);
+        //camera->setTam(800,1200);
+        //camera->mover(2,0);
+        instance->_ventana->setCamara(*camera);
     }
 
     void Nivel::draw(string capa) {
