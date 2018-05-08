@@ -10,18 +10,13 @@
         <group/>
 =======
         <group>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Comportamiento.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Estado.hpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Box2D/Box2D/Box2D.h</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoMenu.cpp</file>
             <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Juego.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Motor.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Hud.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoJuego.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Motor.hpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Hud.hpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Player.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoPausa.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoJuego.hpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Comportamiento.hpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Player.hpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadosManager.hpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoMenu.hpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/main.cpp</file>
         </group>
 >>>>>>> desarrollo/feature/input
     </open-files>
