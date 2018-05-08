@@ -1,8 +1,10 @@
 #pragma once
 #include "Juego.hpp"
+#include "Arma.hpp"
 
 namespace Crazy
 {
+    class Arma;
     class Comportamiento
     {
     public:
@@ -32,6 +34,10 @@ namespace Crazy
         bool GetDireccionIzq();
         void Mover();
         void CambiarPosicion(float x, float y);
+        void SetAngulo(int x, int y);
+        float GetAngulo();
+        Arma* GetArma();
+        SpriteM GetSprite();
         
     protected:
         float vida;
@@ -47,5 +53,8 @@ namespace Crazy
         Reloj relojAnim;
         
         bool direccionIzq;
+        
+        float angulo;
+        Arma* _arma;
     };
 }

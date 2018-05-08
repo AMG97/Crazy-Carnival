@@ -74,6 +74,8 @@ namespace Motor
         float GetX();
         float GetY();
         void Mover(float v);
+        void Mover(float x, float y);
+        bool Interseccion(SpriteM s);
     };
     
     class Camara

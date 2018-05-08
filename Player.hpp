@@ -1,13 +1,15 @@
 #pragma once
 #include "Comportamiento.hpp"
 #include <Box2D/Box2D.h>
+#include "Arma.hpp"
+#include "Enemigo.hpp"
 
 // Constantes
 #define REPOSO 0
-#define CORRER_DER 1
-#define CORRER_IZQ 2
-#define SALTO_DER 3
-#define SALTO_IZQ 4
+#define CORRER 1
+#define SALTO 2
+#define ATAQUE1 3
+#define ATAQUE2 4
 
 namespace Crazy
 {
@@ -29,18 +31,25 @@ namespace Crazy
         void RecibirDanyo(float danyo);
         
         short int GetEstado();
-        short int GetCorrerDer();
-        short int GetCorrerIzq();
-        short int GetSaltarDer();
-        short int GetSaltarIzq();
+        short int GetCorrer();
+        short int GetSaltar();
         short int GetReposo();
+        short int GetAtaque1();
+        short int GetAtaque2();
         void SetEstado(short int est);
         void CambiarDireccion();
+        bool getDireccion();
+        void Dibujar();
         
         //float GetVelocidadSalto();
         void SetVelocidadSalto(float velS);
         
         void ModificarSprite();
+        float GetTAtque2();
+        void Reposo(int n);
+        void Update(vector<Enemigo*> e);
+        void SetVElocidadSalto(float v);
+        float GetVelocidadSalto();
         
         
         // Box2D
@@ -67,12 +76,19 @@ namespace Crazy
         float totalEnfriamiento;
         float enfriamiento;
         bool ataqueEspecial;
+        bool golpear;
         
         short int estado;
+        Reloj tAtaque2;
+        bool Atacado2;
+        
+        float velSalto;
         
         short int contadorSpriteCorrer;
         short int contadorSpriteSalto;
         short int contadorSpriteReposo;
+        short int contadorSpriteAtaque1;
+        short int contadorSpriteAtaque2;
         
         b2World* _mundo; // pa la gravedad
         b2Body* _cuerpo; // esto se le asocia al sprite
@@ -88,6 +104,5 @@ namespace Crazy
         int xAhora;
         int yAhora;
         bool guardado;
-        float velSalto;
     };
 }

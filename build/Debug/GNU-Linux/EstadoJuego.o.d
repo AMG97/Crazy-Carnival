@@ -1,9 +1,10 @@
 build/Debug/GNU-Linux/EstadoJuego.o: EstadoJuego.cpp EstadoJuego.hpp \
  Estado.hpp EstadoPausa.hpp EstadoMenu.hpp EstadoMenuPartidas.hpp \
  EstadoEstadisticas.hpp Juego.hpp EstadosManager.hpp Motor.hpp \
- EstadoAyuda.hpp Player.hpp Comportamiento.hpp Box2D/Box2D/Box2D.h \
- Box2D/Box2D/Common/b2Settings.h Box2D/Box2D/Common/b2Draw.h \
- Box2D/Box2D/Common/b2Math.h Box2D/Box2D/Common/b2Timer.h \
+ EstadoAyuda.hpp Arma.hpp Proyectil.hpp Enemigo.hpp Comportamiento.hpp \
+ Player.hpp Box2D/Box2D/Box2D.h Box2D/Box2D/Common/b2Settings.h \
+ Box2D/Box2D/Common/b2Draw.h Box2D/Box2D/Common/b2Math.h \
+ Box2D/Box2D/Common/b2Timer.h \
  Box2D/Box2D/Collision/Shapes/b2CircleShape.h \
  Box2D/Box2D/Collision/Shapes/b2Shape.h \
  Box2D/Box2D/Common/b2BlockAllocator.h \
@@ -54,9 +55,15 @@ Motor.hpp:
 
 EstadoAyuda.hpp:
 
-Player.hpp:
+Arma.hpp:
+
+Proyectil.hpp:
+
+Enemigo.hpp:
 
 Comportamiento.hpp:
+
+Player.hpp:
 
 Box2D/Box2D/Box2D.h:
 

@@ -116,4 +116,24 @@ namespace Crazy
     {
         sprite.CambiarPosicion(x, y);
     }
+    void Comportamiento::SetAngulo(int x, int y)
+    {
+        float difx=x-sprite.GetX();
+        float dify=y-sprite.GetY();
+        angulo=atan2(difx,dify)*180/3.1415;
+    }
+    
+    float Comportamiento::GetAngulo()
+    {
+        return angulo;
+    }
+    
+    Arma* Comportamiento::GetArma()
+    {
+        return _arma;
+    }
+    SpriteM Comportamiento::GetSprite()
+    {
+        return sprite;
+    }
 }

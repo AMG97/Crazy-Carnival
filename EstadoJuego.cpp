@@ -30,6 +30,13 @@ namespace Crazy
         _jugador = NULL;
         delete _pinstance;
         _pinstance = NULL;
+        for (int i=0; i < _enemigos.size(); i++)
+        {
+            Enemigo *tmp= _enemigos[i];
+            _enemigos.erase(_enemigos.begin()+i);
+            delete tmp;
+            _enemigos[i]=NULL;
+        }
     }
     
     void EstadoJuego::Init()
@@ -39,6 +46,8 @@ namespace Crazy
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
         _jugador = new Player("Espadachina");
         _hud = new Hud();
+        Enemigo* e = new Enemigo();
+        _enemigos.push_back(e);
         teclaPulsada = false;
         
         /*reloj = new sf::Clock();
@@ -65,37 +74,30 @@ namespace Crazy
             
             if (_input->Der())
             {
-                _jugador->SetEstado(_jugador->GetCorrerDer());
-                _jugador->CambiarDireccion();
-                _jugador->SetVelocidad(4.0f);
-                _jugador->Mover();
+                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
+                {
+                    _jugador->SetEstado(_jugador->GetCorrer());
+                }
+                //_jugador->CambiarDireccion();
+                _jugador->SetVelocidad(6.0f);
             }
 
             if (_input->Izq())
             {
-                _jugador->SetEstado(_jugador->GetCorrerIzq());
-                _jugador->CambiarDireccion();
-                _jugador->SetVelocidad(-4.0f);
-                _jugador->Mover();
+                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
+                {
+                _jugador->SetEstado(_jugador->GetCorrer());
+                }
+                //_jugador->CambiarDireccion();
+                _jugador->SetVelocidad(-6.0f);
             }
             
-            if (_input->Arriba())
+            if(_input->Arriba())
             {
-                // Guarda la x y la y de ahora
-                _jugador->SetAhora();
-                
-                /*contador = 0;  
-                _jugador->SetVelocidadSalto(-36.0 + contador);*/
-                
-                if(!_jugador->GetDireccionIzq())        // Derecha
+                if(_jugador->GetEstado()!=_jugador->GetSaltar() && _jugador->GetVelocidadSalto()==0 && _jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
                 {
-                    cout << "Salto der \n"<<endl;
-                    _jugador->SetEstado(_jugador->GetSaltarDer());
-                }
-                else if(_jugador->GetDireccionIzq())        // Izquierda
-                {
-                    cout << "Salto izq....\n"<<endl;
-                    _jugador->SetEstado(_jugador->GetSaltarIzq());
+                    _jugador->SetEstado(_jugador->GetSaltar());
+                    _jugador->SetVelocidadSalto(-14.0f);
                 }
             }
             
@@ -153,8 +155,7 @@ namespace Crazy
         if (evento == _input->Evento().KeyReleased)
         {
             // Poner al personaje en reposo
-            if ((_jugador->GetEstado() == _jugador->GetCorrerDer()) ||
-                    (_jugador->GetEstado() == _jugador->GetCorrerIzq()))
+            if ((_jugador->GetEstado() == _jugador->GetCorrer()))
             {
                 _jugador->SetVelocidad(0.0);
                 _jugador->SetEstado(_jugador->GetReposo());
@@ -162,31 +163,45 @@ namespace Crazy
         }
         
         // Pulsar raton
-        if (evento == _input->Evento().MouseButtonPressed)
-        {
+        /*if (evento == _input->Evento().MouseButtonPressed)
+        {*/
             if (_input->RatonIzq())
             {
-                cout << "Raton izquierda: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
+                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+                {
+                    _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                    _jugador->SetEstado(_jugador->GetAtaque1());
+                }
+                //cout << "Angulo"<<_jugador->GetAngulo()<<endl;
             }
             
             if (_input->RatonDer())
             {
-                cout << "Raton derecha: " << _input->GetPosicionRatonX() << ", "<< _input->GetPosicionRatonY()<< endl;
+                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
+                {
+                    _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                    _jugador->SetEstado(_jugador->GetAtaque2());
+                    if(_jugador->AtaqueEspecialActivado()){
+                        _hud->Parpadear(false);
+                        _hud->EnfriamientoVacio();
+                    }
+                        
+                }
             }
-        }
         
-        // Soltar raton
-        if (evento == _input->Evento().MouseButtonReleased)
-        {
-            
-        }
+            // Soltar raton
+            /*if (evento == _input->Evento().MouseButtonReleased)
+            {
+
+            }*/
+        //}
     }
     
     void EstadoJuego::Actualizar(float tiempoActual)
     {
         // Si el personaje esta saltando
         
-        if ((_jugador->GetEstado() == _jugador->GetSaltarDer())
+        /*if ((_jugador->GetEstado() == _jugador->GetSaltarDer())
             || (_jugador->GetEstado() == _jugador->GetSaltarIzq()))
         {
             
@@ -195,6 +210,38 @@ namespace Crazy
             {
                 _jugador->SetEstado(_jugador->GetReposo());
             }*/
+        //}
+        if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+        {
+            
+            if(_input->GetPosicionRatonX()<_jugador->GetPosX() && !_jugador->getDireccion())
+            {
+                _jugador->CambiarDireccion();
+            }
+            else if(_input->GetPosicionRatonX()>_jugador->GetPosX() && _jugador->getDireccion()){
+                _jugador->CambiarDireccion();
+            }
+                
+        }
+        _jugador->Update(_enemigos);
+        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos);
+        for(int i=0;i<_enemigos.size();i++){
+            if(_enemigos[i]->GetVida()<=0){
+                Enemigo *tmp=_enemigos[i];
+                _enemigos.erase(_enemigos.begin()+i);
+                delete tmp;
+            }
+            else{
+            _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+            _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+            }
+        }
+        
+        _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
+        _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
+        if(_jugador->AtaqueEspecialActivado())
+        {
+            _jugador->SetAtaqueEspecial(true);
         }
         
         
@@ -225,9 +272,14 @@ namespace Crazy
         
         _hud->Dibujar();
         
+        for(int i=0;i<_enemigos.size();i++){
+            _enemigos[i]->Dibujar();
+            
+        }
+        
         _jugador->ModificarSprite();
         _jugador->Dibujar();
-        
+                
         _juego->_ventana->Mostrar();
     }
     

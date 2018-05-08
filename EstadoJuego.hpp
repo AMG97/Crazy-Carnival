@@ -3,7 +3,8 @@
 #include "Estado.hpp"
 #include "EstadoPausa.hpp"
 #include "Juego.hpp"
-
+#include "Arma.hpp"
+#include "Enemigo.hpp"
 #include "Player.hpp"
 #include "Hud.hpp"
 #include "Nivel.hpp"
@@ -18,6 +19,7 @@ namespace Crazy
         
         Juego* _juego;
         Player* _jugador;
+        vector<Enemigo*> _enemigos;
         
         Reloj reloj;
         Reloj relojAtaqueEspecial;

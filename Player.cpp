@@ -11,10 +11,17 @@ namespace Crazy
         totalEnfriamiento = 30.0f;
         ataqueEspecial = false;
         direccionIzq = false;
+        Atacado2 = false;
         estado = REPOSO;
         contadorSpriteCorrer = 0;
         contadorSpriteReposo = 0;
         contadorSpriteSalto = 0;
+        contadorSpriteAtaque1=0;
+        contadorSpriteAtaque2=0;
+        angulo=0;
+        velSalto=0;
+        velocidad=0;
+        golpear=false;
         
         posIniX = 60;
         posIniY = _juego->GetAlto()/2;
@@ -23,6 +30,7 @@ namespace Crazy
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
         sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
         sprite.CambiarPosicion(posIniX, posIniY);
+        _arma=new Arma(2,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5, 1.5);
         
         //TO DO: Box2d + façade
@@ -92,6 +100,14 @@ namespace Crazy
         return ataqueEspecial;
     }
     
+    float Player::GetTAtque2()
+    {
+        if(!Atacado2)
+            return 10000;
+        else
+            return tAtaque2.GetSegundos();
+    }
+    
     void Player::Curar(float cura){
         ModificarVida(cura);
     }
@@ -100,6 +116,7 @@ namespace Crazy
     {
         ModificarVida(-danyo);
         ModificarEnfriamiento(danyo * 0.75f);
+        
     }
     
     short int Player::GetEstado()
@@ -107,24 +124,14 @@ namespace Crazy
         return estado;
     }
     
-    short int  Player::GetCorrerDer()
+    short int  Player::GetCorrer()
     {
-        return CORRER_DER;
+        return CORRER;
     }
     
-    short int  Player::GetCorrerIzq()
+    short int  Player::GetSaltar()
     {
-        return CORRER_IZQ;
-    }
-    
-    short int  Player::GetSaltarDer()
-    {
-        return SALTO_DER;
-    }
-    
-    short int  Player::GetSaltarIzq()
-    {
-        return SALTO_IZQ;
+        return SALTO;
     }
     
     short int  Player::GetReposo()
@@ -132,20 +139,29 @@ namespace Crazy
         return REPOSO;
     }
     
+    short int Player::GetAtaque1(){
+        return ATAQUE1;
+    }
+    
+    short int Player::GetAtaque2(){
+        return ATAQUE2;
+    }
+    
     void Player::SetEstado(short int est)
     {
         estado = est;
+        if(estado==ATAQUE2 && AtaqueEspecialActivado())
+            Atacado2=true;
     }
     
-    /*float Player::GetVelocidadSalto()
+    float Player::GetVelocidadSalto()
     {
-        return velocidad;
-    }*/
+        return velSalto;
+    }
     
-    void Player::SetVelocidadSalto(float velS)
+    void Player::SetVelocidadSalto(float v)
     {
-        velSalto = velS;
-        _cuerpo->SetAngularVelocity(_mundo->GetGravity().y + velS);
+        velSalto=v;
     }
     
     void Player::ModificarSprite()
@@ -154,42 +170,101 @@ namespace Crazy
         {
             switch(estado)
             {
-                case CORRER_IZQ:
-                case CORRER_DER:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 65, 80);
+                case CORRER:
+                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
+                    sprite.CambiarOrigen(60/2,80/2);
+                    _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer++;
                     if(contadorSpriteCorrer == 6)
                     {
                         contadorSpriteCorrer = 0;
                     }
+                    if(velocidad==0)
+                    {
+                        contadorSpriteCorrer=0;
+                        Reposo(3);
+                    }
                 break;
 
-                case SALTO_DER:
-                case SALTO_IZQ:
-                    sprite.CambiarTextRect(contadorSpriteSalto*65, 7*80, 65, 90);
-                    contadorSpriteSalto++;
-                    if(contadorSpriteSalto == 3)
+                case SALTO:
+                    sprite.CambiarTextRect(contadorSpriteSalto*70, 570, 70, 90);
+                    sprite.CambiarOrigen(60/2,90/2);
+                    _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
+                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && velSalto>9) || (contadorSpriteSalto==2 && velSalto>11))
+                        contadorSpriteSalto++;
+                    if(velSalto==0)
                     {
-                        contadorSpriteSalto = 0;
+                        contadorSpriteSalto=0;
+                        Reposo(3);
                     }
+                        
                 break;
 
                 case REPOSO:
                     sprite.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
+                    sprite.CambiarOrigen(60/2,80/2);
+                    _arma->ModificarSprite(estado,contadorSpriteReposo,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteReposo++;
                     if(contadorSpriteReposo == 8)
                     {
                         contadorSpriteReposo = 0;
                     }
                 break;
+                
+                case ATAQUE1:
+                        if(contadorSpriteAtaque1==0)
+                        {
+                            sprite.CambiarOrigen(100/2,90/2);
+                            sprite.Mover(0,-22);
+                            golpear=true;
+                        }
+                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 150, 100, 90);
+                        _arma->ModificarSprite(estado,contadorSpriteAtaque1,sprite.GetX(),sprite.GetY(),angulo);
+                        contadorSpriteAtaque1++;                        
+                        if(contadorSpriteAtaque1==6)
+                        {
+                            Reposo(1);
+                        }
+                break;
+                
+                case ATAQUE2:
+                    if(contadorSpriteAtaque2==0)
+                    {
+                        sprite.CambiarOrigen(100/2, 80/2);
+                        sprite.Mover(0,-15);
+                        if(AtaqueEspecialActivado())
+                        {
+                            ataqueEspecial=false;
+                            enfriamiento=0.0f;
+                            tAtaque2.ReiniciarSegundos();
+                        }
+                    }
+                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,360,100,80);
+                    _arma->ModificarSprite(estado,contadorSpriteAtaque2,sprite.GetX(),sprite.GetY(),angulo);
+                    contadorSpriteAtaque2++;
+                    if(contadorSpriteAtaque2==3)
+                    {
+                        _arma->Disparar(angulo);
+                    }
+                    if(contadorSpriteAtaque2==9)
+                    {
+                        Reposo(2);
+                    }
+                    
+                break;
+                    
             }
             relojAnim.ReiniciarSegundos();
         }
     }
     
+    bool Player::getDireccion(){
+        return direccionIzq;
+    }
+    
     void Player::CambiarDireccion()
     {
-        if (((estado == CORRER_IZQ) || (estado == SALTO_IZQ)) 
+        /*if (((estado == CORRER_IZQ) || (estado == SALTO_IZQ)) 
             && (!direccionIzq))
         {
             cout << "Dir IZQ"<<endl;
@@ -200,70 +275,68 @@ namespace Crazy
         {
             cout << "Dir DER"<<endl;
             CambiarDireccionDer();
-        }
-    }
-    
-    b2World* Player::GetMundo()
-    {
-        return _mundo;
-    }
-    
-    b2Body* Player::GetCuerpo()
-    {
-        return _cuerpo;
-    }
-    
-    void Player::SetCuerpo()
-    {
-        _cuerpo = _mundo->CreateBody(&cuerpoDef);
-    }
-    
-    b2BodyDef Player::GetCuerpoDefinicion()
-    {
-        return cuerpoDef;
-    }
-    
-    void Player::SetCuerpoDefinicionPosicion(float32 posX, float32 posY)
-    {
-        cuerpoDef.position = b2Vec2(posX + velocidad, posY + _cuerpo->GetAngularVelocity());
-    }
-       
-    b2Fixture* Player::GetFixtureCuerpo()
-    {
-        return _fixCuerpo;
-    }
-    
-    b2FixtureDef Player::GetFixtureCuerpoDefinicion()
-    {
-        return fixCuerpoDef;
-    }
-    b2PolygonShape Player::GetForma()
-    {
-        return formaCuerpo;
-    }
-    
-    void Player::SetAhora()
-    {
-        if (!guardado)
+        }*/
+        if(direccionIzq)
         {
-            xAhora = sprite.GetX();
-            yAhora = sprite.GetY();
-            guardado = true;
+            CambiarDireccionDer();
         }
+        else
+        {
+            CambiarDireccionIzq();
+        }
+        _arma->CambiarDireccion();
     }
     
-    float Player::GetXAhora()
-    {
-        return xAhora;
+    void Player::Reposo(int n){
+        sprite.CambiarTextRect(0,0,60,80);
+        sprite.CambiarOrigen(60/2,80/2);
+        estado=REPOSO;
+        if(n==1)
+        {
+            contadorSpriteAtaque1 = 0;
+            sprite.Mover(0,22);
+        }
+        else if(n==2)
+        {
+            contadorSpriteAtaque2=0;
+            sprite.Mover(0, 15);
+        }
+        _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),0);
     }
     
-    float Player::GetYAhora()
+    void Player::Dibujar()
     {
-        return yAhora;
+        _juego->_ventana->Dibujar(sprite);
+        _arma->Dibujar();
     }
     
-    void Player::Saltar()
+    void Player::Update(vector<Enemigo*> e)
     {
-        sprite.move(0, velSalto);
+        if(velSalto!=0)
+        {
+            velSalto=velSalto+0.5;
+            if(velSalto==0)
+                velSalto=velSalto+0.5;
+        }
+        if(velSalto>13.6)
+            velSalto=0;
+        if(velocidad!=0){
+            if(velocidad>0.1)
+                velocidad=velocidad-2.f;
+            else if(velocidad<0.1)
+                velocidad=velocidad+2.f;
+        }
+        if(abs(velocidad)<0.2)
+            velocidad=0;
+        sprite.Mover(velocidad,velSalto);
+        if(contadorSpriteAtaque1==3 && golpear){
+            for(int j=0;j<e.size();j++){
+                if(sprite.Interseccion(e[j]->GetSprite()))
+                {
+                    e[j]->RecibirDanyo(_arma->GetDanyo());
+                    golpear=false;
+                }
+            }
+        }
     }
 }

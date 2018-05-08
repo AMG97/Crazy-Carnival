@@ -217,6 +217,14 @@ namespace Motor
     {
         move(v, 0);
     }
+    void SpriteM::Mover(float x,float y)
+    {
+        move(x,y);
+    } 
+    bool SpriteM::Interseccion(SpriteM s)
+    {
+        return getGlobalBounds().intersects(s.getGlobalBounds());
+    }
 
 // Ventana
     Ventana* Ventana::_pinstance=0;

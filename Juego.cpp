@@ -38,6 +38,11 @@ namespace Crazy
         recursos.CargarTextura("Objetos","resources/SpritesObjetos.png");
         recursos.CargarTextura("Playa","resources/SpritesPlaya.png");
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
+        recursos.CargarTextura("Espada1","resources/espada1.png");
+        recursos.CargarTextura("Espada2","resources/espada2.png");
+        recursos.CargarTextura("Enemigo-Pistola1","resources/enemigo-pistola.png");
+        recursos.CargarTextura("Puñal","resources/puñal.png");
+        recursos.CargarTextura("Bala","resources/bala.png");
         //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");
         
         maquina.Anyadir(new EstadoMenu(), true);
