@@ -49,6 +49,7 @@ namespace Crazy
     
     void EstadoJuego::ManejarEventos()
     {
+        cout<<"Pero Entras?"<<endl;
         teclaPulsada = _input->BucleEventos();
         
         if (teclaPulsada)
@@ -123,7 +124,7 @@ namespace Crazy
                     //*tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                     _jugador->SetEstadoPersonaje(2);
                     _jugador->SetVelocidad(-2.0);
-                    this->Actualizar(relojDesplazamiento.GetSegundos());
+                    //this->Actualizar(relojDesplazamiento.GetSegundos());
                 }
                 else
                 {
@@ -131,7 +132,7 @@ namespace Crazy
                 }
                 //teclaPulsada = false;
             }
-            
+            teclaPulsada = false;
             if (_input->GetTeclas().Der)
             {
                 if(_jugador->GetEstadoPersonaje() != 3 || _jugador->GetEstadoPersonaje() != 4)
@@ -139,7 +140,7 @@ namespace Crazy
                     //*tiempoDesplazamiento = relojDesplazamiento->getElapsedTime();
                     _jugador->SetEstadoPersonaje(1);
                     _jugador->SetVelocidad(2.0);
-                    this->Actualizar(relojDesplazamiento.GetSegundos());
+                    //this->Actualizar(relojDesplazamiento.GetSegundos());
                 }
                 else
                 {
@@ -147,7 +148,7 @@ namespace Crazy
                 }
                 //teclaPulsada = false;
             }
-            
+            teclaPulsada = false;
             if (_input->GetTeclas().Arriba)
             {
                 contador = 0;  
@@ -163,26 +164,28 @@ namespace Crazy
                     }
                 }
             }
-            
+            cout<<"esto está bien"<<endl;
             teclaPulsada = false;
         }
         else
         {
+            cout<<"esto está mal"<<endl;
             if(contador == 0 && (_jugador->GetEstadoPersonaje() == 4 || _jugador->GetEstadoPersonaje() == 3))
             {
                 _jugador->SetVelocidadSalto(-36.0 + contador);
                 this->Actualizar(relojDesplazamiento.GetSegundos());
+                //this->Dibujar(relojDesplazamiento.GetSegundos());
                 _jugador->ModificarSprite();
             }
             
-            else if(contador == 0 && (!_input->GetTeclas().Izq && !_input->GetTeclas().Der))
+            /*else if(contador == 0 && (_input->GetTeclas().Izq || _input->GetTeclas().Der))
             {
                 _jugador->SetEstadoPersonaje(0);
                 _jugador->SetVelocidad(0.0);
-            }
+            }*/
             
-            while((_jugador->GetSpriteM().GetY() < 360 || _jugador->GetVelocidad() != 0.0)){
-                if(_jugador->GetVelocidad() != 0.0 && (_jugador->GetEstadoPersonaje() == 0))
+            while(_jugador->GetSpriteM().GetY() < 360){
+                if(_jugador->GetVelocidad() != 0.0 && _jugador->GetEstadoPersonaje() == 0)
                 {
                     _jugador->SetVelocidad(0.0);
                 }                     
@@ -199,6 +202,10 @@ namespace Crazy
                     }
                     contador += 2;
                 }
+                /*else
+                {
+                    _jugador->SetVelocidad(0.0);
+                }*/
                 this->Actualizar(relojDesplazamiento.GetSegundos());
                 this->Dibujar(relojDesplazamiento.GetSegundos());
                 if(_jugador->GetCuerpo()->GetPosition().y >= 360 && (!_input->GetTeclas().Izq && !_input->GetTeclas().Der))
@@ -240,6 +247,7 @@ namespace Crazy
     
     void EstadoJuego::Actualizar(float tiempoActual)
     {
+        cout<<"falla"<<endl;
         if(tiempoActual >= 1/15)
         {
             _jugador->SetCuerpoDefinicionPosicion(_jugador->GetCuerpo()->GetPosition().x, _jugador->GetCuerpo()->GetPosition().y);
