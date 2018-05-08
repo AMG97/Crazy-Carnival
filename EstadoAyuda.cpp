@@ -52,15 +52,13 @@ namespace Crazy
     
     void EstadoAyuda::ManejarEventos()
     {
-        teclaPulsada = _input->BucleEventos();
-        
-        if (teclaPulsada) {
-            if (_input->GetTeclas().BackSpace
-                || _input->GetTeclas().Escape)
+        if (_input->GetTipoEvento() == _input->Evento().KeyPressed)
+        {
+            if (_input->BackSpace()
+                || _input->Escape())
             {
                 Atras();
             }
-            teclaPulsada = false;
         }
     }
     

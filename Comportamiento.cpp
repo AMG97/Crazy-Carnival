@@ -4,7 +4,7 @@ namespace Crazy
 {
     Comportamiento::Comportamiento()
     {
-
+        _juego = Juego::Instance();
     }
 
     float Comportamiento::GetVida()
@@ -34,6 +34,16 @@ namespace Crazy
             vida = totalVida;
         }
     }
+    
+    float Comportamiento::GetVelocidad()
+    {
+        return velocidad;
+    }
+    
+    void Comportamiento::SetVelocidad(float vel)
+    {
+        velocidad = vel;
+    }
 
     float Comportamiento::GetPosIniX()
     {
@@ -57,12 +67,12 @@ namespace Crazy
     
     float Comportamiento::GetPosX()
     {
-        return posX;
+        return sprite.GetX();
     }
 
     float Comportamiento::GetPosY()
     {
-        return posY;
+        return sprite.GetY();
     }
 
     void Comportamiento::SetPosX(float x)
@@ -75,4 +85,35 @@ namespace Crazy
         posY = y;
     }
     
+    void Comportamiento::Dibujar()
+    {
+        _juego->_ventana->Dibujar(sprite);
+    }
+    
+    void Comportamiento::CambiarDireccionDer()
+    {
+        direccionIzq = false;
+        sprite.EscalarProporcion(-1.0, 1.0);
+    }
+    
+    void Comportamiento::CambiarDireccionIzq()
+    {
+        direccionIzq = true;
+        sprite.EscalarProporcion(-1.0, 1.0);
+    }
+    
+    bool Comportamiento::GetDireccionIzq()
+    {
+        return direccionIzq;
+    }
+    
+    void Comportamiento::Mover()
+    {
+        sprite.Mover(velocidad);
+    }
+    
+    void Comportamiento::CambiarPosicion(float x, float y)
+    {
+        sprite.CambiarPosicion(x, y);
+    }
 }
