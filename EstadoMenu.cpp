@@ -155,7 +155,7 @@ namespace Crazy
                 _juego->maquina.Anyadir(EstadoMenuPartidas::Instance());
                 break;
             case AYUDA:
-                _juego->maquina.Anyadir(EstadoAyuda::Instance());
+                _juego->maquina.Anyadir(EstadoAyuda::Instance(), false);
                 break;
             case SALIR:
                 _juego->_ventana->Cerrar();

@@ -26,6 +26,7 @@ namespace Crazy
         Texto t_titulo;
         Texto t_atras;
         SpriteM flecha;
+        SpriteM ayuda;
         
         bool teclaPulsada;
         void Atras();

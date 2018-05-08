@@ -45,7 +45,10 @@ namespace Crazy
         recursos.CargarTextura("Bala","resources/bala.png");
         //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");
         
-        maquina.Anyadir(new EstadoMenu(), true);
+        // Temporal
+        recursos.CargarTextura("Ayuda","resources/ayuda.png");
+        
+        maquina.Anyadir(EstadoMenu::Instance());
         
         while (_ventana->EstaAbierta())
         {

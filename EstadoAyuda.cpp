@@ -48,6 +48,9 @@ namespace Crazy
         flecha.Rotar(180.0f);
         flecha.CambiarPosicion(60, t_atras.GetY()-30);
         flecha.Escalar(70.0f, 70.0f); // Escalar al 70%
+        
+        ayuda.CambiarTextura(_juego->recursos.GetTextura("Ayuda"));
+        ayuda.CambiarPosicion(250, t_titulo.GetY()+100);
     }
     
     void EstadoAyuda::ManejarEventos()
@@ -75,11 +78,13 @@ namespace Crazy
         _juego->_ventana->Dibujar(t_atras);
         _juego->_ventana->Dibujar(flecha);
         
+        _juego->_ventana->Dibujar(ayuda);
+        
         _juego->_ventana->Mostrar();
     }
     
     void EstadoAyuda::Atras()
     {
-        _juego->maquina.Anyadir(EstadoMenu::Instance());
+        _juego->maquina.Eliminar();
     }
 }
