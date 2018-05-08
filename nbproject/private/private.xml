@@ -6,18 +6,15 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Estado.hpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Box2D/Box2D/Box2D.h</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoMenu.cpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Juego.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/main.cpp</file>
             <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadosManager.hpp</file>
             <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoMenu.hpp</file>
-            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/main.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Box2D/Box2D/Box2D.h</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Estado.hpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Juego.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/Motor.cpp</file>
+            <file>file:/home/fv/NetBeansProjects/Crazy-Carnival/EstadoMenu.cpp</file>
         </group>
->>>>>>> desarrollo/feature/input
     </open-files>
 </project-private>

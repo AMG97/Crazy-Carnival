@@ -135,7 +135,8 @@ namespace Crazy{
         }
         
         camera = Camara::Instance();
-        camera->CrearCamara(0,504,800,800);
+        //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
+        camera->CrearCamara(0,0,1024,720);
         instance->_ventana->setCamara(*camera);
         
         

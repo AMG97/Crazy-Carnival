@@ -218,39 +218,6 @@ namespace Motor
         move(v, 0);
     }
 
-// Cámara
-    Camara* Camara::_pinstance2=0;
-    
-    Camara* Camara::Instance()
-    {
-        if (_pinstance2 == 0)
-        {
-            _pinstance2 = new Camara();
-        }
-        return _pinstance2;
-    }
-    
-    Camara::~Camara()
-    {
-        delete _pinstance2;
-        _pinstance2 = NULL;
-    }
-    
-    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
-    {
-        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
-    }
-            
-    sf::View& Camara::GetCamara()
-    {
-        return camara;
-    }
-    
-    ///Define el tamaño de la cámara
-    void Camara::setTam(float x, float y) {
-        camara.setSize(x,y);
-    }
-    
 // Ventana
     Ventana* Ventana::_pinstance=0;
     
@@ -269,8 +236,7 @@ namespace Motor
         _pinstance = NULL;
     }
     
-    void Ventana::CrearVentana(int ancho, int alto, string titulo)
-    {
+    void Ventana::CrearVentana(int ancho, int alto, string titulo) {
         window.create(sf::VideoMode(ancho, alto), titulo);
 
         //Activa la sincronizacion vertical (60 fps)
@@ -323,49 +289,43 @@ namespace Motor
     
 // Cámara
     Camara* Camara::_pinstance2=0;
+    
     Camara* Camara::Instance()
-    
     {
-        {
         if (_pinstance2 == 0)
+        {
             _pinstance2 = new Camara();
-    }
-        return _pinstance2;
         }
+        return _pinstance2;
+    }
+    
     Camara::~Camara()
-    
     {
-        _pinstance2 = NULL;
         delete _pinstance2;
+        _pinstance2 = NULL;
     }
-    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
     
+    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
     {
-    }
         camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
-    sf::View& Camara::GetCamara()
+    }
             
+    sf::View& Camara::GetCamara()
     {
         return camara;
     }
-    ///Define el tamaño de la cámara
     
-        camara.setSize(x,y);
+    ///Define el tamaño de la cámara
     void Camara::setTam(float x, float y) {
+        camara.setSize(x,y);
     }
     
     void Camara::mover(int x, int y) {
-    }
         camara.move(x,y);
+    }
 
     void Camara::setCentro(int x, int y) {
         camara.setCenter(x,y);
-
-    }
-    
-
-    void Ventana::setBackground(int r, int g, int b) {
-        background = sf::Color(r,g,b);
     }
 
 // Input

@@ -46,10 +46,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Motor.o \
-<<<<<<< HEAD
 	${OBJECTDIR}/Nivel.o \
-=======
->>>>>>> desarrollo/feature/input
 	${OBJECTDIR}/Player.o
 
 
@@ -132,14 +129,11 @@ ${OBJECTDIR}/Motor.o: Motor.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Motor.o Motor.cpp
 
-<<<<<<< HEAD
 ${OBJECTDIR}/Nivel.o: Nivel.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nivel.o Nivel.cpp
 
-=======
->>>>>>> desarrollo/feature/input
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
