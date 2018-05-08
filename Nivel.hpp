@@ -3,7 +3,7 @@
 #include "tinyxml.h"
 #include "tinystr.h"
 
-#define INT_MAX 2147483648
+#define INT_MAX_VALUE 2147483648
 
 using namespace std;
 

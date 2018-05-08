@@ -92,7 +92,7 @@ namespace Crazy{
                                 cout<<value<<endl;
                             }
                             
-                            if(value>50000)value = value-INT_MAX;
+                            if(value>50000)value = value-INT_MAX_VALUE;
                             
                             
                             if(value==0) tilemap[name][i][j] = 0;
