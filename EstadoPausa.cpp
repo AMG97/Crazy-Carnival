@@ -168,7 +168,7 @@ namespace Crazy
                 break;
             case OP1:
                 _juego->maquina.Eliminar();
-                _juego->maquina.Anyadir(new EstadoMenu());
+                _juego->maquina.Anyadir(EstadoMenu::Instance());
                 break;
             case OP2:
                 abandonar = false;

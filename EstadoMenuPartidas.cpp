@@ -174,7 +174,7 @@ namespace Crazy
     
     void EstadoMenuPartidas::NuevaPartida()
     {
-        _juego->maquina.Anyadir(new EstadoJuego());
+        _juego->maquina.Anyadir(EstadoJuego::Instance());
     }
     
     void EstadoMenuPartidas::CargarPartida()
@@ -189,11 +189,11 @@ namespace Crazy
     
     void EstadoMenuPartidas::Estadisticas()
     {
-        _juego->maquina.Anyadir(new EstadoEstadisticas(), false);
+        _juego->maquina.Anyadir(EstadoEstadisticas::Instance(), false);
     }
     
     void EstadoMenuPartidas::Atras()
     {
-        _juego->maquina.Anyadir(new EstadoMenu());
+        _juego->maquina.Anyadir(EstadoMenu::Instance());
     }
 }

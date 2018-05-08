@@ -37,6 +37,8 @@ namespace Crazy
         void Dibujar(float tiempoActual);
         void Pausar();
         void Reanudar();
+        b2World* GetMundo();
+        void SetMundo(b2World* world);
         
         ~EstadoJuego();
     private:
@@ -47,5 +49,6 @@ namespace Crazy
         
         Hud* _hud;
         Nivel* _level;
+        b2World* _mundo;
     };
 }

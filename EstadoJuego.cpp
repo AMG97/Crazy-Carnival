@@ -5,8 +5,6 @@ namespace Crazy
     EstadoJuego::EstadoJuego()
     {
         _juego = Juego::Instance();
-        _level = new Nivel();
-        _level->cargarNivel(1);
     }
     
     EstadoJuego* EstadoJuego::_pinstance=0;
@@ -41,6 +39,8 @@ namespace Crazy
     
     void EstadoJuego::Init()
     {
+        _mundo = new b2World(b2Vec2(0.0, 9.8));
+        
         _input = new Input();
         
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
@@ -49,6 +49,9 @@ namespace Crazy
         Enemigo* e = new Enemigo();
         _enemigos.push_back(e);
         teclaPulsada = false;
+        
+        _level = new Nivel();
+        _level->cargarNivel(1);
         
         /*reloj = new sf::Clock();
         relojAtaqueEspecial = new sf::Clock();
@@ -292,4 +295,14 @@ namespace Crazy
     {
         cout << "REANUDADO";
     }
+
+    b2World* EstadoJuego::GetMundo() {
+        return _mundo;
+    }
+
+    void EstadoJuego::SetMundo(b2World* world) {
+        _mundo = world;
+    }
+
+
 }

@@ -53,8 +53,6 @@ namespace Crazy
         
         
         // Box2D
-        b2World* GetMundo();
-        void SetMundo();
         b2Body* GetCuerpo();
         void SetCuerpo();
         b2BodyDef GetCuerpoDefinicion();

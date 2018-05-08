@@ -2,6 +2,7 @@
 #include "Juego.hpp"
 #include "tinyxml.h"
 #include "tinystr.h"
+#include "box.h"
 
 #define INT_MAX_VALUE 2147483648
 
@@ -22,8 +23,9 @@ class Nivel {
         map<string,SpriteM***> tilemap;
         vector<string> layers;
         int width, height;
-        Juego* instance;
-        Camara* camera;
+        Juego* _instance;
+        Camara* _camera;
+        b2World* _mundo;
     };
 
 }

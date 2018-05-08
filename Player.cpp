@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Motor.hpp"
+#include "EstadoJuego.hpp"
 
 namespace Crazy
 {
@@ -34,7 +35,7 @@ namespace Crazy
         sprite.EscalarProporcion(1.5, 1.5);
         
         //TO DO: Box2d + façade
-        _mundo = new b2World(b2Vec2(0.0, 9.8));
+        _mundo = EstadoJuego::Instance()->GetMundo();
         cuerpoDef.type = b2BodyType::b2_dynamicBody;
         cuerpoDef.position = b2Vec2(sprite.GetX(), sprite.GetY());
         _cuerpo = _mundo->CreateBody(&cuerpoDef);

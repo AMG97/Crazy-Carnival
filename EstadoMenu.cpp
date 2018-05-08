@@ -152,10 +152,10 @@ namespace Crazy
         switch (opcion)
         {
             case JUGAR:
-                _juego->maquina.Anyadir(new EstadoMenuPartidas());
+                _juego->maquina.Anyadir(EstadoMenuPartidas::Instance());
                 break;
             case AYUDA:
-                _juego->maquina.Anyadir(new EstadoAyuda());
+                _juego->maquina.Anyadir(EstadoAyuda::Instance());
                 break;
             case SALIR:
                 _juego->_ventana->Cerrar();

@@ -80,6 +80,6 @@ namespace Crazy
     
     void EstadoAyuda::Atras()
     {
-        _juego->maquina.Anyadir(new EstadoMenu());
+        _juego->maquina.Anyadir(EstadoMenu::Instance());
     }
 }
