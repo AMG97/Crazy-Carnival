@@ -17,7 +17,7 @@ namespace Crazy
         void Iniciar();
         int GetAncho();
         int GetAlto();
-        string GetTitulo();
+        std::string GetTitulo();
         ~Juego();
         
     private:
@@ -28,7 +28,7 @@ namespace Crazy
         
         int ancho;
         int alto;
-        string titulo;
+        std::string titulo;
         float tiempoActual;
         Reloj reloj;
     };

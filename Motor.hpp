@@ -7,6 +7,7 @@ using namespace std;
 
 namespace Motor
 {
+    
     class Reloj : public sf::Clock {
     public:
         Reloj() { };
@@ -83,6 +84,10 @@ namespace Motor
         void CrearCamara(float centroX, float centroY, float ancho, float alto);
         sf::View& GetCamara();
         void setTam(float x, float y);
+        void mover(int x, int y);
+        void setCentro(int x, int y);
+        //vector2 getCentro();
+        
 
     private:
         Camara() { };
@@ -118,7 +123,6 @@ namespace Motor
         
         sf::RenderWindow window;
         sf::Color background;
-        
     };
     
     class Input

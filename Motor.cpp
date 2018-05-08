@@ -316,7 +316,54 @@ namespace Motor
     {
         return window;
     }
+    void Ventana::setBackground(int r, int g, int b) {
+        background = sf::Color(r,g,b);
+    }
+
     
+// Cámara
+    Camara* Camara::_pinstance2=0;
+    Camara* Camara::Instance()
+    
+    {
+        {
+        if (_pinstance2 == 0)
+            _pinstance2 = new Camara();
+    }
+        return _pinstance2;
+        }
+    Camara::~Camara()
+    
+    {
+        _pinstance2 = NULL;
+        delete _pinstance2;
+    }
+    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    
+    {
+    }
+        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+    sf::View& Camara::GetCamara()
+            
+    {
+        return camara;
+    }
+    ///Define el tamaño de la cámara
+    
+        camara.setSize(x,y);
+    void Camara::setTam(float x, float y) {
+    }
+    
+    void Camara::mover(int x, int y) {
+    }
+        camara.move(x,y);
+
+    void Camara::setCentro(int x, int y) {
+        camara.setCenter(x,y);
+
+    }
+    
+
     void Ventana::setBackground(int r, int g, int b) {
         background = sf::Color(r,g,b);
     }

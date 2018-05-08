@@ -16,6 +16,10 @@
       <itemPath>Hud.hpp</itemPath>
       <itemPath>Juego.hpp</itemPath>
       <itemPath>Motor.hpp</itemPath>
+<<<<<<< HEAD
+      <itemPath>Nivel.hpp</itemPath>
+=======
+>>>>>>> desarrollo/feature/input
       <itemPath>Player.hpp</itemPath>
       <itemPath>box.h</itemPath>
     </logicalFolder>
@@ -37,6 +41,10 @@
       <itemPath>Hud.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
       <itemPath>Motor.cpp</itemPath>
+<<<<<<< HEAD
+      <itemPath>Nivel.cpp</itemPath>
+=======
+>>>>>>> desarrollo/feature/input
       <itemPath>Player.cpp</itemPath>
       <itemPath>box.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -138,6 +146,13 @@
       </item>
       <item path="Motor.hpp" ex="false" tool="3" flavor2="0">
       </item>
+<<<<<<< HEAD
+      <item path="Nivel.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Nivel.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+=======
+>>>>>>> desarrollo/feature/input
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Player.hpp" ex="false" tool="3" flavor2="0">
@@ -215,10 +230,21 @@
       </item>
       <item path="Motor.hpp" ex="false" tool="3" flavor2="0">
       </item>
+<<<<<<< HEAD
+      <item path="Nivel.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Nivel.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Player.hpp" ex="false" tool="3" flavor2="0">
       </item>
+=======
+      <item path="Player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Player.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+>>>>>>> desarrollo/feature/input
       <item path="box.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
