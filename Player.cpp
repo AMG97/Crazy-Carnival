@@ -219,7 +219,7 @@ namespace Crazy
                             sprite.Mover(0,-22);
                             golpear=true;
                         }
-                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 150, 100, 90);
+                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 90);
                         _arma->ModificarSprite(estado,contadorSpriteAtaque1,sprite.GetX(),sprite.GetY(),angulo);
                         contadorSpriteAtaque1++;                        
                         if(contadorSpriteAtaque1==6)
