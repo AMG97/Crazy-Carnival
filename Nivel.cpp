@@ -178,15 +178,15 @@ namespace Crazy{
         if(_jugadorX < 500)
         {
             if(_jugadorY <= 40*30 && _jugadorY >= -40*30){
-                _camera->setCentro(500,_jugadorY-3*30);
+                _camera->setCentro(500,_jugadorY-8*30);
             }
             else if(_jugadorY > 40*30)
             {
-                _camera->setCentro(500,43*30);
+                _camera->setCentro(500,43*30-8*30);
             }
             else if(_jugadorY < -40*30)
             {
-                _camera->setCentro(500,-43*30);
+                _camera->setCentro(500,-43*30-8*30);
             }
         }
         if(_jugadorX > 10000)
