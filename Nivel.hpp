@@ -21,6 +21,8 @@ class Nivel {
         void clear();
         void iniciarFisicas();
         void setPosCamara(float _jugadorX, float _jugadorY);
+        int getAnchura();
+        int getAltura();
         Camara * getCamara();
     private:
         map<string,SpriteM***> tilemap;

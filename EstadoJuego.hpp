@@ -31,6 +31,8 @@ namespace Crazy
         bool inercia;
         int contador;
         
+        Nivel* _level;
+        
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
@@ -48,7 +50,7 @@ namespace Crazy
         bool teclaPulsada;
         
         Hud* _hud;
-        Nivel* _level;
         b2World* _mundo;
+        
     };
 }

@@ -23,9 +23,9 @@ namespace Crazy
         velSalto=0;
         velocidad=0;
         golpear=false;
-        
         posIniX = 240;
-        posIniY = 750;
+        posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-1;
+        cout<<"PosicionY"<<posIniY<<endl;
         
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
