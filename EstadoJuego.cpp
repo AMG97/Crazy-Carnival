@@ -47,8 +47,10 @@ namespace Crazy
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
         _jugador = new Player("Espadachina");
         _hud = new Hud();
-        Enemigo* e = new Enemigo();
+        Enemigo* e = new Enemigo(0);
+        Enemigo* e2 = new Enemigo(1);
         _enemigos.push_back(e);
+        _enemigos.push_back(e2);
         
         teclaPulsada = false;
         
