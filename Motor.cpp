@@ -336,6 +336,23 @@ namespace Motor
         camara.setCenter(x,y);
     }
 
+    int Camara::getX() {
+        return camara.getCenter().x;
+    }
+
+    int Camara::getY() {
+        return camara.getCenter().y;
+    }
+    
+    float Camara::getHeight() {
+        return camara.getSize().y;
+    }
+
+    float Camara::getWidth() {
+        return camara.getSize().x;
+    }
+
+
 // Input
     Input::Input()
     {
