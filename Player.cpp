@@ -265,18 +265,7 @@ namespace Crazy
     
     void Player::CambiarDireccion()
     {
-        /*if (((estado == CORRER_IZQ) || (estado == SALTO_IZQ)) 
-            && (!direccionIzq))
-        {
-            cout << "Dir IZQ"<<endl;
-            CambiarDireccionIzq();
-        }
-        else if (((estado == CORRER_DER) || (estado == SALTO_DER)) 
-            && (direccionIzq))
-        {
-            cout << "Dir DER"<<endl;
-            CambiarDireccionDer();
-        }*/
+        
         if(direccionIzq)
         {
             CambiarDireccionDer();

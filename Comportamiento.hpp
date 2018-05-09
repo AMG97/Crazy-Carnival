@@ -27,7 +27,7 @@ namespace Crazy
         void SetPosX(float x);
         void SetPosY(float y);
         
-        void Dibujar();
+        virtual void Dibujar()=0;
         virtual void ModificarSprite() = 0;
         void CambiarDireccionDer();
         void CambiarDireccionIzq();
