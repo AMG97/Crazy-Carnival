@@ -75,36 +75,7 @@ namespace Crazy
                 Pausar();
             }
             
-            if (_input->Der())
-            {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
-                {
-                    _jugador->SetEstado(_jugador->GetCorrer());
-                }
-                //_jugador->CambiarDireccion();
-                _jugador->SetVelocidad(6.0f);
-            }
-
-            if (_input->Izq())
-            {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
-                {
-                _jugador->SetEstado(_jugador->GetCorrer());
-                }
-                //_jugador->CambiarDireccion();
-                _jugador->SetVelocidad(-6.0f);
-            }
-            
-            if(_input->Arriba())
-            {
-                if(_jugador->GetEstado()!=_jugador->GetSaltar() && _jugador->GetVelocidadSalto()==0 && _jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
-                {
-                    _jugador->SetEstado(_jugador->GetSaltar());
-                    _jugador->SetVelocidadSalto(-14.0f);
-                }
-            }
-            
-            
+             
             // Pruebas
             if (_input->D())
             {
@@ -154,20 +125,37 @@ namespace Crazy
             }
         }
         
-        // Soltar tecla
-        if (evento == _input->Evento().KeyReleased)
-        {
-            // Poner al personaje en reposo
-            if ((_jugador->GetEstado() == _jugador->GetCorrer()))
+        if (_input->Der())
             {
-                _jugador->SetVelocidad(0.0);
-                _jugador->SetEstado(_jugador->GetReposo());
+                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
+                {
+                    _jugador->SetEstado(_jugador->GetCorrer());
+                }
+                //_jugador->CambiarDireccion();
+                _jugador->SetVelocidad(6.0f);
             }
-        }
+
+            if (_input->Izq())
+            {
+                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
+                {
+                _jugador->SetEstado(_jugador->GetCorrer());
+                }
+                //_jugador->CambiarDireccion();
+                _jugador->SetVelocidad(-6.0f);
+            }
+            
+            if(_input->Arriba())
+            {
+                if(_jugador->GetEstado()!=_jugador->GetSaltar() && _jugador->GetVelocidadSalto()==0 && _jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+                {
+                    _jugador->SetEstado(_jugador->GetSaltar());
+                    _jugador->SetVelocidadSalto(-14.0f);
+                }
+            }
+           
         
-        // Pulsar raton
-        /*if (evento == _input->Evento().MouseButtonPressed)
-        {*/
+        
             if (_input->RatonIzq())
             {
                 if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
@@ -191,13 +179,6 @@ namespace Crazy
                         
                 }
             }
-        
-            // Soltar raton
-            /*if (evento == _input->Evento().MouseButtonReleased)
-            {
-
-            }*/
-        //}
     }
     
     void EstadoJuego::Actualizar(float tiempoActual)
