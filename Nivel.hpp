@@ -19,6 +19,7 @@ class Nivel {
         void update();
         void draw(string capa);
         void clear();
+        void iniciarFisicas();
     private:
         map<string,SpriteM***> tilemap;
         vector<string> layers;
@@ -26,6 +27,9 @@ class Nivel {
         Juego* _instance;
         Camara* _camera;
         b2World* _mundo;
+        vector<b2Body*> collisions;
+        b2FixtureDef ground_fixdef;
+        
     };
 
 }
