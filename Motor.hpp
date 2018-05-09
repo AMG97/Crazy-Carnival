@@ -88,7 +88,10 @@ namespace Motor
         void setTam(float x, float y);
         void mover(int x, int y);
         void setCentro(int x, int y);
-        //vector2 getCentro();
+        int getX();
+        int getY();
+        float getHeight();
+        float getWidth();
         
 
     private:

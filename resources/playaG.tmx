@@ -2,7 +2,7 @@
 <map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="left-up" width="240" height="30" tilewidth="48" tileheight="48" backgroundcolor="#55aaff" nextobjectid="1">
  <tileset firstgid="1" source="SpritesPlaya.tsx"/>
  <tileset firstgid="442" source="objects.tsx"/>
- <layer name="Fondo" width="240" height="30">
+ <layer name="Fondo" width="240" height="30" visible="0">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -7206,7 +7206,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Trasera" width="240" height="30">
+ <layer name="Trasera" width="240" height="30" visible="0">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -28818,7 +28818,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <layer name="Delante" width="240" height="30">
+ <layer name="Delante" width="240" height="30" visible="0">
   <data>
    <tile gid="0"/>
    <tile gid="0"/>
