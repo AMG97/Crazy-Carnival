@@ -141,9 +141,9 @@ namespace Crazy
         _juego->_ventana->Dibujar(t_cargar);
         _juego->_ventana->Dibujar(t_borrar);
         _juego->_ventana->Dibujar(t_estadisticas);
-        _juego->_ventana->Dibujar(flecha);
+        _juego->_ventana->DibujarC(flecha);
         _juego->_ventana->Dibujar(t_atras);
-        _juego->_ventana->Dibujar(flechaAtras);
+        _juego->_ventana->DibujarC(flechaAtras);
         
         _juego->_ventana->Mostrar();
     }

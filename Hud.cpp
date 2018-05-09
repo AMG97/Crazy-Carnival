@@ -6,6 +6,7 @@ namespace Crazy
     {
         //Inicializar variables
         _juego = Juego::Instance();
+        _camara = Camara::Instance();
         contrarreloj = true;
         elixir = true;
         ataqueEspecial = true;
@@ -86,17 +87,17 @@ namespace Crazy
     
     void Hud::Dibujar()
     {
-        _juego->_ventana->Dibujar(spVida);
-        _juego->_ventana->Dibujar(spEnfriamiento);
-        _juego->_ventana->Dibujar(spRecipVida);
+        _juego->_ventana->DibujarB(spVida, *_camara);
+        _juego->_ventana->DibujarB(spEnfriamiento, *_camara);
+        _juego->_ventana->DibujarB(spRecipVida, *_camara);
         
         if(elixir)
-            _juego->_ventana->Dibujar(spElixir);
+            _juego->_ventana->DibujarB(spElixir, *_camara);
         if(contrarreloj)
         {
             for(int i = 0; i < 5; i++)
             {
-                _juego->_ventana->Dibujar(spContador[i]);
+                _juego->_ventana->DibujarB(spContador[i], *_camara);
             }
         }
     }

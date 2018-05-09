@@ -20,6 +20,8 @@ class Nivel {
         void draw(string capa);
         void clear();
         void iniciarFisicas();
+        void setPosCamara(float _jugadorX, float _jugadorY);
+        Camara * getCamara();
     private:
         map<string,SpriteM***> tilemap;
         vector<string> layers;

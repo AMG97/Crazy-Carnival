@@ -72,7 +72,7 @@ namespace Crazy
         
         _juego->_ventana->Dibujar(t_titulo);
         _juego->_ventana->Dibujar(t_atras);
-        _juego->_ventana->Dibujar(flecha);
+        _juego->_ventana->DibujarC(flecha);
         
         _juego->_ventana->Mostrar();
     }

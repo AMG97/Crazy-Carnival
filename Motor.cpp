@@ -277,7 +277,13 @@ namespace Motor
         window.draw(txt);
     }
     
-    void Ventana::Dibujar(SpriteM sprite)
+     void Ventana::DibujarB(SpriteM sprite, Camara& camara)
+    {
+         sprite.CambiarPosicion(sprite.GetX() + camara.GetCamara().getCenter().x -500, sprite.GetY() + camara.GetCamara().getCenter().y-350);
+        window.draw(sprite);
+    }
+    
+    void Ventana::DibujarC(SpriteM sprite)
     {
         window.draw(sprite);
     }

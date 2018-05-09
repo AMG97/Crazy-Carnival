@@ -25,6 +25,7 @@ namespace Crazy
         
     private:
         Juego* _juego;
+        Camara* _camara;
         SpriteM spRecipVida;
         SpriteM spVida;
         SpriteM spEnfriamiento;

@@ -48,10 +48,12 @@ namespace Crazy
         _hud = new Hud();
         Enemigo* e = new Enemigo();
         _enemigos.push_back(e);
+        
         teclaPulsada = false;
         
         _level = new Nivel();
         _level->cargarNivel(1);
+        //_level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         
         /*reloj = new sf::Clock();
         relojAtaqueEspecial = new sf::Clock();
@@ -198,17 +200,18 @@ namespace Crazy
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
         {
             
-            if(_input->GetPosicionRatonX()<_jugador->GetPosX() && !_jugador->getDireccion())
+            if(_input->GetPosicionRatonX()<_jugador->GetSprite().GetX() && !_jugador->getDireccion())
             {
                 _jugador->CambiarDireccion();
             }
-            else if(_input->GetPosicionRatonX()>_jugador->GetPosX() && _jugador->getDireccion()){
+            else if(_input->GetPosicionRatonX()>_jugador->GetSprite().GetX() && _jugador->getDireccion()){
                 _jugador->CambiarDireccion();
             }
                 
         }
         _jugador->Update(_enemigos);
         _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos);
+        _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         for(int i=0;i<_enemigos.size();i++){
             if(_enemigos[i]->GetVida()<=0){
                 Enemigo *tmp=_enemigos[i];

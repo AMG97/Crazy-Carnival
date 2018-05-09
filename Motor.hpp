@@ -115,7 +115,8 @@ namespace Motor
         void Mostrar();
         void Cerrar();
         void Dibujar(Texto txt);
-        void Dibujar(SpriteM sprite);
+        void DibujarB(SpriteM sprite, Camara& camara);
+        void DibujarC(SpriteM sprite);
         void setCamara(Camara &camara);
         void setBackground(int r, int g, int b);
         sf::RenderWindow& GetVentana();

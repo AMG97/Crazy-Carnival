@@ -135,15 +135,12 @@ namespace Crazy{
                 
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
-            _camera->CrearCamara(0,0,1024,720);
+            _camera->CrearCamara(240,600,_instance->GetAncho(),_instance->GetAlto());
             _instance->_ventana->setCamara(*_camera);
         }else{
             cerr << "Error al cargar el nivel "<<l<<endl;
             exit(0);
         }
-        
-        
-        
         
     }
 
@@ -157,12 +154,61 @@ namespace Crazy{
         for (int i = (_camera->getY()-_camera->getHeight()-1)/48 -1; i < 1+(_camera->getY()+_camera->getHeight())/48; i++) {
             for (int j = (_camera->getX()-_camera->getWidth()-1)/48 -1; j < 1+(_camera->getX()+_camera->getWidth())/48; j++) {
                 if(i>=0&&i<=height && j>=0&&j<=width && tilemap[capa][i][j]!=0)
-                    _instance->_ventana->Dibujar(*tilemap[capa][i][j]);
+                    _instance->_ventana->DibujarC(*tilemap[capa][i][j]);
             }
         }
         cout<<"Sale"<<endl;
     }
-
+    void Nivel::setPosCamara(float _jugadorX, float _jugadorY){
+        
+        if(_jugadorX >= 500 && _jugadorX <= 10000)
+        {
+            if(_jugadorY <= 650 && _jugadorY >= -650){
+                _camera->setCentro(_jugadorX,_jugadorY);
+            }
+            else if(_jugadorY > 650)
+            {
+                _camera->setCentro(_jugadorX,650);
+            }
+            else if(_jugadorY < -650)
+            {
+                _camera->setCentro(_jugadorX,-650);
+            }
+        }
+        if(_jugadorX < 500)
+        {
+            if(_jugadorY <= 650 && _jugadorY >= -650){
+                _camera->setCentro(500,_jugadorY);
+            }
+            else if(_jugadorY > 650)
+            {
+                _camera->setCentro(500,650);
+            }
+            else if(_jugadorY < -650)
+            {
+                _camera->setCentro(500,-650);
+            }
+        }
+        if(_jugadorX > 10000)
+        {
+            if(_jugadorY <= 650 && _jugadorY >= -650){
+                _camera->setCentro(10000,_jugadorY);
+            }
+            else if(_jugadorY > 650)
+            {
+                _camera->setCentro(10000,650);
+            }
+            else if(_jugadorY < -650)
+            {
+                _camera->setCentro(10000,-650);
+            }
+        }
+        _instance->_ventana->setCamara(*_camera);
+    }
+    Camara* Nivel::getCamara(){
+        return _camera;
+    }
+    
 
 
 }

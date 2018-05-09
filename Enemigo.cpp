@@ -6,7 +6,7 @@ namespace Crazy
         sprite.CambiarTextura(_juego->recursos.GetTextura("Enemigo-Pistola1"));
         sprite.CambiarTextRect(0,0,70,80);
         sprite.CambiarOrigen(70/2,80/2+10);
-        sprite.CambiarPosicion(600, _juego->GetAlto()/2);
+        sprite.CambiarPosicion(600, 750);
         _arma=new Arma(0,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5,1.5);
         vida=45.0;
@@ -138,7 +138,7 @@ namespace Crazy
     }
     
     void Enemigo::Dibujar(){
-        _juego->_ventana->Dibujar(sprite);
+        _juego->_ventana->DibujarC(sprite);
         _arma->Dibujar();
     }
     

@@ -24,8 +24,8 @@ namespace Crazy
         velocidad=0;
         golpear=false;
         
-        posIniX = 60;
-        posIniY = _juego->GetAlto()/2;
+        posIniX = 240;
+        posIniY = 750;
         
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
@@ -296,7 +296,7 @@ namespace Crazy
     
     void Player::Dibujar()
     {
-        _juego->_ventana->Dibujar(sprite);
+        _juego->_ventana->DibujarC(sprite);
         _arma->Dibujar();
     }
     
