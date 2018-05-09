@@ -42,7 +42,8 @@ namespace Crazy
         _mundo = new b2World(b2Vec2(0.0, 9.8));
         
         _input = new Input();
-        
+        _level = new Nivel();
+        _level->cargarNivel(1);
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
         _jugador = new Player("Espadachina");
         _hud = new Hud();
@@ -51,8 +52,6 @@ namespace Crazy
         
         teclaPulsada = false;
         
-        _level = new Nivel();
-        _level->cargarNivel(1);
         //_level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         
         /*reloj = new sf::Clock();

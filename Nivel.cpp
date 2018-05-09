@@ -130,6 +130,7 @@ namespace Crazy{
                 
                 width = mapX;
                 height = mapY;
+                cout<<"mapY"<<mapY<<endl;
                 
                 
                 
@@ -157,7 +158,7 @@ namespace Crazy{
                     _instance->_ventana->DibujarC(*tilemap[capa][i][j]);
             }
         }
-        cout<<"Sale"<<endl;
+        //cout<<"Sale"<<endl;
     }
     void Nivel::setPosCamara(float _jugadorX, float _jugadorY){
         
@@ -208,6 +209,15 @@ namespace Crazy{
     Camara* Nivel::getCamara(){
         return _camera;
     }
+    
+    int Nivel::getAltura(){
+        return height;
+    }
+
+    int Nivel::getAnchura() {
+        return width;
+    }
+
     
 
 
