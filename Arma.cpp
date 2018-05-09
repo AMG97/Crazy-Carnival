@@ -7,7 +7,7 @@ namespace Crazy
     Arma::Arma(int n, float x, float y) 
     {
         _juego= Juego::Instance();
-        tipo=n;
+        tipo=0;
         switch (tipo)
         {
             case 0:

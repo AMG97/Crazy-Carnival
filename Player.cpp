@@ -23,13 +23,15 @@ namespace Crazy
         velSalto=0;
         velocidad=0;
         golpear=false;
-        posIniX = 240;
-        posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-1;
-        cout<<"PosicionY"<<posIniY<<endl;
+        
         
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
         sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
+        
+        posIniX = 240;
+        posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
+        cout<<"PosicionY: "<<posIniY<<endl;
         sprite.CambiarPosicion(posIniX, posIniY);
         _arma=new Arma(2,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5, 1.5);
@@ -172,7 +174,7 @@ namespace Crazy
             switch(estado)
             {
                 case CORRER:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
+                    sprite.CambiarTextRect(contadorSpriteCorrer*60, 1*80, 60, 80);
                     sprite.CambiarOrigen(60/2,80/2);
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer++;
@@ -216,7 +218,7 @@ namespace Crazy
                         if(contadorSpriteAtaque1==0)
                         {
                             sprite.CambiarOrigen(100/2,90/2);
-                            sprite.Mover(0,-22);
+                            //sprite.Mover(0,-22);
                             golpear=true;
                         }
                         sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 90);
@@ -232,7 +234,7 @@ namespace Crazy
                     if(contadorSpriteAtaque2==0)
                     {
                         sprite.CambiarOrigen(100/2, 80/2);
-                        sprite.Mover(0,-15);
+                        //sprite.Mover(0,-15);
                         if(AtaqueEspecialActivado())
                         {
                             ataqueEspecial=false;
@@ -240,7 +242,7 @@ namespace Crazy
                             tAtaque2.ReiniciarSegundos();
                         }
                     }
-                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,360,100,80);
+                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,370,100,80);
                     _arma->ModificarSprite(estado,contadorSpriteAtaque2,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteAtaque2++;
                     if(contadorSpriteAtaque2==3)
@@ -284,12 +286,12 @@ namespace Crazy
         if(n==1)
         {
             contadorSpriteAtaque1 = 0;
-            sprite.Mover(0,22);
+            //sprite.Mover(0,22);
         }
         else if(n==2)
         {
             contadorSpriteAtaque2=0;
-            sprite.Mover(0, 15);
+            //sprite.Mover(0, 15);
         }
         _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),0);
     }

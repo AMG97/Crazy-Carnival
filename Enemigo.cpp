@@ -1,4 +1,5 @@
 #include "Enemigo.hpp"
+#include "EstadoJuego.hpp"
 
 namespace Crazy
 {
@@ -6,7 +7,7 @@ namespace Crazy
         sprite.CambiarTextura(_juego->recursos.GetTextura("Enemigo-Pistola1"));
         sprite.CambiarTextRect(0,0,70,80);
         sprite.CambiarOrigen(70/2,80/2+10);
-        sprite.CambiarPosicion(600, 750);
+        sprite.CambiarPosicion(600, EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto()+20);
         _arma=new Arma(0,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5,1.5);
         vida=45.0;
