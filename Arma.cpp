@@ -90,7 +90,7 @@ namespace Crazy
                 BorrarProyectil(i);
             else{
                 for(int j=0;j<e.size();j++){
-                    if(proyectiles[i]->GetProyectil().Interseccion(e[j]->GetSprite()))
+                    if(proyectiles[i]->GetProyectil().Interseccion1(e[j]->GetSprite()))
                     {
                         e[j]->RecibirDanyo(proyectiles[i]->GetDanyo());
                         BorrarProyectil(i);
@@ -110,7 +110,7 @@ namespace Crazy
             bool b=proyectiles[i]->Update();
             if(!b)
                 BorrarProyectil(i);
-            else if(proyectiles[i]->GetProyectil().Interseccion(p->GetSprite()))
+            else if(proyectiles[i]->GetProyectil().Interseccion1(p->GetSprite()))
             {
                 p->RecibirDanyo(proyectiles[i]->GetDanyo());
                 BorrarProyectil(i);

@@ -323,7 +323,7 @@ namespace Crazy
         sprite.Mover(velocidad,velSalto);
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
-                if(sprite.Interseccion(e[j]->GetSprite()))
+                if(sprite.Interseccion2(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
                     golpear=false;

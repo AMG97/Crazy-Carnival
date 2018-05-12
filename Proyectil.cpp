@@ -34,7 +34,7 @@ namespace Crazy
             PosIniY=PosIniY+50*cos(angulo)-10;
         }
         sprite.CambiarPosicion(PosIniX, PosIniY);
-        sprite.EscalarProporcion(1.5,1.5);
+        sprite.EscalarProporcion(2.2,2.2);
         sprite.CambiarOrigen();
         sprite.Rotar(-angulo*180/3.14159+90);
     }
@@ -70,5 +70,12 @@ namespace Crazy
     {
         return danyo;
     }
+    bool Proyectil::direccion() {
+        if(sin(angulo)>0)
+            return false;
+        else
+            return true;
+    }
+
 }
 
