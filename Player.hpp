@@ -7,6 +7,7 @@
 // Constantes
 #define REPOSO 0
 #define CORRER 1
+#define CORRERATRAS 5
 #define SALTO 2
 #define ATAQUE1 3
 #define ATAQUE2 4
@@ -32,6 +33,7 @@ namespace Crazy
         
         short int GetEstado();
         short int GetCorrer();
+        short int GetCorrerAtras();
         short int GetSaltar();
         short int GetReposo();
         short int GetAtaque1();
