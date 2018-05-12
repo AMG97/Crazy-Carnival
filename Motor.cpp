@@ -1,4 +1,6 @@
 #include "Motor.hpp"
+#include "EstadoJuego.hpp"
+
 namespace Motor
 {
 // Reloj
@@ -319,9 +321,11 @@ namespace Motor
         _pinstance2 = NULL;
     }
     
-    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    void Camara::CrearCamara(vector2f centro, vector2f tam, vector2f limits)
     {
-        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+        camara.reset(sf::FloatRect(centro.getX(), centro.getY(), tam.getX(), tam.getY()));
+        limit = limits;
+        tam.print();
     }
             
     sf::View& Camara::GetCamara()
@@ -335,12 +339,20 @@ namespace Motor
     }
     
     void Camara::mover(int x, int y) {
+        limitar(&x,&y);
         camara.move(x,y);
     }
 
     void Camara::setCentro(int x, int y) {
+        limitar(&x,&y);
         camara.setCenter(x,y);
     }
+
+    void Camara::limitar(int* x, int* y) {
+        vector2f prueba(2,1);
+        prueba.print();
+    }
+
 
     int Camara::getX() {
         return camara.getCenter().x;

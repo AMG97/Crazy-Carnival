@@ -136,7 +136,7 @@ namespace Crazy{
                 
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
-            _camera->CrearCamara(240,600,_instance->GetAncho(),_instance->GetAlto());
+            _camera->CrearCamara(vector2f(240,600), vector2f(_instance->GetAncho(),_instance->GetAlto()), vector2f(1,1));
             _instance->_ventana->setCamara(*_camera);
         }else{
             cerr << "Error al cargar el nivel "<<l<<endl;

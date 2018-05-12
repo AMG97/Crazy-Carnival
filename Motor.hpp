@@ -1,12 +1,63 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Box2D/Common/b2Math.h"
 #include <map>
 #include <iostream>
 using namespace std;
 
 namespace Motor
 {
+    /// Un vector de 2 dimensiones
+    struct vector2f : private b2Vec2{
+        vector2f():b2Vec2(){}
+        vector2f(b2Vec2 vector){
+            x = vector.x;
+            y = vector.y;
+        }
+        vector2f(float dimX, float dimY):b2Vec2((float32)dimX, (float32)dimY){}
+        virtual ~vector2f(){}
+        
+        ///Usado para poner a 0 el vector
+        void setZero(){SetZero();}
+        ///Set de las coordenadas pasadas 
+        void set(float dimX, float dimY){Set((float32)dimX, (float32)dimY);}
+        ///Invierte el vector
+        vector2f operator -() const { vector2f v; v.set(-x, -y); return v; }
+        ///Sumar un vector a otro
+        void operator += (const vector2f& v){x += v.x; y += v.y;}
+        ///Restar un vector a otro
+        void operator -= (const vector2f& v){x -= v.x; y -= v.y;}
+        ///Multipliar el vector por un escalar
+        void operator *= (float a){x *= a; y *= a;}
+        ///Devuelve la longitud (la normal?)
+        float length() const{return Length();}
+        /// Get the length squared. For performance, use this instead of
+	/// b2Vec2::Length (if possible).
+        float lengthSquared() const{return LengthSquared();}
+        /// Convert this vector into a unit vector. Returns the length.
+        float normalizar(){return (float)Normalize();}
+        ///Devuelve la primera posicion del vector
+        float getX(){return (float)x;}
+        ///Devuelve la segunda posicion del vector
+        float getY(){return (float)y;}
+        ///Modifica la primera posicion del vector
+        void setX(float n){x = (float32)n;}
+        ///Modifica la segunda posicion del vector
+        void setY(float n){y = (float32)n;}
+        /// Does this vector contain finite coordinates?
+        bool isValid() const{return IsValid();}
+        /// Get the skew vector such that dot(skew_vec, other) == cross(vec, other)
+        vector2f skew() const{return skew();}
+        
+        ///Convierte el vector a Vector de Box2D
+        b2Vec2 convertTob2(){return b2Vec2(x, y);}
+        
+        ///Imprime por consola los valores del vector separados por un espacio
+        void print(){
+            std::cout<<x<<" "<<y<<std::endl;
+        }
+    };
     
     class Reloj : public sf::Clock {
     public:
@@ -83,11 +134,14 @@ namespace Motor
     public:
         static Camara* Instance();
         ~Camara();
-        void CrearCamara(float centroX, float centroY, float ancho, float alto);
+        ///Hay que pasarle un vector de centro, un vector para el tamaño y uno para los límites del mapa
+        void CrearCamara(vector2f centro, vector2f tam, vector2f limits);
         sf::View& GetCamara();
         void setTam(float x, float y);
         void mover(int x, int y);
         void setCentro(int x, int y);
+        void limitar(int* x, int* y);
+        
         int getX();
         int getY();
         float getHeight();
@@ -95,10 +149,11 @@ namespace Motor
         
 
     private:
-        Camara() { };
+        Camara() {};
         Camara(const Camara &);
         Camara &operator=(const Camara &);
         static Camara* _pinstance2;
+        vector2f limit;
         
         sf::View camara;
     };
@@ -172,4 +227,5 @@ namespace Motor
         Ventana* _ventana;
         Eventos eventos;
     };
+    
 }
