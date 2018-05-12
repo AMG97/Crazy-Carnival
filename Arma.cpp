@@ -4,10 +4,11 @@
 
 namespace Crazy
 {
-    Arma::Arma(int n, float x, float y) 
+    Arma::Arma(int n, float x, float y, bool p) 
     {
         _juego= Juego::Instance();
         tipo=0;
+        player=p;
         switch (tipo)
         {
             case 0:
@@ -82,7 +83,7 @@ namespace Crazy
     
     
     
-    void Arma::Update(float x, float y, vector<Enemigo*> e){
+    void Arma::Update(float x, float y, vector<Enemigo*> e, Player *p){
         sprite.CambiarPosicion(x,y);
         for(int i=0;i<proyectiles.size();i++){
             bool b=proyectiles[i]->Update();
@@ -92,6 +93,7 @@ namespace Crazy
                 for(int j=0;j<e.size();j++){
                     if(proyectiles[i]->GetProyectil().Interseccion1(e[j]->GetSprite()))
                     {
+                        p->ModificarEnfriamiento(5);
                         e[j]->RecibirDanyo(proyectiles[i]->GetDanyo());
                         BorrarProyectil(i);
                     }

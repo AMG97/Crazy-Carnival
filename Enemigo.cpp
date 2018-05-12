@@ -11,7 +11,7 @@ namespace Crazy
             sprite.CambiarPosicion(600, EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto()+20);
         else 
             sprite.CambiarPosicion(1100, EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto()+20);
-        _arma=new Arma(0,sprite.GetX(),sprite.GetY());
+        _arma=new Arma(0,sprite.GetX(),sprite.GetY(),false);
         sprite.EscalarProporcion(1.5,1.5);
         vida=45.0;
         posinix=sprite.GetX();

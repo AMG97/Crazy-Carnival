@@ -15,7 +15,7 @@ namespace Crazy
 
     class Arma {
     public:
-        Arma(int n, float x, float y);
+        Arma(int n, float x, float y, bool p);
         Arma(const Arma& orig);
         virtual ~Arma();
         void BorrarProyectil(int i);
@@ -25,13 +25,14 @@ namespace Crazy
         float GetDanyo();
         void CambiarDireccion();
         void Update(float x, float y, Player *p);
-        void Update(float x, float y, vector<Enemigo*>e);
+        void Update(float x, float y, vector<Enemigo*>e, Player *p);
     private:
         float danyo;
         SpriteM sprite;
         vector<Proyectil*> proyectiles;
         int tipo;
         Juego* _juego;
+        bool player;
 
     };
 }

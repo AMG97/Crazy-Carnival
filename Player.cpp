@@ -33,7 +33,7 @@ namespace Crazy
         posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
         cout<<"PosicionY: "<<posIniY<<endl;
         sprite.CambiarPosicion(posIniX, posIniY);
-        _arma=new Arma(2,sprite.GetX(),sprite.GetY());
+        _arma=new Arma(2,sprite.GetX(),sprite.GetY(),true);
         sprite.EscalarProporcion(1.5, 1.5);
         
         //TO DO: Box2d + façade
@@ -118,7 +118,7 @@ namespace Crazy
     void Player::RecibirDanyo(float danyo)
     {
         ModificarVida(-danyo);
-        ModificarEnfriamiento(danyo * 0.75f);
+        //ModificarEnfriamiento(danyo * 0.75f);
         
     }
     
@@ -326,6 +326,7 @@ namespace Crazy
                 if(sprite.Interseccion2(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
+                    ModificarEnfriamiento(5);
                     golpear=false;
                 }
             }

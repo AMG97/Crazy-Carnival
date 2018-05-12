@@ -99,8 +99,6 @@ namespace Crazy
                 
                 _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
                 _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
-                
-                cout << "Daño\n"<<endl;
                 cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
             }
             
@@ -211,7 +209,7 @@ namespace Crazy
                 
         }
         _jugador->Update(_enemigos);
-        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos);
+        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador);
         _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         for(int i=0;i<_enemigos.size();i++){
             if(_enemigos[i]->GetVida()<=0){
