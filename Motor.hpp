@@ -170,6 +170,7 @@ namespace Motor
         
     private:
         Ventana* _ventana;
+        Camara* _camara;
         Eventos eventos;
     };
 }
