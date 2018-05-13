@@ -141,11 +141,13 @@ namespace Motor
         void mover(int x, int y);
         void setCentro(int x, int y);
         void limitar(int* x, int* y);
+        void toggleStatic();
         
         int getX();
         int getY();
         float getHeight();
         float getWidth();
+        bool staticCam;
         
 
     private:
@@ -222,6 +224,7 @@ namespace Motor
         bool R();
         bool E();
         bool Q();
+        bool F9();
         
     private:
         Ventana* _ventana;

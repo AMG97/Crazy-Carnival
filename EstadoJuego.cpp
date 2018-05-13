@@ -126,9 +126,11 @@ namespace Crazy
             {
                 _juego->_ventana->Cerrar();
             }
+            
+            if (_input->F9()) _level->toggleFreeCamera();
         }
-        
-        if (_input->Der())
+        if(!_level->isCamFree()){
+            if (_input->Der())
             {
                 if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
                 {
@@ -147,7 +149,7 @@ namespace Crazy
                 //_jugador->CambiarDireccion();
                 _jugador->SetVelocidad(-6.0f);
             }
-            
+
             if(_input->Arriba())
             {
                 if(_jugador->GetEstado()!=_jugador->GetSaltar() && _jugador->GetVelocidadSalto()==0 && _jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
@@ -156,9 +158,9 @@ namespace Crazy
                     _jugador->SetVelocidadSalto(-14.0f);
                 }
             }
-           
-        
-        
+
+
+
             if (_input->RatonIzq())
             {
                 if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
@@ -168,7 +170,7 @@ namespace Crazy
                 }
                 //cout << "Angulo"<<_jugador->GetAngulo()<<endl;
             }
-            
+
             if (_input->RatonDer())
             {
                 if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
@@ -179,9 +181,15 @@ namespace Crazy
                         _hud->Parpadear(false);
                         _hud->EnfriamientoVacio();
                     }
-                        
+
                 }
             }
+        }else{
+            if(_input->Der())_level->getCamara()->mover(20,0);
+            if(_input->Izq())_level->getCamara()->mover(-20,0);
+            if(_input->Arriba())_level->getCamara()->mover(0,-20);
+            if(_input->Abajo())_level->getCamara()->mover(0,20);
+        }
     }
     
     void EstadoJuego::Actualizar(float tiempoActual)

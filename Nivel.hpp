@@ -24,12 +24,14 @@ class Nivel {
         int getAnchura();
         int getAltura();
         Camara * getCamara();
+        void toggleFreeCamera();
+        bool isCamFree();
     private:
         map<string,SpriteM***> tilemap;
         vector<string> layers;
         int width, height;
         Juego* _instance;
-        Camara* _camera;
+        Camara* _camera; bool freecam;
         b2World* _mundo;
         vector<b2Body*> collisions;
         b2FixtureDef ground_fixdef;

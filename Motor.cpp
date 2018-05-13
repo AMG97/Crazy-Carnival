@@ -325,6 +325,7 @@ namespace Motor
     {
         camara.reset(sf::FloatRect(centro.getX(), centro.getY(), tam.getX(), tam.getY()));
         limit = limits;
+        staticCam = false;
         tam.print();
     }
             
@@ -339,18 +340,41 @@ namespace Motor
     }
     
     void Camara::mover(int x, int y) {
-        limitar(&x,&y);
-        camara.move(x,y);
+        if(!staticCam){
+            //Limitado
+                setCentro(getX()+x,getY()+y);
+
+            //No limitado
+                //camara.move(x,y);
+        }
     }
 
     void Camara::setCentro(int x, int y) {
-        limitar(&x,&y);
-        camara.setCenter(x,y);
+        if(!staticCam){
+            limitar(&x,&y);
+            camara.setCenter(x,y);
+        }
     }
 
     void Camara::limitar(int* x, int* y) {
-        vector2f prueba(2,1);
-        prueba.print();
+        if(*y+camara.getSize().y/2-48/2 > (limit.getY()-1)*48) {
+            *y = (limit.getY()-1)*48 - camara.getSize().y/2 + 48/2;
+        }
+        if(*y-camara.getSize().y/2+48/2 < 48) {
+            *y = 48 + camara.getSize().y/2 - 48/2;
+        }
+        
+        if(*x+camara.getSize().x/2 - 48/2 > (limit.getX()-1)*48) {
+            *x = limit.getX()*48 - camara.getSize().x/2 - 48/2;
+        }
+        if(*x-camara.getSize().x/2 < 0) {
+            *x = camara.getSize().x/2;
+        }
+        
+        
+        
+        //limit.print();
+        
     }
 
 
@@ -368,6 +392,9 @@ namespace Motor
 
     float Camara::getWidth() {
         return camara.getSize().x;
+    }
+    void Camara::toggleStatic() {
+        staticCam = !staticCam;
     }
 
 
@@ -522,4 +549,9 @@ namespace Motor
     {
         return TeclaPulsada(sf::Keyboard::Q);
     }
+
+    bool Input::F9() {
+        return TeclaPulsada(sf::Keyboard::F9);
+    }
+
 }
