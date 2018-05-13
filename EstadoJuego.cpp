@@ -128,28 +128,30 @@ namespace Crazy
         
         if (_input->Der())
             {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
-                {
-                    if(_input->GetPosicionRatonX()<_jugador->GetPosX())
-                        _jugador->SetEstado(_jugador->GetCorrerAtras());
-                    else
-                        _jugador->SetEstado(_jugador->GetCorrer());
-                }
-                //_jugador->CambiarDireccion();
-                _jugador->SetVelocidad(6.0f);
+               if(_jugador->GetPosX()<_level->getCamara()->getX()+_level->getCamara()->getWidth()/2-50){
+                    _jugador->SetVelocidad(6.0f);
+                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
+                    {
+                        if(_input->GetPosicionRatonX()<_jugador->GetPosX())
+                            _jugador->SetEstado(_jugador->GetCorrerAtras());
+                        else
+                            _jugador->SetEstado(_jugador->GetCorrer());
+                    }
+               }
             }
 
             if (_input->Izq())
             {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
-                {
-                    if(_input->GetPosicionRatonX()>_jugador->GetPosX())
-                        _jugador->SetEstado(_jugador->GetCorrerAtras());
+                if(_jugador->GetPosX()>_level->getCamara()->getX()-_level->getCamara()->getWidth()/2+50){
+                    _jugador->SetVelocidad(-6.0f);
+                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
+                    {
+                        if(_input->GetPosicionRatonX()>_jugador->GetPosX())
+                            _jugador->SetEstado(_jugador->GetCorrerAtras());
                     else
                         _jugador->SetEstado(_jugador->GetCorrer());
+                    }
                 }
-                //_jugador->CambiarDireccion();
-                _jugador->SetVelocidad(-6.0f);
             }
             
             if(_input->Arriba())

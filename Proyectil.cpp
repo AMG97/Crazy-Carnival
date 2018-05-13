@@ -16,7 +16,7 @@ namespace Crazy
             
             case 2:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Bala"));
-                alcance=500;
+                alcance=750;
                 danyo=dan;
                 velocidad=6;
             break;
