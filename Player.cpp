@@ -244,7 +244,7 @@ namespace Crazy
                             tAtaque2.ReiniciarSegundos();
                         }
                     }
-                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,370,100,80);
+                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,360,100,80);
                     _arma->ModificarSprite(estado,contadorSpriteAtaque2,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteAtaque2++;
                     if(contadorSpriteAtaque2==3)
