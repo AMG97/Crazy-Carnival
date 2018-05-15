@@ -1,69 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+#pragma once
 
-/* 
- * File:   Objeto.hpp
- * Author: fv
- *
- * Created on April 29, 2018, 6:01 PM
- */
-
-#ifndef OBJETO_HPP
-#define OBJETO_HPP
-#include "player.hpp"
+#include "Player.hpp"
 
 using namespace Crazy;
 
-struct Objeto {
+class Objeto {
 public:
-    Objeto(int tileX,int tileY,int tileValue, sf::Texture& textura,int puntos);
+    Objeto(int tileX,int tileY,SpriteM* sp,int puntos);
     Objeto(const Objeto& orig);
     virtual ~Objeto();
     
     bool colision();
-    void draw(sf::RenderWindow &app);
-    sf::Sprite getSprite();
+    vector2f getPosition();
+    virtual void objectEffect(){}
+    SpriteM* getSprite();
     sf::FloatRect getBound();
-private:
-    int x, y, tile, valor;
-    sf::Sprite sprite;
+
+protected:
+    int valor, p_value;
+    vector2f position;
+    SpriteM* _sprite;
+    Player* _pl_instance;
 };
 
 
-class CdReducer : Objeto{
+class OBJ_Reloj : public Objeto{
 public:
-    CdReducer(int tileX,int tileY,int tileValue, sf::Texture& textura,int puntos):Objeto(tileX,tileY,tileValue,textura,puntos){}
-    void reducirCooldown();
+    OBJ_Reloj(int tileX,int tileY,SpriteM* sp,int puntos):Objeto(tileX,tileY,sp,puntos){}
+    void objectEffect();
 private:
     
 };
 
-class HP : Objeto{
+class OBJ_HP : public Objeto{
 public:
-    HP(int tileX,int tileY,int tileValue, sf::Texture& textura,int puntos):Objeto(tileX,tileY,tileValue,textura,puntos){}
-    void curar(float vida);
+    OBJ_HP(int tileX,int tileY,SpriteM* sp,int puntos):Objeto(tileX,tileY,sp,puntos){}
+    void objectEffect();
+private:
+    float vida;
+};
+
+class OBJ_Elixir : public Objeto{
+public:
+    OBJ_Elixir(int tileX,int tileY,SpriteM* sp,int puntos):Objeto(tileX,tileY,sp,puntos){}
+    void objectEffect();
 private:
     
 };
 
-class Elixir : Objeto{
+class OBJ_Star : public Objeto{
 public:
-    Elixir(int tileX,int tileY,int tileValue, sf::Texture& textura,int puntos):Objeto(tileX,tileY,tileValue,textura,puntos){}
-    void anyadir_resucitar();
+    OBJ_Star(int tileX,int tileY,SpriteM* sp,int puntos):Objeto(tileX,tileY,sp,puntos){}
+    void objectEffect();
 private:
     
 };
 
-class Star : Objeto{
-public:
-    Star(int tileX,int tileY,int tileValue, sf::Texture& textura,int puntos):Objeto(tileX,tileY,tileValue,textura,puntos){}
-    void activarGodMode();
-private:
-    
-};
-
-#endif /* OBJETO_HPP */
 

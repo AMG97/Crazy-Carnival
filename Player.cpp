@@ -23,6 +23,8 @@ namespace Crazy
         velSalto=0;
         velocidad=0;
         golpear=false;
+        puntuacion = 0;
+        elixir = false;
         
         
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
@@ -331,4 +333,22 @@ namespace Crazy
             }
         }
     }
+
+    void Player::SetElixir(bool v) {
+        elixir = v;
+    }
+
+    void Player::addPuntuacion(int puntos) {
+        puntuacion += puntos;
+    }
+
+    int Player::getPuntuacion() {
+        return puntuacion;
+    }
+
+    void Player::setPuntuacion(int puntos) {
+        puntuacion = puntos;
+    }
+
+
 }
