@@ -217,6 +217,18 @@ namespace Crazy{
     int Nivel::getAnchura() {
         return width;
     }
+    
+    bool Nivel::ComprobarColision(float x, float y) {
+        int x2=round(x/48);
+        int y2=round(y/48);
+        if(tilemap["Collisionable"][y2][x2]!=0)
+            return true;
+        else{
+            return false;
+        }
+    }
+    
+
 
     
 

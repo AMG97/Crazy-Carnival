@@ -12,6 +12,7 @@ namespace Crazy
 {
     class Player;
     class Enemigo;
+    class Nivel;
 
     class Arma {
     public:
@@ -25,7 +26,7 @@ namespace Crazy
         float GetDanyo();
         void CambiarDireccion();
         void Update(float x, float y, Player *p);
-        void Update(float x, float y, vector<Enemigo*>e, Player *p);
+        void Update(float x, float y, vector<Enemigo*>e, Player *p, Nivel *n);
     private:
         float danyo;
         SpriteM sprite;

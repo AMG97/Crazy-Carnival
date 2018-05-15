@@ -24,6 +24,7 @@ class Nivel {
         int getAnchura();
         int getAltura();
         Camara * getCamara();
+        bool ComprobarColision(float x, float y);
     private:
         map<string,SpriteM***> tilemap;
         vector<string> layers;
