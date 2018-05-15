@@ -217,7 +217,7 @@ namespace Crazy
                 
         }
         _jugador->Update(_enemigos);
-        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador,_level);
+        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador);
         _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         for(int i=0;i<_enemigos.size();i++){
             if(_enemigos[i]->GetVida()<=0){
@@ -294,6 +294,10 @@ namespace Crazy
     void EstadoJuego::SetMundo(b2World* world) {
         _mundo = world;
     }
+        Nivel* EstadoJuego::GetNivel() {
+            return _level;
+    }
+
 
 
 }

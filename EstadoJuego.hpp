@@ -40,6 +40,7 @@ namespace Crazy
         void Pausar();
         void Reanudar();
         b2World* GetMundo();
+        Nivel* GetNivel();
         void SetMundo(b2World* world);
         
         ~EstadoJuego();

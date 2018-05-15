@@ -26,7 +26,7 @@ namespace Crazy
         float GetDanyo();
         void CambiarDireccion();
         void Update(float x, float y, Player *p);
-        void Update(float x, float y, vector<Enemigo*>e, Player *p, Nivel *n);
+        void Update(float x, float y, vector<Enemigo*>e, Player *p);
     private:
         float danyo;
         SpriteM sprite;

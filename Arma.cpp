@@ -2,6 +2,7 @@
 #include "Enemigo.hpp" 
 #include "Player.hpp"
 #include "Nivel.hpp"
+#include "EstadoJuego.hpp"
 
 namespace Crazy
 {
@@ -84,11 +85,11 @@ namespace Crazy
     
     
     
-    void Arma::Update(float x, float y, vector<Enemigo*> e, Player *p, Nivel *n){
+    void Arma::Update(float x, float y, vector<Enemigo*> e, Player *p){
         sprite.CambiarPosicion(x,y);
         for(int i=0;i<proyectiles.size();i++){
             bool b=proyectiles[i]->Update();
-            if(!b || n->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
+            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
                 BorrarProyectil(i);
             else{
                 for(int j=0;j<e.size();j++){
@@ -111,7 +112,7 @@ namespace Crazy
         for(int i=0;i<proyectiles.size();i++)
         {
             bool b=proyectiles[i]->Update();
-            if(!b)
+            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
                 BorrarProyectil(i);
             else if(proyectiles[i]->GetProyectil().Interseccion1(p->GetSprite()))
             {
