@@ -130,13 +130,14 @@ namespace Crazy{
                 
                 width = mapX;
                 height = mapY;
-                cout<<"mapY"<<mapY<<endl;
+                
+                freecam = false;
                 
                 
                 
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
-            _camera->CrearCamara(240,600,_instance->GetAncho(),_instance->GetAlto());
+            _camera->CrearCamara(vector2f(240,600), vector2f(_instance->GetAncho(),_instance->GetAlto()), vector2f(width,height));
             _instance->_ventana->setCamara(*_camera);
         }else{
             cerr << "Error al cargar el nivel "<<l<<endl;
@@ -161,49 +162,7 @@ namespace Crazy{
         //cout<<"Sale"<<endl;
     }
     void Nivel::setPosCamara(float _jugadorX, float _jugadorY){       
-        if(_jugadorX >= 500 && _jugadorX <= 10000)
-        {
-            if(_jugadorY <= 40*30 && _jugadorY >= -40*30){
-                _camera->setCentro(_jugadorX,_jugadorY-8*30);
-            }
-            else if(_jugadorY > 40*30)
-            {
-                _camera->setCentro(_jugadorX,43*30-8*30);
-            }
-            else if(_jugadorY < -40*30)
-            {
-                _camera->setCentro(_jugadorX,-43*30-8*30);
-            }
-        }
-        if(_jugadorX < 500)
-        {
-            if(_jugadorY <= 40*30 && _jugadorY >= -40*30){
-                _camera->setCentro(500,_jugadorY-8*30);
-            }
-            else if(_jugadorY > 40*30)
-            {
-                _camera->setCentro(500,43*30-8*30);
-            }
-            else if(_jugadorY < -40*30)
-            {
-                _camera->setCentro(500,-43*30-8*30);
-            }
-        }
-        if(_jugadorX > 10000)
-        {
-            if(_jugadorY <= 40*30 && _jugadorY >= -40*30){
-                _camera->setCentro(10000,_jugadorY);
-            }
-            else if(_jugadorY > 40*30)
-            {
-                _camera->setCentro(10000,43*30);
-            }
-            else if(_jugadorY < -40*30)
-            {
-                _camera->setCentro(10000,-43*30);
-            }
-        }
-         
+        if(!freecam)_camera->setCentro(_jugadorX,_jugadorY); 
         _instance->_ventana->setCamara(*_camera);
     }
     Camara* Nivel::getCamara(){
@@ -216,6 +175,12 @@ namespace Crazy{
 
     int Nivel::getAnchura() {
         return width;
+    }
+    void Nivel::toggleFreeCamera() {
+        freecam = !freecam;
+    }
+    bool Nivel::isCamFree() {
+        return freecam;
     }
 
     

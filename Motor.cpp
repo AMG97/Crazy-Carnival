@@ -1,4 +1,6 @@
 #include "Motor.hpp"
+#include "EstadoJuego.hpp"
+
 namespace Motor
 {
 // Reloj
@@ -319,9 +321,12 @@ namespace Motor
         _pinstance2 = NULL;
     }
     
-    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    void Camara::CrearCamara(vector2f centro, vector2f tam, vector2f limits)
     {
-        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+        camara.reset(sf::FloatRect(centro.getX(), centro.getY(), tam.getX(), tam.getY()));
+        limit = limits;
+        staticCam = false;
+        tam.print();
     }
             
     sf::View& Camara::GetCamara()
@@ -335,12 +340,43 @@ namespace Motor
     }
     
     void Camara::mover(int x, int y) {
-        camara.move(x,y);
+        if(!staticCam){
+            //Limitado
+                setCentro(getX()+x,getY()+y);
+
+            //No limitado
+                //camara.move(x,y);
+        }
     }
 
     void Camara::setCentro(int x, int y) {
-        camara.setCenter(x,y);
+        if(!staticCam){
+            limitar(&x,&y);
+            camara.setCenter(x,y);
+        }
     }
+
+    void Camara::limitar(int* x, int* y) {
+        if(*y+camara.getSize().y/2-48/2 > (limit.getY()-1)*48) {
+            *y = (limit.getY()-1)*48 - camara.getSize().y/2 + 48/2;
+        }
+        if(*y-camara.getSize().y/2+48/2 < 48) {
+            *y = 48 + camara.getSize().y/2 - 48/2;
+        }
+        
+        if(*x+camara.getSize().x/2 - 48/2 > (limit.getX()-1)*48) {
+            *x = limit.getX()*48 - camara.getSize().x/2 - 48/2;
+        }
+        if(*x-camara.getSize().x/2 < 0) {
+            *x = camara.getSize().x/2;
+        }
+        
+        
+        
+        //limit.print();
+        
+    }
+
 
     int Camara::getX() {
         return camara.getCenter().x;
@@ -356,6 +392,9 @@ namespace Motor
 
     float Camara::getWidth() {
         return camara.getSize().x;
+    }
+    void Camara::toggleStatic() {
+        staticCam = !staticCam;
     }
 
 
@@ -510,4 +549,9 @@ namespace Motor
     {
         return TeclaPulsada(sf::Keyboard::Q);
     }
+
+    bool Input::F9() {
+        return TeclaPulsada(sf::Keyboard::F9);
+    }
+
 }
