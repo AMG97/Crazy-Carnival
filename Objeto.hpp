@@ -34,7 +34,7 @@ private:
 
 class OBJ_HP : public Objeto{
 public:
-    OBJ_HP(int tileX,int tileY,SpriteM* sp,int puntos):Objeto(tileX,tileY,sp,puntos){}
+    OBJ_HP(int tileX,int tileY,SpriteM* sp,int puntos);
     void objectEffect();
 private:
     float vida;

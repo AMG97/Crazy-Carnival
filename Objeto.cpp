@@ -47,6 +47,7 @@ void OBJ_Reloj::objectEffect() {
 
 void OBJ_HP::objectEffect() {   
     if(_pl_instance!=0){
+        valor = _pl_instance->GetTotalVida()/2;
         _pl_instance->Curar(valor);
     }
 }
@@ -63,6 +64,9 @@ void OBJ_Star::objectEffect() {
 
 vector2f Objeto::getPosition() {
     return position;
+}
+
+OBJ_HP::OBJ_HP(int tileX, int tileY, SpriteM* sp, int puntos) : Objeto(tileX, tileY, sp, puntos) {
 }
 
 
