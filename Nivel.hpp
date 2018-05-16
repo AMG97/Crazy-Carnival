@@ -26,6 +26,7 @@ class Nivel {
         Camara * getCamara();
         void toggleFreeCamera();
         bool isCamFree();
+        bool ComprobarColision(float x, float y);
     private:
         map<string,SpriteM***> tilemap;
         vector<string> layers;

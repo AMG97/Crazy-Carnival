@@ -99,8 +99,6 @@ namespace Crazy
                 
                 _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
                 _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
-                
-                cout << "Daño\n"<<endl;
                 cout <<_jugador->GetEnfriamiento()<<", "<<_jugador->GetEnfriamiento()<<endl;
             }
             
@@ -132,22 +130,30 @@ namespace Crazy
         if(!_level->isCamFree()){
             if (_input->Der())
             {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
-                {
-                    _jugador->SetEstado(_jugador->GetCorrer());
-                }
-                //_jugador->CambiarDireccion();
-                _jugador->SetVelocidad(6.0f);
+               if(_jugador->GetPosX()<_level->getCamara()->getX()+_level->getCamara()->getWidth()/2-50){
+                    _jugador->SetVelocidad(6.0f);
+                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
+                    {
+                        if(_input->GetPosicionRatonX()<_jugador->GetPosX())
+                            _jugador->SetEstado(_jugador->GetCorrerAtras());
+                        else
+                            _jugador->SetEstado(_jugador->GetCorrer());
+                    }
+               }
             }
 
             if (_input->Izq())
             {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
-                {
-                _jugador->SetEstado(_jugador->GetCorrer());
+                if(_jugador->GetPosX()>_level->getCamara()->getX()-_level->getCamara()->getWidth()/2+50){
+                    _jugador->SetVelocidad(-6.0f);
+                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
+                    {
+                        if(_input->GetPosicionRatonX()>_jugador->GetPosX())
+                            _jugador->SetEstado(_jugador->GetCorrerAtras());
+                    else
+                        _jugador->SetEstado(_jugador->GetCorrer());
+                    }
                 }
-                //_jugador->CambiarDireccion();
-                _jugador->SetVelocidad(-6.0f);
             }
 
             if(_input->Arriba())
@@ -219,7 +225,7 @@ namespace Crazy
                 
         }
         _jugador->Update(_enemigos);
-        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos);
+        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador);
         _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         for(int i=0;i<_enemigos.size();i++){
             if(_enemigos[i]->GetVida()<=0){
@@ -296,6 +302,10 @@ namespace Crazy
     void EstadoJuego::SetMundo(b2World* world) {
         _mundo = world;
     }
+        Nivel* EstadoJuego::GetNivel() {
+            return _level;
+    }
+
 
 
 }

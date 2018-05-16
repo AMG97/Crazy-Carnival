@@ -12,6 +12,7 @@ namespace Crazy
         SpriteM GetProyectil();
         float GetDanyo();
         void Dibujar();
+        bool direccion();
     private:
         SpriteM sprite;
         int alcance;

@@ -223,9 +223,14 @@ namespace Motor
     {
         move(x,y);
     } 
-    bool SpriteM::Interseccion(SpriteM s)
+    bool SpriteM::Interseccion1(SpriteM s)
     {
-        return getGlobalBounds().intersects(s.getGlobalBounds());
+        return s.getGlobalBounds().contains(getPosition().x,getPosition().y);
+    }
+    
+    bool SpriteM::Interseccion2(SpriteM s)
+    {
+        return s.getGlobalBounds().intersects(getGlobalBounds());
     }
 
 // Ventana
@@ -402,7 +407,7 @@ namespace Motor
     Input::Input()
     {
         _ventana = Ventana::Instance();
-        
+        _camara = Camara::Instance();
         eventos.Closed = 1;
         eventos.KeyPressed = 2;
         eventos.KeyReleased = 3;
@@ -412,12 +417,12 @@ namespace Motor
     
     float Input::GetPosicionRatonX()
     {
-        return sf::Mouse::getPosition(_ventana->GetVentana()).x;
+        return sf::Mouse::getPosition(_ventana->GetVentana()).x+_camara->getX()-_camara->getWidth()/2;
     }
     
     float Input::GetPosicionRatonY()
     {
-       return sf::Mouse::getPosition(_ventana->GetVentana()).y;
+       return sf::Mouse::getPosition(_ventana->GetVentana()).y+_camara->getY()-_camara->getHeight()/2;
     }
     
     Input::Eventos Input::Evento()

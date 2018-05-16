@@ -33,7 +33,7 @@ namespace Crazy
         posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
         cout<<"PosicionY: "<<posIniY<<endl;
         sprite.CambiarPosicion(posIniX, posIniY);
-        _arma=new Arma(2,sprite.GetX(),sprite.GetY());
+        _arma=new Arma(2,sprite.GetX(),sprite.GetY(),true);
         sprite.EscalarProporcion(1.5, 1.5);
         
         //TO DO: Box2d + façade
@@ -118,7 +118,7 @@ namespace Crazy
     void Player::RecibirDanyo(float danyo)
     {
         ModificarVida(-danyo);
-        ModificarEnfriamiento(danyo * 0.75f);
+        //ModificarEnfriamiento(danyo * 0.75f);
         
     }
     
@@ -130,6 +130,10 @@ namespace Crazy
     short int  Player::GetCorrer()
     {
         return CORRER;
+    }
+    short int  Player::GetCorrerAtras()
+    {
+        return CORRERATRAS;
     }
     
     short int  Player::GetSaltar()
@@ -181,6 +185,23 @@ namespace Crazy
                     if(contadorSpriteCorrer == 6)
                     {
                         contadorSpriteCorrer = 0;
+                    }
+                    if(velocidad==0)
+                    {
+                        contadorSpriteCorrer=0;
+                        Reposo(3);
+                    }
+                break;
+                
+                case CORRERATRAS:
+                    sprite.CambiarTextRect(contadorSpriteCorrer*60, 1*80, 60, 80);
+                    sprite.CambiarOrigen(60/2,80/2);
+                    //cout<<"ATRAS"<<endl;
+                    _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
+                    contadorSpriteCorrer--;
+                    if(contadorSpriteCorrer == -1)
+                    {
+                        contadorSpriteCorrer = 5;
                     }
                     if(velocidad==0)
                     {
@@ -323,9 +344,10 @@ namespace Crazy
         sprite.Mover(velocidad,velSalto);
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
-                if(sprite.Interseccion(e[j]->GetSprite()))
+                if(sprite.Interseccion2(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
+                    ModificarEnfriamiento(5);
                     golpear=false;
                 }
             }
