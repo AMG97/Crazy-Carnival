@@ -414,6 +414,7 @@ namespace Motor
     Input::Input()
     {
         _ventana = Ventana::Instance();
+        _camara = Camara::Instance();
         eventos.Closed = 1;
         eventos.KeyPressed = 2;
         eventos.KeyReleased = 3;
@@ -424,14 +425,12 @@ namespace Motor
     
     float Input::GetPosicionRatonX()
     {
-        sf::Vector2f worldPos = _ventana->GetVentana().mapPixelToCoords(sf::Mouse::getPosition());
-        return worldPos.x;
+        return sf::Mouse::getPosition(_ventana->GetVentana()).x+_camara->getX()-_camara->getWidth()/2;
     }
     
     float Input::GetPosicionRatonY()
     {
-       sf::Vector2f worldPos = _ventana->GetVentana().mapPixelToCoords(sf::Mouse::getPosition());
-        return worldPos.y;
+       return sf::Mouse::getPosition(_ventana->GetVentana()).y+_camara->getY()-_camara->getHeight()/2;
     }
     
     void Input::Reescalar()

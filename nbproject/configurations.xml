@@ -12,7 +12,6 @@
       <itemPath>EstadoEstadisticas.hpp</itemPath>
       <itemPath>EstadoJuego.hpp</itemPath>
       <itemPath>EstadoMenu.hpp</itemPath>
-      <itemPath>EstadoMenuPartidas.hpp</itemPath>
       <itemPath>EstadoPausa.hpp</itemPath>
       <itemPath>EstadosManager.hpp</itemPath>
       <itemPath>Hud.hpp</itemPath>
@@ -38,7 +37,6 @@
       <itemPath>EstadoEstadisticas.cpp</itemPath>
       <itemPath>EstadoJuego.cpp</itemPath>
       <itemPath>EstadoMenu.cpp</itemPath>
-      <itemPath>EstadoMenuPartidas.cpp</itemPath>
       <itemPath>EstadoPausa.cpp</itemPath>
       <itemPath>EstadosManager.cpp</itemPath>
       <itemPath>Hud.cpp</itemPath>
@@ -144,10 +142,6 @@
       </item>
       <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="EstadoMenuPartidas.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="EstadoMenuPartidas.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="EstadoPausa.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadoPausa.hpp" ex="false" tool="3" flavor2="0">
@@ -240,10 +234,6 @@
       <item path="EstadoMenu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadoMenu.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="EstadoMenuPartidas.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="EstadoMenuPartidas.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="EstadoPausa.cpp" ex="false" tool="1" flavor2="0">
       </item>
