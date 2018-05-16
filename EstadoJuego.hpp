@@ -16,6 +16,7 @@ namespace Crazy
     public:
         EstadoJuego();
         static EstadoJuego* Instance();
+        void Vaciar();
         
         Juego* _juego;
         Player* _jugador;

@@ -175,6 +175,7 @@ namespace Motor
         void Dibujar(Texto txt);
         void DibujarB(SpriteM sprite, Camara& camara);
         void DibujarC(SpriteM sprite);
+        void SetCamaraPorDefecto();
         void setCamara(Camara &camara);
         void setBackground(int r, int g, int b);
         sf::RenderWindow& GetVentana();
@@ -198,11 +199,13 @@ namespace Motor
             short int KeyReleased;
             short int MouseButtonPressed;
             short int MouseButtonReleased;
+            short int Resized;
         };
         
         Input();
         float GetPosicionRatonX();
         float GetPosicionRatonY();
+        void Reescalar();
         
         Eventos Evento();
         short int GetTipoEvento();
@@ -229,7 +232,6 @@ namespace Motor
         
     private:
         Ventana* _ventana;
-        Camara* _camara;
         Eventos eventos;
     };
     

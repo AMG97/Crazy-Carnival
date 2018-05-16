@@ -294,6 +294,12 @@ namespace Motor
     {
         window.draw(sprite);
     }
+    
+    void Ventana::SetCamaraPorDefecto()
+    {
+        window.setView(window.getDefaultView());
+    }
+    
     void Ventana::setCamara(Camara &camara)
     {
         window.setView(camara.GetCamara());
@@ -303,6 +309,7 @@ namespace Motor
     {
         return window;
     }
+    
     void Ventana::setBackground(int r, int g, int b) {
         background = sf::Color(r,g,b);
     }
@@ -407,22 +414,31 @@ namespace Motor
     Input::Input()
     {
         _ventana = Ventana::Instance();
-        _camara = Camara::Instance();
         eventos.Closed = 1;
         eventos.KeyPressed = 2;
         eventos.KeyReleased = 3;
         eventos.MouseButtonPressed = 4;
         eventos.MouseButtonReleased = 5;
+        eventos.Resized = 6;
     }
     
     float Input::GetPosicionRatonX()
     {
-        return sf::Mouse::getPosition(_ventana->GetVentana()).x+_camara->getX()-_camara->getWidth()/2;
+        sf::Vector2f worldPos = _ventana->GetVentana().mapPixelToCoords(sf::Mouse::getPosition());
+        return worldPos.x;
     }
     
     float Input::GetPosicionRatonY()
     {
-       return sf::Mouse::getPosition(_ventana->GetVentana()).y+_camara->getY()-_camara->getHeight()/2;
+       sf::Vector2f worldPos = _ventana->GetVentana().mapPixelToCoords(sf::Mouse::getPosition());
+        return worldPos.y;
+    }
+    
+    void Input::Reescalar()
+    {
+        // update the view to the new size of the window
+        /*sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+        window.setView(sf::View(visibleArea));*/
     }
     
     Input::Eventos Input::Evento()
@@ -437,6 +453,10 @@ namespace Motor
         {
             switch(event.type)
             {
+                case sf::Event::Resized:
+                    //Reescalar();
+                    return eventos.Resized;
+                    
                 case sf::Event::Closed:
                     _ventana->Cerrar();
                     return eventos.Closed;

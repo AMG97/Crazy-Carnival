@@ -1,4 +1,6 @@
 #include "EstadosManager.hpp"
+#include <iostream>
+using namespace std;
 
 namespace Crazy
 {
@@ -18,6 +20,7 @@ namespace Crazy
     {
         if ( eliminando && !estados.empty())
         {
+            estados.top()->Vaciar();
             estados.pop();
             
             if (!estados.empty())
@@ -51,5 +54,15 @@ namespace Crazy
     Estado* &EstadosManager::GetEstadoActivo()
     {
         return estados.top();
+    }
+    
+    void EstadosManager::SaltarAlMenu()
+    {
+        for (short int est=0; est<estados.size(); est++)
+        {
+            estados.top()->Vaciar();
+            estados.pop();
+        }
+        estados.top()->Reanudar();
     }
 }

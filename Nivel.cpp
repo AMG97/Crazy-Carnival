@@ -49,15 +49,15 @@ namespace Crazy{
 
     
     void Nivel::cargarNivel(unsigned short int l) {
-        _instance = Juego::Instance();
+        _juego = Juego::Instance();
         sf::Texture* mapa = 0;
         TiXmlDocument doc,sprite,objects_doc;
         switch(l){
             case 1:
-                mapa = &_instance->recursos.GetTextura("Playa");
+                mapa = &_juego->recursos.GetTextura("Playa");
                 sprite = TiXmlDocument("resources/SpritesPlaya.tsx");
                 doc = TiXmlDocument("resources/playaG.tmx");
-                _instance->_ventana->setBackground(135,207,235);
+                _juego->_ventana->setBackground(135,207,235);
                 break;
                
             default:
@@ -113,7 +113,7 @@ namespace Crazy{
                                 tilemap[name][i][j]->CambiarTextura(*mapa);
                                 sprite.FirstChildElement()->QueryIntAttribute("columns",&limit);
                             }else{
-                                tilemap[name][i][j]->CambiarTextura(_instance->recursos.GetTextura("Objetos"));
+                                tilemap[name][i][j]->CambiarTextura(_juego->recursos.GetTextura("Objetos"));
                                 tileV-=change-1;
                                 objects_doc.FirstChildElement()->QueryIntAttribute("columns",&limit);
                             }
@@ -161,8 +161,8 @@ namespace Crazy{
                 
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
-            _camera->CrearCamara(vector2f(240,600), vector2f(_instance->GetAncho(),_instance->GetAlto()), vector2f(width,height));
-            _instance->_ventana->setCamara(*_camera);
+            _camera->CrearCamara(vector2f(240,600), vector2f(_juego->GetAncho(),_juego->GetAlto()), vector2f(width,height));
+            _juego->_ventana->setCamara(*_camera);
         }else{
             cerr << "Error al cargar el nivel "<<l<<endl;
             exit(0);
@@ -173,7 +173,7 @@ namespace Crazy{
     void Nivel::update() {
         //camera->setTam(800,1200);
         //camera->mover(2,0);
-        _instance->_ventana->setCamara(*_camera);
+        _juego->_ventana->setCamara(*_camera);
         
         
         //Colision con los objetos
@@ -197,14 +197,14 @@ namespace Crazy{
         for (int i = (_camera->getY()-_camera->getHeight()-1)/48 -1; i < 1+(_camera->getY()+_camera->getHeight())/48; i++) {
             for (int j = (_camera->getX()-_camera->getWidth()-1)/48 -1; j < 1+(_camera->getX()+_camera->getWidth())/48; j++) {
                 if(i>=0&&i<height && j>=0&&j<width && tilemap[capa][i][j]!=0)
-                    _instance->_ventana->DibujarC(*tilemap[capa][i][j]);
+                    _juego->_ventana->DibujarC(*tilemap[capa][i][j]);
             }
         }
         //cout<<"Sale"<<endl;
     }
     void Nivel::setPosCamara(float _jugadorX, float _jugadorY){       
         if(!freecam)_camera->setCentro(_jugadorX,_jugadorY); 
-        _instance->_ventana->setCamara(*_camera);
+        _juego->_ventana->setCamara(*_camera);
     }
     Camara* Nivel::getCamara(){
         return _camera;

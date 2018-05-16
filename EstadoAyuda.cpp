@@ -18,6 +18,11 @@ namespace Crazy
         return _pinstance;
     }
     
+    void EstadoAyuda::Vaciar()
+    {
+        _pinstance=0;
+    }
+    
     EstadoAyuda::~EstadoAyuda()
     {
         delete _input;

@@ -48,8 +48,8 @@ namespace Crazy
         // Temporal
         recursos.CargarTextura("Ayuda","resources/ayuda.png");
         
-        //maquina.Anyadir(EstadoMenu::Instance());
-        maquina.Anyadir(EstadoJuego::Instance());
+        maquina.Anyadir(EstadoMenu::Instance());
+        //maquina.Anyadir(EstadoJuego::Instance());
         
         while (_ventana->EstaAbierta())
         {

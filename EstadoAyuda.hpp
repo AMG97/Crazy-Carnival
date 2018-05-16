@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Estado.hpp"
-#include "EstadoMenu.hpp"
 #include "Juego.hpp"
 
 namespace Crazy
@@ -11,6 +10,7 @@ namespace Crazy
     public:
         EstadoAyuda();
         static EstadoAyuda* Instance();
+        void Vaciar();
         
         void Init();
         void ManejarEventos();

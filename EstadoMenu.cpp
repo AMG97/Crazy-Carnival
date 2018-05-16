@@ -18,6 +18,11 @@ namespace Crazy
         return _pinstance;
     }
     
+    void EstadoMenu::Vaciar()
+    {
+        _pinstance=0;
+    }
+    
     EstadoMenu::~EstadoMenu()
     {
         delete _input;
@@ -29,55 +34,57 @@ namespace Crazy
     void EstadoMenu::Init()
     {
         _input = new Input();
-        opcion = JUGAR;
+        opcion = NUEVA;
         teclaPulsada = false;
+        tamFuente = 48;
         
         t_titulo.CambiarFuente(_juego->recursos.GetFuente("Z"));
         t_titulo.CambiarTexto("Crazy Carnival");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CentrarOrigen();
-        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 100);
         
-        t_jugar.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_jugar.CambiarTexto("Jugar");
-        t_jugar.CambiarTamanyo(50);
-        t_jugar.CentrarOrigen();
-        t_jugar.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+200);
+        t_nueva.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_nueva.CambiarTexto("Nueva partida");
+        t_nueva.CambiarTamanyo(tamFuente);
+        t_nueva.CentrarOrigen();
+        t_nueva.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+150);
+        
+        t_cargar.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_cargar.CambiarTexto("Cargar partida");
+        t_cargar.CambiarTamanyo(tamFuente);
+        t_cargar.CentrarOrigen();
+        t_cargar.CambiarPosicion((_juego->GetAncho()/2), t_nueva.GetY()+75);
+        
+        t_borrar.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_borrar.CambiarTexto("Borrar partida");
+        t_borrar.CambiarTamanyo(tamFuente);
+        t_borrar.CentrarOrigen();
+        t_borrar.CambiarPosicion((_juego->GetAncho()/2), t_cargar.GetY()+75);
+        
+        t_estadisticas.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_estadisticas.CambiarTexto("Estadisticas");
+        t_estadisticas.CambiarTamanyo(tamFuente);
+        t_estadisticas.CentrarOrigen();
+        t_estadisticas.CambiarPosicion((_juego->GetAncho()/2), t_borrar.GetY()+75);
         
         t_ayuda.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_ayuda.CambiarTexto("Ayuda");
-        t_ayuda.CambiarTamanyo(50);
+        t_ayuda.CambiarTamanyo(tamFuente);
         t_ayuda.CentrarOrigen();
-        t_ayuda.CambiarPosicion((_juego->GetAncho()/2), t_jugar.GetY()+75);
+        t_ayuda.CambiarPosicion((_juego->GetAncho()/2), t_estadisticas.GetY()+75);
         
         t_salir.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_salir.CambiarTexto("Salir");
-        t_salir.CambiarTamanyo(50);
+        t_salir.CambiarTamanyo(tamFuente);
         t_salir.CentrarOrigen();
         t_salir.CambiarPosicion((_juego->GetAncho()/2), t_ayuda.GetY()+75);
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
-        CambiarFlecha(t_jugar);
+        CambiarFlecha(t_nueva);
         flecha.CambiarColorRojo();
         flecha.Escalar(80.0f, 80.0f); // Escalar al 80%
-        
-        t_explicar.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_explicar.CambiarTexto("Utiliza las");
-        t_explicar.CambiarTamanyo(40);
-        t_explicar.CentrarOrigen();
-        t_explicar.CambiarPosicion(_juego->GetAncho()/2-120, _juego->GetAlto()-50);
-        
-        flechas.CambiarTextura(_juego->recursos.GetTextura("Flechas"));
-        flechas.CentrarOrigen();
-        flechas.CambiarPosicion(_juego->GetAncho()/2, t_explicar.GetY()+8);
-        flechas.Escalar(50.0f, 50.0f); // Escalar al 50%
-        
-        t_explicar2.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_explicar2.CambiarTexto("para elegir");
-        t_explicar2.CambiarTamanyo(40);
-        t_explicar2.CentrarOrigen();
-        t_explicar2.CambiarPosicion(flechas.GetX()+flechas.GetAncho()+70, t_explicar.GetY());
     }
     
     void EstadoMenu::ManejarEventos()
@@ -94,7 +101,7 @@ namespace Crazy
             
             if (_input->Arriba()) {
                 opcion--;
-                if (opcion < JUGAR)
+                if (opcion < NUEVA)
                 {
                     opcion = SALIR;
                 }
@@ -104,7 +111,7 @@ namespace Crazy
                 opcion++;
                 if (opcion > SALIR)
                 {
-                    opcion = JUGAR;
+                    opcion = NUEVA;
                 }
             }
         }
@@ -114,8 +121,17 @@ namespace Crazy
     {
         switch (opcion)
         {
-            case JUGAR:
-                CambiarFlecha(t_jugar);
+            case NUEVA:
+                CambiarFlecha(t_nueva);
+                break;
+            case CARGAR:
+                CambiarFlecha(t_cargar);
+                break;
+            case BORRAR:
+                CambiarFlecha(t_borrar);
+                break;
+            case ESTADISTICAS:
+                CambiarFlecha(t_estadisticas);
                 break;
             case AYUDA:
                 CambiarFlecha(t_ayuda);
@@ -131,15 +147,26 @@ namespace Crazy
         _juego->_ventana->Limpiar();
         
         _juego->_ventana->Dibujar(t_titulo);
-        _juego->_ventana->Dibujar(t_jugar);
+        _juego->_ventana->Dibujar(t_nueva);
+        _juego->_ventana->Dibujar(t_cargar);
+        _juego->_ventana->Dibujar(t_borrar);
+        _juego->_ventana->Dibujar(t_estadisticas);
         _juego->_ventana->Dibujar(t_ayuda);
         _juego->_ventana->Dibujar(t_salir);
         _juego->_ventana->DibujarC(flecha);
-        _juego->_ventana->Dibujar(t_explicar);
-        _juego->_ventana->DibujarC(flechas);
-        _juego->_ventana->Dibujar(t_explicar2);
         
         _juego->_ventana->Mostrar();
+    }
+    
+    void EstadoMenu::Pausar()
+    {
+        cout<<"Menu pausado"<<endl;
+    }
+    
+    void EstadoMenu::Reanudar()
+    {
+        cout<<"Menu reanudado"<<endl;
+        _juego->_ventana->setBackground(0,0,0);
     }
     
     void EstadoMenu::CambiarFlecha(Texto texto)
@@ -151,8 +178,17 @@ namespace Crazy
     {
         switch (opcion)
         {
-            case JUGAR:
-                _juego->maquina.Anyadir(EstadoMenuPartidas::Instance());
+            case NUEVA:
+                NuevaPartida();
+                break;
+            case CARGAR:
+                CargarPartida();
+                break;
+            case BORRAR:
+                BorrarPartida();
+                break;
+            case ESTADISTICAS:
+                Estadisticas();
                 break;
             case AYUDA:
                 _juego->maquina.Anyadir(EstadoAyuda::Instance(), false);
@@ -161,5 +197,25 @@ namespace Crazy
                 _juego->_ventana->Cerrar();
                 break;
         }
+    }
+    
+    void EstadoMenu::NuevaPartida()
+    {
+        _juego->maquina.Anyadir(EstadoJuego::Instance(), false);
+    }
+    
+    void EstadoMenu::CargarPartida()
+    {
+        cout<<"Cargar"<<endl;
+    }
+    
+    void EstadoMenu::BorrarPartida()
+    {
+        cout<<"Borrar"<<endl;
+    }
+    
+    void EstadoMenu::Estadisticas()
+    {
+        _juego->maquina.Anyadir(EstadoEstadisticas::Instance(), false);
     }
 }

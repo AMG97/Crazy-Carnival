@@ -18,6 +18,11 @@ namespace Crazy
         return _pinstance;
     }
     
+    void EstadoJuego::Vaciar()
+    {
+        _pinstance=0;
+    }
+    
     EstadoJuego::~EstadoJuego()
     {
         delete _input;
@@ -69,6 +74,7 @@ namespace Crazy
     void EstadoJuego::ManejarEventos()
     {
         short int evento = _input->GetTipoEvento();
+        
         // Pulsar tecla
         if (evento == _input->Evento().KeyPressed)
         {
@@ -78,7 +84,6 @@ namespace Crazy
                 Pausar();
             }
             
-             
             // Pruebas
             if (_input->D())
             {
@@ -287,12 +292,13 @@ namespace Crazy
     
     void EstadoJuego::Pausar()
     {
-        _juego->maquina.Anyadir(new EstadoPausa(), false);
+        cout << "Juego pausado"<<endl;
+        _juego->maquina.Anyadir(EstadoPausa::Instance(), false);
     }
     
     void EstadoJuego::Reanudar()
     {
-        cout << "REANUDADO";
+        cout << "Juego reanudado"<<endl;
     }
 
     b2World* EstadoJuego::GetMundo() {

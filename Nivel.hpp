@@ -34,7 +34,7 @@ class Nivel {
         vector<Objeto*> objects;
         
         int width, height;
-        Juego* _instance;
+        Juego* _juego;
         Camara* _camera; bool freecam;
         b2World* _mundo;
         vector<b2Body*> collisions;

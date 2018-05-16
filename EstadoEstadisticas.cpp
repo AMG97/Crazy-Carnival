@@ -17,6 +17,11 @@ namespace Crazy
         return _pinstance;
     }
     
+    void EstadoEstadisticas::Vaciar()
+    {
+        _pinstance=0;
+    }
+    
     EstadoEstadisticas::~EstadoEstadisticas()
     {
         delete _input;

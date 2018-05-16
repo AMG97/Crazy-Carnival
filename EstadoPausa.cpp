@@ -18,6 +18,11 @@ namespace Crazy
         return _pinstance;
     }
     
+    void EstadoPausa::Vaciar()
+    {
+        _pinstance=0;
+    }
+    
     EstadoPausa::~EstadoPausa()
     {
         delete _input;
@@ -28,6 +33,10 @@ namespace Crazy
     
     void EstadoPausa::Init()
     {
+        // Cambiar a Default View de la ventana
+        _juego->_ventana->SetCamaraPorDefecto();
+        _juego->_ventana->setBackground(0,0,0); // Fondo negro
+        
         _input = new Input();
         opcion = ABANDONAR;
         teclaPulsada = false;
@@ -167,13 +176,10 @@ namespace Crazy
                 Confirmar();
                 break;
             case OP1:
-                _juego->maquina.Eliminar();
-                _juego->maquina.Anyadir(EstadoMenu::Instance());
+                _juego->maquina.SaltarAlMenu();
                 break;
             case OP2:
-                abandonar = false;
-                opcion = ABANDONAR;
-                Abandonar();
+                _juego->maquina.Eliminar();
                 break;
         }
     }
