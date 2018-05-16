@@ -21,6 +21,10 @@ namespace Crazy
         float GetEnfriamiento();
         float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);
+        void SetElixir(bool v);
+        void addPuntuacion(int puntos);
+        void setPuntuacion(int puntos);
+        int getPuntuacion();
         
         void ModificarEnfriamiento(float modificador);
         
@@ -77,6 +81,8 @@ namespace Crazy
         float enfriamiento;
         bool ataqueEspecial;
         bool golpear;
+        bool elixir;
+        int puntuacion;
         
         short int estado;
         Reloj tAtaque2;
