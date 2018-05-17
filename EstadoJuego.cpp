@@ -170,29 +170,29 @@ namespace Crazy
                 }
             }
 
-
-
-            if (_input->RatonIzq())
-            {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+            if(_input->GetPosicionRatonX()>=_level->getCamara()->getX()-_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonX()<=_level->getCamara()->getX()+_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonY()>=_level->getCamara()->getY()-_level->getCamara()->getHeight()/2 && _input->GetPosicionRatonY()<=_level->getCamara()->getY()+_level->getCamara()->getHeight()/2){
+                if (_input->RatonIzq())
                 {
-                    _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
-                    _jugador->SetEstado(_jugador->GetAtaque1());
-                }
-                //cout << "Angulo"<<_jugador->GetAngulo()<<endl;
-            }
-
-            if (_input->RatonDer())
-            {
-                if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
-                {
-                    _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
-                    _jugador->SetEstado(_jugador->GetAtaque2());
-                    if(_jugador->AtaqueEspecialActivado()){
-                        _hud->Parpadear(false);
-                        _hud->EnfriamientoVacio();
+                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+                    {
+                        _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                        _jugador->SetEstado(_jugador->GetAtaque1());
                     }
+                    //cout << "Angulo"<<_jugador->GetAngulo()<<endl;
+                }
 
+                if (_input->RatonDer())
+                {
+                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
+                    {
+                        _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                        _jugador->SetEstado(_jugador->GetAtaque2());
+                        if(_jugador->AtaqueEspecialActivado()){
+                            _hud->Parpadear(false);
+                            _hud->EnfriamientoVacio();
+                        }
+
+                    }
                 }
             }
         }else{
@@ -217,6 +217,7 @@ namespace Crazy
                 _jugador->SetEstado(_jugador->GetReposo());
             }*/
         //}
+
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
         {
             

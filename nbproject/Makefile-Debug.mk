@@ -42,13 +42,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
-	${OBJECTDIR}/EstadoMenuPartidas.o \
 	${OBJECTDIR}/EstadoPausa.o \
 	${OBJECTDIR}/EstadosManager.o \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/Nivel.o \
+	${OBJECTDIR}/Objeto.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Proyectil.o \
 	${OBJECTDIR}/box.o \
@@ -124,11 +124,6 @@ ${OBJECTDIR}/EstadoMenu.o: EstadoMenu.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMenu.o EstadoMenu.cpp
 
-${OBJECTDIR}/EstadoMenuPartidas.o: EstadoMenuPartidas.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMenuPartidas.o EstadoMenuPartidas.cpp
-
 ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -158,6 +153,11 @@ ${OBJECTDIR}/Nivel.o: Nivel.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nivel.o Nivel.cpp
+
+${OBJECTDIR}/Objeto.o: Objeto.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
 
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -1,9 +1,8 @@
 build/Debug/GNU-Linux/EstadoJuego.o: EstadoJuego.cpp EstadoJuego.hpp \
- Estado.hpp EstadoPausa.hpp EstadoMenu.hpp EstadoMenuPartidas.hpp \
- EstadoEstadisticas.hpp Juego.hpp EstadosManager.hpp Motor.hpp \
- EstadoAyuda.hpp Arma.hpp Proyectil.hpp Enemigo.hpp Comportamiento.hpp \
- Player.hpp Box2D/Box2D/Box2D.h Box2D/Box2D/Common/b2Settings.h \
- Box2D/Box2D/Common/b2Draw.h Box2D/Box2D/Common/b2Math.h \
+ Estado.hpp EstadoPausa.hpp Juego.hpp EstadosManager.hpp Motor.hpp \
+ Box2D/Box2D/Common/b2Math.h Box2D/Box2D/Common/b2Settings.h Arma.hpp \
+ Proyectil.hpp Enemigo.hpp Comportamiento.hpp Player.hpp \
+ Box2D/Box2D/Box2D.h Box2D/Box2D/Common/b2Draw.h \
  Box2D/Box2D/Common/b2Timer.h \
  Box2D/Box2D/Collision/Shapes/b2CircleShape.h \
  Box2D/Box2D/Collision/Shapes/b2Shape.h \
@@ -33,7 +32,7 @@ build/Debug/GNU-Linux/EstadoJuego.o: EstadoJuego.cpp EstadoJuego.hpp \
  Box2D/Box2D/Dynamics/Joints/b2RopeJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h Hud.hpp Nivel.hpp \
- tinyxml/tinyxml.h tinyxml/tinystr.h tinyxml/tinystr.h box.h
+ tinyxml/tinyxml.h tinyxml/tinystr.h tinyxml/tinystr.h box.h Objeto.hpp
 
 EstadoJuego.hpp:
 
@@ -41,19 +40,15 @@ Estado.hpp:
 
 EstadoPausa.hpp:
 
-EstadoMenu.hpp:
-
-EstadoMenuPartidas.hpp:
-
-EstadoEstadisticas.hpp:
-
 Juego.hpp:
 
 EstadosManager.hpp:
 
 Motor.hpp:
 
-EstadoAyuda.hpp:
+Box2D/Box2D/Common/b2Math.h:
+
+Box2D/Box2D/Common/b2Settings.h:
 
 Arma.hpp:
 
@@ -67,11 +62,7 @@ Player.hpp:
 
 Box2D/Box2D/Box2D.h:
 
-Box2D/Box2D/Common/b2Settings.h:
-
 Box2D/Box2D/Common/b2Draw.h:
-
-Box2D/Box2D/Common/b2Math.h:
 
 Box2D/Box2D/Common/b2Timer.h:
 
@@ -150,3 +141,5 @@ tinyxml/tinystr.h:
 tinyxml/tinystr.h:
 
 box.h:
+
+Objeto.hpp:
