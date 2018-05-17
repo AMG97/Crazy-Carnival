@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
+	${OBJECTDIR}/EstadoMuerte.o \
 	${OBJECTDIR}/EstadoPausa.o \
 	${OBJECTDIR}/EstadosManager.o \
 	${OBJECTDIR}/Hud.o \
@@ -123,6 +124,11 @@ ${OBJECTDIR}/EstadoMenu.o: EstadoMenu.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMenu.o EstadoMenu.cpp
+
+${OBJECTDIR}/EstadoMuerte.o: EstadoMuerte.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMuerte.o EstadoMuerte.cpp
 
 ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -217,7 +217,11 @@ namespace Crazy
                 _jugador->SetEstado(_jugador->GetReposo());
             }*/
         //}
-
+        
+        if(_jugador->GetVida()<=0){
+            _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
+        }
+                
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
         {
             

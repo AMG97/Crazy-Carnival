@@ -313,6 +313,17 @@ namespace Motor
     void Ventana::setBackground(int r, int g, int b) {
         background = sf::Color(r,g,b);
     }
+    
+    void Ventana::setBackground2(int r, int g, int b, int a){
+        Camara* c=Camara::Instance();
+        sf::RectangleShape f;
+        f.setSize(sf::Vector2f(c->getWidth(),c->getHeight()));
+        f.setOrigin(c->getWidth()/2,c->getHeight()/2);
+        
+        f.setPosition(c->getX(),c->getY());
+        f.setFillColor(sf::Color(r,g,b,a));
+        window.draw(f);
+    }
 
     
 // Cámara

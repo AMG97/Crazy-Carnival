@@ -2,6 +2,7 @@
 
 #include "Estado.hpp"
 #include "EstadoPausa.hpp"
+#include "EstadoMuerte.hpp"
 #include "Juego.hpp"
 #include "Arma.hpp"
 #include "Enemigo.hpp"

@@ -178,6 +178,8 @@ namespace Motor
         void SetCamaraPorDefecto();
         void setCamara(Camara &camara);
         void setBackground(int r, int g, int b);
+        void setBackground2(int r, int g, int b,int a);
+        sf::Image Capturar();
         sf::RenderWindow& GetVentana();
         
     private:
