@@ -253,8 +253,9 @@ namespace Crazy
         _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
         if(_jugador->AtaqueEspecialActivado())
         {
-            _jugador->SetAtaqueEspecial(true);
-        }
+            _hud->SetAtaqueEspecial(true);
+        }else
+            _hud->SetAtaqueEspecial(false);
         
         
     }
@@ -269,16 +270,9 @@ namespace Crazy
         _level->draw("Objetos");
         _level->draw("Delante");
         
-        if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
+        if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial() && _hud->GetAtaqueEspecial())
         {
-            if(_hud->GetAtaqueEspecial())
-            {
-                _hud->Parpadear(true);
-            }
-            else
-            {
-                _hud->Parpadear(false);
-            }
+            _hud->Parpadear(true);
             relojAtaqueEspecial.ReiniciarSegundos();
         }
         

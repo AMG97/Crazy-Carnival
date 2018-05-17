@@ -9,7 +9,8 @@ namespace Crazy
         _camara = Camara::Instance();
         contrarreloj = true;
         elixir = true;
-        ataqueEspecial = true;
+        ataqueEspecial = false;
+        parpadea=false;
         
         spRecipVida.CambiarTextura(_juego->recursos.GetTextura("Hud"));
         spVida.CambiarTextura(_juego->recursos.GetTextura("Hud"));
@@ -87,6 +88,8 @@ namespace Crazy
     
     void Hud::Dibujar()
     {
+        if(!ataqueEspecial)
+            spRecipVida.Parpadear(false);
         _juego->_ventana->DibujarB(spVida, *_camara);
         _juego->_ventana->DibujarB(spEnfriamiento, *_camara);
         _juego->_ventana->DibujarB(spRecipVida, *_camara);
@@ -104,8 +107,8 @@ namespace Crazy
     
     void Hud::Parpadear(bool parpadeo)
     {
-        SetAtaqueEspecial(!parpadeo);
-        spRecipVida.Parpadear(parpadeo);
+        parpadea=!parpadea;
+        spRecipVida.Parpadear(parpadea);
     }
     
     void Hud::CambiarTexturaContador(){
