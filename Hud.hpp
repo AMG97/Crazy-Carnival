@@ -34,6 +34,7 @@ namespace Crazy
         
         bool contrarreloj;
         bool elixir;
+        bool parpadea;
         bool ataqueEspecial;
         int spriteTimerSeg;
         int spriteTimerSeg1;

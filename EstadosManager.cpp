@@ -36,6 +36,7 @@ namespace Crazy
             {
                 if (reemplazando)
                 {
+                    estados.top()->Vaciar();
                     estados.pop();
                 }
                 else

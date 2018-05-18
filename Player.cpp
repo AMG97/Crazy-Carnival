@@ -25,6 +25,7 @@ namespace Crazy
         golpear=false;
         puntuacion = 0;
         elixir = false;
+        rojo=false;
         
         
         sprite.CambiarTextura(_juego->recursos.GetTextura(textura));
@@ -120,6 +121,8 @@ namespace Crazy
     void Player::RecibirDanyo(float danyo)
     {
         ModificarVida(-danyo);
+        rojo=true;
+        relojrojo.ReiniciarSegundos();
         //ModificarEnfriamiento(danyo * 0.75f);
         
     }
@@ -353,6 +356,13 @@ namespace Crazy
                     golpear=false;
                 }
             }
+        }
+        
+        if(rojo && relojrojo.GetSegundos()<=0.2)
+            sprite.CambiarColorRojo();
+        else if(rojo && relojrojo.GetSegundos()>0.2){
+            rojo=false;
+            sprite.Parpadear(false);
         }
     }
 

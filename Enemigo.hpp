@@ -7,17 +7,18 @@ namespace Crazy
 {
     class Enemigo : public Comportamiento {
     public:
-        Enemigo(int x, int y);
+        Enemigo();
         Enemigo(const Enemigo& orig);
         virtual ~Enemigo();
-        void Update(int Posx,int Posy);
-        void Dibujar();
-        void ModificarSpriteCorrer();
-        void ModificarSpriteAtaque1();
-        void ModificarSprite();
+        virtual void Update(int Posx,int Posy)=0;
+        virtual void Update(int Posx,int Posy,Player* p)=0;
+        void Dibujar()=0;
+        virtual void ModificarSpriteCorrer()=0;
+        virtual void ModificarSpriteAtaque1()=0;
+        virtual void ModificarSprite()=0;
         void SetDireccion(bool direccion);
         void RecibirDanyo(float dan);
-    private:
+    protected:
         float alcancex;
         float alcancey;
         float posinix;

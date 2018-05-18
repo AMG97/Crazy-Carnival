@@ -206,7 +206,11 @@ namespace Crazy
                 _jugador->SetEstado(_jugador->GetReposo());
             }*/
         //}
-
+        
+        if(_jugador->GetVida()<=0){
+            _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
+        }
+                
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
         {
             
@@ -221,13 +225,28 @@ namespace Crazy
         }
         
         _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
+        for(int i=0;i<_enemigos.size();i++){
+            if(_enemigos[i]->GetVida()<=0){
+                Enemigo *tmp=_enemigos[i];
+                _enemigos.erase(_enemigos.begin()+i);
+                delete tmp;
+            }
+            else{
+            if(_enemigos[i]->GetArma()!=NULL){
+                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+            }else
+                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
+            }
+        }
         
         _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
         _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
         if(_jugador->AtaqueEspecialActivado())
         {
-            _jugador->SetAtaqueEspecial(true);
-        }
+            _hud->SetAtaqueEspecial(true);
+        }else
+            _hud->SetAtaqueEspecial(false);
         
         
     }
@@ -242,16 +261,9 @@ namespace Crazy
         _level->draw("Objetos");
         _level->draw("Delante");
         
-        if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial())
+        if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial() && _hud->GetAtaqueEspecial())
         {
-            if(_hud->GetAtaqueEspecial())
-            {
-                _hud->Parpadear(true);
-            }
-            else
-            {
-                _hud->Parpadear(false);
-            }
+            _hud->Parpadear(true);
             relojAtaqueEspecial.ReiniciarSegundos();
         }
         
