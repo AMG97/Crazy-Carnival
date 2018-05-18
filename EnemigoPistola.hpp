@@ -11,6 +11,7 @@ namespace Crazy
         EnemigoPistola(const EnemigoPistola& orig);
         virtual ~EnemigoPistola();
         void Update(int Posx,int Posy);
+        void Update(int Posx,int Posy,Player* p);
         void Dibujar();
         void ModificarSpriteCorrer();
         void ModificarSpriteAtaque1();

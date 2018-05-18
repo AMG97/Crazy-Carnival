@@ -54,8 +54,10 @@ namespace Crazy
         _hud = new Hud();
         EnemigoPistola* e = new EnemigoPistola(600,_level->getAltura()*48-48*3-2-70+20);
         EnemigoPistola* e2 = new EnemigoPistola(1100,_level->getAltura()*48-48*3-2-70+20);
+        EnemigoVolador* e3 = new EnemigoVolador(800,_level->getAltura()*48-48*5);
         _enemigos.push_back(e);
         _enemigos.push_back(e2);
+        _enemigos.push_back(e3);
         
         teclaPulsada = false;
         
@@ -244,8 +246,11 @@ namespace Crazy
                 delete tmp;
             }
             else{
-            _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
-            _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+            if(_enemigos[i]->GetArma()!=NULL){
+                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+            }else
+                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
             }
         }
         

@@ -11,6 +11,7 @@ namespace Crazy
         Enemigo(const Enemigo& orig);
         virtual ~Enemigo();
         virtual void Update(int Posx,int Posy)=0;
+        virtual void Update(int Posx,int Posy,Player* p)=0;
         void Dibujar()=0;
         virtual void ModificarSpriteCorrer()=0;
         virtual void ModificarSpriteAtaque1()=0;

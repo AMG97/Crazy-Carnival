@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
+	${OBJECTDIR}/EnemigoVolador.o \
 	${OBJECTDIR}/EstadoAyuda.o \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
@@ -98,6 +99,11 @@ ${OBJECTDIR}/EnemigoPistola.o: EnemigoPistola.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemigoPistola.o EnemigoPistola.cpp
+
+${OBJECTDIR}/EnemigoVolador.o: EnemigoVolador.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemigoVolador.o EnemigoVolador.cpp
 
 ${OBJECTDIR}/EstadoAyuda.o: EstadoAyuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}

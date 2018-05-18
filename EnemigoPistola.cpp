@@ -76,7 +76,7 @@ namespace Crazy
                     SetDireccion(true);
                 if(x-Posx>movimiento/2)
                 {
-                    sprite.move(-velocidad,0);
+                    sprite.Mover(-velocidad,0);
                     mov=true;
                 }
             }
@@ -142,6 +142,9 @@ namespace Crazy
     }
     
     void EnemigoPistola::ModificarSprite(){
+        
+    }
+    void EnemigoPistola::Update(int Posx, int Posy, Player* p){
         
     }
     
