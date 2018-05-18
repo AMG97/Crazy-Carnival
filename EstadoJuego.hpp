@@ -20,7 +20,7 @@ namespace Crazy
         
         Juego* _juego;
         Player* _jugador;
-        vector<Enemigo*> _enemigos;
+        
         
         Reloj reloj;
         Reloj relojAtaqueEspecial;

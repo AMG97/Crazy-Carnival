@@ -32,9 +32,11 @@ class Nivel {
         map<string,SpriteM***> tilemap;
         vector<string> layers;
         vector<Objeto*> objects;
+        vector<Enemigo*> _enemigos;
         
         int width, height;
         Juego* _juego;
+        Player* _jugador;
         Camara* _camera; bool freecam;
         b2World* _mundo;
         vector<b2Body*> collisions;

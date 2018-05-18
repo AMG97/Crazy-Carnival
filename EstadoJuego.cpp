@@ -33,13 +33,6 @@ namespace Crazy
         _jugador = NULL;
         delete _pinstance;
         _pinstance = NULL;
-        for (int i=0; i < _enemigos.size(); i++)
-        {
-            Enemigo *tmp= _enemigos[i];
-            _enemigos.erase(_enemigos.begin()+i);
-            delete tmp;
-            _enemigos[i]=NULL;
-        }
     }
     
     void EstadoJuego::Init()
@@ -52,10 +45,6 @@ namespace Crazy
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
         _jugador = new Player("Espadachina");
         _hud = new Hud();
-        Enemigo* e = new Enemigo(0);
-        Enemigo* e2 = new Enemigo(1);
-        _enemigos.push_back(e);
-        _enemigos.push_back(e2);
         
         teclaPulsada = false;
         
@@ -230,20 +219,8 @@ namespace Crazy
             }
                 
         }
-        _jugador->Update(_enemigos);
-        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador);
+        
         _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
-        for(int i=0;i<_enemigos.size();i++){
-            if(_enemigos[i]->GetVida()<=0){
-                Enemigo *tmp=_enemigos[i];
-                _enemigos.erase(_enemigos.begin()+i);
-                delete tmp;
-            }
-            else{
-            _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
-            _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
-            }
-        }
         
         _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
         _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());
@@ -280,10 +257,6 @@ namespace Crazy
         
         _hud->Dibujar();
         
-        for(int i=0;i<_enemigos.size();i++){
-            _enemigos[i]->Dibujar();
-            
-        }
         
         _jugador->ModificarSprite();
         _jugador->Dibujar();

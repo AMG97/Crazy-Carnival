@@ -44,12 +44,21 @@ namespace Crazy{
             delete ob;
         }
         objects.clear();
+        
+        for (int i=0; i < _enemigos.size(); i++)
+        {
+            Enemigo *tmp= _enemigos[i];
+            _enemigos.erase(_enemigos.begin()+i);
+            delete tmp;
+        }
+        _enemigos.clear();
 
     }
 
     
     void Nivel::cargarNivel(unsigned short int l) {
         _juego = Juego::Instance();
+        _jugador = 0;
         sf::Texture* mapa = 0;
         TiXmlDocument doc,sprite,objects_doc;
         switch(l){
@@ -107,6 +116,8 @@ namespace Crazy{
 
                         if(tilemap[name][i][j]!=0){
                             int tileV = abs(value)-1, limit = 1, change;
+                            bool isObject = false;
+                            
                             map->FirstChild()->NextSiblingElement()->QueryIntAttribute("firstgid",&change);
 
                             if(abs(value) < change){
@@ -116,6 +127,7 @@ namespace Crazy{
                                 tilemap[name][i][j]->CambiarTextura(_juego->recursos.GetTextura("Objetos"));
                                 tileV-=change-1;
                                 objects_doc.FirstChildElement()->QueryIntAttribute("columns",&limit);
+                                isObject=true;
                             }
 
                             tilemap[name][i][j]->CambiarPosicion(48*j,48*i);
@@ -123,7 +135,7 @@ namespace Crazy{
 
 
 
-                            if(tilemap[name][i][j]!=0 && name=="Objetos"){
+                            if(name=="Objetos" && tilemap[name][i][j]!=0){
                                 switch(tileV+1){
                                     case 1:
                                         objects.push_back(new OBJ_HP(j,i,tilemap[name][i][j],100));
@@ -142,9 +154,21 @@ namespace Crazy{
                                         break;
                                 }
                             }
+                            if(name=="Delante" && isObject && tilemap[name][i][j]!=0){
+                                switch(tileV){
+                                    case 98: //Es la e verde, la roja será +1 y el resto para atrás
+                                        delete tilemap[name][i][j];
+                                        tilemap[name][i][j] = 0;
+                                        _enemigos.push_back(new Enemigo(48*j,48*i));
+                                        cout<<"Entra"<<endl;
+                                        break;
+                                }
+                            }
 
-                            tilemap[name][i][j]->CambiarTextRect(48*(tileV%limit),48*(tileV/limit),48,48);
-                            if(value<0)tilemap[name][i][j]->EscalarProporcion(-1,1);
+                            if(tilemap[name][i][j]!=0){
+                                tilemap[name][i][j]->CambiarTextRect(48*(tileV%limit),48*(tileV/limit),48,48);
+                                if(value<0)tilemap[name][i][j]->EscalarProporcion(-1,1);
+                            }
 
                         }
                         if((i+1)*(j+1)<mapX*mapY)tile = tile->NextSiblingElement();
@@ -174,6 +198,7 @@ namespace Crazy{
         //camera->setTam(800,1200);
         //camera->mover(2,0);
         _juego->_ventana->setCamara(*_camera);
+        _jugador = EstadoJuego::Instance()->_jugador;
         
         
         //Colision con los objetos
@@ -189,7 +214,19 @@ namespace Crazy{
         }
         //Fin de la colision
         
-        
+        _jugador->Update(_enemigos);
+        _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador);
+        for(int i=0;i<_enemigos.size();i++){
+            if(_enemigos[i]->GetVida()<=0){
+                Enemigo *tmp=_enemigos[i];
+                _enemigos.erase(_enemigos.begin()+i);
+                delete tmp;
+            }
+            else{
+                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+            }
+        }
 
     }
 
@@ -200,7 +237,10 @@ namespace Crazy{
                     _juego->_ventana->DibujarC(*tilemap[capa][i][j]);
             }
         }
-        //cout<<"Sale"<<endl;
+        
+        for(int i=0;i<_enemigos.size();i++){
+            _enemigos[i]->Dibujar();
+        }
     }
     void Nivel::setPosCamara(float _jugadorX, float _jugadorY){       
         if(!freecam)_camera->setCentro(_jugadorX,_jugadorY); 

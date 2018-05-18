@@ -7,7 +7,7 @@ namespace Crazy
 {
     class Enemigo : public Comportamiento {
     public:
-        Enemigo(int n);
+        Enemigo(int x, int y);
         Enemigo(const Enemigo& orig);
         virtual ~Enemigo();
         void Update(int Posx,int Posy);

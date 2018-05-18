@@ -3,17 +3,16 @@
 
 namespace Crazy
 {
-    Enemigo::Enemigo(int n) {
+    Enemigo::Enemigo(int x, int y) {
         sprite.CambiarTextura(_juego->recursos.GetTextura("Enemigo-Pistola1"));
         sprite.CambiarTextRect(0,0,70,80);
         sprite.CambiarOrigen(70/2,80/2+10);
-        if(n==1)
-            sprite.CambiarPosicion(600, EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto()+20);
-        else 
-            sprite.CambiarPosicion(1100, EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto()+20);
+        
+        sprite.CambiarPosicion(x,y);
+            
         _arma=new Arma(0,sprite.GetX(),sprite.GetY(),false);
         sprite.EscalarProporcion(1.5,1.5);
-        vida=45.0;
+        vida=25.0;
         posinix=sprite.GetX();
         posiniy=sprite.GetY();
         contadorSpriteCorrer=0;
