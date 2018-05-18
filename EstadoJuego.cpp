@@ -52,8 +52,8 @@ namespace Crazy
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
         _jugador = new Player("Espadachina");
         _hud = new Hud();
-        Enemigo* e = new Enemigo(0);
-        Enemigo* e2 = new Enemigo(1);
+        EnemigoPistola* e = new EnemigoPistola(600,_level->getAltura()*48-48*3-2-70+20);
+        EnemigoPistola* e2 = new EnemigoPistola(1100,_level->getAltura()*48-48*3-2-70+20);
         _enemigos.push_back(e);
         _enemigos.push_back(e2);
         

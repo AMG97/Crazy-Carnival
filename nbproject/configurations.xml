@@ -7,6 +7,7 @@
       <itemPath>Arma.hpp</itemPath>
       <itemPath>Comportamiento.hpp</itemPath>
       <itemPath>Enemigo.hpp</itemPath>
+      <itemPath>EnemigoPistola.hpp</itemPath>
       <itemPath>Estado.hpp</itemPath>
       <itemPath>EstadoAyuda.hpp</itemPath>
       <itemPath>EstadoEstadisticas.hpp</itemPath>
@@ -34,6 +35,7 @@
       <itemPath>Arma.cpp</itemPath>
       <itemPath>Comportamiento.cpp</itemPath>
       <itemPath>Enemigo.cpp</itemPath>
+      <itemPath>EnemigoPistola.cpp</itemPath>
       <itemPath>EstadoAyuda.cpp</itemPath>
       <itemPath>EstadoEstadisticas.cpp</itemPath>
       <itemPath>EstadoJuego.cpp</itemPath>
@@ -125,6 +127,10 @@
       <item path="Enemigo.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Enemigo.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EnemigoPistola.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EnemigoPistola.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -222,6 +228,10 @@
       <item path="Enemigo.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Enemigo.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EnemigoPistola.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EnemigoPistola.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
       </item>
