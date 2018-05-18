@@ -19,6 +19,7 @@ namespace Crazy
         contadorSpriteCorrer=0;
         contadorSpriteAtaque1=0;
         Ataque1=false;
+        rojo=false;
         angulo=0;
         SetDireccion(true);
         velocidad=1.5;
@@ -139,6 +140,12 @@ namespace Crazy
                 }
             }
         }
+        if(rojo && relojrojo.GetSegundos()<=0.2)
+            sprite.CambiarColorRojo();
+        else if(rojo && relojrojo.GetSegundos()>0.2){
+            rojo=false;
+            sprite.Parpadear(false);
+        }
     }
     
     void Enemigo::Dibujar(){
@@ -147,15 +154,9 @@ namespace Crazy
     }
     
     void Enemigo::RecibirDanyo(float dan){
-        cout<<"Danyo recibido: "<<dan;
-        cout<<"Vida antes: "<<vida;
         vida-=dan;
-        cout<<"Vida despues:"<<vida;
-        if(vida<0){
-            cout<<"Enemigo muerto"<<endl;
-        }else{
-            cout<<"Enemigo recibe danyo:"<<dan<<endl;
-        }
+        rojo=true;
+        relojrojo.ReiniciarSegundos();
     }
     
     void Enemigo::ModificarSprite(){

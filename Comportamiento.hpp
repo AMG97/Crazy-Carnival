@@ -56,5 +56,8 @@ namespace Crazy
         
         float angulo;
         Arma* _arma;
+        
+        bool rojo;
+        Reloj relojrojo;
     };
 }
