@@ -16,7 +16,7 @@ namespace Crazy
         contadorSpriteCorrer=0;
         rojo=false;
         SetDireccion(true);
-        velocidad=2.5;
+        velocidad=2.7;
         alcancex=600;
         alcancey=200;
         movimiento=400;
@@ -76,7 +76,7 @@ namespace Crazy
                 Mover(0,velocidad/2);
             else 
                 Mover(0, -velocidad/2);
-            if(tAtaque.GetSegundos()>2.0){
+            if(tAtaque.GetSegundos()>1.0){
                 tAtaque.ReiniciarSegundos();
                 if(p->GetSprite().Interseccion1(sprite)){
                     p->RecibirDanyo(danyo);
