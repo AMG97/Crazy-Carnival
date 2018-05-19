@@ -16,8 +16,10 @@ namespace Crazy
         void ModificarSpriteCorrer();
         void ModificarSpriteAtaque1();
         void ModificarSprite();
+        void MoverX(float x, bool t);
+        void MoverY();
     private:
-
+        float caida;
     };
 }
 

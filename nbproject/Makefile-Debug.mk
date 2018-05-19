@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Arma.o \
+	${OBJECTDIR}/BossCangrejo.o \
 	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
@@ -96,6 +97,11 @@ ${OBJECTDIR}/Arma.o: Arma.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Arma.o Arma.cpp
+
+${OBJECTDIR}/BossCangrejo.o: BossCangrejo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossCangrejo.o BossCangrejo.cpp
 
 ${OBJECTDIR}/Comportamiento.o: Comportamiento.cpp 
 	${MKDIR} -p ${OBJECTDIR}

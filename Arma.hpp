@@ -7,6 +7,7 @@
 #define SALTO 2
 #define ATAQUE1  3
 #define ATAQUE2  4
+#define CORRERATRAS 5
 
 namespace Crazy
 {
@@ -16,7 +17,7 @@ namespace Crazy
 
     class Arma {
     public:
-        Arma(int n, float x, float y, bool p);
+        Arma(int n, float x, float y);
         Arma(const Arma& orig);
         virtual ~Arma();
         void BorrarProyectil(int i);

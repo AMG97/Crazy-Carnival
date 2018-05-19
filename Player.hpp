@@ -11,6 +11,7 @@
 #define SALTO 2
 #define ATAQUE1 3
 #define ATAQUE2 4
+#define DESLIZARSE 6
 
 namespace Crazy
 {
@@ -42,6 +43,7 @@ namespace Crazy
         short int GetReposo();
         short int GetAtaque1();
         short int GetAtaque2();
+        short int GetDeslizarse();
         void SetEstado(short int est);
         void CambiarDireccion();
         bool getDireccion();
@@ -57,24 +59,15 @@ namespace Crazy
         void SetVElocidadSalto(float v);
         float GetVelocidadSalto();
         
-        
-        // Box2D
-        b2Body* GetCuerpo();
-        void SetCuerpo();
-        b2BodyDef GetCuerpoDefinicion();
-        void SetCuerpoDefinicionPosicion(float32 posX, float32 posY);
-        b2Fixture* GetFixtureCuerpo();
-        void SetFixtureCuerpo();
-        b2FixtureDef GetFixtureCuerpoDefinicion();
-        void SetFixtureCuerpoDefinicion();
-        b2PolygonShape GetForma();
-        void SetForma();
-        
-        void SetAhora();
-        float GetXAhora();
-        float GetYAhora();
+        void MoverX(float x);
+        void MoverY();
         
         void Saltar();
+        
+        int GetLastPared();
+        
+        void tparedRestart();
+        float Gettpared();
         
     private:
         float totalEnfriamiento;
@@ -88,27 +81,16 @@ namespace Crazy
         Reloj tAtaque2;
         bool Atacado2;
         
-        float velSalto;
+        Reloj tpared;
         
+        float velSalto;
+        float caida;
         short int contadorSpriteCorrer;
         short int contadorSpriteSalto;
         short int contadorSpriteReposo;
         short int contadorSpriteAtaque1;
         short int contadorSpriteAtaque2;
         
-        b2World* _mundo; // pa la gravedad
-        b2Body* _cuerpo; // esto se le asocia al sprite
-        
-        // esto define las fisicas
-        b2BodyDef cuerpoDef;
-        b2Fixture *_fixCuerpo;
-        b2FixtureDef fixCuerpoDef;
-        b2PolygonShape formaCuerpo; //bounding box, posiblemente
-        
-        
-        // Prueba
-        int xAhora;
-        int yAhora;
-        bool guardado;
+        int lastpared;
     };
 }

@@ -9,9 +9,9 @@ namespace Crazy
         {
             case 1:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Puñal"));
-                alcance=400;
+                alcance=600;
                 danyo=dan*1.5;
-                velocidad=5;
+                velocidad=5.5;
             break;
             
             case 2:
@@ -19,6 +19,13 @@ namespace Crazy
                 alcance=750;
                 danyo=dan;
                 velocidad=6;
+            break;
+            case 3:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Cangrejo"));
+                sprite.CambiarTextRect(0,70*4,20,20);
+                danyo=dan;
+                velocidad=6;
+                alcance=1200;
             break;
                 
         }
@@ -35,7 +42,6 @@ namespace Crazy
         }
         sprite.CambiarPosicion(PosIniX, PosIniY);
         sprite.EscalarProporcion(2.2,2.2);
-        sprite.CambiarOrigen();
         sprite.Rotar(-angulo*180/3.14159+90);
     }
     

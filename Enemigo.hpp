@@ -18,6 +18,7 @@ namespace Crazy
         virtual void ModificarSprite()=0;
         void SetDireccion(bool direccion);
         void RecibirDanyo(float dan);
+        int getPuntos();
     protected:
         float alcancex;
         float alcancey;
@@ -29,6 +30,8 @@ namespace Crazy
         float movimiento;
         Reloj tAtaque;
         Reloj tDesp;
+        bool encontrado;
+        int puntos;
     };
 }
 
