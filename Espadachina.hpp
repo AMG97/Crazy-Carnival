@@ -19,7 +19,9 @@ namespace Crazy
     public:
         Espadachina();
         void ModificarSprite();
-        void Reposo(int n);        
+        void Reposo(int n);  
+        void Update(vector<Enemigo*> e);
+
     private:
 
     };

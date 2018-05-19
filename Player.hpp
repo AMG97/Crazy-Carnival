@@ -55,7 +55,7 @@ namespace Crazy
         virtual void ModificarSprite()=0;
         float GetTAtque2();
         virtual void Reposo(int n)=0;
-        void Update(vector<Enemigo*> e);
+        virtual void Update(vector<Enemigo*> e)=0;
         void SetVElocidadSalto(float v);
         float GetVelocidadSalto();
         
