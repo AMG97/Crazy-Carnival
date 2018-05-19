@@ -8,7 +8,7 @@ namespace Crazy
         sprite.CambiarTextRect(0,0,70,80);
         sprite.CambiarOrigen(70/2,80/2);
             sprite.CambiarPosicion(posx, posy);
-        _arma=new Arma(0,sprite.GetX(),sprite.GetY(),false);
+        _arma=new Arma(0,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5,1.5);
         vida=25.0;
         posinix=sprite.GetX();

@@ -200,7 +200,7 @@ namespace Crazy
                 break;
                 
                 case CORRERATRAS:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*60, 1*80, 60, 80);
+                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
                     sprite.CambiarOrigen(60/2,80/2);
                     //cout<<"ATRAS"<<endl;
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);

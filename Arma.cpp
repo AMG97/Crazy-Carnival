@@ -6,7 +6,7 @@
 
 namespace Crazy
 {
-    Arma::Arma(int n, float x, float y, bool p) 
+    Arma::Arma(int n, float x, float y) 
     {
         _juego= Juego::Instance();
         tipo=n;
@@ -60,6 +60,7 @@ namespace Crazy
                 sprite.CambiarOrigen(30, 45);
             break;
             
+            case CORRERATRAS:
             case CORRER:
                 sprite.CambiarTextRect(n*65,80,60,70);
                 sprite.CambiarOrigen(30, 40);
