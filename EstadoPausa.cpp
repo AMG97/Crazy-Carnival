@@ -18,6 +18,11 @@ namespace Crazy
         return _pinstance;
     }
     
+    void EstadoPausa::Vaciar()
+    {
+        _pinstance=0;
+    }
+    
     EstadoPausa::~EstadoPausa()
     {
         delete _input;
@@ -28,6 +33,10 @@ namespace Crazy
     
     void EstadoPausa::Init()
     {
+        // Cambiar a Default View de la ventana
+        _juego->_ventana->SetCamaraPorDefecto();
+        _juego->_ventana->setBackground(0,0,0); // Fondo negro
+        
         _input = new Input();
         opcion = ABANDONAR;
         teclaPulsada = false;
@@ -119,20 +128,20 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->Dibujar(t_titulo);
-        _juego->_ventana->Dibujar(t_frase);
-        _juego->_ventana->DibujarC(flecha);
+        _juego->_ventana->DibujarTexto(t_titulo);
+        _juego->_ventana->DibujarTexto(t_frase);
+        _juego->_ventana->DibujarSprite(flecha);
         
         if (!abandonar)
         {
-            _juego->_ventana->Dibujar(t_atras);
-            _juego->_ventana->DibujarC(flechaAtras);
+            _juego->_ventana->DibujarTexto(t_atras);
+            _juego->_ventana->DibujarSprite(flechaAtras);
         }
         else
         {
-            _juego->_ventana->Dibujar(t_op);
-            _juego->_ventana->Dibujar(t_op2);
-            _juego->_ventana->Dibujar(t_frase2);
+            _juego->_ventana->DibujarTexto(t_op);
+            _juego->_ventana->DibujarTexto(t_op2);
+            _juego->_ventana->DibujarTexto(t_frase2);
         }
         
         _juego->_ventana->Mostrar();
@@ -167,13 +176,10 @@ namespace Crazy
                 Confirmar();
                 break;
             case OP1:
-                _juego->maquina.Eliminar();
-                _juego->maquina.Anyadir(EstadoMenu::Instance());
+                _juego->maquina.SaltarAlMenu();
                 break;
             case OP2:
-                abandonar = false;
-                opcion = ABANDONAR;
-                Abandonar();
+                _juego->maquina.Eliminar();
                 break;
         }
     }

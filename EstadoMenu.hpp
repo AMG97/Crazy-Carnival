@@ -1,14 +1,18 @@
 #pragma once
 
 #include "Estado.hpp"
-#include "EstadoMenuPartidas.hpp"
+#include "EstadoSeleccion.hpp"
+#include "EstadoEstadisticas.hpp"
 #include "EstadoAyuda.hpp"
 #include "Juego.hpp"
 
 // Constantes
-#define JUGAR 0
-#define AYUDA 1
-#define SALIR 2
+#define NUEVA 0
+#define CARGAR 1
+#define BORRAR 2
+#define ESTADISTICAS 3
+#define AYUDA 4
+#define SALIR 5
 
 namespace Crazy
 {
@@ -17,11 +21,14 @@ namespace Crazy
     public:
         EstadoMenu();
         static EstadoMenu* Instance();
+        void Vaciar();
         
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
         void Dibujar(float tiempoActual);
+        void Pausar();
+        void Reanudar();
         
         ~EstadoMenu();
     private:
@@ -30,7 +37,10 @@ namespace Crazy
         Juego* _juego;
         Input* _input;
         Texto t_titulo;
-        Texto t_jugar;
+        Texto t_nueva;
+        Texto t_cargar;
+        Texto t_borrar;
+        Texto t_estadisticas;
         Texto t_ayuda;
         Texto t_salir;
         Texto t_explicar;
@@ -40,8 +50,16 @@ namespace Crazy
         
         short int opcion;
         bool teclaPulsada;
+        short int tamFuente;
         
         void CambiarFlecha(Texto texto);
         void CambiarEstado();
+        
+        void NuevaPartida();
+        void CargarPartida();
+        void BorrarPartida();
+        void Estadisticas();
+        void Ayuda();
+        void Salir();
     };
 }

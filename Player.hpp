@@ -7,6 +7,7 @@
 // Constantes
 #define REPOSO 0
 #define CORRER 1
+#define CORRERATRAS 5
 #define SALTO 2
 #define ATAQUE1 3
 #define ATAQUE2 4
@@ -20,6 +21,10 @@ namespace Crazy
         float GetEnfriamiento();
         float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);
+        void SetElixir(bool v);
+        void addPuntuacion(int puntos);
+        void setPuntuacion(int puntos);
+        int getPuntuacion();
         
         void ModificarEnfriamiento(float modificador);
         
@@ -32,6 +37,7 @@ namespace Crazy
         
         short int GetEstado();
         short int GetCorrer();
+        short int GetCorrerAtras();
         short int GetSaltar();
         short int GetReposo();
         short int GetAtaque1();
@@ -75,6 +81,8 @@ namespace Crazy
         float enfriamiento;
         bool ataqueEspecial;
         bool golpear;
+        bool elixir;
+        int puntuacion;
         
         short int estado;
         Reloj tAtaque2;

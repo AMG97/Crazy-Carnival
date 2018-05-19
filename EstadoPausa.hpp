@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Estado.hpp"
-#include "EstadoMenu.hpp"
 #include "Juego.hpp"
 
 // Constantes
@@ -16,6 +15,7 @@ namespace Crazy
     public:
         EstadoPausa();
         static EstadoPausa* Instance();
+        void Vaciar();
         
         void Init();
         void ManejarEventos();

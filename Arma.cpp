@@ -1,13 +1,16 @@
 #include "Arma.hpp"
 #include "Enemigo.hpp" 
 #include "Player.hpp"
+#include "Nivel.hpp"
+#include "EstadoJuego.hpp"
 
 namespace Crazy
 {
-    Arma::Arma(int n, float x, float y) 
+    Arma::Arma(int n, float x, float y, bool p) 
     {
         _juego= Juego::Instance();
         tipo=n;
+        player=p;
         switch (tipo)
         {
             case 0:
@@ -38,7 +41,7 @@ namespace Crazy
     void Arma::Dibujar()
     {
         if(tipo!=0)
-            _juego->_ventana->DibujarC(sprite);
+            _juego->_ventana->DibujarSprite(sprite);
         for(int i=0; i<proyectiles.size();i++)
             proyectiles[i]->Dibujar();
     }
@@ -82,16 +85,17 @@ namespace Crazy
     
     
     
-    void Arma::Update(float x, float y, vector<Enemigo*> e){
+    void Arma::Update(float x, float y, vector<Enemigo*> e, Player *p){
         sprite.CambiarPosicion(x,y);
         for(int i=0;i<proyectiles.size();i++){
             bool b=proyectiles[i]->Update();
-            if(!b)
+            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
                 BorrarProyectil(i);
             else{
                 for(int j=0;j<e.size();j++){
-                    if(proyectiles[i]->GetProyectil().Interseccion(e[j]->GetSprite()))
+                    if(proyectiles[i]->GetProyectil().Interseccion1(e[j]->GetSprite()))
                     {
+                        p->ModificarEnfriamiento(5);
                         e[j]->RecibirDanyo(proyectiles[i]->GetDanyo());
                         BorrarProyectil(i);
                     }
@@ -108,9 +112,9 @@ namespace Crazy
         for(int i=0;i<proyectiles.size();i++)
         {
             bool b=proyectiles[i]->Update();
-            if(!b)
+            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
                 BorrarProyectil(i);
-            else if(proyectiles[i]->GetProyectil().Interseccion(p->GetSprite()))
+            else if(proyectiles[i]->GetProyectil().Interseccion1(p->GetSprite()))
             {
                 p->RecibirDanyo(proyectiles[i]->GetDanyo());
                 BorrarProyectil(i);

@@ -2,9 +2,12 @@
 
 #include "Estado.hpp"
 #include "EstadoPausa.hpp"
+#include "EstadoMuerte.hpp"
 #include "Juego.hpp"
 #include "Arma.hpp"
 #include "Enemigo.hpp"
+#include "EnemigoPistola.hpp"
+#include "EnemigoVolador.hpp"
 #include "Player.hpp"
 #include "Hud.hpp"
 #include "Nivel.hpp"
@@ -16,10 +19,11 @@ namespace Crazy
     public:
         EstadoJuego();
         static EstadoJuego* Instance();
+        void Vaciar();
         
         Juego* _juego;
         Player* _jugador;
-        vector<Enemigo*> _enemigos;
+        
         
         Reloj reloj;
         Reloj relojAtaqueEspecial;
@@ -33,6 +37,7 @@ namespace Crazy
         
         Nivel* _level;
         
+        void Personaje(string jugador);
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
@@ -40,6 +45,7 @@ namespace Crazy
         void Pausar();
         void Reanudar();
         b2World* GetMundo();
+        Nivel* GetNivel();
         void SetMundo(b2World* world);
         
         ~EstadoJuego();
@@ -48,6 +54,7 @@ namespace Crazy
         
         Input* _input;
         bool teclaPulsada;
+        string texturaJugador;
         
         Hud* _hud;
         b2World* _mundo;

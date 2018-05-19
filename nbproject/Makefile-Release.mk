@@ -38,17 +38,20 @@ OBJECTFILES= \
 	${OBJECTDIR}/Arma.o \
 	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/Enemigo.o \
+	${OBJECTDIR}/EnemigoPistola.o \
+	${OBJECTDIR}/EnemigoVolador.o \
 	${OBJECTDIR}/EstadoAyuda.o \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
-	${OBJECTDIR}/EstadoMenuPartidas.o \
+	${OBJECTDIR}/EstadoMuerte.o \
 	${OBJECTDIR}/EstadoPausa.o \
 	${OBJECTDIR}/EstadosManager.o \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/Nivel.o \
+	${OBJECTDIR}/Objeto.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Proyectil.o
 
@@ -92,6 +95,16 @@ ${OBJECTDIR}/Enemigo.o: Enemigo.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Enemigo.o Enemigo.cpp
 
+${OBJECTDIR}/EnemigoPistola.o: EnemigoPistola.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemigoPistola.o EnemigoPistola.cpp
+
+${OBJECTDIR}/EnemigoVolador.o: EnemigoVolador.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemigoVolador.o EnemigoVolador.cpp
+
 ${OBJECTDIR}/EstadoAyuda.o: EstadoAyuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -112,10 +125,10 @@ ${OBJECTDIR}/EstadoMenu.o: EstadoMenu.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMenu.o EstadoMenu.cpp
 
-${OBJECTDIR}/EstadoMenuPartidas.o: EstadoMenuPartidas.cpp 
+${OBJECTDIR}/EstadoMuerte.o: EstadoMuerte.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMenuPartidas.o EstadoMenuPartidas.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMuerte.o EstadoMuerte.cpp
 
 ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -146,6 +159,11 @@ ${OBJECTDIR}/Nivel.o: Nivel.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nivel.o Nivel.cpp
+
+${OBJECTDIR}/Objeto.o: Objeto.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
 
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}

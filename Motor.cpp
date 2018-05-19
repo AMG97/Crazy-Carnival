@@ -1,4 +1,6 @@
 #include "Motor.hpp"
+#include "EstadoJuego.hpp"
+
 namespace Motor
 {
 // Reloj
@@ -91,6 +93,16 @@ namespace Motor
     float Texto::GetY()
     {
         return getPosition().y;
+    }
+    
+    void Texto::CambiarColorRojo()
+    {
+        setColor(sf::Color::Red);
+    }
+    
+    void Texto::CambiarColorBlanco()
+    {
+        setColor(sf::Color::White);
     }
     
 // Recursos
@@ -221,9 +233,14 @@ namespace Motor
     {
         move(x,y);
     } 
-    bool SpriteM::Interseccion(SpriteM s)
+    bool SpriteM::Interseccion1(SpriteM s)
     {
-        return getGlobalBounds().intersects(s.getGlobalBounds());
+        return s.getGlobalBounds().contains(getPosition().x,getPosition().y);
+    }
+    
+    bool SpriteM::Interseccion2(SpriteM s)
+    {
+        return s.getGlobalBounds().intersects(getGlobalBounds());
     }
 
 // Ventana
@@ -271,22 +288,33 @@ namespace Motor
     {
         window.close();
     }
+
+    void Ventana::DibujarTexto(Texto txt, Camara* camara) {
+        txt.CambiarPosicion(txt.GetX() + camara->getX()-camara->getWidth()/2, txt.GetY() + camara->getY()-camara->getHeight()/2);
+        window.draw(txt);
+    }
     
-    void Ventana::Dibujar(Texto txt)
+    void Ventana::DibujarTexto(Texto txt)
     {
         window.draw(txt);
     }
     
-     void Ventana::DibujarB(SpriteM sprite, Camara& camara)
+     void Ventana::DibujarSprite(SpriteM sprite, Camara* camara)
     {
-         sprite.CambiarPosicion(sprite.GetX() + camara.GetCamara().getCenter().x -500, sprite.GetY() + camara.GetCamara().getCenter().y-350);
+        sprite.CambiarPosicion(sprite.GetX() + camara->getX()-camara->getWidth()/2, sprite.GetY() + camara->getY()-camara->getHeight()/2);
         window.draw(sprite);
     }
     
-    void Ventana::DibujarC(SpriteM sprite)
+    void Ventana::DibujarSprite(SpriteM sprite)
     {
         window.draw(sprite);
     }
+    
+    void Ventana::SetCamaraPorDefecto()
+    {
+        window.setView(window.getDefaultView());
+    }
+    
     void Ventana::setCamara(Camara &camara)
     {
         window.setView(camara.GetCamara());
@@ -296,8 +324,20 @@ namespace Motor
     {
         return window;
     }
+    
     void Ventana::setBackground(int r, int g, int b) {
         background = sf::Color(r,g,b);
+    }
+    
+    void Ventana::setBackground2(int r, int g, int b, int a){
+        Camara* c=Camara::Instance();
+        sf::RectangleShape f;
+        f.setSize(sf::Vector2f(c->getWidth(),c->getHeight()));
+        f.setOrigin(c->getWidth()/2,c->getHeight()/2);
+        
+        f.setPosition(c->getX(),c->getY());
+        f.setFillColor(sf::Color(r,g,b,a));
+        window.draw(f);
     }
 
     
@@ -319,9 +359,12 @@ namespace Motor
         _pinstance2 = NULL;
     }
     
-    void Camara::CrearCamara(float centroX, float centroY, float ancho, float alto)
+    void Camara::CrearCamara(vector2f centro, vector2f tam, vector2f limits)
     {
-        camara.reset(sf::FloatRect(centroX, centroY, ancho, alto));
+        camara.reset(sf::FloatRect(centro.getX(), centro.getY(), tam.getX(), tam.getY()));
+        limit = limits;
+        staticCam = false;
+        tam.print();
     }
             
     sf::View& Camara::GetCamara()
@@ -335,12 +378,40 @@ namespace Motor
     }
     
     void Camara::mover(int x, int y) {
-        camara.move(x,y);
+        if(!staticCam){
+            //Limitado
+                setCentro(getX()+x,getY()+y);
+
+            //No limitado
+                //camara.move(x,y);
+        }
     }
 
     void Camara::setCentro(int x, int y) {
-        camara.setCenter(x,y);
+        if(!staticCam){
+            limitar(&x,&y);
+            camara.setCenter(x,y);
+        }
     }
+
+    void Camara::limitar(int* x, int* y) {
+        if(*y+camara.getSize().y/2-48/2 > (limit.getY()-1)*48) {
+            *y = (limit.getY()-1)*48 - camara.getSize().y/2 + 48/2;
+        }
+        if(*y-camara.getSize().y/2+48/2 < 48) {
+            *y = 48 + camara.getSize().y/2 - 48/2;
+        }
+        
+        if(*x+camara.getSize().x/2 - 48/2 > (limit.getX()-1)*48) {
+            *x = limit.getX()*48 - camara.getSize().x/2 - 48/2;
+        }
+        if(*x-camara.getSize().x/2 < 0) {
+            *x = camara.getSize().x/2;
+        }
+        
+        //limit.print();
+    }
+
 
     int Camara::getX() {
         return camara.getCenter().x;
@@ -357,28 +428,40 @@ namespace Motor
     float Camara::getWidth() {
         return camara.getSize().x;
     }
+    void Camara::toggleStatic() {
+        staticCam = !staticCam;
+    }
 
 
 // Input
     Input::Input()
     {
         _ventana = Ventana::Instance();
-        
+        _camara = Camara::Instance();
         eventos.Closed = 1;
         eventos.KeyPressed = 2;
         eventos.KeyReleased = 3;
         eventos.MouseButtonPressed = 4;
         eventos.MouseButtonReleased = 5;
+        eventos.MouseMoved = 6;
+        eventos.Resized = 7;
     }
     
     float Input::GetPosicionRatonX()
     {
-        return sf::Mouse::getPosition(_ventana->GetVentana()).x;
+        return sf::Mouse::getPosition(_ventana->GetVentana()).x+_camara->getX()-_camara->getWidth()/2;
     }
     
     float Input::GetPosicionRatonY()
     {
-       return sf::Mouse::getPosition(_ventana->GetVentana()).y;
+       return sf::Mouse::getPosition(_ventana->GetVentana()).y+_camara->getY()-_camara->getHeight()/2;
+    }
+    
+    void Input::Reescalar()
+    {
+        // update the view to the new size of the window
+        /*sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+        window.setView(sf::View(visibleArea));*/
     }
     
     Input::Eventos Input::Evento()
@@ -393,6 +476,10 @@ namespace Motor
         {
             switch(event.type)
             {
+                case sf::Event::Resized:
+                    //Reescalar();
+                    return eventos.Resized;
+                    
                 case sf::Event::Closed:
                     _ventana->Cerrar();
                     return eventos.Closed;
@@ -408,7 +495,10 @@ namespace Motor
 
                 case sf::Event::MouseButtonReleased:
                     return eventos.MouseButtonReleased;
-
+                    
+                case sf::Event::MouseMoved:
+                    return eventos.MouseMoved;
+                    
                 default:
                     return 0;
             }
@@ -429,6 +519,32 @@ namespace Motor
             return  true;
         }
         return  false;
+    }
+    
+    bool Input::IsTextoClicked(Texto& object)
+    {
+        sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY(),
+            object.GetAncho(), object.GetAlto());
+        
+        if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana())))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    bool Input::RatonSobre(Texto& object)
+    {
+        sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY(),
+            object.GetAncho(), object.GetAlto());
+        
+        if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana()))) {
+            object.CambiarColorRojo();
+            return true;
+        } else {
+            object.CambiarColorBlanco();
+            return false;
+        }
     }
     
     bool Input::RatonDer()
@@ -510,4 +626,9 @@ namespace Motor
     {
         return TeclaPulsada(sf::Keyboard::Q);
     }
+
+    bool Input::F9() {
+        return TeclaPulsada(sf::Keyboard::F9);
+    }
+
 }

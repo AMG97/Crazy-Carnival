@@ -1,5 +1,6 @@
 #pragma once
 #include "Juego.hpp"
+#include "Player.hpp"   
 
 namespace Crazy
 {
@@ -25,15 +26,18 @@ namespace Crazy
         
     private:
         Juego* _juego;
+        Player* _jugador;
         Camara* _camara;
         SpriteM spRecipVida;
         SpriteM spVida;
         SpriteM spEnfriamiento;
         SpriteM spElixir;
         SpriteM spContador [5];
+        Texto puntuacion;
         
         bool contrarreloj;
         bool elixir;
+        bool parpadea;
         bool ataqueEspecial;
         int spriteTimerSeg;
         int spriteTimerSeg1;

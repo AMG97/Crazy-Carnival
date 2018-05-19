@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Estado.hpp"
-#include "EstadoMenuPartidas.hpp"
 #include "Juego.hpp"
 
 namespace Crazy
@@ -11,6 +10,7 @@ namespace Crazy
     public:
         EstadoEstadisticas();
         static EstadoEstadisticas* Instance();
+        void Vaciar();
         
         void Init();
         void ManejarEventos();

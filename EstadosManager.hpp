@@ -23,6 +23,7 @@ namespace Crazy
         void Eliminar();
         
         void ProcesarPilaEstados();
+        void SaltarAlMenu();
         
         Estado* &GetEstadoActivo();
         
