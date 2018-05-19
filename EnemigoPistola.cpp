@@ -10,7 +10,7 @@ namespace Crazy
             sprite.CambiarPosicion(posx, posy);
         _arma=new Arma(0,sprite.GetX(),sprite.GetY(),false);
         sprite.EscalarProporcion(1.5,1.5);
-        vida=45.0;
+        vida=25.0;
         posinix=sprite.GetX();
         posiniy=sprite.GetY();
         contadorSpriteCorrer=0;

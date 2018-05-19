@@ -225,20 +225,6 @@ namespace Crazy
         }
         
         _level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
-        for(int i=0;i<_enemigos.size();i++){
-            if(_enemigos[i]->GetVida()<=0){
-                Enemigo *tmp=_enemigos[i];
-                _enemigos.erase(_enemigos.begin()+i);
-                delete tmp;
-            }
-            else{
-            if(_enemigos[i]->GetArma()!=NULL){
-                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
-                _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
-            }else
-                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
-            }
-        }
         
         _hud->ModificarVida(_jugador->GetVida(),_jugador->GetTotalVida());
         _hud->ModificarEnfriamiento(_jugador->GetEnfriamiento(),_jugador->GetTotalEnfriamiento());

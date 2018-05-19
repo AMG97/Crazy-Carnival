@@ -13,6 +13,7 @@
 
 #include "Nivel.hpp"
 #include "EstadoJuego.hpp"
+#include "EnemigoVolador.hpp"
 
 
 namespace Crazy{
@@ -159,8 +160,12 @@ namespace Crazy{
                                     case 98: //Es la e verde, la roja será +1 y el resto para atrás
                                         delete tilemap[name][i][j];
                                         tilemap[name][i][j] = 0;
-                                        _enemigos.push_back(new Enemigo(48*j,48*i));
-                                        cout<<"Entra"<<endl;
+                                        _enemigos.push_back(new EnemigoPistola(48*j,48*i));
+                                        break;
+                                    case 99:
+                                        delete tilemap[name][i][j];
+                                        tilemap[name][i][j] = 0;
+                                        _enemigos.push_back(new EnemigoVolador(48*j,48*i));
                                         break;
                                 }
                             }
@@ -223,10 +228,14 @@ namespace Crazy{
                 delete tmp;
             }
             else{
-                _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
-                _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+                if(_enemigos[i]->GetArma()!=NULL){
+                    _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                    _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+                }else
+                    _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
             }
-        }
+        }        
+        
 
     }
 
