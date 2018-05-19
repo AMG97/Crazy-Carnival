@@ -56,14 +56,14 @@ namespace Crazy
             break;
             
             case SALTO:
-                sprite.CambiarTextRect(n*60,7*80,60,90);
-                sprite.CambiarOrigen(30, 45);
+                sprite.CambiarTextRect(n*65,7*80,65,90);
+                sprite.CambiarOrigen(65/2, 45);
             break;
             
             case CORRERATRAS:
             case CORRER:
-                sprite.CambiarTextRect(n*65,80,60,70);
-                sprite.CambiarOrigen(30, 40);
+                sprite.CambiarTextRect(n*65,80,65,65);
+                sprite.CambiarOrigen(65/2, 40);
             break;
             
             case ATAQUE2:
