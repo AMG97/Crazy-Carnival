@@ -183,8 +183,8 @@ namespace Crazy
             switch(estado)
             {
                 case CORRER:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*60, 1*80, 60, 80);
-                    sprite.CambiarOrigen(60/2,80/2);
+                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 65, 80);
+                    sprite.CambiarOrigen(65/2,80/2);
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer++;
                     if(contadorSpriteCorrer == 6)
@@ -216,10 +216,10 @@ namespace Crazy
                 break;
 
                 case SALTO:
-                    sprite.CambiarTextRect(contadorSpriteSalto*70, 570, 70, 90);
+                    sprite.CambiarTextRect(contadorSpriteSalto*65, 560, 65, 90);
                     sprite.CambiarOrigen(60/2,90/2);
                     _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
-                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && velSalto>9) || (contadorSpriteSalto==2 && velSalto>11))
+                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && velSalto>2) || (contadorSpriteSalto==2 && velSalto>11))
                         contadorSpriteSalto++;
                     if(velSalto==0)
                     {
@@ -247,7 +247,8 @@ namespace Crazy
                             //sprite.Mover(0,-22);
                             golpear=true;
                         }
-                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 90);
+                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 80);
+                        sprite.CambiarOrigen(100/2,80/2);
                         _arma->ModificarSprite(estado,contadorSpriteAtaque1,sprite.GetX(),sprite.GetY(),angulo);
                         contadorSpriteAtaque1++;                        
                         if(contadorSpriteAtaque1==6)
@@ -268,7 +269,7 @@ namespace Crazy
                             tAtaque2.ReiniciarSegundos();
                         }
                     }
-                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,370,100,80);
+                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,360,100,80);
                     _arma->ModificarSprite(estado,contadorSpriteAtaque2,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteAtaque2++;
                     if(contadorSpriteAtaque2==3)
