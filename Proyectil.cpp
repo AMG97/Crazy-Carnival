@@ -20,6 +20,13 @@ namespace Crazy
                 danyo=dan;
                 velocidad=6;
             break;
+            case 3:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Cangrejo"));
+                sprite.CambiarTextRect(0,70*4,20,20);
+                danyo=dan;
+                velocidad=6;
+                alcance=1200;
+            break;
                 
         }
         angulo=ang*3.14159/180;
@@ -35,7 +42,6 @@ namespace Crazy
         }
         sprite.CambiarPosicion(PosIniX, PosIniY);
         sprite.EscalarProporcion(2.2,2.2);
-        sprite.CambiarOrigen();
         sprite.Rotar(-angulo*180/3.14159+90);
     }
     

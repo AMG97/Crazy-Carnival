@@ -40,7 +40,7 @@ namespace Crazy
         if(contadorSpriteAtaque1==2){
             contadorSpriteAtaque1=0;
             _arma->Disparar(angulo);
-            tAtaque.restart();
+            tAtaque.ReiniciarSegundos();
             Ataque1=false;
         }
     }

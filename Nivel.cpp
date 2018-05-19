@@ -14,6 +14,7 @@
 #include "Nivel.hpp"
 #include "EstadoJuego.hpp"
 #include "EnemigoVolador.hpp"
+#include "BossCangrejo.hpp"
 
 
 namespace Crazy{
@@ -187,7 +188,7 @@ namespace Crazy{
 
             freecam = false;
                 
-                
+            
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
             _camera->CrearCamara(vector2f(240,600), vector2f(_juego->GetAncho(),_juego->GetAlto()), vector2f(width,height));

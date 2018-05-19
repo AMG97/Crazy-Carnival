@@ -44,6 +44,7 @@ namespace Crazy
         recursos.CargarTextura("Puñal","resources/puñal.png");
         recursos.CargarTextura("Bala","resources/bala.png");
         recursos.CargarTextura("Enemigo-Volador","resources/enemigo-pajaro.png");
+        recursos.CargarTextura("Cangrejo","resources/CrabSprite.png");
         //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");
         
         // Temporal

@@ -79,7 +79,7 @@ namespace Crazy
                     Mover(0, -velocidad/2);
                 if(tAtaque.GetSegundos()>1.0){
                     tAtaque.ReiniciarSegundos();
-                    if(p->GetSprite().Interseccion1(sprite)){
+                    if(p->GetSprite().Interseccion2(sprite)){
                         p->RecibirDanyo(danyo);
                     }
                 }
