@@ -9,8 +9,7 @@ namespace Crazy
     Arma::Arma(int n, float x, float y, bool p) 
     {
         _juego= Juego::Instance();
-        tipo=0;
-        player=p;
+        tipo=n;
         switch (tipo)
         {
             case 0:
@@ -62,7 +61,7 @@ namespace Crazy
             break;
             
             case CORRER:
-                sprite.CambiarTextRect(n*60,80,60,80);
+                sprite.CambiarTextRect(n*65,80,60,70);
                 sprite.CambiarOrigen(30, 40);
             break;
             
