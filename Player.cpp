@@ -175,8 +175,8 @@ namespace Crazy
             switch(estado)
             {
                 case CORRER:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
-                    sprite.CambiarOrigen(60/2,80/2);
+                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 65, 80);
+                    sprite.CambiarOrigen(65/2,80/2);
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer++;
                     if(contadorSpriteCorrer == 6)
