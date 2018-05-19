@@ -37,6 +37,7 @@ namespace Crazy
         
         Nivel* _level;
         
+        void Personaje(string jugador);
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
@@ -53,6 +54,7 @@ namespace Crazy
         
         Input* _input;
         bool teclaPulsada;
+        string texturaJugador;
         
         Hud* _hud;
         b2World* _mundo;

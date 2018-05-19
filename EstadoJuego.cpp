@@ -35,6 +35,11 @@ namespace Crazy
         _pinstance = NULL;
     }
     
+    void EstadoJuego::Personaje(string jugador)
+    {
+        texturaJugador = jugador;
+    }
+    
     void EstadoJuego::Init()
     {
         _mundo = new b2World(b2Vec2(0.0, 9.8));
@@ -42,8 +47,7 @@ namespace Crazy
         _input = new Input();
         _level = new Nivel();
         _level->cargarNivel(1);
-        //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
-        _jugador = new Player("Espadachina");
+        _jugador = new Player(texturaJugador);
         _hud = new Hud();
         
         teclaPulsada = false;

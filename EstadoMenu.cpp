@@ -201,7 +201,7 @@ namespace Crazy
     
     void EstadoMenu::NuevaPartida()
     {
-        _juego->maquina.Anyadir(EstadoJuego::Instance(), false);
+        _juego->maquina.Anyadir(EstadoSeleccion::Instance(), false);
     }
     
     void EstadoMenu::CargarPartida()

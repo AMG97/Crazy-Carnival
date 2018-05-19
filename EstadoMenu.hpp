@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Estado.hpp"
-#include "EstadoJuego.hpp"
+#include "EstadoSeleccion.hpp"
 #include "EstadoEstadisticas.hpp"
 #include "EstadoAyuda.hpp"
 #include "Juego.hpp"
