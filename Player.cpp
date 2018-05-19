@@ -420,7 +420,10 @@ namespace Crazy
     
     void Player::MoverY(){
         if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2) && velSalto==0){
-            caida+=0.4;
+            if(estado==DESLIZARSE)
+                caida+=0.2;
+            else
+                caida+=0.4;
             sprite.Mover(0,caida);
         }else{
             if(caida!=0){
@@ -433,8 +436,6 @@ namespace Crazy
         if((velSalto!=0 && estado!=DESLIZARSE) || (estado==DESLIZARSE && velSalto<0))
         {
             velSalto=velSalto+0.5;
-        }else if(velSalto>0 && estado==DESLIZARSE){
-            velSalto+=0.25;
         }
         if(velSalto>4)
             velSalto=4;

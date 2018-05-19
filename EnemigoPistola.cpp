@@ -77,7 +77,7 @@ namespace Crazy
                         SetDireccion(false);
                     if(Posx-x>movimiento/2)
                     {
-                        MoverX(velocidad);
+                        MoverX(velocidad,true);
                         mov=true;
                     }
                 }
@@ -86,7 +86,7 @@ namespace Crazy
                         SetDireccion(true);
                     if(x-Posx>movimiento/2)
                     {
-                        MoverX(-velocidad);
+                        MoverX(-velocidad,true);
                         mov=true;
                     }
                 }
@@ -109,7 +109,7 @@ namespace Crazy
                         SetDireccion(false);
                     }
                     else{
-                        MoverX(-velocidad);
+                        MoverX(-velocidad,false);
                         if(tDesp.GetSegundos()>0.1){
                             if(Ataque1){
                                 ModificarSpriteAtaque1();
@@ -126,7 +126,7 @@ namespace Crazy
                     if(x-posinix>movimiento){
                         SetDireccion(true);
                     }else{
-                        MoverX(velocidad);
+                        MoverX(velocidad,false);
                     }
                     if(tDesp.GetSegundos()>0.1){
                         if(Ataque1){
@@ -154,7 +154,7 @@ namespace Crazy
         _juego->_ventana->DibujarSprite(sprite);
         _arma->Dibujar();
     }
-    void EnemigoPistola::MoverX(float x){
+    void EnemigoPistola::MoverX(float x,bool t){
         float sumx;
         if(x==0)
             sumx=0;
@@ -166,7 +166,7 @@ namespace Crazy
            !EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()-30) &&
             EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()+30*2))
             sprite.Mover(x,0);
-        else 
+        else if(!t)
             SetDireccion(!direccionIzq);
     }
     
