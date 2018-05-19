@@ -91,15 +91,15 @@ namespace Crazy
     {
         if (_input->GetTipoEvento() == _input->Evento().KeyPressed)
         {
-            if (_input->Enter()) {
-                CambiarEstado();
-            }
-            
             if (_input->Escape()) {
                 _juego->_ventana->Cerrar();
             }
             
-            if (_input->Arriba()) {
+            if (_input->Enter()) {
+                CambiarEstado();
+            }
+            
+            /*if (_input->Arriba()) {
                 opcion--;
                 if (opcion < NUEVA)
                 {
@@ -113,13 +113,73 @@ namespace Crazy
                 {
                     opcion = NUEVA;
                 }
+            }*/
+        } else {
+            // Color rojo/blanco del texto
+            if (_input->RatonSobre(t_nueva))
+            {
+                CambiarFlecha(t_nueva);
+                opcion = NUEVA;
+            }
+            if (_input->RatonSobre(t_cargar))
+            {
+                CambiarFlecha(t_cargar);
+                opcion = CARGAR;
+            }
+            if (_input->RatonSobre(t_borrar))
+            {
+                CambiarFlecha(t_borrar);
+                opcion = BORRAR;
+            }
+            if (_input->RatonSobre(t_estadisticas))
+            {
+                CambiarFlecha(t_estadisticas);
+                opcion = ESTADISTICAS;
+            }
+            if (_input->RatonSobre(t_ayuda))
+            {
+                CambiarFlecha(t_ayuda);
+                opcion = AYUDA;
+            }
+            if (_input->RatonSobre(t_salir))
+            {
+                CambiarFlecha(t_salir);
+                opcion = SALIR;
+            }
+            
+            // Clic sobre texto
+            if (_input->RatonIzq()) {
+                if(_input->IsTextoClicked(t_nueva))
+                {
+                    NuevaPartida();
+                }
+                if(_input->IsTextoClicked(t_cargar))
+                {
+                    CargarPartida();
+                }
+                if(_input->IsTextoClicked(t_borrar))
+                {
+                    BorrarPartida();
+                }
+                if(_input->IsTextoClicked(t_estadisticas))
+                {
+                    Estadisticas();
+                }
+                if(_input->IsTextoClicked(t_ayuda))
+                {
+                    Ayuda();
+                }
+                if(_input->IsTextoClicked(t_salir))
+                {
+                    Salir();
+                }
             }
         }
     }
     
     void EstadoMenu::Actualizar(float tiempoActual)
     {
-        switch (opcion)
+        /*switch (opcion)
         {
             case NUEVA:
                 CambiarFlecha(t_nueva);
@@ -139,7 +199,7 @@ namespace Crazy
             case SALIR:
                 CambiarFlecha(t_salir);
                 break;
-        }
+        }*/
     }
     
     void EstadoMenu::Dibujar(float tiempoActual)
@@ -160,12 +220,10 @@ namespace Crazy
     
     void EstadoMenu::Pausar()
     {
-        cout<<"Menu pausado"<<endl;
     }
     
     void EstadoMenu::Reanudar()
     {
-        cout<<"Menu reanudado"<<endl;
         _juego->_ventana->setBackground(0,0,0);
     }
     
@@ -191,10 +249,10 @@ namespace Crazy
                 Estadisticas();
                 break;
             case AYUDA:
-                _juego->maquina.Anyadir(EstadoAyuda::Instance(), false);
+                Ayuda();
                 break;
             case SALIR:
-                _juego->_ventana->Cerrar();
+                Salir();
                 break;
         }
     }
@@ -217,5 +275,15 @@ namespace Crazy
     void EstadoMenu::Estadisticas()
     {
         _juego->maquina.Anyadir(EstadoEstadisticas::Instance(), false);
+    }
+    
+    void EstadoMenu::Ayuda()
+    {
+        _juego->maquina.Anyadir(EstadoAyuda::Instance(), false);
+    }
+    
+    void EstadoMenu::Salir()
+    {
+        _juego->_ventana->Cerrar();
     }
 }

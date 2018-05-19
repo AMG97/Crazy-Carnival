@@ -95,6 +95,16 @@ namespace Motor
         return getPosition().y;
     }
     
+    void Texto::CambiarColorRojo()
+    {
+        setColor(sf::Color::Red);
+    }
+    
+    void Texto::CambiarColorBlanco()
+    {
+        setColor(sf::Color::White);
+    }
+    
 // Recursos
     void Recursos::CargarTextura(string nombre, string fichero)
     {
@@ -399,10 +409,7 @@ namespace Motor
             *x = camara.getSize().x/2;
         }
         
-        
-        
         //limit.print();
-        
     }
 
 
@@ -436,7 +443,8 @@ namespace Motor
         eventos.KeyReleased = 3;
         eventos.MouseButtonPressed = 4;
         eventos.MouseButtonReleased = 5;
-        eventos.Resized = 6;
+        eventos.MouseMoved = 6;
+        eventos.Resized = 7;
     }
     
     float Input::GetPosicionRatonX()
@@ -487,7 +495,10 @@ namespace Motor
 
                 case sf::Event::MouseButtonReleased:
                     return eventos.MouseButtonReleased;
-
+                    
+                case sf::Event::MouseMoved:
+                    return eventos.MouseMoved;
+                    
                 default:
                     return 0;
             }
@@ -508,6 +519,32 @@ namespace Motor
             return  true;
         }
         return  false;
+    }
+    
+    bool Input::IsTextoClicked(Texto& object)
+    {
+        sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY(),
+            object.GetAncho(), object.GetAlto());
+        
+        if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana())))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    bool Input::RatonSobre(Texto& object)
+    {
+        sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY(),
+            object.GetAncho(), object.GetAlto());
+        
+        if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana()))) {
+            object.CambiarColorRojo();
+            return true;
+        } else {
+            object.CambiarColorBlanco();
+            return false;
+        }
     }
     
     bool Input::RatonDer()

@@ -86,6 +86,8 @@ namespace Motor
         float GetLeft();
         float GetX();
         float GetY();
+        void CambiarColorRojo();
+        void CambiarColorBlanco();
     };
     
     class Recursos
@@ -202,6 +204,7 @@ namespace Motor
             short int KeyReleased;
             short int MouseButtonPressed;
             short int MouseButtonReleased;
+            short int MouseMoved;
             short int Resized;
         };
         
@@ -214,6 +217,8 @@ namespace Motor
         short int GetTipoEvento();
         bool RatonPulsado(sf::Mouse::Button boton);
         bool TeclaPulsada(sf::Keyboard::Key key);
+        bool IsTextoClicked(Texto& object);
+        bool RatonSobre(Texto& object);
         
         bool RatonDer();
         bool RatonIzq();

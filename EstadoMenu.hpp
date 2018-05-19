@@ -59,5 +59,7 @@ namespace Crazy
         void CargarPartida();
         void BorrarPartida();
         void Estadisticas();
+        void Ayuda();
+        void Salir();
     };
 }
