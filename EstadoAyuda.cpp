@@ -79,11 +79,11 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->Dibujar(t_titulo);
-        _juego->_ventana->Dibujar(t_atras);
-        _juego->_ventana->DibujarC(flecha);
+        _juego->_ventana->DibujarTexto(t_titulo);
+        _juego->_ventana->DibujarTexto(t_atras);
+        _juego->_ventana->DibujarSprite(flecha);
         
-        _juego->_ventana->DibujarC(ayuda);
+        _juego->_ventana->DibujarSprite(ayuda);
         
         _juego->_ventana->Mostrar();
     }

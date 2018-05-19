@@ -278,19 +278,24 @@ namespace Motor
     {
         window.close();
     }
+
+    void Ventana::DibujarTexto(Texto txt, Camara* camara) {
+        txt.CambiarPosicion(txt.GetX() + camara->getX()-camara->getWidth()/2, txt.GetY() + camara->getY()-camara->getHeight()/2);
+        window.draw(txt);
+    }
     
-    void Ventana::Dibujar(Texto txt)
+    void Ventana::DibujarTexto(Texto txt)
     {
         window.draw(txt);
     }
     
-     void Ventana::DibujarB(SpriteM sprite, Camara& camara)
+     void Ventana::DibujarSprite(SpriteM sprite, Camara* camara)
     {
-         sprite.CambiarPosicion(sprite.GetX() + camara.GetCamara().getCenter().x -500, sprite.GetY() + camara.GetCamara().getCenter().y-350);
+        sprite.CambiarPosicion(sprite.GetX() + camara->getX()-camara->getWidth()/2, sprite.GetY() + camara->getY()-camara->getHeight()/2);
         window.draw(sprite);
     }
     
-    void Ventana::DibujarC(SpriteM sprite)
+    void Ventana::DibujarSprite(SpriteM sprite)
     {
         window.draw(sprite);
     }

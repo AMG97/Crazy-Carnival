@@ -172,9 +172,10 @@ namespace Motor
         void Limpiar();
         void Mostrar();
         void Cerrar();
-        void Dibujar(Texto txt);
-        void DibujarB(SpriteM sprite, Camara& camara);
-        void DibujarC(SpriteM sprite);
+        void DibujarTexto(Texto txt, Camara* camara);
+        void DibujarTexto(Texto txt);
+        void DibujarSprite(SpriteM sprite, Camara* camara);
+        void DibujarSprite(SpriteM sprite);
         void SetCamaraPorDefecto();
         void setCamara(Camara &camara);
         void setBackground(int r, int g, int b);

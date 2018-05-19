@@ -41,7 +41,7 @@ namespace Crazy
     void Arma::Dibujar()
     {
         if(tipo!=0)
-            _juego->_ventana->DibujarC(sprite);
+            _juego->_ventana->DibujarSprite(sprite);
         for(int i=0; i<proyectiles.size();i++)
             proyectiles[i]->Dibujar();
     }

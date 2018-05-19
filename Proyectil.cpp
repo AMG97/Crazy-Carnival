@@ -48,7 +48,7 @@ namespace Crazy
     
     void Proyectil::Dibujar()
     {
-        _juego->_ventana->DibujarC(sprite);
+        _juego->_ventana->DibujarSprite(sprite);
     }
     
     bool Proyectil::Update()

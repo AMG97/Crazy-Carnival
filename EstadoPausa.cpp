@@ -128,20 +128,20 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->Dibujar(t_titulo);
-        _juego->_ventana->Dibujar(t_frase);
-        _juego->_ventana->DibujarC(flecha);
+        _juego->_ventana->DibujarTexto(t_titulo);
+        _juego->_ventana->DibujarTexto(t_frase);
+        _juego->_ventana->DibujarSprite(flecha);
         
         if (!abandonar)
         {
-            _juego->_ventana->Dibujar(t_atras);
-            _juego->_ventana->DibujarC(flechaAtras);
+            _juego->_ventana->DibujarTexto(t_atras);
+            _juego->_ventana->DibujarSprite(flechaAtras);
         }
         else
         {
-            _juego->_ventana->Dibujar(t_op);
-            _juego->_ventana->Dibujar(t_op2);
-            _juego->_ventana->Dibujar(t_frase2);
+            _juego->_ventana->DibujarTexto(t_op);
+            _juego->_ventana->DibujarTexto(t_op2);
+            _juego->_ventana->DibujarTexto(t_frase2);
         }
         
         _juego->_ventana->Mostrar();

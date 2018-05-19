@@ -324,7 +324,7 @@ namespace Crazy
     
     void Player::Dibujar()
     {
-        _juego->_ventana->DibujarC(sprite);
+        _juego->_ventana->DibujarSprite(sprite);
         _arma->Dibujar();
     }
     

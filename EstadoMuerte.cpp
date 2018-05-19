@@ -72,8 +72,8 @@ namespace Crazy
         if(!dibujado){
             dibujado=true;
             _juego->_ventana->setBackground2(0,0,0,100);
-            _juego->_ventana->Dibujar(t_titulo);
-            _juego->_ventana->Dibujar(t_atras);
+            _juego->_ventana->DibujarTexto(t_titulo);
+            _juego->_ventana->DibujarTexto(t_atras);
 
             _juego->_ventana->Mostrar();
         }
