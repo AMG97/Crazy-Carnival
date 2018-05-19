@@ -20,10 +20,12 @@ namespace Crazy
         angulo=0;
         SetDireccion(true);
         velocidad=1.5;
-        alcancex=400;
-        alcancey=200;
+        alcancex=500;
+        alcancey=300;
         movimiento=400;
         caida=0;
+        encontrado = false;
+        puntos = 250/EstadoJuego::Instance()->getNumNivel()+250;
     }
 
     EnemigoPistola::EnemigoPistola(const EnemigoPistola& orig) {
@@ -64,6 +66,11 @@ namespace Crazy
         bool mov=false;
         if(diferenciax<1200 && diferenciay<1200 && diferenciax>-1200 && diferenciay>-1200){
             if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
+                if(!encontrado){
+                    encontrado = true;
+                    tAtaque.restart();
+                }
+                
                 if(Posx>x)
                 {
                     if(direccionIzq)
@@ -96,6 +103,7 @@ namespace Crazy
                     }
                 }
             }else{
+                encontrado=false;
                 if(direccionIzq){
                     if(posinix-x>movimiento){
                         SetDireccion(false);

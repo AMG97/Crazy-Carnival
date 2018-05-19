@@ -41,7 +41,9 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        _level->cargarNivel(1);
+        lvl_n = 1;//Aquí meter el código de leer la partida guardada
+        _level->cargarNivel(lvl_n);
+        
         //TO DO If jugador = 1, espadachina; if jugador = 2, tipo duro ... jugador 4
         _jugador = new Player("Espadachina");
         _hud = new Hud();
@@ -284,6 +286,8 @@ namespace Crazy
             return _level;
     }
 
-
+    unsigned short int EstadoJuego::getNumNivel() {
+        return lvl_n; 
+    }
 
 }

@@ -39,5 +39,9 @@ namespace Crazy
         rojo=true;
         relojrojo.ReiniciarSegundos();
     }
-    
+
+    int Enemigo::getPuntos() {
+        return puntos;
+    }
+
 }

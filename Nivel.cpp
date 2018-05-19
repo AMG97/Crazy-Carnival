@@ -19,6 +19,7 @@
 
 namespace Crazy{
     Nivel::Nivel() {
+        width=0; height=0;
     }
 
     Nivel::Nivel(const Nivel& orig) {
@@ -225,6 +226,7 @@ namespace Crazy{
         for(int i=0;i<_enemigos.size();i++){
             if(_enemigos[i]->GetVida()<=0){
                 Enemigo *tmp=_enemigos[i];
+                _jugador->addPuntuacion(tmp->getPuntos());
                 _enemigos.erase(_enemigos.begin()+i);
                 delete tmp;
             }
@@ -283,7 +285,6 @@ namespace Crazy{
             return false;
         }
     }
-    
 
 
     

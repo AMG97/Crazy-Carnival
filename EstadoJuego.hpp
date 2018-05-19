@@ -46,6 +46,7 @@ namespace Crazy
         b2World* GetMundo();
         Nivel* GetNivel();
         void SetMundo(b2World* world);
+        unsigned short int getNumNivel();
         
         ~EstadoJuego();
     private:
@@ -57,5 +58,6 @@ namespace Crazy
         Hud* _hud;
         b2World* _mundo;
         
+        unsigned short int lvl_n;
     };
 }

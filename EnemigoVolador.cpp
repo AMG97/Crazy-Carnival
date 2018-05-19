@@ -23,6 +23,7 @@ namespace Crazy
         danyo=5;
         direccionSubir=false;
         _arma=NULL;
+        puntos = 125/EstadoJuego::Instance()->getNumNivel()+125;
     }
 
     EnemigoVolador::EnemigoVolador(const EnemigoVolador& orig) {
