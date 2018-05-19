@@ -163,6 +163,8 @@ namespace Crazy
             sumy=y-40/2;
         if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()+sumy))
             sprite.Mover(x,y);
+        else
+            SetDireccion(!direccionIzq);
     }
 }
 
