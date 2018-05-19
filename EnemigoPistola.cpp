@@ -21,7 +21,7 @@ namespace Crazy
         SetDireccion(true);
         velocidad=1.5;
         alcancex=500;
-        alcancey=300;
+        alcancey=100;
         movimiento=400;
         caida=0;
         encontrado = false;
@@ -97,7 +97,7 @@ namespace Crazy
                         ModificarSpriteAtaque1();
                         tDesp.ReiniciarSegundos();
                     }
-                    else if(tAtaque.GetSegundos()<2 && mov && tDesp.GetSegundos()>0.2){
+                    else if(tAtaque.GetSegundos()<2.3 && tDesp.GetSegundos()>0.2){
                         ModificarSpriteCorrer();
                         tDesp.ReiniciarSegundos();
                     }

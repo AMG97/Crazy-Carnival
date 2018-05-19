@@ -65,7 +65,7 @@ namespace Crazy
     void EstadoJuego::ManejarEventos()
     {
         short int evento = _input->GetTipoEvento();
-        
+        short int estado=_jugador->GetEstado();
         // Pulsar tecla
         if (evento == _input->Evento().KeyPressed)
         {
@@ -128,7 +128,7 @@ namespace Crazy
             {
                if(_jugador->GetPosX()<_level->getCamara()->getX()+_level->getCamara()->getWidth()/2-50){
                     _jugador->SetVelocidad(6.0f);
-                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetSaltar())
+                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetSaltar() && estado!=_jugador->GetDeslizarse())
                     {
                         if(_input->GetPosicionRatonX()<_jugador->GetPosX())
                             _jugador->SetEstado(_jugador->GetCorrerAtras());
@@ -142,7 +142,7 @@ namespace Crazy
             {
                 if(_jugador->GetPosX()>_level->getCamara()->getX()-_level->getCamara()->getWidth()/2+50){
                     _jugador->SetVelocidad(-6.0f);
-                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2()&& _jugador->GetEstado()!=_jugador->GetSaltar())
+                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2()&& estado!=_jugador->GetSaltar()&& estado!=_jugador->GetDeslizarse())
                     {
                         if(_input->GetPosicionRatonX()>_jugador->GetPosX())
                             _jugador->SetEstado(_jugador->GetCorrerAtras());
@@ -154,17 +154,26 @@ namespace Crazy
 
             if(_input->Arriba())
             {
-                if(_jugador->GetEstado()!=_jugador->GetSaltar() && _jugador->GetVelocidadSalto()==0 && _jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+                if(estado==_jugador->GetDeslizarse() && _jugador->Gettpared()>0.2){
+                    if(_jugador->GetLastPared()==1){
+                        _jugador->SetVelocidad(-6.0f);
+                    }else
+                        _jugador->SetVelocidad(6.0f);
+                    _jugador->SetVelocidadSalto(-8);
+                    _jugador->tparedRestart();
+                }
+                else if(estado!=_jugador->GetSaltar() && _jugador->GetVelocidadSalto()==0 && estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2())
                 {
                     _jugador->SetEstado(_jugador->GetSaltar());
                     _jugador->SetVelocidadSalto(-14.0f);
+                    _jugador->tparedRestart();
                 }
             }
 
             if(_input->GetPosicionRatonX()>=_level->getCamara()->getX()-_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonX()<=_level->getCamara()->getX()+_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonY()>=_level->getCamara()->getY()-_level->getCamara()->getHeight()/2 && _input->GetPosicionRatonY()<=_level->getCamara()->getY()+_level->getCamara()->getHeight()/2){
                 if (_input->RatonIzq())
                 {
-                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse())
                     {
                         _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
                         _jugador->SetEstado(_jugador->GetAtaque1());
@@ -174,7 +183,7 @@ namespace Crazy
 
                 if (_input->RatonDer())
                 {
-                    if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
+                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
                     {
                         _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
                         _jugador->SetEstado(_jugador->GetAtaque2());
@@ -196,24 +205,12 @@ namespace Crazy
     
     void EstadoJuego::Actualizar(float tiempoActual)
     {
-        // Si el personaje esta saltando
-        
-        /*if ((_jugador->GetEstado() == _jugador->GetSaltarDer())
-            || (_jugador->GetEstado() == _jugador->GetSaltarIzq()))
-        {
-            
-            // Suelo
-            /*if (_jugador->GetYAhora() == _jugador->GetPosY())
-            {
-                _jugador->SetEstado(_jugador->GetReposo());
-            }*/
-        //}
         
         if(_jugador->GetVida()<=0){
             _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
         }
                 
-        if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2())
+        if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetDeslizarse())
         {
             
             if(_input->GetPosicionRatonX()<_jugador->GetSprite().GetX() && !_jugador->getDireccion())

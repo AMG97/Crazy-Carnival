@@ -9,9 +9,9 @@ namespace Crazy
         {
             case 1:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Puñal"));
-                alcance=400;
+                alcance=600;
                 danyo=dan*1.5;
-                velocidad=5;
+                velocidad=5.5;
             break;
             
             case 2:

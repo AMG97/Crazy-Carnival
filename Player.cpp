@@ -34,29 +34,12 @@ namespace Crazy
         
         posIniX = 240;
         posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
-        cout<<"PosicionY: "<<posIniY<<endl;
+        
         sprite.CambiarPosicion(posIniX, posIniY);
         _arma=new Arma(2,sprite.GetX(),sprite.GetY());
-        cout<<"PosicionY arma: "<<sprite.GetY()<<endl;
         sprite.EscalarProporcion(1.5, 1.5);
-        
-        //TO DO: Box2d + façade
-        _mundo = EstadoJuego::Instance()->GetMundo();
-        cuerpoDef.type = b2BodyType::b2_dynamicBody;
-        cuerpoDef.position = b2Vec2(sprite.GetX(), sprite.GetY());
-        _cuerpo = _mundo->CreateBody(&cuerpoDef);
-        
-        cout <<"Ancho :"<<sprite.GetAncho()<<endl;
-        cout <<"Alto :"<<sprite.GetAlto()<<endl;
-        
-        formaCuerpo.SetAsBox(sprite.GetAncho() / 2, sprite.GetAlto() / 2);
-        fixCuerpoDef.shape = &formaCuerpo;
-        fixCuerpoDef.density = 1.0;
-        fixCuerpoDef.friction = 0.0;
-        fixCuerpoDef.restitution = 0.0;
-        _fixCuerpo = _cuerpo->CreateFixture(&fixCuerpoDef);
-        
-        guardado = false;
+        caida=0;
+        lastpared=0;
     }
     
     float Player::GetEnfriamiento()
@@ -160,6 +143,10 @@ namespace Crazy
         return ATAQUE2;
     }
     
+    short int Player::GetDeslizarse(){
+        return DESLIZARSE;
+    }
+    
     void Player::SetEstado(short int est)
     {
         estado = est;
@@ -202,7 +189,6 @@ namespace Crazy
                 case CORRERATRAS:
                     sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
                     sprite.CambiarOrigen(60/2,80/2);
-                    //cout<<"ATRAS"<<endl;
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer--;
                     if(contadorSpriteCorrer == -1)
@@ -220,14 +206,21 @@ namespace Crazy
                     sprite.CambiarTextRect(contadorSpriteSalto*65, 560, 65, 90);
                     sprite.CambiarOrigen(60/2,90/2);
                     _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
-                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && velSalto>2) || (contadorSpriteSalto==2 && velSalto>11))
+                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)) || (contadorSpriteSalto==2 && velSalto>11))
                         contadorSpriteSalto++;
-                    if(velSalto==0)
+                    if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60))
                     {
                         contadorSpriteSalto=0;
                         Reposo(3);
+                        lastpared=0;
                     }
                         
+                break;
+                
+                case DESLIZARSE:
+                    sprite.CambiarTextRect(65, 560,65,90);
+                    sprite.CambiarOrigen(60/2,90/2);
+                    _arma->ModificarSprite(SALTO,1,sprite.GetX(),sprite.GetY(),angulo);
                 break;
 
                 case REPOSO:
@@ -314,12 +307,10 @@ namespace Crazy
         if(n==1)
         {
             contadorSpriteAtaque1 = 0;
-            //sprite.Mover(0,22);
         }
         else if(n==2)
         {
             contadorSpriteAtaque2=0;
-            //sprite.Mover(0, 15);
         }
         _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),0);
     }
@@ -332,23 +323,25 @@ namespace Crazy
     
     void Player::Update(vector<Enemigo*> e)
     {
-        if(velSalto!=0)
-        {
-            velSalto=velSalto+0.5;
-            if(velSalto==0)
-                velSalto=velSalto+0.5;
-        }
-        if(velSalto>13.6)
-            velSalto=0;
+        MoverY();
         if(velocidad!=0){
-            if(velocidad>0.1)
-                velocidad=velocidad-2.f;
-            else if(velocidad<0.1)
+            if(velocidad>0.1){
+                if(lastpared!=0){
+                    velocidad-=0.25f;
+                }
+                else
+                    velocidad=velocidad-2.f;
+            }
+            else if(velocidad<0.1){
+                if(lastpared!=0){
+                    velocidad+=0.25f;
+                }else
                 velocidad=velocidad+2.f;
+            }
         }
-        if(abs(velocidad)<0.2)
+        if(abs(velocidad)<=0.5)
             velocidad=0;
-        sprite.Mover(velocidad,velSalto);
+        MoverX(velocidad);
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
                 if(sprite.Interseccion2(e[j]->GetSprite()))
@@ -366,6 +359,34 @@ namespace Crazy
             rojo=false;
             sprite.Parpadear(false);
         }
+        if(estado==SALTO && (EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
+            if((EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && lastpared!=1) ||
+                (EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && lastpared!=2)){
+                    if(lastpared==0){
+                        if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()))
+                            lastpared=1;
+                        else
+                            lastpared=2;
+                    }else if(lastpared==1)
+                        lastpared=2;
+                    else
+                        lastpared=1;
+                    estado=DESLIZARSE;
+                    if((EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && direccionIzq==false) || (EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && direccionIzq==true))
+                        CambiarDireccion();
+            }
+        }
+        if((estado==DESLIZARSE) && (velSalto==0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60)
+           ||(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && !EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY())))){
+            if(velSalto==0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60)){
+                estado=REPOSO;
+                lastpared=0;
+                contadorSpriteSalto=0;
+            }
+            else
+                estado=SALTO;
+        }
+        
     }
 
     void Player::SetElixir(bool v) {
@@ -383,6 +404,60 @@ namespace Crazy
     void Player::setPuntuacion(int puntos) {
         puntuacion = puntos;
     }
+    
+    void Player::MoverX(float x){
+        float sumx;
+        if(x==0)
+            sumx=0;
+        else if(x>0)
+            sumx=x+70/2;
+        else
+            sumx=x-70/2;
+        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()+30) &&
+           !EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()-30))
+            sprite.Mover(x,0);
+    }
+    
+    void Player::MoverY(){
+        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2) && velSalto==0){
+            caida+=0.4;
+            sprite.Mover(0,caida);
+        }else{
+            if(caida!=0){
+                caida=0;
+                velSalto=0;
+                sprite.CambiarPosicion(sprite.GetX(),floor(sprite.GetY()/48)*48+13);
+            }
+        }
+        
+        if((velSalto!=0 && estado!=DESLIZARSE) || (estado==DESLIZARSE && velSalto<0))
+        {
+            velSalto=velSalto+0.5;
+        }else if(velSalto>0 && estado==DESLIZARSE){
+            velSalto+=0.25;
+        }
+        if(velSalto>4)
+            velSalto=4;
+        if(sprite.GetY()-sprite.GetAlto()/2-20>0){
+            if(velSalto<0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()-sprite.GetAlto()/2+10)){
+                velSalto=0;
+            }
+        }else{
+            velSalto=0;
+        }
+        sprite.Mover(0,velSalto);
+    }
+    int Player::GetLastPared() {
+        return lastpared;
+    }
+    void Player::tparedRestart() {
+        tpared.ReiniciarSegundos();
+    }
+    
+    float Player::Gettpared(){
+        return tpared.GetSegundos();
+    }
+
 
 
 }
