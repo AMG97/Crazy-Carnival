@@ -50,6 +50,7 @@ namespace Crazy
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
+        flecha.CambiarColorRojo();
         flecha.Rotar(180.0f);
         flecha.CambiarPosicion(60, t_atras.GetY()-30);
         flecha.Escalar(70.0f, 70.0f); // Escalar al 70%
@@ -66,6 +67,17 @@ namespace Crazy
                 || _input->Escape())
             {
                 Atras();
+            }
+        } else {
+            // Color rojo/blanco del texto
+            _input->RatonSobre(t_atras);
+            
+            // Clic sobre texto
+            if (_input->RatonIzq()) {
+                if(_input->IsTextoClicked(t_atras))
+                {
+                    Atras();
+                }
             }
         }
     }
