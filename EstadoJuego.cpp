@@ -47,7 +47,7 @@ namespace Crazy
         _input = new Input();
         _level = new Nivel();
         _level->cargarNivel(1);
-        _jugador = new Player(texturaJugador);
+        _jugador = new Espadachina();
         _hud = new Hud();
         
         teclaPulsada = false;

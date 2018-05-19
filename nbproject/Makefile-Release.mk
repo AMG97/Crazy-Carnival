@@ -41,12 +41,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
 	${OBJECTDIR}/EnemigoVolador.o \
+	${OBJECTDIR}/Espadachina.o \
 	${OBJECTDIR}/EstadoAyuda.o \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
 	${OBJECTDIR}/EstadoMuerte.o \
 	${OBJECTDIR}/EstadoPausa.o \
+	${OBJECTDIR}/EstadoSeleccion.o \
 	${OBJECTDIR}/EstadosManager.o \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
@@ -111,6 +113,11 @@ ${OBJECTDIR}/EnemigoVolador.o: EnemigoVolador.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemigoVolador.o EnemigoVolador.cpp
 
+${OBJECTDIR}/Espadachina.o: Espadachina.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Espadachina.o Espadachina.cpp
+
 ${OBJECTDIR}/EstadoAyuda.o: EstadoAyuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -140,6 +147,11 @@ ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoPausa.o EstadoPausa.cpp
+
+${OBJECTDIR}/EstadoSeleccion.o: EstadoSeleccion.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoSeleccion.o EstadoSeleccion.cpp
 
 ${OBJECTDIR}/EstadosManager.o: EstadosManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}

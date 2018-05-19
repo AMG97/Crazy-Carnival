@@ -32,7 +32,8 @@ build/Debug/GNU-Linux/EstadoJuego.o: EstadoJuego.cpp EstadoJuego.hpp \
  Box2D/Box2D/Dynamics/Joints/b2RopeJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WeldJoint.h \
  Box2D/Box2D/Dynamics/Joints/b2WheelJoint.h Hud.hpp Nivel.hpp \
- tinyxml/tinyxml.h tinyxml/tinystr.h tinyxml/tinystr.h box.h Objeto.hpp
+ tinyxml/tinyxml.h tinyxml/tinystr.h tinyxml/tinystr.h box.h Objeto.hpp \
+ Espadachina.hpp
 
 EstadoJuego.hpp:
 
@@ -149,3 +150,5 @@ tinyxml/tinystr.h:
 box.h:
 
 Objeto.hpp:
+
+Espadachina.hpp:

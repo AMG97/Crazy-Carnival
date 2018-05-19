@@ -1,0 +1,161 @@
+#include "Espadachina.hpp"
+#include "Motor.hpp"
+#include "EstadoJuego.hpp"
+
+namespace Crazy
+{
+    Espadachina::Espadachina()
+    {
+        totalVida = 60.0f;
+        vida = totalVida;
+        enfriamiento = 0.0f;
+        totalEnfriamiento = 30.0f;        
+        sprite.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
+        sprite.CambiarTextRect(0*60, 0*80, 60, 80);
+        sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
+        
+        posIniX = 240;
+        posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
+        
+        sprite.CambiarPosicion(posIniX, posIniY);
+        _arma=new Arma(2,sprite.GetX(),sprite.GetY());
+        sprite.EscalarProporcion(1.5, 1.5);
+        caida=0;
+        lastpared=0;
+    }
+    
+    void Espadachina::ModificarSprite()
+    {
+        if (relojAnim.GetSegundos() >= 0.1f)
+        {
+            switch(estado)
+            {
+                case CORRER:
+                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 65, 80);
+                    sprite.CambiarOrigen(65/2,80/2);
+                    _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
+                    contadorSpriteCorrer++;
+                    if(contadorSpriteCorrer == 6)
+                    {
+                        contadorSpriteCorrer = 0;
+                    }
+                    if(velocidad==0)
+                    {
+                        contadorSpriteCorrer=0;
+                        Reposo(3);
+                    }
+                break;
+                
+                case CORRERATRAS:
+                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
+                    sprite.CambiarOrigen(60/2,80/2);
+                    _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
+                    contadorSpriteCorrer--;
+                    if(contadorSpriteCorrer == -1)
+                    {
+                        contadorSpriteCorrer = 5;
+                    }
+                    if(velocidad==0)
+                    {
+                        contadorSpriteCorrer=0;
+                        Reposo(3);
+                    }
+                break;
+
+                case SALTO:
+                    sprite.CambiarTextRect(contadorSpriteSalto*65, 560, 65, 90);
+                    sprite.CambiarOrigen(60/2,90/2);
+                    _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
+                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)) || (contadorSpriteSalto==2 && velSalto>11))
+                        contadorSpriteSalto++;
+                    if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60))
+                    {
+                        contadorSpriteSalto=0;
+                        Reposo(3);
+                        lastpared=0;
+                    }
+                        
+                break;
+                
+                case DESLIZARSE:
+                    sprite.CambiarTextRect(65, 560,65,90);
+                    sprite.CambiarOrigen(60/2,90/2);
+                    _arma->ModificarSprite(SALTO,1,sprite.GetX(),sprite.GetY(),angulo);
+                break;
+
+                case REPOSO:
+                    sprite.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
+                    sprite.CambiarOrigen(60/2,80/2);
+                    _arma->ModificarSprite(estado,contadorSpriteReposo,sprite.GetX(),sprite.GetY(),angulo);
+                    contadorSpriteReposo++;
+                    if(contadorSpriteReposo == 8)
+                    {
+                        contadorSpriteReposo = 0;
+                    }
+                break;
+                
+                case ATAQUE1:
+                        if(contadorSpriteAtaque1==0)
+                        {
+                            sprite.CambiarOrigen(100/2,90/2);
+                            //sprite.Mover(0,-22);
+                            golpear=true;
+                        }
+                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 80);
+                        sprite.CambiarOrigen(100/2,80/2);
+                        _arma->ModificarSprite(estado,contadorSpriteAtaque1,sprite.GetX(),sprite.GetY(),angulo);
+                        contadorSpriteAtaque1++;                        
+                        if(contadorSpriteAtaque1==6)
+                        {
+                            Reposo(1);
+                        }
+                break;
+                
+                case ATAQUE2:
+                    if(contadorSpriteAtaque2==0)
+                    {
+                        sprite.CambiarOrigen(100/2, 80/2);
+                        //sprite.Mover(0,-15);
+                        if(AtaqueEspecialActivado())
+                        {
+                            ataqueEspecial=false;
+                            enfriamiento=0.0f;
+                            tAtaque2.ReiniciarSegundos();
+                        }
+                    }
+                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,360,100,80);
+                    _arma->ModificarSprite(estado,contadorSpriteAtaque2,sprite.GetX(),sprite.GetY(),angulo);
+                    contadorSpriteAtaque2++;
+                    if(contadorSpriteAtaque2==3)
+                    {
+                        _arma->Disparar(angulo);
+                    }
+                    if(contadorSpriteAtaque2==9)
+                    {
+                        Reposo(2);
+                    }
+                    
+                break;
+                    
+            }
+            relojAnim.ReiniciarSegundos();
+        }
+    }
+    
+    void Espadachina::Reposo(int n){
+        sprite.CambiarTextRect(0,0,60,80);
+        sprite.CambiarOrigen(60/2,80/2);
+        estado=REPOSO;
+        if(n==1)
+        {
+            contadorSpriteAtaque1 = 0;
+        }
+        else if(n==2)
+        {
+            contadorSpriteAtaque2=0;
+        }
+        _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),0);
+    }
+
+
+}
