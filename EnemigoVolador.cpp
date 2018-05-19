@@ -18,7 +18,7 @@ namespace Crazy
         SetDireccion(true);
         velocidad=2.7;
         alcancex=600;
-        alcancey=200;
+        alcancey=400;
         movimiento=400;
         danyo=5;
         direccionSubir=false;
@@ -59,74 +59,76 @@ namespace Crazy
         float y=sprite.GetY();
         float diferenciax=Posx-x;
         float diferenciay=Posy-y;
-        if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
-            if(Posx>x)
-            {
-                if(direccionIzq)
-                    SetDireccion(false);
-                
-                Mover(velocidad,0);
-            }
-            else if(Posx<x){
-                if(!direccionIzq)
-                    SetDireccion(true);
-                Mover(-velocidad,0);
-            }
-            if(Posy>y)
-                Mover(0,velocidad/2);
-            else 
-                Mover(0, -velocidad/2);
-            if(tAtaque.GetSegundos()>1.0){
-                tAtaque.ReiniciarSegundos();
-                if(p->GetSprite().Interseccion1(sprite)){
-                    p->RecibirDanyo(danyo);
-                }
-            }
-                
-        }
-        else{
-            if(direccionIzq){
-                if(posinix-x>movimiento)
-                    SetDireccion(false);
-                else{
-                    Mover(-velocidad,0);
-                }
-            }
-            else{
-                if(x-posinix>movimiento){
-                    SetDireccion(true);
-                }else{
+        if(diferenciax<1200 && diferenciay<1200 && diferenciax>-1200 && diferenciay>-1200){
+            if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
+                if(Posx>x)
+                {
+                    if(direccionIzq)
+                        SetDireccion(false);
+
                     Mover(velocidad,0);
                 }
-                if(tDesp.GetSegundos()>0.1){
+                else if(Posx<x){
+                    if(!direccionIzq)
+                        SetDireccion(true);
+                    Mover(-velocidad,0);
+                }
+                if(Posy>y)
+                    Mover(0,velocidad/2);
+                else 
+                    Mover(0, -velocidad/2);
+                if(tAtaque.GetSegundos()>1.0){
+                    tAtaque.ReiniciarSegundos();
+                    if(p->GetSprite().Interseccion1(sprite)){
+                        p->RecibirDanyo(danyo);
+                    }
+                }
+
+            }
+            else{
+                if(direccionIzq){
+                    if(posinix-x>movimiento)
+                        SetDireccion(false);
+                    else{
+                        Mover(-velocidad,0);
+                    }
+                }
+                else{
+                    if(x-posinix>movimiento){
+                        SetDireccion(true);
+                    }else{
+                        Mover(velocidad,0);
+                    }
+                    if(tDesp.GetSegundos()>0.1){
+                        ModificarSpriteCorrer();
+                        tDesp.restart();
+
+                    }
+                }
+                if(direccionSubir){
+                    if(posiniy-y>40)
+                        direccionSubir=false;
+                    else{
+                        Mover(0,-velocidad);
+                    }
+                }else{
+                    if(y-posiniy>40)
+                        direccionSubir=true;
+                    else{
+                        Mover(0,velocidad);
+                    }
+                }
+            }
+            if(tDesp.GetSegundos()>0.1){
                     ModificarSpriteCorrer();
-                    tDesp.restart();
-                    
-                }
+                    tDesp.ReiniciarSegundos();
             }
-            if(direccionSubir){
-                if(posiniy-y>40)
-                    direccionSubir=false;
-                else{
-                    Mover(0,-velocidad);
-                }
-            }else{
-                if(y-posiniy>40)
-                    direccionSubir=true;
-                else{
-                    Mover(0,velocidad);
-                }
+            if(rojo && relojrojo.GetSegundos()<=0.2)
+                sprite.CambiarColorRojo();
+            else if(rojo && relojrojo.GetSegundos()>0.2){
+                rojo=false;
+                sprite.Parpadear(false);
             }
-        }
-        if(tDesp.GetSegundos()>0.1){
-                ModificarSpriteCorrer();
-                tDesp.ReiniciarSegundos();
-        }
-        if(rojo && relojrojo.GetSegundos()<=0.2)
-            sprite.CambiarColorRojo();
-        else if(rojo && relojrojo.GetSegundos()>0.2){
-            rojo=false;
-            sprite.Parpadear(false);
         }
     }
     
@@ -146,7 +148,20 @@ namespace Crazy
     }
     
     void EnemigoVolador::Mover(float x, float y){
-        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+x+70/2+10,sprite.GetY()+y+40/2))
+        float sumx, sumy;
+        if(x==0)
+            sumx=0;
+        else if(x>0)
+            sumx=x+70/2+10;
+        else
+            sumx=x-70/2-10;
+        if(y==0)
+            sumy=0;
+        else if(y>0)
+            sumy=y+40/2;
+        else
+            sumy=y-40/2;
+        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()+sumy))
             sprite.Mover(x,y);
     }
 }
