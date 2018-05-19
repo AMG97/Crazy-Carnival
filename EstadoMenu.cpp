@@ -146,14 +146,14 @@ namespace Crazy
     {
         _juego->_ventana->Limpiar();
         
-        _juego->_ventana->Dibujar(t_titulo);
-        _juego->_ventana->Dibujar(t_nueva);
-        _juego->_ventana->Dibujar(t_cargar);
-        _juego->_ventana->Dibujar(t_borrar);
-        _juego->_ventana->Dibujar(t_estadisticas);
-        _juego->_ventana->Dibujar(t_ayuda);
-        _juego->_ventana->Dibujar(t_salir);
-        _juego->_ventana->DibujarC(flecha);
+        _juego->_ventana->DibujarTexto(t_titulo);
+        _juego->_ventana->DibujarTexto(t_nueva);
+        _juego->_ventana->DibujarTexto(t_cargar);
+        _juego->_ventana->DibujarTexto(t_borrar);
+        _juego->_ventana->DibujarTexto(t_estadisticas);
+        _juego->_ventana->DibujarTexto(t_ayuda);
+        _juego->_ventana->DibujarTexto(t_salir);
+        _juego->_ventana->DibujarSprite(flecha);
         
         _juego->_ventana->Mostrar();
     }

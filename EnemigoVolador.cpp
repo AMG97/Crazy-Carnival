@@ -133,7 +133,7 @@ namespace Crazy
     }
     
     void EnemigoVolador::Dibujar(){
-        _juego->_ventana->DibujarC(sprite);
+        _juego->_ventana->DibujarSprite(sprite);
     }
     
     void EnemigoVolador::ModificarSprite(){

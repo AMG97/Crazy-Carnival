@@ -143,7 +143,7 @@ namespace Crazy
     }
     
     void EnemigoPistola::Dibujar(){
-        _juego->_ventana->DibujarC(sprite);
+        _juego->_ventana->DibujarSprite(sprite);
         _arma->Dibujar();
     }
     void EnemigoPistola::MoverX(float x){

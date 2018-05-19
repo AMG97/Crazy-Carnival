@@ -87,7 +87,7 @@ namespace Crazy
     
     void Comportamiento::Dibujar()
     {
-        _juego->_ventana->DibujarC(sprite);
+        _juego->_ventana->DibujarSprite(sprite);
     }
     
     void Comportamiento::CambiarDireccionDer()

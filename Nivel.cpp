@@ -244,7 +244,7 @@ namespace Crazy{
         for (int i = (_camera->getY()-_camera->getHeight()-1)/48 -1; i < 1+(_camera->getY()+_camera->getHeight())/48; i++) {
             for (int j = (_camera->getX()-_camera->getWidth()-1)/48 -1; j < 1+(_camera->getX()+_camera->getWidth())/48; j++) {
                 if(i>=0&&i<height && j>=0&&j<width && tilemap[capa][i][j]!=0)
-                    _juego->_ventana->DibujarC(*tilemap[capa][i][j]);
+                    _juego->_ventana->DibujarSprite(*tilemap[capa][i][j]);
             }
         }
         
