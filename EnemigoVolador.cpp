@@ -62,14 +62,14 @@ namespace Crazy
         float diferenciay=Posy-y;
         if(diferenciax<1200 && diferenciay<1200 && diferenciax>-1200 && diferenciay>-1200){
             if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
-                if(Posx>x)
+                if(Posx>x  && Posx-x>30)
                 {
                     if(direccionIzq)
                         SetDireccion(false);
 
                     Mover(velocidad,0);
                 }
-                else if(Posx<x){
+                else if(Posx<x && x-Posx>30){
                     if(!direccionIzq)
                         SetDireccion(true);
                     Mover(-velocidad,0);
