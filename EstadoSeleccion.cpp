@@ -37,6 +37,9 @@ namespace Crazy
         opcion = P1;
         contadorSpriteReposo = 0;
         
+        modoNormal = true;
+        modoContrareloj = false;
+        
         t_titulo.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_titulo.CambiarTexto("Elige personaje");
         t_titulo.CambiarTamanyo(100);
@@ -73,6 +76,20 @@ namespace Crazy
         flechaAtras.Rotar(180.0f);
         flechaAtras.CambiarPosicion(60, t_atras.GetY()-30);
         flechaAtras.Escalar(70.0f, 70.0f); // Escalar al 70%
+        
+        flechaM.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
+        flechaM.CambiarOrigen();
+        flechaM.CambiarPosicion(60, t_atras.GetY()-30);              // Cambiar
+        flechaM.Escalar(70.0f, 70.0f); // Escalar al 70%
+        flechaM.CambiarColorRojo();
+        CambiarFlecha(flechaM, t_normal);
+        
+        flechaMC.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
+        flechaMC.CambiarOrigen();
+        flechaMC.CambiarPosicion(60, t_atras.GetY()-30);              // Cambiar
+        flechaMC.Escalar(70.0f, 70.0f); // Escalar al 70%
+        flechaMC.CambiarColorRojo();
+        CambiarFlecha(flechaMC, t_no);
     }
     
     void EstadoSeleccion::ManejarEventos()
@@ -85,7 +102,11 @@ namespace Crazy
                 Atras();
             }
             
-            if (_input->Izq()) {
+            if(_input->Enter()){
+                Elegir();
+            }
+            
+            /*if (_input->Izq()) {
                 opcion--;
                 if (opcion < P1)
                 {
@@ -99,10 +120,53 @@ namespace Crazy
                 {
                     opcion = P1;
                 }
+            }*/
+        } else {
+            // Color rojo/blanco del texto
+            _input->RatonSobre(t_atras);
+            if (_input->RatonSobre(p1))
+            {
+                CambiarFlecha(p1);
+                opcion = P1;
             }
+            if (_input->RatonSobre(p2))
+            {
+                CambiarFlecha(p2);
+                opcion = P2;
+            }
+            /*if (_input->RatonSobre(p3))
+            {
+                CambiarFlecha(p3);
+                opcion = P3;
+            }
+            if (_input->RatonSobre(p4))
+            {
+                CambiarFlecha(p4);
+                opcion = P4;
+            }*/
             
-            if(_input->Enter()){
-                Elegir();
+            // Clic sobre texto
+            if (_input->RatonIzq()) {
+                if(_input->IsTextoClicked(t_atras))
+                {
+                    Atras();
+                }
+                if(_input->IsSpriteClicked(p1))
+                {
+                    Player1();
+                }
+                if(_input->IsSpriteClicked(p2))
+                {
+                    Player2();
+                }
+                /*if(_input->IsSpriteClicked(p3))
+                {
+                    Player3;
+                }
+                if(_input->IsSpriteClicked(p4))
+                {
+                    Player4();
+                }*/
             }
         }
     }
@@ -117,6 +181,12 @@ namespace Crazy
             case P2:
                 CambiarFlecha(p2);
                 break;
+            /*case P3:
+                CambiarFlecha(p3);
+                break;
+            case P4:
+                CambiarFlecha(p4);
+                break;*/
         }
     }
     
@@ -145,20 +215,29 @@ namespace Crazy
         flecha.CambiarPosicion(personaje.GetX(),personaje.GetY()-personaje.GetAlto()/2);
     }
     
+    void EstadoSeleccion::CambiarFlecha(SpriteM f, Texto texto)
+    {
+        f.CambiarPosicion(texto.GetLeft()-10,texto.GetY()+texto.GetOrigenY()/2);
+    }
+    
     void EstadoSeleccion::Elegir()
     {
-        EstadoJuego::Instance(); // Creamos el puntero
         switch (opcion)          // Elegimos el personaje
         {
             case P1:
-                EstadoJuego::Instance()->Personaje("Espadachina");
+                Player1();
                 break;
             case P2:
-                EstadoJuego::Instance()->Personaje("Espadachina");
+                Player2();
                 break;
+            /*case P3:
+                Player3();
+                break;
+            case P4:
+                Player4();
+                break;*/
         }
-        // Cambiamos de estado la maquina
-        _juego->maquina.Anyadir(EstadoJuego::Instance(), true);
+        CambiarEstadoMaquina();
     }
     
     void EstadoSeleccion::Animar()
@@ -175,6 +254,10 @@ namespace Crazy
                     p2.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
                     p2.CambiarOrigen(60/2,80/2);
                     break;
+                /*case P3:
+                    break;
+                case P4:
+                    break;*/
             }
             
             contadorSpriteReposo++;
@@ -184,5 +267,39 @@ namespace Crazy
             }
             relojAnim.ReiniciarSegundos();
         }
+    }
+    
+    void EstadoSeleccion::Player1()
+    {
+        EstadoJuego::Instance(); // Creamos el puntero
+        EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrareloj);
+        CambiarEstadoMaquina();
+    }
+    
+    void EstadoSeleccion::Player2()
+    {
+        EstadoJuego::Instance(); // Creamos el puntero
+        EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrareloj); // MAMBO
+        CambiarEstadoMaquina();
+    }
+    
+    /*void EstadoSeleccion::Player3()
+    {
+        EstadoJuego::Instance(); // Creamos el puntero
+        EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrareloj);
+        CambiarEstadoMaquina();
+    }
+    
+    void EstadoSeleccion::Player4()
+    {
+        EstadoJuego::Instance(); // Creamos el puntero
+        EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrareloj);
+        CambiarEstadoMaquina();
+    }*/
+    
+    void EstadoSeleccion::CambiarEstadoMaquina()
+    {
+        // Cambiamos de estado la maquina
+        _juego->maquina.Anyadir(EstadoJuego::Instance(), true);
     }
 }

@@ -47,6 +47,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
 	${OBJECTDIR}/EstadoMuerte.o \
+	${OBJECTDIR}/EstadoPartidas.o \
 	${OBJECTDIR}/EstadoPausa.o \
 	${OBJECTDIR}/EstadoSeleccion.o \
 	${OBJECTDIR}/EstadosManager.o \
@@ -77,11 +78,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Arma.o: Arma.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -143,6 +144,11 @@ ${OBJECTDIR}/EstadoMuerte.o: EstadoMuerte.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMuerte.o EstadoMuerte.cpp
 
+${OBJECTDIR}/EstadoPartidas.o: EstadoPartidas.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoPartidas.o EstadoPartidas.cpp
+
 ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -199,7 +205,7 @@ ${OBJECTDIR}/Proyectil.o: Proyectil.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
 
 # Subprojects
 .clean-subprojects:

@@ -116,7 +116,17 @@ namespace Motor
         void CentrarOrigen();
         void CambiarOrigen();
         void CambiarOrigen(float x, float y);
+        
         void CambiarColorRojo();
+        void CambiarColorNegro();
+        void CambiarColorBlanco();
+        void CambiarColorVerde();
+        void CambiarColorAzul();
+        void CambiarColorAmarillo();
+        void CambiarColorCyan();
+        void CambiarColorMagenta();
+        void ColorTransparente();
+
         void Rotar(float angulo);
         void Escalar(float x, float y);
         void EscalarProporcion(float x, float y);
@@ -129,7 +139,6 @@ namespace Motor
         void Mover(float v);
         void Mover(float x, float y);
         bool Interseccion1(SpriteM s);
-        bool Interseccion1(SpriteM *s);
         bool Interseccion2(SpriteM s);
     };
     
@@ -219,6 +228,7 @@ namespace Motor
         bool RatonPulsado(sf::Mouse::Button boton);
         bool TeclaPulsada(sf::Keyboard::Key key);
         bool IsTextoClicked(Texto& object);
+        bool IsSpriteClicked(SpriteM& object);
         bool RatonSobre(Texto& object);
         bool RatonSobre(SpriteM& object);
         

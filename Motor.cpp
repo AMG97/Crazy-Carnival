@@ -179,6 +179,46 @@ namespace Motor
         setColor(sf::Color::Red);
     }
     
+    void SpriteM::CambiarColorNegro()
+    {
+        setColor(sf::Color::Black);
+    }
+    
+    void SpriteM::CambiarColorBlanco()
+    {
+        setColor(sf::Color::White);
+    }
+    
+    void SpriteM::CambiarColorVerde()
+    {
+        setColor(sf::Color::Green);
+    }
+    
+    void SpriteM::CambiarColorAzul()
+    {
+        setColor(sf::Color::Blue);
+    }
+    
+    void SpriteM::CambiarColorAmarillo()
+    {
+        setColor(sf::Color::Yellow);
+    }
+    
+    void SpriteM::CambiarColorCyan()
+    {
+        setColor(sf::Color::Cyan);
+    }
+    
+    void SpriteM::CambiarColorMagenta()
+    {
+        setColor(sf::Color::Magenta);
+    }
+    
+    void SpriteM::ColorTransparente()
+    {
+        setColor(sf::Color::Transparent);
+    }
+    
     void SpriteM::Rotar(float angulo)
     {
         rotate(angulo);
@@ -236,11 +276,6 @@ namespace Motor
     bool SpriteM::Interseccion1(SpriteM s)
     {
         return s.getGlobalBounds().contains(getPosition().x,getPosition().y);
-    }
-    
-        bool SpriteM::Interseccion1(SpriteM* s)
-    {
-        return s->getGlobalBounds().contains(getPosition().x,getPosition().y);
     }
     
     bool SpriteM::Interseccion2(SpriteM s)
@@ -529,6 +564,18 @@ namespace Motor
     bool Input::IsTextoClicked(Texto& object)
     {
         sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY(),
+            object.GetAncho(), object.GetAlto());
+        
+        if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana())))
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    bool Input::IsSpriteClicked(SpriteM& object)
+    {
+        sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY()-object.GetAlto()/2,
             object.GetAncho(), object.GetAlto());
         
         if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana())))

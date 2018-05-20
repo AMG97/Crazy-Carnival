@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Git
+PROJECTNAME=Crazy-Carnival
 
 # Active Configuration
 DEFAULTCONF=Debug

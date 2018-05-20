@@ -10,6 +10,7 @@ namespace Crazy
     class Juego {
     public:
         static Juego* Instance();
+        ~Juego();
         
         EstadosManager maquina;
         Ventana* _ventana;
@@ -18,7 +19,8 @@ namespace Crazy
         int GetAncho();
         int GetAlto();
         std::string GetTitulo();
-        ~Juego();
+        short int GetSlot();
+        void SetSlot(short int s);
         
     private:
         Juego() { };
@@ -31,5 +33,8 @@ namespace Crazy
         std::string titulo;
         float tiempoActual;
         Reloj reloj;
+        
+        // Slot guardado
+        short int slot;
     };
 }

@@ -37,7 +37,6 @@ namespace Crazy
         recursos.CargarTextura("Hud","resources/HUD.png");
         recursos.CargarTextura("Objetos","resources/SpritesObjetos.png");
         recursos.CargarTextura("Playa","resources/SpritesPlaya.png");
-        recursos.CargarTextura("Barrio","resources/Barrio.png");
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
         recursos.CargarTextura("Espada1","resources/espada1.png");
         recursos.CargarTextura("Espada2","resources/espada2.png");
@@ -85,5 +84,15 @@ namespace Crazy
     string Juego::GetTitulo()
     {
         return titulo;
+    }
+    
+    short int Juego::GetSlot()
+    {
+        return slot;
+    }
+    
+    void Juego::SetSlot(short int s)
+    {
+        slot = s;
     }
 }
