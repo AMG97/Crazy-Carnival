@@ -23,11 +23,14 @@ namespace Crazy
         void MoverX(float x);
         void MoverY();
         void BorrarProyectil(int i);
+        void MoverHaciaJugador(float v,int Posx, int x);
     private:
         float danyo;
         int contadorSpriteAtaque2;
         int contadorSpriteSalto;
         float caida;
+        float velSalto;
+        float danyoSalto;
         bool Ataque2;
         bool zanahorias;
         Reloj tAtaque2;

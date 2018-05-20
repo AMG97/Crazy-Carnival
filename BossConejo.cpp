@@ -19,17 +19,19 @@ namespace Crazy
         contadorSpriteSalto=0;
         rojo=false;
         SetDireccion(true);
-        velocidad=2.9;
-        alcancex=1000;
-        alcancey=400;
+        velocidad=2.6;
+        alcancex=1200;
+        alcancey=800;
         movimiento=500;
-        danyo=8;
+        danyo=6;
         _arma=NULL; 
         caida=0;
         angulo=0;
         Ataque1=false;
         Ataque2=false;
         zanahorias=false;
+        velSalto=0;
+        danyoSalto=false;
     }
 
     BossConejo::BossConejo(const BossConejo& orig) {
@@ -80,8 +82,8 @@ namespace Crazy
             if(zanahorias){
                 Proyectil *p=new Proyectil(5,danyo/3,94,sprite);
                 Proyectil *p2=new Proyectil(5,2,139,sprite);
-                Proyectil *p3=new Proyectil(5,2,184,sprite);
-                Proyectil *p4=new Proyectil(5,2,229,sprite);
+                Proyectil *p3=new Proyectil(5,1,184,sprite);
+                Proyectil *p4=new Proyectil(5,1,229,sprite);
                 Proyectil *p5=new Proyectil(5,2,274,sprite);
                 proyectiles.push_back(p);
                 proyectiles.push_back(p2);
@@ -90,9 +92,9 @@ namespace Crazy
                 proyectiles.push_back(p5);
                 zanahorias=false;
             }else{
-                Proyectil *p=new Proyectil(5,2,116.5,sprite);
+                Proyectil *p=new Proyectil(5,1,116.5,sprite);
                 Proyectil *p2=new Proyectil(5,2,161.5,sprite);
-                Proyectil *p3=new Proyectil(5,2,206.5,sprite);
+                Proyectil *p3=new Proyectil(5,1,206.5,sprite);
                 Proyectil *p4=new Proyectil(5,2,251.5,sprite);
                 proyectiles.push_back(p);
                 proyectiles.push_back(p2);
@@ -110,7 +112,15 @@ namespace Crazy
     }
 
     void BossConejo::ModificarSpriteSalto() {
-        
+        sprite.CambiarTextRect(contadorSpriteSalto*35,50,35,55);
+         if(contadorSpriteSalto==0){
+            sprite.CambiarOrigen(35/2,55/2);
+        }
+        if((contadorSpriteSalto==0 && velSalto>-2) || (contadorSpriteSalto==1 && caida>1.2)){
+            contadorSpriteSalto++;
+        }
+        if(contadorSpriteSalto==3)
+            contadorSpriteSalto=0;
     }
 
     
@@ -123,23 +133,37 @@ namespace Crazy
         else
             sumx=x-90/2;
         if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()+30) &&
-           !EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()-30) &&
-            EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()+30*2))
+           !EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+sumx,sprite.GetY()-30))
             sprite.Mover(x,0);
         else 
             SetDireccion(!direccionIzq);
     }
     
     void BossConejo::MoverY(){
-        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2)){
+        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2) && velSalto==0){
             caida+=0.4;
             sprite.Mover(0,caida);
         }else{
             if(caida!=0){
                 caida=0;
-                sprite.CambiarPosicion(sprite.GetX(),floor(sprite.GetY()/48)*48+23); //puede que lo tenga que cambiar
+                velSalto=0;
+                sprite.CambiarPosicion(sprite.GetX(),floor(sprite.GetY()/48)*48+13);
             }
         }
+        if(velSalto!=0)
+        {
+            velSalto=velSalto+0.5;
+            if(velSalto>4)
+                velSalto=4;
+        }
+        if(sprite.GetY()-sprite.GetAlto()/2-20>0){
+            if(velSalto<0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()-sprite.GetAlto()/2+20)){
+                velSalto=0;
+            }
+        }else{
+            velSalto=0;
+        }
+        sprite.Mover(0,velSalto);
     }
     void BossConejo::Dibujar() {
         _juego->_ventana->DibujarSprite(sprite);
@@ -160,7 +184,7 @@ namespace Crazy
             if(vida<=15){
                 if(contadorSpriteAtaque1!=0){
                     contadorSpriteAtaque1=0;
-                    sprite.Mover(0,-10);
+                    sprite.Mover(0,10);
                 }
                 if(tAtaque2.GetSegundos()>0.4)
                         Ataque2=true;
@@ -172,49 +196,50 @@ namespace Crazy
                 }
             }
             else{
-                if(Posx>x)
-                {
-                    if(direccionIzq)
-                        SetDireccion(false);
-                    if(Posx-x>50)
-                    {
-                        MoverX(velocidad);
-                        if(tDesp.GetSegundos()>0.2){
+                if(abs(diferenciax)<200 && abs(diferenciay)<alcancey && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2)){
+                    MoverHaciaJugador(velocidad,Posx,x);
+                    if(tAtaque.GetSegundos()>1.2 && Posx-x<150 && Posx-x>-150)
+                        Ataque1=true;
+                    if(tDesp.GetSegundos()>0.1){
+                        if(Ataque1){
+                            ModificarSpriteAtaque1();
+                            if(contadorSpriteAtaque1==1){
+                                if(p->GetSprite().Interseccion2(sprite)){
+                                    p->RecibirDanyo(danyo);
+                                }
+                            }
+                            tDesp.ReiniciarSegundos();
+                        }
+                        else if(tAtaque.GetSegundos()<1.2 && tDesp.GetSegundos()>0.2){
                             ModificarSpriteCorrer();
                             tDesp.ReiniciarSegundos();
                         }
                     }
                 }
-                else if(Posx<x){
-                    if(!direccionIzq)
-                        SetDireccion(true);
-                    if(x-Posx>50)
-                    {
-                        MoverX(-velocidad);
+                else if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
+                    if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2)){
+                        velSalto=-15;
+                        contadorSpriteSalto=0;
+                        danyoSalto=false;
+                        caida=0;
                         if(tDesp.GetSegundos()>0.2){
-                            ModificarSpriteCorrer();
-                            tDesp.ReiniciarSegundos();
+                            ModificarSpriteSalto();
                         }
-                    }
-                }
-                if(tAtaque.GetSegundos()>1.2 && Posx-x<150 && Posx-x>-150)
-                    Ataque1=true;
-                if(tDesp.GetSegundos()>0.1){
-                    if(Ataque1){
-                        ModificarSpriteAtaque1();
-                        if(contadorSpriteAtaque1==1){
-                            if(p->GetSprite().Interseccion2(sprite)){
-                                p->RecibirDanyo(danyo);
+                    }else{
+                        MoverHaciaJugador(velocidad*2,Posx,x);
+                        if(tDesp.GetSegundos()>0.2){
+                            ModificarSpriteSalto();
+                            if(contadorSpriteSalto==2 && danyoSalto==false){
+                                if(p->GetSprite().Interseccion2(sprite)){
+                                    p->RecibirDanyo(danyo);
+                                    danyoSalto=true;
+                                }
                             }
                         }
-                        tDesp.ReiniciarSegundos();
-                    }
-                    else if(tAtaque.GetSegundos()<1.2 && tDesp.GetSegundos()>0.2){
-                        ModificarSpriteCorrer();
-                        tDesp.ReiniciarSegundos();
                     }
                 }
             }
+           
         
             for(int i=0;i<proyectiles.size();i++)
             {
@@ -240,6 +265,39 @@ namespace Crazy
         proyectiles.erase(proyectiles.begin()+i);
         delete tmp;
     }
+    
+    void BossConejo::MoverHaciaJugador(float v,int Posx, int x) {
+        if(Posx>x)
+        {
+            if(direccionIzq)
+                SetDireccion(false);
+            if(Posx-x>50)
+            {
+                MoverX(v);
+                if(tDesp.GetSegundos()>0.2){
+                    if(v==velocidad){
+                        ModificarSpriteCorrer();
+                        tDesp.ReiniciarSegundos();
+                    }
+                }
+            }
+        }
+        else if(Posx<x){
+            if(!direccionIzq)
+                SetDireccion(true);
+            if(x-Posx>50)
+            {
+                MoverX(-v);
+                if(tDesp.GetSegundos()>0.2){
+                    if(v==velocidad){
+                        ModificarSpriteCorrer();
+                        tDesp.ReiniciarSegundos();
+                    }
+                }
+            }
+       }
+    }
+
 
 
 }

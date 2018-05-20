@@ -181,7 +181,7 @@ namespace Crazy{
             height = mapY;
 
             freecam = false;
-            BossConejo* b=new BossConejo(900,900);
+            BossConejo* b=new BossConejo(900,1200);
             _enemigos.push_back(b);
             
             _camera = Camara::Instance();
