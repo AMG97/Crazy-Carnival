@@ -2,6 +2,7 @@
 #include "EstadoJuego.hpp"
 #include "EnemigoVolador.hpp"
 #include "BossCangrejo.hpp"
+#include "BossConejo.hpp"
 
 
 namespace Crazy{
@@ -180,7 +181,8 @@ namespace Crazy{
             height = mapY;
 
             freecam = false;
-                
+            BossConejo* b=new BossConejo(900,900);
+            _enemigos.push_back(b);
             
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
@@ -272,11 +274,13 @@ namespace Crazy{
     bool Nivel::ComprobarColision(float x, float y) {
         int x2=round(x/48);
         int y2=round(y/48);
+        if(y2>=0 && y2<height && x2>=0 && x2<width){
         if(tilemap["Collisionable"][y2][x2]!=0)
             return true;
         else{
             return false;
-        }
+        }}
+        else return true;
     }
 
 
