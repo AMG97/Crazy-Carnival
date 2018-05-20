@@ -10,7 +10,7 @@ namespace Crazy
         sprite.CambiarOrigen(35/2,50/2);
         sprite.CambiarPosicion(posx, posy);
         sprite.EscalarProporcion(2,2);
-        vida=50.0;
+        vida=100.0;
         posinix=sprite.GetX();
         posiniy=sprite.GetY();
         contadorSpriteCorrer=0;
@@ -182,7 +182,7 @@ namespace Crazy
         float diferenciay=Posy-y;
         angulo=atan2(diferenciax,diferenciay)*180/3.14159;
         if(diferenciax<1200 && diferenciay<1200 && diferenciax>-1200 && diferenciay>-1200){
-            if(vida<=15){
+            if(vida<=20){
                 if(contadorSpriteAtaque1!=0){
                     contadorSpriteAtaque1=0;
                     sprite.Mover(0,10);
