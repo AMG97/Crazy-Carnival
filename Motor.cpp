@@ -174,6 +174,32 @@ namespace Motor
         setOrigin(x, y);
     }
     
+    void SpriteM::Rotar(float angulo)
+    {
+        rotate(angulo);
+    }
+    
+    void SpriteM::Escalar(float x, float y)
+    {
+        scale(x/getTexture()->getSize().x, y/getTexture()->getSize().y);
+    }
+    void SpriteM::EscalarProporcion(float x, float y)
+    {
+        scale(x, y);
+    }
+    
+    void SpriteM::Parpadear(bool parpadeo)
+    {
+        if (parpadeo)
+        {
+            setColor(sf::Color(50, 125, 255, 255));
+        }
+        else
+        {
+            setColor(sf::Color(255, 255, 255, 255));
+        }
+    }
+    
     void SpriteM::CambiarColorRojo()
     {
         setColor(sf::Color::Red);
@@ -219,32 +245,6 @@ namespace Motor
         setColor(sf::Color::Transparent);
     }
     
-    void SpriteM::Rotar(float angulo)
-    {
-        rotate(angulo);
-    }
-    
-    void SpriteM::Escalar(float x, float y)
-    {
-        scale(x/getTexture()->getSize().x, y/getTexture()->getSize().y);
-    }
-    void SpriteM::EscalarProporcion(float x, float y)
-    {
-        scale(x, y);
-    }
-    
-    void SpriteM::Parpadear(bool parpadeo)
-    {
-        if (parpadeo)
-        {
-            setColor(sf::Color(50, 125, 255, 255));
-        }
-        else
-        {
-            setColor(sf::Color(255, 255, 255, 255));
-        }
-    }
-    
     float SpriteM::GetAncho()
     {
         return getGlobalBounds().width;
@@ -276,6 +276,11 @@ namespace Motor
     bool SpriteM::Interseccion1(SpriteM s)
     {
         return s.getGlobalBounds().contains(getPosition().x,getPosition().y);
+    }
+    
+        bool SpriteM::Interseccion1(SpriteM* s)
+    {
+        return s->getGlobalBounds().contains(getPosition().x,getPosition().y);
     }
     
     bool SpriteM::Interseccion2(SpriteM s)

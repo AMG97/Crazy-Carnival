@@ -39,7 +39,7 @@ namespace Crazy
         
         Nivel* _level;
         
-        void Personaje(string jugador, bool modoN, bool modoC);
+        void Personaje(string jugador, bool modoNormal, bool modoContrareloj);
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);

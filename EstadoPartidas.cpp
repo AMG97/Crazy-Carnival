@@ -351,4 +351,3 @@ Si no, Nueva partida*/
         _juego->maquina.Anyadir(EstadoEstadisticas::Instance(), false);
     }
 }
-

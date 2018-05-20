@@ -116,6 +116,10 @@ namespace Motor
         void CentrarOrigen();
         void CambiarOrigen();
         void CambiarOrigen(float x, float y);
+        void Rotar(float angulo);
+        void Escalar(float x, float y);
+        void EscalarProporcion(float x, float y);
+        void Parpadear(bool parpadeo);
         
         void CambiarColorRojo();
         void CambiarColorNegro();
@@ -126,11 +130,6 @@ namespace Motor
         void CambiarColorCyan();
         void CambiarColorMagenta();
         void ColorTransparente();
-
-        void Rotar(float angulo);
-        void Escalar(float x, float y);
-        void EscalarProporcion(float x, float y);
-        void Parpadear(bool parpadeo);
         
         float GetAncho();
         float GetAlto();
@@ -139,6 +138,7 @@ namespace Motor
         void Mover(float v);
         void Mover(float x, float y);
         bool Interseccion1(SpriteM s);
+        bool Interseccion1(SpriteM *s);
         bool Interseccion2(SpriteM s);
     };
     
