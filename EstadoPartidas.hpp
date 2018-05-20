@@ -11,11 +11,6 @@
 #define SLOT2 2
 #define SLOT3 3
 
-#define NUEVA 0
-#define CARGAR 1
-#define BORRAR 2
-#define ESTADISTICAS 3
-
 namespace Crazy
 {
     class EstadoPartidas : public Estado
@@ -46,7 +41,7 @@ namespace Crazy
 
         short int slots = 3;
         short int archivos = 2;
-        bool** partidas = new bool*[slots];
+        bool partidas[3][2];
         bool hayPartidas;
         
         Texto t_slot1;
@@ -66,10 +61,11 @@ namespace Crazy
         
         void ComprobarPartidas();
         void CambiarSlot(short int num);
-        void Opciones(Texto texto);
+        void Opciones();
+        void Elegir();
         
         void Atras();
-        void CambiarFlecha(SpriteM f, Texto texto);
+        void CambiarFlecha(SpriteM &f, Texto texto);
         void NuevaPartida();
         void CargarPartida();
         void BorrarPartida();
