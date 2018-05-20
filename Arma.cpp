@@ -22,6 +22,14 @@ namespace Crazy
             break;
             case 2:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Espada2"));
+                danyo=11.5;
+            break;
+            case 3:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Espada3"));
+                danyo=11;
+            break;
+            case 4:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Espada4"));
                 danyo=12;
             break;
         }

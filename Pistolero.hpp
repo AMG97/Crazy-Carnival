@@ -17,7 +17,7 @@ namespace Crazy
     class Pistolero : public Player
     {
     public:
-        Pistolero();
+        Pistolero(int arma);
         void ModificarSprite();
         void Reposo(int n);  
         void Update(vector<Enemigo*> e);

@@ -4,11 +4,10 @@
 
 namespace Crazy
 {
-    Espadachina::Espadachina()
+    Espadachina::Espadachina(int arma)
     {
         totalVida = 60.0f;
         vida = totalVida;
-        enfriamiento = 0.0f;
         totalEnfriamiento = 30.0f;        
         sprite.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
@@ -18,10 +17,8 @@ namespace Crazy
         posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
         
         sprite.CambiarPosicion(posIniX, posIniY);
-        _arma=new Arma(2,sprite.GetX(),sprite.GetY());
+        _arma=new Arma(arma,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5, 1.5);
-        caida=0;
-        lastpared=0;
     }
     
     void Espadachina::ModificarSprite()
@@ -163,7 +160,6 @@ namespace Crazy
     void Espadachina::Update(vector<Enemigo*> e)
     {
         MoverY();
-        cout<<sprite.GetX()<<endl;
         if(velocidad!=0){
             if(velocidad>0.1){
                 if(lastpared!=0){

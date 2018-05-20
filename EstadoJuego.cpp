@@ -50,9 +50,9 @@ namespace Crazy
         _level->cargarNivel(lvl_n);
         cout<<lvl_n<<endl;
         if(texturaJugador=="Espadachina")
-            _jugador = new Espadachina();
+            _jugador = new Espadachina(1);
         else
-            _jugador=new Pistolero();
+            _jugador=new Pistolero(2);
         _hud = new Hud();
         
         teclaPulsada = false;
