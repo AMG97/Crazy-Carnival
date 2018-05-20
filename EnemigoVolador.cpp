@@ -16,7 +16,7 @@ namespace Crazy
         //contadorSpriteCorrer=0;
         rojo=false;
         SetDireccion(true);
-        velocidad=2.7;
+        velocidad=2.9;
         alcancex=600;
         alcancey=400;
         movimiento=400;

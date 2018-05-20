@@ -199,10 +199,8 @@ namespace Crazy{
         for (vector<Objeto*>::iterator it = objects.begin() ; it <objects.end(); ++it){
             
             Objeto* ref = *it;
-            cout<<ref->getPosition().getX()<<" - "<<ref->getPosition().getY()<<endl;
             if(ref!=0 && ref->colision()){
                 vector2f rem = ref->getPosition();
-                cout<<rem.getX()<<" . "<<rem.getY()<<endl;
                 delete tilemap["Objetos"][(int)rem.getY()][(int)rem.getX()];
                 tilemap["Objetos"][(int)rem.getY()][(int)rem.getX()] = 0;
                 delete ref;

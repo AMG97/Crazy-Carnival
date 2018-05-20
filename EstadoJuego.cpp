@@ -157,7 +157,7 @@ namespace Crazy
 
             if(_input->Arriba())
             {
-                if(estado==_jugador->GetDeslizarse() && _jugador->Gettpared()>0.2){
+                if(estado==_jugador->GetDeslizarse() && _jugador->Gettpared()>0.1){
                     if(_jugador->GetLastPared()==1){
                         _jugador->SetVelocidad(-6.0f);
                     }else
