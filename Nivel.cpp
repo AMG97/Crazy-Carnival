@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Nivel.cpp
- * Author: fv
- * 
- * Created on May 1, 2018, 6:32 PM
- */
-
 #include "Nivel.hpp"
 #include "EstadoJuego.hpp"
 #include "EnemigoVolador.hpp"
@@ -209,10 +196,13 @@ namespace Crazy{
         
         
         //Colision con los objetos
-        for (vector<Objeto*>::iterator it = objects.begin() ; it != objects.end(); ++it){
+        for (vector<Objeto*>::iterator it = objects.begin() ; it <objects.end(); ++it){
+            
             Objeto* ref = *it;
+            cout<<ref->getPosition().getX()<<" - "<<ref->getPosition().getY()<<endl;
             if(ref!=0 && ref->colision()){
                 vector2f rem = ref->getPosition();
+                cout<<rem.getX()<<" . "<<rem.getY()<<endl;
                 delete tilemap["Objetos"][(int)rem.getY()][(int)rem.getX()];
                 tilemap["Objetos"][(int)rem.getY()][(int)rem.getX()] = 0;
                 delete ref;
