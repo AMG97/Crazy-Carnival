@@ -196,9 +196,10 @@ namespace Crazy
             rojo=false;
             sprite.Parpadear(false);
         }
-        if(estado==SALTO && (EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
-            if((EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && lastpared!=1) ||
-                (EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && lastpared!=2)){
+        EstadoJuego* ej=EstadoJuego::Instance();
+        if(estado==SALTO && (ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
+            if((ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && lastpared!=1) ||
+                (ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && lastpared!=2)){
                     if(lastpared==0){
                         if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()))
                             lastpared=1;
@@ -209,13 +210,13 @@ namespace Crazy
                     else
                         lastpared=1;
                     estado=DESLIZARSE;
-                    if((EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && direccionIzq==false) || (EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && direccionIzq==true))
+                    if((ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && direccionIzq==false) || (ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && direccionIzq==true))
                         CambiarDireccion();
             }
         }
-        if((estado==DESLIZARSE) && (velSalto==0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60)
-           ||(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && !EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY())))){
-            if(velSalto==0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60)){
+        if((estado==DESLIZARSE) && (velSalto==0 && ej->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60)
+           ||(!ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && !ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY())))){
+            if(velSalto==0 && ej->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60)){
                 estado=REPOSO;
                 lastpared=0;
                 contadorSpriteSalto=0;
