@@ -46,8 +46,9 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n=2;
+        lvl_n=1;
         _level->cargarNivel(lvl_n);
+        cout<<lvl_n<<endl;
         if(texturaJugador=="Espadachina")
             _jugador = new Espadachina();
         else

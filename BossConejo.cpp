@@ -32,6 +32,7 @@ namespace Crazy
         zanahorias=false;
         velSalto=0;
         danyoSalto=false;
+        puntos = 5000;
     }
 
     BossConejo::BossConejo(const BossConejo& orig) {

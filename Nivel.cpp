@@ -220,6 +220,39 @@ namespace Crazy{
         
         
         switch(EstadoJuego::Instance()->getNumNivel()){
+            case 1:
+                if(!bossMatado && !peleandoBoss && _jugador->GetPosX()>13600){
+                    peleandoBoss =true;
+                    _enemigos.clear();
+                    _enemigos.push_back(new BossConejo(_camera->getX()+_camera->getWidth()/2+200,1080));
+                    _camera->toggleStatic();
+                }
+                
+                if(peleandoBoss){
+                    BossConejo* boss = (BossConejo*) *_enemigos.begin();
+                    
+                    if(boss->GetVida()<=0){
+                        _jugador->addPuntuacion(boss->getPuntos());
+                        _enemigos.erase(_enemigos.begin());
+                        peleandoBoss=false;
+                        bossMatado = true;
+                        
+                        //AQUI LANZAR EL NUEVO NIVEL
+                        
+                        delete boss;
+                    }else if(boss->GetVida()>0){
+                        if(boss->GetArma()!=NULL){
+                            boss->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                            boss->GetArma()->Update(boss->GetSprite().GetX(),boss->GetSprite().GetY(),_jugador);
+                        }else
+                            boss->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
+                    }
+                    
+                    
+                }
+            break;
+                
+                
             case 2:
                 if(!bossMatado && !peleandoBoss && _jugador->GetPosX()>48*180){
                     peleandoBoss =true;

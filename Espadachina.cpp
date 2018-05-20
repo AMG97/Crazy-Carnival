@@ -14,7 +14,7 @@ namespace Crazy
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
         sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
         
-        posIniX = 200;
+        posIniX = 13400;
         posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
         
         sprite.CambiarPosicion(posIniX, posIniY);
