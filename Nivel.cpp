@@ -53,12 +53,17 @@ namespace Crazy{
         TiXmlDocument doc,sprite,objects_doc;
         switch(l){
             case 1:
+                mapa = &_juego->recursos.GetTextura("Barrio");
+                sprite = TiXmlDocument("resources/BarrioPatron.tsx");
+                doc = TiXmlDocument("resources/Barrio.tmx");
+                _juego->_ventana->setBackground(100,125,125);
+                break;
+            case 2:
                 mapa = &_juego->recursos.GetTextura("Playa");
                 sprite = TiXmlDocument("resources/SpritesPlaya.tsx");
                 doc = TiXmlDocument("resources/playaG.tmx");
                 _juego->_ventana->setBackground(135,207,235);
-                break;
-               
+                break;  
             default:
                 mapa = 0;
                 break;

@@ -220,6 +220,7 @@ namespace Motor
         bool TeclaPulsada(sf::Keyboard::Key key);
         bool IsTextoClicked(Texto& object);
         bool RatonSobre(Texto& object);
+        bool RatonSobre(SpriteM& object);
         
         bool RatonDer();
         bool RatonIzq();

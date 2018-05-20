@@ -247,7 +247,6 @@ namespace Crazy
         _level->draw("Trasera");
         _level->draw("Collisionable");
         _level->draw("Objetos");
-        _level->draw("Delante");
         
         if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial() && _hud->GetAtaqueEspecial())
         {
@@ -260,6 +259,7 @@ namespace Crazy
         
         _jugador->ModificarSprite();
         _jugador->Dibujar();
+        _level->draw("Delante");
                 
         _juego->_ventana->Mostrar();
     }

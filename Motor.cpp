@@ -552,6 +552,18 @@ namespace Motor
         }
     }
     
+    bool Input::RatonSobre(SpriteM& object)
+    {
+        sf::IntRect playButtonRect(object.GetX()-object.GetAncho()/2, object.GetY()-object.GetAlto()/2,
+            object.GetAncho(), object.GetAlto());
+        
+        if (playButtonRect.contains(sf::Mouse::getPosition(_ventana->GetVentana()))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     bool Input::RatonDer()
     {
         return RatonPulsado(sf::Mouse::Button::Right);
