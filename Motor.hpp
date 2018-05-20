@@ -126,8 +126,13 @@ namespace Motor
         float GetY();
         void Mover(float v);
         void Mover(float x, float y);
-        bool Interseccion1(SpriteM s);
-        bool Interseccion2(SpriteM s);
+        bool InterseccionContiene(SpriteM s);
+        ///A este no le afecta la colisión de pixel
+        bool InterseccionContieneSP(SpriteM s);
+        bool Interseccion(SpriteM s);
+        ///A este no le afecta la colision de pixel
+        bool InterseccionSP(SpriteM s);
+        bool InterseccionPixel(SpriteM* s);
     };
     
     class Camara

@@ -349,9 +349,15 @@ namespace Crazy
         if(abs(velocidad)<0.2)
             velocidad=0;
         sprite.Mover(velocidad,velSalto);
+        
+        if(contadorSpriteAtaque1>2)
+            atacando=true;
+        else
+            atacando=false;
+        
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
-                if(sprite.Interseccion2(e[j]->GetSprite()))
+                if(sprite.InterseccionSP(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
                     ModificarEnfriamiento(5);
@@ -382,6 +388,9 @@ namespace Crazy
 
     void Player::setPuntuacion(int puntos) {
         puntuacion = puntos;
+    }
+    bool Player::isAttacking() {
+        return atacando;
     }
 
 

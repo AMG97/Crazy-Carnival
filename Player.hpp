@@ -56,6 +56,7 @@ namespace Crazy
         void Update(vector<Enemigo*> e);
         void SetVElocidadSalto(float v);
         float GetVelocidadSalto();
+        bool isAttacking();
         
         
         // Box2D
@@ -87,6 +88,7 @@ namespace Crazy
         short int estado;
         Reloj tAtaque2;
         bool Atacado2;
+        bool atacando;
         
         float velSalto;
         

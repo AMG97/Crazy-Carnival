@@ -29,7 +29,9 @@ namespace Crazy
         bool Ataque2;
         Reloj tAtaque2;
         Reloj tAtaqueFinal;
+        Reloj explotarBurbuja;
         vector<Proyectil*> proyectiles;
+        vector<Proyectil*> animacionExplote;
     };
 
 }

@@ -10,7 +10,7 @@ namespace Crazy
         sprite.CambiarOrigen(90/2,70/2);
         sprite.CambiarPosicion(posx, posy);
         sprite.EscalarProporcion(2,2);
-        vida=55.0;
+        vida=100.0;
         posinix=sprite.GetX();
         posiniy=sprite.GetY();
         contadorSpriteCorrer=0;
@@ -111,6 +111,21 @@ namespace Crazy
         _juego->_ventana->DibujarSprite(sprite);
         for(int i=0; i<proyectiles.size();i++)
             proyectiles[i]->Dibujar();
+        
+        for (int i = 0; i < animacionExplote.size(); i++) {
+            float secs=0.65; 
+            Proyectil* bala = animacionExplote[i];
+            
+            if(explotarBurbuja.getElapsedTime().asSeconds()>secs)animacionExplote.erase(animacionExplote.begin()+i);
+            else if(explotarBurbuja.getElapsedTime().asSeconds()>0.8*secs) bala->GetProyectil()->CambiarTextRect(72+80*4,278,80,74);
+            else if(explotarBurbuja.getElapsedTime().asSeconds()>0.6*secs) bala->GetProyectil()->CambiarTextRect(72+80*3,278,80,74);
+            else if(explotarBurbuja.getElapsedTime().asSeconds()>0.4*secs) bala->GetProyectil()->CambiarTextRect(72+80*2,278,80,74);
+            else if(explotarBurbuja.getElapsedTime().asSeconds()>0.2*secs) bala->GetProyectil()->CambiarTextRect(72+80*1,278,80,74);
+            else if(explotarBurbuja.getElapsedTime().asSeconds()>0.05*secs) bala->GetProyectil()->CambiarTextRect(72+80*0,278,80,74);
+            
+            bala->Dibujar();
+        }
+        
     }
     void BossCangrejo::Update(int Posx, int Posy) {
 
@@ -155,8 +170,9 @@ namespace Crazy
                     if(Ataque1){
                         ModificarSpriteAtaque1();
                         if(contadorSpriteAtaque1==1){
-                            if(p->GetSprite().Interseccion2(sprite)){
-                                p->RecibirDanyo(danyo);
+                            if(p->GetSprite().Interseccion(sprite)){
+                                if(p->GetSprite().InterseccionPixel(&sprite))
+                                    p->RecibirDanyo(danyo);
                             }
                         }
                         tDesp.ReiniciarSegundos();
@@ -166,38 +182,45 @@ namespace Crazy
                         tDesp.ReiniciarSegundos();
                     }
                 }
-        }else if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
-            if(tAtaque2.GetSegundos()>1)
-                    Ataque2=true;
-            if(tDesp.GetSegundos()>0.1){
-                if(Ataque2){
-                    ModificarSpriteAtaque2();
-                    tDesp.ReiniciarSegundos();
-                }
-                else if(tAtaque.GetSegundos()<2 && tDesp.GetSegundos()>0.2){
-                    ModificarSpriteCorrer();
-                    tDesp.ReiniciarSegundos();
+            }else if(abs(diferenciax)<alcancex && abs(diferenciay)<alcancey){
+                if(tAtaque2.GetSegundos()>1)
+                        Ataque2=true;
+                if(tDesp.GetSegundos()>0.1){
+                    if(Ataque2){
+                        ModificarSpriteAtaque2();
+                        tDesp.ReiniciarSegundos();
+                    }
+                    else if(tAtaque.GetSegundos()<2 && tDesp.GetSegundos()>0.2){
+                        ModificarSpriteCorrer();
+                        tDesp.ReiniciarSegundos();
+                    }
                 }
             }
-        }
-                    for(int i=0;i<proyectiles.size();i++)
-        {
-            bool b=proyectiles[i]->Update();
-            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
-                BorrarProyectil(i);
-            else if(proyectiles[i]->GetProyectil().Interseccion1(p->GetSprite()))
+            for(int i=0;i<proyectiles.size();i++)
             {
-                p->RecibirDanyo(proyectiles[i]->GetDanyo());
-                BorrarProyectil(i);
+                bool b=proyectiles[i]->Update();
+                if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil()->GetX(),proyectiles[i]->GetProyectil()->GetY()))
+                    BorrarProyectil(i);
+                else if(proyectiles[i]->GetProyectil()->InterseccionContiene(p->GetSprite()))
+                {
+                    if(!p->isAttacking()){
+                        p->RecibirDanyo(proyectiles[i]->GetDanyo());
+                        BorrarProyectil(i);
+                    }else{
+                        explotarBurbuja.restart();
+                        animacionExplote.push_back(proyectiles[i]);
+                        proyectiles.erase(proyectiles.begin()+i);
+                    }    
+                }
             }
         }
+        
+        if(rojo && relojrojo.GetSegundos()<=0.2)
+            sprite.CambiarColorRojo();
+        else if(rojo && relojrojo.GetSegundos()>0.2){
+            rojo=false;
+            sprite.Parpadear(false);
         }
-            if(rojo && relojrojo.GetSegundos()<=0.2)
-                sprite.CambiarColorRojo();
-            else if(rojo && relojrojo.GetSegundos()>0.2){
-                rojo=false;
-                sprite.Parpadear(false);
-            }
     }
     void BossCangrejo::BorrarProyectil(int i) {
         Proyectil *tmp=proyectiles[i];

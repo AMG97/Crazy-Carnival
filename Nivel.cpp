@@ -188,7 +188,8 @@ namespace Crazy{
             height = mapY;
 
             freecam = false;
-                
+            _enemigos.clear();
+            _enemigos.push_back(new BossCangrejo(100,1080));
             
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje

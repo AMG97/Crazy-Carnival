@@ -90,11 +90,11 @@ namespace Crazy
         bool colision=false;
         for(int i=0;i<proyectiles.size();i++){
             bool b=proyectiles[i]->Update();
-            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
+            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil()->GetX(),proyectiles[i]->GetProyectil()->GetY()))
                 BorrarProyectil(i);
             else{
                 for(int j=0;j<e.size() && colision==false;j++){
-                    if(proyectiles[i]->GetProyectil().Interseccion1(e[j]->GetSprite()))
+                    if(proyectiles[i]->GetProyectil()->InterseccionContieneSP(e[j]->GetSprite()))
                     {
                         p->ModificarEnfriamiento(5);
                         e[j]->RecibirDanyo(proyectiles[i]->GetDanyo());
@@ -114,9 +114,9 @@ namespace Crazy
         for(int i=0;i<proyectiles.size();i++)
         {
             bool b=proyectiles[i]->Update();
-            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
+            if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil()->GetX(),proyectiles[i]->GetProyectil()->GetY()))
                 BorrarProyectil(i);
-            else if(proyectiles[i]->GetProyectil().Interseccion1(p->GetSprite()))
+            else if(proyectiles[i]->GetProyectil()->InterseccionContiene(p->GetSprite()))
             {
                 p->RecibirDanyo(proyectiles[i]->GetDanyo());
                 BorrarProyectil(i);
