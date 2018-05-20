@@ -36,81 +36,56 @@ namespace Crazy
         ComprobarPartidas();
         _input = new Input();
         tamFuente = 48;
-        slotGuardar = SLOT1;
         
         t_titulo.CambiarFuente(_juego->recursos.GetFuente("Z"));
         t_titulo.CambiarTexto("Partidas");
         t_titulo.CambiarTamanyo(100);
         t_titulo.CentrarOrigen();
-        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 100);
+        t_titulo.CambiarPosicion((_juego->GetAncho()/2), 110);
         
         t_slot1.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_slot1.CambiarTamanyo(tamFuente);
         t_slot1.CentrarOrigen();
-        t_slot1.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+150);
+        t_slot1.CambiarPosicion((_juego->GetAncho()/2)-300, t_titulo.GetY()+150);
         
         t_slot2.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_slot2.CambiarTamanyo(tamFuente);
         t_slot2.CentrarOrigen();
-        t_slot2.CambiarPosicion((_juego->GetAncho()/2), t_slot1.GetY()+75);
+        t_slot2.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+150);
         
         t_slot3.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_slot3.CambiarTamanyo(tamFuente);
         t_slot3.CentrarOrigen();
-        t_slot3.CambiarPosicion((_juego->GetAncho()/2), t_slot2.GetY()+75);
-        
-        
-            /*t_cargar.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_cargar.CambiarTexto("Cargar partida");
-        t_cargar.CambiarTamanyo(tamFuente);
-        t_cargar.CentrarOrigen();
-        t_cargar.CambiarPosicion((_juego->GetAncho()/2), t_jugar.GetY()+75);
-        
-        t_borrar.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_borrar.CambiarTexto("Borrar partida");
-        t_borrar.CambiarTamanyo(tamFuente);
-        t_borrar.CentrarOrigen();
-        t_borrar.CambiarPosicion((_juego->GetAncho()/2), t_cargar.GetY()+75);
-             
-        t_estadisticas.CambiarFuente(_juego->recursos.GetFuente("DK"));
-        t_estadisticas.CambiarTexto("Estadisticas");
-        t_estadisticas.CambiarTamanyo(tamFuente);
-        t_estadisticas.CentrarOrigen();
-        t_estadisticas.CambiarPosicion((_juego->GetAncho()/2), t_jugar.GetY()+75);
-        */
+        t_slot3.CambiarPosicion((_juego->GetAncho()/2)+300, t_titulo.GetY()+150);
         
         if (!hayPartidas) {
             t_explicar.CambiarFuente(_juego->recursos.GetFuente("DK"));
             t_explicar.CambiarTamanyo(tamFuente-5);
-            t_explicar.CambiarTexto("Elige el slot para guardar partida");
+            t_explicar.CambiarTexto("Elige un slot para guardar partida");
             t_explicar.CentrarOrigen();
             t_explicar.CambiarPosicion((_juego->GetAncho()/2), t_slot3.GetY()+150);
         } else {
             
             t_op1.CambiarFuente(_juego->recursos.GetFuente("DK"));
             t_op1.CambiarTamanyo(tamFuente);
-            t_op1.CambiarTexto("Elige el slot para guardar partida");
-            t_op1.CentrarOrigen();
-            t_op1.CambiarPosicion(150, t_slot3.GetY()+150);
             
+            t_op2.CambiarFuente(_juego->recursos.GetFuente("DK"));
+            t_op2.CambiarTamanyo(tamFuente);
             
-            
-            
-            
-            
-            
-            flechaOp.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
-            flechaOp.CambiarOrigen();
-            flechaOp.Escalar(60.0f, 60.0f); // Escalar al 60%
-            flechaOp.CambiarColorVerde();
-            CambiarFlecha(flechaOp, t_op1);
+            t_op3.CambiarFuente(_juego->recursos.GetFuente("DK"));
+            t_op3.CambiarTamanyo(tamFuente);
         }
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
         flecha.CambiarColorRojo();
-        flecha.Escalar(80.0f, 80.0f); // Escalar al 80%
+        flecha.Escalar(60.0f, 60.0f); // Escalar al 60%
         CambiarFlecha(flecha, t_slot1);
+        
+        flechaOp.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
+        flechaOp.CambiarOrigen();
+        flechaOp.Escalar(60.0f, 60.0f); // Escalar al 60%
+        flechaOp.CambiarColorRojo();
         
         t_atras.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_atras.CambiarTexto("Volver");
@@ -124,6 +99,9 @@ namespace Crazy
         flechaAtras.Rotar(180.0f);
         flechaAtras.CambiarPosicion(60, t_atras.GetY()-30);
         flechaAtras.Escalar(70.0f, 70.0f); // Escalar al 70%
+        
+        slotGuardar = SLOT1;
+        Opciones();
     }
     
     void EstadoPartidas::ManejarEventos()
@@ -143,33 +121,32 @@ namespace Crazy
             {
                 CambiarFlecha(flecha, t_slot1);
                 slotGuardar = SLOT1;
+                Opciones();
             }
             if (_input->RatonSobre(t_slot2))
             {
                 CambiarFlecha(flecha, t_slot2);
                 slotGuardar = SLOT2;
+                Opciones();
             }
             if (_input->RatonSobre(t_slot3))
             {
                 CambiarFlecha(flecha, t_slot3);
                 slotGuardar = SLOT3;
+                Opciones();
             }
-            
-            /*if (_input->RatonSobre(t_cargar))
+            if (_input->RatonSobre(t_op1))
             {
-                CambiarFlecha(t_cargar);
-                opcion = CARGAR;
+                CambiarFlecha(flechaOp, t_op1);
             }
-            if (_input->RatonSobre(t_borrar))
+            if (_input->RatonSobre(t_op2))
             {
-                CambiarFlecha(t_borrar);
-                opcion = BORRAR;
+                CambiarFlecha(flechaOp, t_op2);
             }
-            if (_input->RatonSobre(t_estadisticas))
+            if (_input->RatonSobre(t_op3))
             {
-                CambiarFlecha(t_estadisticas);
-                opcion = ESTADISTICAS;
-            }*/
+                CambiarFlecha(flechaOp, t_op3);
+            }
             
             // Clic sobre texto
             if (_input->RatonIzq()) {
@@ -178,45 +155,32 @@ namespace Crazy
                     Atras();
                 }
                 
-                if ((_input->IsTextoClicked(t_slot1)) ||
+                if (((_input->IsTextoClicked(t_slot1)) ||
                     (_input->IsTextoClicked(t_slot2)) ||
-                    (_input->IsTextoClicked(t_slot3)))
+                    (_input->IsTextoClicked(t_slot3))) && (!hayPartidas))
                 {
                     NuevaPartida();
                 }
                 
-                /*
-                if(_input->IsTextoClicked(t_cargar))
+                if (_input->IsTextoClicked(t_op1))
                 {
-                    CargarPartida();
+                    Elegir();
                 }
-                if(_input->IsTextoClicked(t_borrar))
+                if(_input->IsTextoClicked(t_op2))
                 {
                     BorrarPartida();
                 }
-                if(_input->IsTextoClicked(t_estadisticas))
+                if(_input->IsTextoClicked(t_op3))
                 {
                     Estadisticas();
-                }*/
+                }
             }
         }
     }
     
     void EstadoPartidas::Actualizar(float tiempoActual)
     {
-        /*Habrá un archivo save
-Había pensado hacer el slot como dos archivos: Estadisticas y Save
-Si existe Estadísticas, Nueva partida*; si existe Estadísticas y Save, Reanudar;
-Si no, Nueva partida*/
-        switch(slotGuardar)
-        {
-            case SLOT1:
-                break;
-            case SLOT2:
-                break;
-            case SLOT3:
-                break;
-        }
+        
     }
     
     void EstadoPartidas::Dibujar(float tiempoActual)
@@ -235,7 +199,11 @@ Si no, Nueva partida*/
             
             _juego->_ventana->DibujarTexto(t_op1);
             _juego->_ventana->DibujarTexto(t_op2);
-            _juego->_ventana->DibujarTexto(t_op3);
+            
+            if ((partidas[SLOT1][1]) || (partidas[SLOT2][1]) ||
+                    (partidas[SLOT3][1])) {
+                _juego->_ventana->DibujarTexto(t_op3);
+            }
         }
         
         _juego->_ventana->DibujarSprite(flecha);
@@ -252,15 +220,12 @@ Si no, Nueva partida*/
         t_slot2.CambiarTexto("Slot 2");
         t_slot3.CambiarTexto("Slot 3");
         
-        /*ifstream leerPartida;
+        ifstream leerPartida;
         ifstream leerEstadisticas;
         string ruta = "";
-        
-        cout << "Llega maldito" <<endl;
-        
         for (short int num=1; num<=slots; num++)
         {
-            partidas[num] = new bool[archivos];
+            //partidas[num] = new bool[archivos];
             ruta = CARPETA+PARTIDA+to_string(num)+EXTENSION;
             
             leerPartida.open(ruta);
@@ -284,7 +249,7 @@ Si no, Nueva partida*/
                 partidas[num][0] = false;
             }
             leerPartida.close();
-        }*/
+        }
     }
     
     void EstadoPartidas::CambiarSlot(short int num)
@@ -303,9 +268,94 @@ Si no, Nueva partida*/
         }
     }
     
-    void EstadoPartidas::Opciones(Texto texto)
+    void EstadoPartidas::Opciones()
     {
+        switch(slotGuardar)
+        {
+            case SLOT1:
+                if (!partidas[SLOT1][0]) {
+                    t_op1.CambiarTexto("Nueva partida");
+                    t_op2.CambiarTexto("");
+                    t_op3.CambiarTexto("");
+                } else if (partidas[SLOT1][1]) {
+                    t_op1.CambiarTexto("Reanudar partida");
+                    t_op2.CambiarTexto("Borrar partida");
+                    t_op3.CambiarTexto("Ver estadisticas");
+                } else {
+                    t_op1.CambiarTexto("Cargar partida");
+                    t_op2.CambiarTexto("Borrar partida");
+                    t_op3.CambiarTexto("");
+                }
+                break;
+                
+            case SLOT2:
+                if (!partidas[SLOT2][0]) {
+                    t_op1.CambiarTexto("Nueva partida");
+                    t_op2.CambiarTexto("");
+                    t_op3.CambiarTexto("");
+                } else if (partidas[SLOT2][1]) {
+                    t_op1.CambiarTexto("Reanudar partida");
+                    t_op2.CambiarTexto("Borrar partida");
+                    t_op3.CambiarTexto("Ver estadisticas");
+                } else {
+                    t_op1.CambiarTexto("Cargar partida");
+                    t_op2.CambiarTexto("Borrar partida");
+                    t_op3.CambiarTexto("");
+                }
+                break;
+                
+            case SLOT3:
+                if (!(partidas[SLOT3][0])) {
+                    t_op1.CambiarTexto("Nueva partida");
+                    t_op2.CambiarTexto("");
+                    t_op3.CambiarTexto("");
+                } else if (partidas[SLOT3][1]) {
+                    t_op1.CambiarTexto("Reanudar partida");
+                    t_op2.CambiarTexto("Borrar partida");
+                    t_op3.CambiarTexto("Ver estadisticas");
+                } else {
+                    t_op1.CambiarTexto("Cargar partida");
+                    t_op2.CambiarTexto("Borrar partida");
+                    t_op3.CambiarTexto("");
+                }
+                break;
+        }
         
+        t_op1.CentrarOrigen();
+        t_op1.CambiarPosicion((_juego->GetAncho()/2)-200, t_slot3.GetY()+150);
+        t_op2.CentrarOrigen();
+        t_op2.CambiarPosicion((_juego->GetAncho()/2)+200, t_slot3.GetY()+150);
+        t_op3.CentrarOrigen();
+        t_op3.CambiarPosicion((_juego->GetAncho()/2), t_slot3.GetY()+250);
+        CambiarFlecha(flechaOp, t_op1);
+    }
+    
+    void EstadoPartidas::Elegir()
+    {
+        switch(slotGuardar)
+        {
+            case SLOT1:
+                if (!partidas[SLOT1][0]) {
+                    NuevaPartida();
+                } else {
+                    CargarPartida();
+                }
+                break;
+            case SLOT2:
+                if (!partidas[SLOT2][0]) {
+                    NuevaPartida();
+                } else {
+                    CargarPartida();
+                }
+                break;
+            case SLOT3:
+                if (!partidas[SLOT3][0]) {
+                    NuevaPartida();
+                } else {
+                    CargarPartida();
+                }
+                break;
+        }
     }
     
     void EstadoPartidas::Atras()
@@ -313,23 +363,14 @@ Si no, Nueva partida*/
         _juego->maquina.Eliminar();
     }
     
-    void EstadoPartidas::CambiarFlecha(SpriteM f, Texto texto)
+    void EstadoPartidas::CambiarFlecha(SpriteM &f, Texto texto)
     {
-        f.CambiarPosicion(texto.GetLeft()-10,texto.GetY()+texto.GetOrigenY()/2);
+        f.CambiarPosicion(texto.GetLeft()-10,texto.GetY()+texto.GetOrigenY()/2+5);
     }
     
     void EstadoPartidas::NuevaPartida()
     {
         cout << "Guardar en: " << slotGuardar << endl;
-        
-        // Liberamos la memoria dinamica
-        /*for (short int num=1; num<=slots; num++)
-        {
-            delete[] partidas[num];
-        }
-        delete[] partidas;
-        partidas = NULL;*/
-        
         _juego->SetSlot(slotGuardar);
         
         // Cambiamos de estado la maquina
