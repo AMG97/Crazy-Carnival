@@ -35,9 +35,12 @@ namespace Crazy
         _pinstance = NULL;
     }
     
-    void EstadoJuego::Personaje(string jugador)
+    void EstadoJuego::Personaje(string jugador, bool modoN, bool modoC)
     {
         texturaJugador = jugador;
+        
+        // TODO: manejar esto:
+        // modoNormal y modoContrareloj
     }
     
     void EstadoJuego::Init()
