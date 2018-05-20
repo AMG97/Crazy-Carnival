@@ -46,7 +46,7 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n=1;
+        lvl_n=2;
         _level->cargarNivel(lvl_n);
         _jugador = new Espadachina();
         _hud = new Hud();

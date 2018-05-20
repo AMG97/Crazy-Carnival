@@ -66,8 +66,10 @@ namespace Crazy
                     sprite.CambiarTextRect(contadorSpriteSalto*65, 560, 65, 90);
                     sprite.CambiarOrigen(60/2,90/2);
                     _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
-                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)) || (contadorSpriteSalto==2 && velSalto>11))
+                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)))
                         contadorSpriteSalto++;
+                    if(contadorSpriteSalto>1)
+                        contadorSpriteSalto=1;
                     if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60))
                     {
                         contadorSpriteSalto=0;
@@ -197,7 +199,7 @@ namespace Crazy
             sprite.Parpadear(false);
         }
         EstadoJuego* ej=EstadoJuego::Instance();
-        if(estado==SALTO && (ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
+        if(estado==SALTO && velSalto==0 && (ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
             if((ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && lastpared!=1) ||
                 (ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && lastpared!=2)){
                     if(lastpared==0){
