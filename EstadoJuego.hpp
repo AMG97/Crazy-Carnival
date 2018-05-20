@@ -55,6 +55,8 @@ namespace Crazy
     private:
         static EstadoJuego* _pinstance;
         
+        bool normal;
+        bool contrarreloj;
         Input* _input;
         bool teclaPulsada;
         string texturaJugador;

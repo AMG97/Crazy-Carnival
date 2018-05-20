@@ -33,8 +33,11 @@ namespace Crazy
         Input* _input;
         Texto t_titulo;
         Texto t_atras;
+        Texto t_jugar;
         SpriteM flechaAtras;
+        SpriteM flechaJugar;
         short int opcion;
+        short int player;
         
         SpriteM p1;
         SpriteM p2;
@@ -51,7 +54,7 @@ namespace Crazy
         Texto t_pesadilla;
         SpriteM flechaM;
         
-        bool modoContrareloj;
+        bool modoContrarreloj;
         Texto t_modoC;
         Texto t_si;
         Texto t_no;
@@ -66,6 +69,7 @@ namespace Crazy
         void Player2();
         /*void Player3();
         void Player4();*/
+        void Jugar();
         void CambiarEstadoMaquina();
     };
 }

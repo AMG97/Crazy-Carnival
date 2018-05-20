@@ -10,7 +10,7 @@ namespace Crazy
     class Hud
     {
     public:
-        Hud();
+        Hud(bool nDificultar, bool mContrarreloj);
         void Dibujar();
         void Parpadear(bool parpadeo);
         

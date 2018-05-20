@@ -35,9 +35,11 @@ namespace Crazy
         _pinstance = NULL;
     }
     
-    void EstadoJuego::Personaje(string jugador, bool modoNormal, bool modoContrareloj)
+    void EstadoJuego::Personaje(string jugador, bool modoNormal, bool modoContrarreloj)
     {
         texturaJugador = jugador;
+        normal = modoNormal;
+        contrarreloj = modoContrarreloj;
         
         // TODO: manejar esto:
         // modoNormal y modoContrareloj
@@ -52,7 +54,7 @@ namespace Crazy
         lvl_n=1;
         _level->cargarNivel(lvl_n);
         _jugador = new Espadachina();
-        _hud = new Hud();
+        _hud = new Hud(normal, contrarreloj);
         
         teclaPulsada = false;
         

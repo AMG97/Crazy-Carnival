@@ -3,13 +3,13 @@
 
 namespace Crazy
 {
-    Hud::Hud()
+    Hud::Hud(bool nDificultad, bool mContrarreloj)
     {
         //Inicializar variables
         _juego = Juego::Instance();
         _camara = Camara::Instance();
         _jugador = EstadoJuego::Instance()->_jugador;
-        contrarreloj = true;
+        contrarreloj = mContrarreloj;
         elixir = false;
         ataqueEspecial = false;
         parpadea=false;
