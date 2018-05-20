@@ -55,6 +55,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/Nivel.o \
 	${OBJECTDIR}/Objeto.o \
+	${OBJECTDIR}/Pistolero.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Proyectil.o \
 	${OBJECTDIR}/box.o \
@@ -194,6 +195,11 @@ ${OBJECTDIR}/Objeto.o: Objeto.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
+
+${OBJECTDIR}/Pistolero.o: Pistolero.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pistolero.o Pistolero.cpp
 
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}

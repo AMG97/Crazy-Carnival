@@ -25,6 +25,7 @@
       <itemPath>Motor.hpp</itemPath>
       <itemPath>Nivel.hpp</itemPath>
       <itemPath>Objeto.hpp</itemPath>
+      <itemPath>Pistolero.hpp</itemPath>
       <itemPath>Player.hpp</itemPath>
       <itemPath>Proyectil.hpp</itemPath>
       <itemPath>box.h</itemPath>
@@ -56,6 +57,7 @@
       <itemPath>Motor.cpp</itemPath>
       <itemPath>Nivel.cpp</itemPath>
       <itemPath>Objeto.cpp</itemPath>
+      <itemPath>Pistolero.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
       <itemPath>Proyectil.cpp</itemPath>
       <itemPath>box.cpp</itemPath>
@@ -254,6 +256,10 @@
       </item>
       <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Pistolero.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Pistolero.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Player.hpp" ex="false" tool="3" flavor2="0">
@@ -370,6 +376,10 @@
       <item path="Objeto.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Objeto.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pistolero.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Pistolero.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Player.cpp" ex="false" tool="1" flavor2="0">
       </item>

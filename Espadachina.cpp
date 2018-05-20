@@ -203,7 +203,7 @@ namespace Crazy
             if((ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && lastpared!=1) ||
                 (ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && lastpared!=2)){
                     if(lastpared==0){
-                        if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()))
+                        if(ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()))
                             lastpared=1;
                         else
                             lastpared=2;
