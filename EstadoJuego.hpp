@@ -24,6 +24,7 @@ namespace Crazy
         
         Juego* _juego;
         Player* _jugador;
+        Hud* _hud;
         
         
         Reloj reloj;
@@ -58,7 +59,6 @@ namespace Crazy
         bool teclaPulsada;
         string texturaJugador;
         
-        Hud* _hud;
         b2World* _mundo;
         
         unsigned short int lvl_n;
