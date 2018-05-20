@@ -46,6 +46,7 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
+        lvl_n = 1;
         _level->cargarNivel(1);
         _jugador = new Player(texturaJugador);
         _hud = new Hud();
@@ -246,7 +247,6 @@ namespace Crazy
         _level->draw("Trasera");
         _level->draw("Collisionable");
         _level->draw("Objetos");
-        _level->draw("Delante");
         
         if(relojAtaqueEspecial.GetSegundos() >= 0.1 && _jugador->GetAtaqueEspecial() && _hud->GetAtaqueEspecial())
         {
@@ -259,6 +259,7 @@ namespace Crazy
         
         _jugador->ModificarSprite();
         _jugador->Dibujar();
+        _level->draw("Delante");
                 
         _juego->_ventana->Mostrar();
     }
