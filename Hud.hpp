@@ -19,7 +19,8 @@ namespace Crazy
         void ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento);
         void EnfriamientoVacio();
         void ModoContrarreloj();
-        void ElixirEncontrado();
+        void ElixirEncontrado(bool v);
+        bool getElixir();
         void SetAtaqueEspecial(bool ataque);
         SpriteM GetSpriteRecipienteVida();
         bool GetAtaqueEspecial();

@@ -166,13 +166,12 @@ namespace Crazy
         contrarreloj = !contrarreloj;
     }
     
-    void Hud::ElixirEncontrado(){
-        if(elixir){
-            elixir = false;
-        }
-        else{
-            elixir = true;
-        }
+    void Hud::ElixirEncontrado(bool v){
+        elixir = v;
+        _jugador->SetElixir(elixir);
+    }
+    bool Hud::getElixir(){
+        return elixir;
     }
     
     void Hud::SetAtaqueEspecial(bool ataque){

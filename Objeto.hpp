@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
+#include "Hud.hpp"
 
 using namespace Crazy;
 
@@ -21,6 +22,7 @@ protected:
     vector2f position;
     SpriteM* _sprite;
     Player* _pl_instance;
+    Hud* _hud_instance;
 };
 
 

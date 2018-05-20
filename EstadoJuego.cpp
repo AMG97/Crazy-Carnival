@@ -116,7 +116,14 @@ namespace Crazy
             
             if (_input->E())
             {
-                _hud->ElixirEncontrado();
+                if(_hud->getElixir())
+                {
+                    _hud->ElixirEncontrado(false);
+                }
+                else
+                {
+                    _hud->ElixirEncontrado(true);
+                }    
             }
             
             if (_input->Q())
