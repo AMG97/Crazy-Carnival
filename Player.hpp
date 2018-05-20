@@ -18,7 +18,7 @@ namespace Crazy
     class Player : public Comportamiento
     {
     public:
-        Player(string textura);
+        Player();
         float GetEnfriamiento();
         float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);
@@ -52,24 +52,21 @@ namespace Crazy
         //float GetVelocidadSalto();
         void SetVelocidadSalto(float velS);
         
-        void ModificarSprite();
+        virtual void ModificarSprite()=0;
         float GetTAtque2();
-        void Reposo(int n);
-        void Update(vector<Enemigo*> e);
+        virtual void Reposo(int n)=0;
+        virtual void Update(vector<Enemigo*> e)=0;
         void SetVElocidadSalto(float v);
         float GetVelocidadSalto();
         
         void MoverX(float x);
         void MoverY();
         
-        void Saltar();
-        
         int GetLastPared();
-        
         void tparedRestart();
         float Gettpared();
         
-    private:
+    protected:
         float totalEnfriamiento;
         float enfriamiento;
         bool ataqueEspecial;

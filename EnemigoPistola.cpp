@@ -75,7 +75,7 @@ namespace Crazy
                 {
                     if(direccionIzq)
                         SetDireccion(false);
-                    if(Posx-x>movimiento/2)
+                    if(Posx-x>70)
                     {
                         MoverX(velocidad,true);
                         mov=true;
@@ -84,7 +84,7 @@ namespace Crazy
                 else if(Posx<x){
                     if(!direccionIzq)
                         SetDireccion(true);
-                    if(x-Posx>movimiento/2)
+                    if(x-Posx>70)
                     {
                         MoverX(-velocidad,true);
                         mov=true;

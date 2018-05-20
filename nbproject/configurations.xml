@@ -10,6 +10,7 @@
       <itemPath>Enemigo.hpp</itemPath>
       <itemPath>EnemigoPistola.hpp</itemPath>
       <itemPath>EnemigoVolador.hpp</itemPath>
+      <itemPath>Espadachina.hpp</itemPath>
       <itemPath>Estado.hpp</itemPath>
       <itemPath>EstadoAyuda.hpp</itemPath>
       <itemPath>EstadoEstadisticas.hpp</itemPath>
@@ -41,6 +42,7 @@
       <itemPath>Enemigo.cpp</itemPath>
       <itemPath>EnemigoPistola.cpp</itemPath>
       <itemPath>EnemigoVolador.cpp</itemPath>
+      <itemPath>Espadachina.cpp</itemPath>
       <itemPath>EstadoAyuda.cpp</itemPath>
       <itemPath>EstadoEstadisticas.cpp</itemPath>
       <itemPath>EstadoJuego.cpp</itemPath>
@@ -194,6 +196,10 @@
       </item>
       <item path="EnemigoVolador.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Espadachina.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Espadachina.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="EstadoAyuda.cpp" ex="false" tool="1" flavor2="0">
@@ -306,6 +312,10 @@
       <item path="EnemigoVolador.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EnemigoVolador.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Espadachina.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Espadachina.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Estado.hpp" ex="false" tool="3" flavor2="0">
       </item>

@@ -238,6 +238,11 @@ namespace Motor
         return s.getGlobalBounds().contains(getPosition().x,getPosition().y);
     }
     
+        bool SpriteM::Interseccion1(SpriteM* s)
+    {
+        return s->getGlobalBounds().contains(getPosition().x,getPosition().y);
+    }
+    
     bool SpriteM::Interseccion2(SpriteM s)
     {
         return s.getGlobalBounds().intersects(getGlobalBounds());

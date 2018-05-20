@@ -41,12 +41,14 @@ OBJECTFILES= \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
 	${OBJECTDIR}/EnemigoVolador.o \
+	${OBJECTDIR}/Espadachina.o \
 	${OBJECTDIR}/EstadoAyuda.o \
 	${OBJECTDIR}/EstadoEstadisticas.o \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
 	${OBJECTDIR}/EstadoMuerte.o \
 	${OBJECTDIR}/EstadoPausa.o \
+	${OBJECTDIR}/EstadoSeleccion.o \
 	${OBJECTDIR}/EstadosManager.o \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
@@ -77,21 +79,21 @@ LDLIBSOPTIONS=-L/usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libsfml-grap
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: /usr/lib/x86_64-linux-gnu/libsfml-system.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: /usr/lib/x86_64-linux-gnu/libsfml-system.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: /usr/lib/x86_64-linux-gnu/libsfml-window.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: /usr/lib/x86_64-linux-gnu/libsfml-window.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: libbox2d.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: libbox2d.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: libtinyxml.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: libtinyxml.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Arma.o: Arma.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -123,6 +125,11 @@ ${OBJECTDIR}/EnemigoVolador.o: EnemigoVolador.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EnemigoVolador.o EnemigoVolador.cpp
 
+${OBJECTDIR}/Espadachina.o: Espadachina.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Espadachina.o Espadachina.cpp
+
 ${OBJECTDIR}/EstadoAyuda.o: EstadoAyuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -152,6 +159,11 @@ ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoPausa.o EstadoPausa.cpp
+
+${OBJECTDIR}/EstadoSeleccion.o: EstadoSeleccion.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoSeleccion.o EstadoSeleccion.cpp
 
 ${OBJECTDIR}/EstadosManager.o: EstadosManager.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -209,7 +221,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/git
 
 # Subprojects
 .clean-subprojects:

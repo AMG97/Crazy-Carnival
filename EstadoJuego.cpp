@@ -46,9 +46,9 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n = 1;
-        _level->cargarNivel(1);
-        _jugador = new Player(texturaJugador);
+        lvl_n=1;
+        _level->cargarNivel(lvl_n);
+        _jugador = new Espadachina();
         _hud = new Hud();
         
         teclaPulsada = false;
@@ -157,7 +157,7 @@ namespace Crazy
 
             if(_input->Arriba())
             {
-                if(estado==_jugador->GetDeslizarse() && _jugador->Gettpared()>0.2){
+                if(estado==_jugador->GetDeslizarse() && _jugador->Gettpared()>0.1){
                     if(_jugador->GetLastPared()==1){
                         _jugador->SetVelocidad(-6.0f);
                     }else

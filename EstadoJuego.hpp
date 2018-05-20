@@ -11,6 +11,7 @@
 #include "Player.hpp"
 #include "Hud.hpp"
 #include "Nivel.hpp"
+#include "Espadachina.hpp"
 
 namespace Crazy
 {

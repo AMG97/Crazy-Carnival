@@ -13,10 +13,10 @@ namespace Crazy
         vida=20.0;
         posinix=sprite.GetX();
         posiniy=sprite.GetY();
-        contadorSpriteCorrer=0;
+        //contadorSpriteCorrer=0;
         rojo=false;
         SetDireccion(true);
-        velocidad=2.7;
+        velocidad=2.9;
         alcancex=600;
         alcancey=400;
         movimiento=400;
