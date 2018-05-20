@@ -49,6 +49,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoJuego.o \
 	${OBJECTDIR}/EstadoMenu.o \
 	${OBJECTDIR}/EstadoMuerte.o \
+	${OBJECTDIR}/EstadoPartidas.o \
 	${OBJECTDIR}/EstadoPausa.o \
 	${OBJECTDIR}/EstadoSeleccion.o \
 	${OBJECTDIR}/EstadosManager.o \
@@ -155,6 +156,11 @@ ${OBJECTDIR}/EstadoMuerte.o: EstadoMuerte.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoMuerte.o EstadoMuerte.cpp
+
+${OBJECTDIR}/EstadoPartidas.o: EstadoPartidas.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoPartidas.o EstadoPartidas.cpp
 
 ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp 
 	${MKDIR} -p ${OBJECTDIR}

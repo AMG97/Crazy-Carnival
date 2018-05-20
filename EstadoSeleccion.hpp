@@ -33,17 +33,35 @@ namespace Crazy
         Input* _input;
         Texto t_titulo;
         Texto t_atras;
+        Texto t_jugar;
         SpriteM flechaAtras;
+        SpriteM flechaJugar;
         short int opcion;
         
         SpriteM p1;
         SpriteM p2;
+        /*SpriteM p3;
+        SpriteM p4;*/
         SpriteM flecha;
         short int contadorSpriteReposo;
         Reloj relojAnim;
         
+        bool modoNormal;
+        Texto t_modo;
+        Texto t_normal;
+        Texto t_pesadilla;
+        SpriteM flechaM;
+        
+        bool modoContrarreloj;
+        Texto t_modoC;
+        Texto t_si;
+        Texto t_no;
+        SpriteM flechaMC;
+        
         void CambiarFlecha(SpriteM personaje);
-        void Elegir();
+        void CambiarFlecha(SpriteM &f, Texto texto);
         void Animar();
+        void Jugar();
+        void CambiarEstadoMaquina();
     };
 }

@@ -101,6 +101,6 @@ namespace Crazy
     
     void EstadoEstadisticas::Atras()
     {
-        _juego->maquina.Eliminar();
+        _juego->maquina.SaltarAlMenu();
     }
 }

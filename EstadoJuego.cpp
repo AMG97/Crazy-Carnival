@@ -35,9 +35,14 @@ namespace Crazy
         _pinstance = NULL;
     }
     
-    void EstadoJuego::Personaje(string jugador)
+    void EstadoJuego::Personaje(string jugador, bool modoNormal, bool modoContrarreloj)
     {
         texturaJugador = jugador;
+        normal = modoNormal;
+        contrarreloj = modoContrarreloj;
+        
+        // TODO: manejar esto:
+        // modoNormal y modoContrareloj
     }
     
     void EstadoJuego::Init()
@@ -48,12 +53,11 @@ namespace Crazy
         _level = new Nivel();
         lvl_n=1;
         _level->cargarNivel(lvl_n);
-        cout<<lvl_n<<endl;
         if(texturaJugador=="Espadachina")
             _jugador = new Espadachina(1);
         else
             _jugador=new Pistolero(2);
-        _hud = new Hud();
+        _hud = new Hud(contrarreloj);
         
         teclaPulsada = false;
         
@@ -120,7 +124,14 @@ namespace Crazy
             
             if (_input->E())
             {
-                _hud->ElixirEncontrado();
+                if(_hud->getElixir())
+                {
+                    _hud->ElixirEncontrado(false);
+                }
+                else
+                {
+                    _hud->ElixirEncontrado(true);
+                }    
             }
             
             if (_input->Q())
@@ -213,7 +224,7 @@ namespace Crazy
     void EstadoJuego::Actualizar(float tiempoActual)
     {
         
-        if(_jugador->GetVida()<=0){
+        if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
             _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
         }
                 
@@ -239,6 +250,11 @@ namespace Crazy
             _hud->SetAtaqueEspecial(true);
         }else
             _hud->SetAtaqueEspecial(false);
+        if(contrarreloj && relojContrarreloj.GetSegundos()>=1)
+        {
+            _hud->CambiarTexturaContador();
+            relojContrarreloj.ReiniciarSegundos();
+        }
         
         
     }

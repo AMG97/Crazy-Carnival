@@ -25,21 +25,24 @@ namespace Crazy
         
         Juego* _juego;
         Player* _jugador;
+        Hud* _hud;
         
         
         Reloj reloj;
         Reloj relojAtaqueEspecial;
         Reloj relojDesplazamiento; //separada la anim de aqui
+        Reloj relojContrarreloj;
         Reloj tiempo;
         Reloj tiempoAtaqueEspecial;
         Reloj tiempoDesplazamiento;
+        Reloj tiempoContrarreloj;
         
         bool inercia;
         int contador;
         
         Nivel* _level;
         
-        void Personaje(string jugador);
+        void Personaje(string jugador, bool modoNormal, bool modoContrareloj);
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
@@ -55,11 +58,12 @@ namespace Crazy
     private:
         static EstadoJuego* _pinstance;
         
+        bool normal;
+        bool contrarreloj;
         Input* _input;
         bool teclaPulsada;
         string texturaJugador;
         
-        Hud* _hud;
         b2World* _mundo;
         
         unsigned short int lvl_n;

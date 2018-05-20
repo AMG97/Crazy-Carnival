@@ -18,10 +18,15 @@ Objeto::~Objeto() {
 
 bool Objeto::colision(){
     _pl_instance = EstadoJuego::Instance()->_jugador;
+    _hud_instance = EstadoJuego::Instance()->_hud;
 
     if(_pl_instance!=0 && _sprite!=0){        
         if(_sprite->InterseccionContiene(_pl_instance->GetSprite())){
             _pl_instance->addPuntuacion(p_value);
+            if(p_value == 1000)
+            {
+                _hud_instance->ElixirEncontrado(true);
+            }
             objectEffect();
             return true;
         }
