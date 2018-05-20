@@ -181,8 +181,6 @@ namespace Crazy{
             height = mapY;
 
             freecam = false;
-            BossConejo* b=new BossConejo(900,1200);
-            _enemigos.push_back(b);
             
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
