@@ -241,6 +241,9 @@ namespace Crazy
     float Player::Gettpared(){
         return tpared.GetSegundos();
     }
+    bool Player::isAttacking() {
+        return atacando;
+    }
 
 
 

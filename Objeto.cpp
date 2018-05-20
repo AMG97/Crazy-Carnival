@@ -20,7 +20,7 @@ bool Objeto::colision(){
     _pl_instance = EstadoJuego::Instance()->_jugador;
 
     if(_pl_instance!=0 && _sprite!=0){        
-        if(_sprite->Interseccion1(_pl_instance->GetSprite())){
+        if(_sprite->InterseccionContiene(_pl_instance->GetSprite())){
             _pl_instance->addPuntuacion(p_value);
             objectEffect();
             return true;

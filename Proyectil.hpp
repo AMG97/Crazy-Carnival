@@ -9,7 +9,7 @@ namespace Crazy
         Proyectil(const Proyectil& orig);
         virtual ~Proyectil();
         bool Update();
-        SpriteM GetProyectil();
+        SpriteM* GetProyectil();
         float GetDanyo();
         void Dibujar();
         bool direccion();

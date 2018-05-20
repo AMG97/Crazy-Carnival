@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=final
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/final
+CND_ARTIFACT_NAME_Debug=crazy-carnival
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/crazy-carnival
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=final.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/final.tar
+CND_PACKAGE_NAME_Debug=crazy-carnival.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/crazy-carnival.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=final
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/final
+CND_ARTIFACT_NAME_Release=crazy-carnival
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/crazy-carnival
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=final.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/final.tar
+CND_PACKAGE_NAME_Release=crazy-carnival.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/crazy-carnival.tar
 #
 # include compiler specific variables
 #

@@ -74,9 +74,9 @@ namespace Crazy
             return true;
     }
     
-    SpriteM Proyectil::GetProyectil()
+    SpriteM* Proyectil::GetProyectil()
     {
-        return sprite;
+        return &sprite;
     }
     
     float Proyectil::GetDanyo()

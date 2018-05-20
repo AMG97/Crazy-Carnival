@@ -163,6 +163,7 @@ namespace Crazy
     void Espadachina::Update(vector<Enemigo*> e)
     {
         MoverY();
+        cout<<sprite.GetX()<<endl;
         if(velocidad!=0){
             if(velocidad>0.1){
                 if(lastpared!=0){
@@ -183,7 +184,7 @@ namespace Crazy
         MoverX(velocidad);
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
-                if(sprite.Interseccion2(e[j]->GetSprite()))
+                if(sprite.Interseccion(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
                     ModificarEnfriamiento(5);

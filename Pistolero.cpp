@@ -183,7 +183,7 @@ namespace Crazy
         MoverX(velocidad);
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
-                if(sprite.Interseccion2(e[j]->GetSprite()))
+                if(sprite.Interseccion(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
                     ModificarEnfriamiento(5);

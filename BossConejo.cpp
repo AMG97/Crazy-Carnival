@@ -204,7 +204,7 @@ namespace Crazy
                         if(Ataque1){
                             ModificarSpriteAtaque1();
                             if(contadorSpriteAtaque1==1){
-                                if(p->GetSprite().Interseccion2(sprite)){
+                                if(p->GetSprite().Interseccion(sprite)){
                                     p->RecibirDanyo(danyo);
                                 }
                             }
@@ -230,7 +230,7 @@ namespace Crazy
                         if(tDesp.GetSegundos()>0.2){
                             ModificarSpriteSalto();
                             if(contadorSpriteSalto==2 && danyoSalto==false){
-                                if(p->GetSprite().Interseccion2(sprite)){
+                                if(p->GetSprite().Interseccion(sprite)){
                                     p->RecibirDanyo(danyo);
                                     danyoSalto=true;
                                 }
@@ -244,9 +244,9 @@ namespace Crazy
             for(int i=0;i<proyectiles.size();i++)
             {
                 bool b=proyectiles[i]->Update();
-                if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil().GetX(),proyectiles[i]->GetProyectil().GetY()))
+                if(!b || EstadoJuego::Instance()->_level->ComprobarColision(proyectiles[i]->GetProyectil()->GetX(),proyectiles[i]->GetProyectil()->GetY()))
                     BorrarProyectil(i);
-                else if(proyectiles[i]->GetProyectil().Interseccion1(p->GetSprite()))
+                else if(proyectiles[i]->GetProyectil()->InterseccionContiene(p->GetSprite()))
                 {
                     p->RecibirDanyo(proyectiles[i]->GetDanyo());
                     BorrarProyectil(i);
