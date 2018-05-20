@@ -28,6 +28,7 @@ class Nivel {
         void toggleFreeCamera();
         bool isCamFree();
         bool ComprobarColision(float x, float y);
+        bool isPeleandoBoss();
     private:
         map<string,SpriteM***> tilemap;
         vector<string> layers;
@@ -42,7 +43,7 @@ class Nivel {
         vector<b2Body*> collisions;
         b2FixtureDef ground_fixdef;
         
-        
+        bool peleandoBoss, bossMatado;
         
     };
 
