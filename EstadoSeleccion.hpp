@@ -37,7 +37,6 @@ namespace Crazy
         SpriteM flechaAtras;
         SpriteM flechaJugar;
         short int opcion;
-        short int player;
         
         SpriteM p1;
         SpriteM p2;
@@ -47,7 +46,6 @@ namespace Crazy
         short int contadorSpriteReposo;
         Reloj relojAnim;
         
-        // TODO: 
         bool modoNormal;
         Texto t_modo;
         Texto t_normal;
@@ -60,15 +58,9 @@ namespace Crazy
         Texto t_no;
         SpriteM flechaMC;
         
-        
         void CambiarFlecha(SpriteM personaje);
-        void CambiarFlecha(SpriteM f, Texto texto);
-        void Elegir();
+        void CambiarFlecha(SpriteM &f, Texto texto);
         void Animar();
-        void Player1();
-        void Player2();
-        /*void Player3();
-        void Player4();*/
         void Jugar();
         void CambiarEstadoMaquina();
     };

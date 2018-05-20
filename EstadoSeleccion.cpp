@@ -35,7 +35,6 @@ namespace Crazy
     {
         _input = new Input();
         opcion = P1;
-        player = 1;
         contadorSpriteReposo = 0;
         
         modoNormal = true;
@@ -122,7 +121,6 @@ namespace Crazy
         
         flechaJugar.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flechaJugar.CambiarOrigen();
-        //flechaJugar.Rotar(180.0f);
         flechaJugar.CambiarPosicion(964, t_atras.GetY()-30);
         flechaJugar.Escalar(70.0f, 70.0f); // Escalar al 70%
         
@@ -151,10 +149,6 @@ namespace Crazy
                 Atras();
             }
             
-            if(_input->Enter()){
-                Elegir();
-            }
-            
             /*if (_input->Izq()) {
                 opcion--;
                 if (opcion < P1)
@@ -173,6 +167,12 @@ namespace Crazy
         } else {
             // Color rojo/blanco del texto
             _input->RatonSobre(t_atras);
+            _input->RatonSobre(t_jugar);
+            _input->RatonSobre(t_normal);
+            _input->RatonSobre(t_pesadilla);
+            _input->RatonSobre(t_si);
+            _input->RatonSobre(t_no);
+            
             if (_input->RatonSobre(p1))
             {
                 CambiarFlecha(p1);
@@ -182,26 +182,6 @@ namespace Crazy
             {
                 CambiarFlecha(p2);
                 opcion = P2;
-            }
-            if (_input->RatonSobre(t_normal))
-            {
-                CambiarFlecha(flechaM, t_normal);
-            }
-            if (_input->RatonSobre(t_pesadilla))
-            {
-                CambiarFlecha(flechaM, t_pesadilla);
-            }
-            if (_input->RatonSobre(t_si))
-            {
-                CambiarFlecha(flechaMC, t_si);
-            }
-            if (_input->RatonSobre(t_no))
-            {
-                CambiarFlecha(flechaMC, t_no);
-            }
-            if (_input->RatonSobre(t_jugar))
-            {
-                CambiarFlecha(flechaMC, t_jugar);
             }
             /*if (_input->RatonSobre(p3))
             {
@@ -220,41 +200,31 @@ namespace Crazy
                 {
                     Atras();
                 }
-                if(_input->IsSpriteClicked(p1))
-                {
-                    player = 1;
-                }
-                if(_input->IsSpriteClicked(p2))
-                {
-                    player = 2;
-                }
-                /*if(_input->IsSpriteClicked(p3))
-                {
-                    Player3;
-                }
-                if(_input->IsSpriteClicked(p4))
-                {
-                    Player4();
-                }*/
-                if(_input->IsTextoClicked(t_normal))
-                {
-                    modoNormal = true;
-                }
-                if(_input->IsTextoClicked(t_pesadilla))
-                {
-                    modoNormal = false;
-                }
-                if(_input->IsTextoClicked(t_si))
-                {
-                    modoContrarreloj = true;
-                }
-                if(_input->IsTextoClicked(t_no))
-                {
-                    modoContrarreloj = false;
-                }
+                
                 if(_input->IsTextoClicked(t_jugar))
                 {
                     Jugar();
+                }
+                
+                if (_input->IsTextoClicked(t_normal))
+                {
+                    CambiarFlecha(flechaM, t_normal);
+                    modoNormal = true;
+                }
+                if (_input->IsTextoClicked(t_pesadilla))
+                {
+                    CambiarFlecha(flechaM, t_pesadilla);
+                    modoNormal = false;
+                }
+                if (_input->IsTextoClicked(t_si))
+                {
+                    CambiarFlecha(flechaMC, t_si);
+                    modoContrarreloj = true;
+                }
+                if (_input->IsTextoClicked(t_no))
+                {
+                    CambiarFlecha(flechaMC, t_no);
+                    modoContrarreloj = false;
                 }
             }
         }
@@ -291,9 +261,11 @@ namespace Crazy
         _juego->_ventana->DibujarTexto(t_modo);
         _juego->_ventana->DibujarTexto(t_normal);
         _juego->_ventana->DibujarTexto(t_pesadilla);
+        _juego->_ventana->DibujarSprite(flechaM);
         _juego->_ventana->DibujarTexto(t_modoC);
         _juego->_ventana->DibujarTexto(t_si);
         _juego->_ventana->DibujarTexto(t_no);
+        _juego->_ventana->DibujarSprite(flechaMC);
         _juego->_ventana->DibujarTexto(t_atras);
         _juego->_ventana->DibujarSprite(flechaAtras);
         _juego->_ventana->DibujarTexto(t_jugar);
@@ -312,29 +284,9 @@ namespace Crazy
         flecha.CambiarPosicion(personaje.GetX(),personaje.GetY()-personaje.GetAlto()/2);
     }
     
-    void EstadoSeleccion::CambiarFlecha(SpriteM f, Texto texto)
+    void EstadoSeleccion::CambiarFlecha(SpriteM &f, Texto texto)
     {
         f.CambiarPosicion(texto.GetLeft()-10,texto.GetY()+texto.GetOrigenY()/2);
-    }
-    
-    void EstadoSeleccion::Elegir()
-    {
-        switch (opcion)          // Elegimos el personaje
-        {
-            /*case P1:
-                //Player1();
-                break;
-            case P2:
-                Player2();
-                break;
-            /*case P3:
-                Player3();
-                break;
-            case P4:
-                Player4();
-                break;*/
-        }
-        CambiarEstadoMaquina();
     }
     
     void EstadoSeleccion::Animar()
@@ -366,28 +318,7 @@ namespace Crazy
         }
     }
     
-    /*void EstadoSeleccion::Player1()
-    {
-        EstadoJuego::Instance(); // Creamos el puntero
-        EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
-        CambiarEstadoMaquina();
-    }
-    
-    void EstadoSeleccion::Player2()
-    {
-        EstadoJuego::Instance(); // Creamos el puntero
-        EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj); // MAMBO
-        CambiarEstadoMaquina();
-    }
-    
-    /*void EstadoSeleccion::Player3()
-    {
-        EstadoJuego::Instance(); // Creamos el puntero
-        EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrareloj);
-        CambiarEstadoMaquina();
-    }
-    
-    void EstadoSeleccion::Player4()
+    /*void EstadoSeleccion::Player4()
     {
         EstadoJuego::Instance(); // Creamos el puntero
         EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrareloj);
@@ -396,11 +327,20 @@ namespace Crazy
     void EstadoSeleccion::Jugar()
     {
         EstadoJuego::Instance(); // Creamos el puntero
-        if(player == 1){
-            EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
-        }
-        else if(player == 2){
-            EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj); //MAMBO
+        switch(opcion)
+        {
+            case P1:
+                EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
+                break;
+            case P2:
+                EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj); //MAMBO
+                break;
+            /*case P3:
+                EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrarreloj);
+                break;
+            case P4:
+                EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrarreloj);
+                break;*/
         }
         CambiarEstadoMaquina();
     }
