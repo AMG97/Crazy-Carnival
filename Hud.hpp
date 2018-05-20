@@ -10,7 +10,7 @@ namespace Crazy
     class Hud
     {
     public:
-        Hud(bool nDificultar, bool mContrarreloj);
+        Hud(bool mContrarreloj);
         void Dibujar();
         void Parpadear(bool parpadeo);
         
@@ -21,6 +21,7 @@ namespace Crazy
         void ModoContrarreloj();
         void ElixirEncontrado(bool v);
         bool getElixir();
+        int getContador();
         void SetAtaqueEspecial(bool ataque);
         SpriteM GetSpriteRecipienteVida();
         bool GetAtaqueEspecial();
@@ -43,5 +44,6 @@ namespace Crazy
         int spriteTimerSeg;
         int spriteTimerSeg1;
         int spriteTimerMin;
+        int contador;
     };
 }

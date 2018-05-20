@@ -54,7 +54,7 @@ namespace Crazy
         lvl_n=1;
         _level->cargarNivel(lvl_n);
         _jugador = new Espadachina();
-        _hud = new Hud(normal, contrarreloj);
+        _hud = new Hud(contrarreloj);
         
         teclaPulsada = false;
         
@@ -221,7 +221,7 @@ namespace Crazy
     void EstadoJuego::Actualizar(float tiempoActual)
     {
         
-        if(_jugador->GetVida()<=0){
+        if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
             _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
         }
                 
@@ -247,6 +247,11 @@ namespace Crazy
             _hud->SetAtaqueEspecial(true);
         }else
             _hud->SetAtaqueEspecial(false);
+        if(contrarreloj && relojContrarreloj.GetSegundos()>=1)
+        {
+            _hud->CambiarTexturaContador();
+            relojContrarreloj.ReiniciarSegundos();
+        }
         
         
     }

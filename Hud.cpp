@@ -3,7 +3,7 @@
 
 namespace Crazy
 {
-    Hud::Hud(bool nDificultad, bool mContrarreloj)
+    Hud::Hud(bool mContrarreloj)
     {
         //Inicializar variables
         _juego = Juego::Instance();
@@ -21,7 +21,7 @@ namespace Crazy
 
         spriteTimerSeg = 0;
         spriteTimerSeg1 = 0;
-        spriteTimerMin = 36;
+        spriteTimerMin = 18;
 
         for(int i = 0; i < 5; i++)
         {
@@ -63,25 +63,25 @@ namespace Crazy
         {
             switch(i){
                 case 0:
-                    spContador[i].setTextureRect(sf::IntRect(106, 60, 9, 11));
+                    spContador[i].setTextureRect(sf::IntRect(107, 60, 9, 11));
                     spContador[i].CambiarOrigen(10/2, 12/2);
                     spContador[i].CambiarPosicion(contX-16, contY);
                     spContador[i].EscalarProporcion(1.5, 1.5);
                     break;
                 case 1:
-                    spContador[i].setTextureRect(sf::IntRect(154, 60, 9, 11));
+                    spContador[i].setTextureRect(sf::IntRect(134, 60, 9, 11));
                     spContador[i].CambiarOrigen(10/2, 12/2);
                     spContador[i].CambiarPosicion(contX, contY);
                     spContador[i].EscalarProporcion(1.5, 1.5);
                     break;
                 case 2:
-                    spContador[i].setTextureRect(sf::IntRect(198, 61, 4, 9));
+                    spContador[i].setTextureRect(sf::IntRect(197, 61, 4, 9));
                     spContador[i].CambiarOrigen(4/2, 10/2);
                     spContador[i].CambiarPosicion(contX+10, contY);
                     spContador[i].EscalarProporcion(1.5, 1.5);
                     break;
                 case 3:
-                    spContador[i].setTextureRect(sf::IntRect(106, 60, 9, 11));
+                    spContador[i].setTextureRect(sf::IntRect(107, 60, 9, 11));
                     spContador[i].CambiarOrigen(10/2, 12/2);
                     spContador[i].CambiarPosicion(contX+21, contY);
                     spContador[i].EscalarProporcion(1.5, 1.5);
@@ -94,6 +94,7 @@ namespace Crazy
                     break;
             }
         }
+        contador = 0;
     }
     
     void Hud::Dibujar()
@@ -130,20 +131,21 @@ namespace Crazy
             spriteTimerSeg = 81;
             if(spriteTimerSeg1 == 0){
                 spriteTimerSeg1 = 45;
-                spContador[1].setTextureRect(sf::IntRect(106 + spriteTimerMin, 60, 9, 11));
+                spContador[1].setTextureRect(sf::IntRect(107 + spriteTimerMin, 60, 9, 11));
                 spriteTimerMin -= 9;
             }
             else
             {
                 spriteTimerSeg1 -= 9;
             }
-            spContador[3].setTextureRect(sf::IntRect(106 + spriteTimerSeg1, 60, 9, 11));
+            spContador[3].setTextureRect(sf::IntRect(107 + spriteTimerSeg1, 60, 9, 11));
         }
         else
         {
             spriteTimerSeg -= 9;
         }
-        spContador[4].setTextureRect(sf::IntRect(106 + spriteTimerSeg, 60, 9, 11));
+        spContador[4].setTextureRect(sf::IntRect(107 + spriteTimerSeg, 60, 9, 11));
+        contador++;
     }
     
     void Hud::ModificarVida(float vida, float totalVida){
@@ -180,5 +182,8 @@ namespace Crazy
     
     bool Hud::GetAtaqueEspecial(){
         return ataqueEspecial;
+    }
+    int Hud::getContador(){
+        return contador;
     }
 }

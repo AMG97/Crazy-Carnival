@@ -30,9 +30,11 @@ namespace Crazy
         Reloj reloj;
         Reloj relojAtaqueEspecial;
         Reloj relojDesplazamiento; //separada la anim de aqui
+        Reloj relojContrarreloj;
         Reloj tiempo;
         Reloj tiempoAtaqueEspecial;
         Reloj tiempoDesplazamiento;
+        Reloj tiempoContrarreloj;
         
         bool inercia;
         int contador;
