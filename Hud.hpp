@@ -15,6 +15,7 @@ namespace Crazy
         void Parpadear(bool parpadeo);
         
         void CambiarTexturaContador();
+        void CambiarTexturaContadorAumentar(int tiempo);
         void ModificarVida(float vida, float totalVida);
         void ModificarEnfriamiento(float enfriamiento, float totalEnfriamiento);
         void EnfriamientoVacio();
@@ -22,6 +23,7 @@ namespace Crazy
         void ElixirEncontrado(bool v);
         bool getElixir();
         int getContador();
+        void aumentarTiempo(int tiempo);
         void SetAtaqueEspecial(bool ataque);
         SpriteM GetSpriteRecipienteVida();
         bool GetAtaqueEspecial();

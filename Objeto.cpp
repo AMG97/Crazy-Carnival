@@ -23,10 +23,6 @@ bool Objeto::colision(){
     if(_pl_instance!=0 && _sprite!=0){        
         if(_sprite->Interseccion1(_pl_instance->GetSprite())){
             _pl_instance->addPuntuacion(p_value);
-            if(p_value == 1000)
-            {
-                _hud_instance->ElixirEncontrado(true);
-            }
             objectEffect();
             return true;
         }
@@ -43,8 +39,8 @@ sf::FloatRect Objeto::getBound() {
 }
 
 void OBJ_Reloj::objectEffect() {    
-    if(_pl_instance!=0){
-        _pl_instance->SetEnfriamiento(0);
+    if(_hud_instance!=0){
+        _hud_instance->aumentarTiempo(30);
     }
 }
 
@@ -56,8 +52,8 @@ void OBJ_HP::objectEffect() {
 }
 
 void OBJ_Elixir::objectEffect() {    
-    if(_pl_instance!=0){
-        _pl_instance->SetElixir(true);
+    if(_hud_instance!=0){
+        _hud_instance->ElixirEncontrado(true);
     }
 }
 
