@@ -277,6 +277,14 @@ namespace Crazy
         {
             contador++;
         }
+        if(_jugador->getContadorInvulnerable() < 1000 && _jugador->getInvulnerable())
+        {
+            _jugador->AumentarContadorInvulnerable();
+        }
+        else if(_jugador->getContadorInvulnerable() >= 1000 && _jugador->getInvulnerable())
+        {
+            _jugador->setInvulnerable(false);
+        }
                         
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetDeslizarse())
         {

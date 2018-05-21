@@ -63,13 +63,16 @@ namespace Crazy
         void SetVElocidadSalto(float v);
         float GetVelocidadSalto();
         bool isAttacking();
-        
+        void setInvulnerable(bool esInvulnerable);
+        bool getInvulnerable();
         void MoverX(float x);
         void MoverY();
         
         int GetLastPared();
         void tparedRestart();
         float Gettpared();
+        int getContadorInvulnerable();
+        void AumentarContadorInvulnerable();
         
     protected:
         float totalEnfriamiento;
@@ -78,6 +81,7 @@ namespace Crazy
         bool golpear;
         bool elixir;
         int puntuacion;
+        bool invulnerable;
         
         short int estado;
         Reloj tAtaque2;
@@ -95,5 +99,6 @@ namespace Crazy
         short int contadorSpriteAtaque2;
         
         int lastpared;
+        int contadorInvulnerable;
     };
 }

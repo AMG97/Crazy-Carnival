@@ -25,6 +25,7 @@ namespace Crazy
         enfriamiento = 0.0f;
         caida=0;
         lastpared=0;
+        invulnerable=false;
     }
     
     float Player::GetEnfriamiento()
@@ -89,11 +90,12 @@ namespace Crazy
     
     void Player::RecibirDanyo(float danyo)
     {
-        ModificarVida(-danyo);
-        rojo=true;
-        relojrojo.ReiniciarSegundos();
-        //ModificarEnfriamiento(danyo * 0.75f);
-        
+        if(!invulnerable){
+            ModificarVida(-danyo);
+            rojo=true;
+            relojrojo.ReiniciarSegundos();
+            //ModificarEnfriamiento(danyo * 0.75f);
+        }
     }
     
     short int Player::GetEstado()
@@ -219,10 +221,33 @@ namespace Crazy
     float Player::Gettpared(){
         return tpared.GetSegundos();
     }
+    int Player::getContadorInvulnerable()
+    {
+        return contadorInvulnerable;
+    }
+    void Player::AumentarContadorInvulnerable()
+    {
+        contadorInvulnerable++;
+    }
+    
     bool Player::isAttacking() {
         return atacando;
     }
-
+    void Player::setInvulnerable(bool esInvulnerable)
+    {
+        invulnerable = esInvulnerable;
+        if(invulnerable)
+            sprite.CambiarColorAmarillo();
+        else
+        {
+            sprite.CambiarColorBlanco();
+            contadorInvulnerable = 0;
+        }
+    }
+    bool Player::getInvulnerable()
+    {
+        return invulnerable;
+    }
 
 
 }

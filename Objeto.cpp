@@ -58,7 +58,9 @@ void OBJ_Elixir::objectEffect() {
 }
 
 void OBJ_Star::objectEffect() {
-
+    if(_pl_instance!=0){
+        _pl_instance->setInvulnerable(true);
+    }
 }
 
 vector2f Objeto::getPosition() {
