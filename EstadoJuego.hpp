@@ -12,6 +12,7 @@
 #include "Hud.hpp"
 #include "Nivel.hpp"
 #include "Espadachina.hpp"
+#include "Pistolero.hpp"
 
 namespace Crazy
 {

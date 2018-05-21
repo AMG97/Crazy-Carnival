@@ -37,6 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Arma.o \
 	${OBJECTDIR}/BossCangrejo.o \
+	${OBJECTDIR}/BossConejo.o \
+	${OBJECTDIR}/Collision.o \
 	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
@@ -56,6 +58,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/Nivel.o \
 	${OBJECTDIR}/Objeto.o \
+	${OBJECTDIR}/Pistolero.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Proyectil.o \
 	${OBJECTDIR}/box.o \
@@ -80,21 +83,21 @@ LDLIBSOPTIONS=-L/usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/libsfml-grap
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: /usr/lib/x86_64-linux-gnu/libsfml-system.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: /usr/lib/x86_64-linux-gnu/libsfml-system.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: /usr/lib/x86_64-linux-gnu/libsfml-window.so
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: /usr/lib/x86_64-linux-gnu/libsfml-window.so
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: libbox2d.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: libbox2d.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: libtinyxml.a
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: libtinyxml.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Arma.o: Arma.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -105,6 +108,16 @@ ${OBJECTDIR}/BossCangrejo.o: BossCangrejo.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossCangrejo.o BossCangrejo.cpp
+
+${OBJECTDIR}/BossConejo.o: BossConejo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossConejo.o BossConejo.cpp
+
+${OBJECTDIR}/Collision.o: Collision.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Collision.o Collision.cpp
 
 ${OBJECTDIR}/Comportamiento.o: Comportamiento.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -201,6 +214,11 @@ ${OBJECTDIR}/Objeto.o: Objeto.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
 
+${OBJECTDIR}/Pistolero.o: Pistolero.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pistolero.o Pistolero.cpp
+
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -227,7 +245,7 @@ ${OBJECTDIR}/main.o: main.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00
 
 # Subprojects
 .clean-subprojects:

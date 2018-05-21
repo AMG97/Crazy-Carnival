@@ -27,6 +27,13 @@ namespace Crazy
                 velocidad=6;
                 alcance=1200;
             break;
+            case 5:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Zanahoria"));
+                alcance=1000;
+                danyo=dan;
+                velocidad=7.5;
+                sprite.EscalarProporcion(1.3,1.3);
+            break;
                 
         }
         angulo=ang*3.14159/180;
@@ -67,9 +74,9 @@ namespace Crazy
             return true;
     }
     
-    SpriteM Proyectil::GetProyectil()
+    SpriteM* Proyectil::GetProyectil()
     {
-        return sprite;
+        return &sprite;
     }
     
     float Proyectil::GetDanyo()

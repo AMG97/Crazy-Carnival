@@ -4,11 +4,10 @@
 
 namespace Crazy
 {
-    Espadachina::Espadachina()
+    Espadachina::Espadachina(int arma)
     {
         totalVida = 60.0f;
         vida = totalVida;
-        enfriamiento = 0.0f;
         totalEnfriamiento = 30.0f;        
         sprite.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
         sprite.CambiarTextRect(0*60, 0*80, 60, 80);
@@ -18,10 +17,8 @@ namespace Crazy
         posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
         
         sprite.CambiarPosicion(posIniX, posIniY);
-        _arma=new Arma(2,sprite.GetX(),sprite.GetY());
+        _arma=new Arma(arma,sprite.GetX(),sprite.GetY());
         sprite.EscalarProporcion(1.5, 1.5);
-        caida=0;
-        lastpared=0;
     }
     
     void Espadachina::ModificarSprite()
@@ -66,8 +63,10 @@ namespace Crazy
                     sprite.CambiarTextRect(contadorSpriteSalto*65, 560, 65, 90);
                     sprite.CambiarOrigen(60/2,90/2);
                     _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
-                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)) || (contadorSpriteSalto==2 && velSalto>11))
+                    if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)))
                         contadorSpriteSalto++;
+                    if(contadorSpriteSalto>1)
+                        contadorSpriteSalto=1;
                     if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+60))
                     {
                         contadorSpriteSalto=0;
@@ -181,7 +180,7 @@ namespace Crazy
         MoverX(velocidad);
         if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
-                if(sprite.Interseccion2(e[j]->GetSprite()))
+                if(sprite.Interseccion(e[j]->GetSprite()))
                 {
                     e[j]->RecibirDanyo(_arma->GetDanyo());
                     ModificarEnfriamiento(5);
@@ -197,11 +196,11 @@ namespace Crazy
             sprite.Parpadear(false);
         }
         EstadoJuego* ej=EstadoJuego::Instance();
-        if(estado==SALTO && (ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
+        if(estado==SALTO && velSalto==0 && (ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) || ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()))){
             if((ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()) && lastpared!=1) ||
                 (ej->_level->ComprobarColision(sprite.GetX()-48,sprite.GetY()) && lastpared!=2)){
                     if(lastpared==0){
-                        if(EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()))
+                        if(ej->_level->ComprobarColision(sprite.GetX()+48,sprite.GetY()))
                             lastpared=1;
                         else
                             lastpared=2;
@@ -226,6 +225,43 @@ namespace Crazy
         }
         
     }
+    
+    
+    void Espadachina::MoverY(){
+        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2) && velSalto==0){
+            if(estado==DESLIZARSE)
+                caida+=0.2;
+            else
+                caida+=0.4;
+            sprite.Mover(0,caida);
+        }else{
+            if(caida!=0){
+                caida=0;
+                velSalto=0;
+                sprite.CambiarPosicion(sprite.GetX(),floor(sprite.GetY()/48)*48+13);
+            }
+        }
+        
+        if((velSalto!=0 && estado!=DESLIZARSE) || (estado==DESLIZARSE && velSalto<0))
+        {
+            velSalto=velSalto+0.5;
+        }
+        if(velSalto>4)
+            velSalto=4;
+        if(sprite.GetY()-sprite.GetAlto()/2-20>0){
+            if(velSalto<0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()-sprite.GetAlto()/2+10)){
+                velSalto=0;
+            }
+        }else{
+            velSalto=0;
+        }
+        sprite.Mover(0,velSalto);
+    }
+        
+    float Espadachina::GetTAtaque1() {
+            return 50;
+    }
+
 
 
 }

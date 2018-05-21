@@ -54,10 +54,12 @@ namespace Crazy
         
         virtual void ModificarSprite()=0;
         float GetTAtque2();
+        virtual float GetTAtaque1()=0;
         virtual void Reposo(int n)=0;
         virtual void Update(vector<Enemigo*> e)=0;
         void SetVElocidadSalto(float v);
         float GetVelocidadSalto();
+        bool isAttacking();
         
         void MoverX(float x);
         void MoverY();
@@ -77,6 +79,7 @@ namespace Crazy
         short int estado;
         Reloj tAtaque2;
         bool Atacado2;
+        bool atacando;
         
         Reloj tpared;
         

@@ -46,13 +46,13 @@ namespace Crazy
         t_titulo.CentrarOrigen();
         t_titulo.CambiarPosicion((_juego->GetAncho()/2), 75);
         
-        p1.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
+        p1.CambiarTextura(_juego->recursos.GetTextura("Espadachina-old"));
         p1.CambiarTextRect(0*60, 0*80, 60, 80);
         p1.CambiarOrigen(p1.GetAncho()/2, p1.GetAlto()/2);
         p1.CambiarPosicion((_juego->GetAncho()/2)-150, t_titulo.GetY()+200);
         p1.EscalarProporcion(1.5, 1.5);
         
-        p2.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
+        p2.CambiarTextura(_juego->recursos.GetTextura("Espadachina-old"));
         p2.CambiarTextRect(0*60, 0*80, 60, 80);
         p2.CambiarOrigen(p2.GetAncho()/2, p2.GetAlto()/2);
         p2.CambiarPosicion(p1.GetX()+300, t_titulo.GetY()+200);
@@ -333,7 +333,7 @@ namespace Crazy
                 EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
                 break;
             case P2:
-                EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj); //MAMBO
+                EstadoJuego::Instance()->Personaje("Mambo", modoNormal, modoContrarreloj); //MAMBO
                 break;
             /*case P3:
                 EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrarreloj);

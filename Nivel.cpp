@@ -2,6 +2,7 @@
 #include "EstadoJuego.hpp"
 #include "EnemigoVolador.hpp"
 #include "BossCangrejo.hpp"
+#include "BossConejo.hpp"
 
 
 namespace Crazy{
@@ -180,12 +181,12 @@ namespace Crazy{
             height = mapY;
 
             freecam = false;
-                
             
             _camera = Camara::Instance();
             //camera->CrearCamara(0,504,800,800); cambiar localización para ver personaje
             _camera->CrearCamara(vector2f(240,600), vector2f(_juego->GetAncho(),_juego->GetAlto()), vector2f(width,height));
             _juego->_ventana->setCamara(*_camera);
+            peleandoBoss = false; bossMatado=false;
         }else{
             cerr << "Error al cargar el nivel "<<l<<endl;
             exit(0);
@@ -216,22 +217,91 @@ namespace Crazy{
         
         _jugador->Update(_enemigos);
         _jugador->GetArma()->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_enemigos,_jugador);
-        for(int i=0;i<_enemigos.size();i++){
-            if(_enemigos[i]->GetVida()<=0){
-                Enemigo *tmp=_enemigos[i];
-                _jugador->addPuntuacion(tmp->getPuntos());
-                _enemigos.erase(_enemigos.begin()+i);
-                delete tmp;
-            }
-            else{
-                if(_enemigos[i]->GetArma()!=NULL){
-                    _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
-                    _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
-                }else
-                    _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
-            }
-        }        
         
+        
+        switch(EstadoJuego::Instance()->getNumNivel()){
+            case 1:
+                if(!bossMatado && !peleandoBoss && _jugador->GetPosX()>13600){
+                    peleandoBoss =true;
+                    _enemigos.clear();
+                    _enemigos.push_back(new BossConejo(_camera->getX()+_camera->getWidth()/2+200,1080));
+                    _camera->toggleStatic();
+                }
+                
+                if(peleandoBoss){
+                    BossConejo* boss = (BossConejo*) *_enemigos.begin();
+                    
+                    if(boss->GetVida()<=0){
+                        _jugador->addPuntuacion(boss->getPuntos());
+                        _enemigos.erase(_enemigos.begin());
+                        peleandoBoss=false;
+                        bossMatado = true;
+                        
+                        //AQUI LANZAR EL NUEVO NIVEL
+                        
+                        delete boss;
+                    }else if(boss->GetVida()>0){
+                        if(boss->GetArma()!=NULL){
+                            boss->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                            boss->GetArma()->Update(boss->GetSprite().GetX(),boss->GetSprite().GetY(),_jugador);
+                        }else
+                            boss->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
+                    }
+                    
+                    
+                }
+            break;
+                
+                
+            case 2:
+                if(!bossMatado && !peleandoBoss && _jugador->GetPosX()>48*180){
+                    peleandoBoss =true;
+                    _enemigos.clear();
+                    _enemigos.push_back(new BossCangrejo(_camera->getX()+_camera->getWidth()/2+200,1080));
+                    _camera->toggleStatic();
+                }
+                
+                if(peleandoBoss){
+                    BossCangrejo* boss = (BossCangrejo*) *_enemigos.begin();
+                    
+                    if(boss->GetVida()<=0 && boss->animacionMuerte()){
+                        _jugador->addPuntuacion(boss->getPuntos());
+                        _enemigos.erase(_enemigos.begin());
+                        peleandoBoss=false;
+                        bossMatado = true;
+                        
+                        //AQUI LANZAR EL NUEVO NIVEL
+                        
+                        delete boss;
+                    }else if(boss->GetVida()>0){
+                        if(boss->GetArma()!=NULL){
+                            boss->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                            boss->GetArma()->Update(boss->GetSprite().GetX(),boss->GetSprite().GetY(),_jugador);
+                        }else
+                            boss->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
+                    }
+                    
+                    
+                }
+            break;
+        }
+        
+        if(!peleandoBoss){
+            for(int i=0;i<_enemigos.size();i++){
+                if(_enemigos[i]->GetVida()<=0){
+                    Enemigo *tmp=_enemigos[i];
+                    _jugador->addPuntuacion(tmp->getPuntos());
+                    _enemigos.erase(_enemigos.begin()+i);
+                    delete tmp;
+                }else{
+                    if(_enemigos[i]->GetArma()!=NULL){
+                        _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY());
+                        _enemigos[i]->GetArma()->Update(_enemigos[i]->GetSprite().GetX(),_enemigos[i]->GetSprite().GetY(),_jugador);
+                    }else
+                        _enemigos[i]->Update(_jugador->GetSprite().GetX(),_jugador->GetSprite().GetY(),_jugador);
+                }
+            }       
+        }
 
     }
 
@@ -272,13 +342,18 @@ namespace Crazy{
     bool Nivel::ComprobarColision(float x, float y) {
         int x2=round(x/48);
         int y2=round(y/48);
+        if(y2>=0 && y2<height && x2>=0 && x2<width){
         if(tilemap["Collisionable"][y2][x2]!=0)
             return true;
         else{
             return false;
-        }
+        }}
+        else return true;
     }
-
+    
+    bool Nivel::isPeleandoBoss() {
+        return peleandoBoss;
+    }
 
     
 

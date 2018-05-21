@@ -37,6 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Arma.o \
 	${OBJECTDIR}/BossCangrejo.o \
+	${OBJECTDIR}/BossConejo.o \
+	${OBJECTDIR}/Collision.o \
 	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
@@ -56,6 +58,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/Nivel.o \
 	${OBJECTDIR}/Objeto.o \
+	${OBJECTDIR}/Pistolero.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Proyectil.o
 
@@ -78,11 +81,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Arma.o: Arma.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -93,6 +96,16 @@ ${OBJECTDIR}/BossCangrejo.o: BossCangrejo.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossCangrejo.o BossCangrejo.cpp
+
+${OBJECTDIR}/BossConejo.o: BossConejo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossConejo.o BossConejo.cpp
+
+${OBJECTDIR}/Collision.o: Collision.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Collision.o Collision.cpp
 
 ${OBJECTDIR}/Comportamiento.o: Comportamiento.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -189,6 +202,11 @@ ${OBJECTDIR}/Objeto.o: Objeto.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
 
+${OBJECTDIR}/Pistolero.o: Pistolero.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pistolero.o Pistolero.cpp
+
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -205,7 +223,7 @@ ${OBJECTDIR}/Proyectil.o: Proyectil.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/20-23_00
 
 # Subprojects
 .clean-subprojects:
