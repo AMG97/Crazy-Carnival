@@ -52,11 +52,11 @@ namespace Crazy
         p1.CambiarPosicion((_juego->GetAncho()/2)-150, t_titulo.GetY()+200);
         p1.EscalarProporcion(1.5, 1.5);
         
-        p2.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
-        p2.CambiarTextRect(0*60, 0*80, 60, 80);
+        p2.CambiarTextura(_juego->recursos.GetTextura("Mambo"));
+        p2.CambiarTextRect(0*35, 0*40, 35, 40);
         p2.CambiarOrigen(p2.GetAncho()/2, p2.GetAlto()/2);
         p2.CambiarPosicion(p1.GetX()+300, t_titulo.GetY()+200);
-        p2.EscalarProporcion(1.5, 1.5);
+        p2.EscalarProporcion(2.5, 2.5);
         
         t_modo.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_modo.CambiarTexto("Dificultad");
@@ -300,8 +300,8 @@ namespace Crazy
                     p1.CambiarOrigen(60/2,80/2);
                     break;
                 case P2:
-                    p2.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
-                    p2.CambiarOrigen(60/2,80/2);
+                    p2.CambiarTextRect(contadorSpriteReposo*35, 0*40, 35, 40);
+                    p2.CambiarOrigen(35/2,40/2);
                     break;
                 /*case P3:
                     break;

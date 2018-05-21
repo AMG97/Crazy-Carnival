@@ -47,10 +47,10 @@ namespace Crazy
         recursos.CargarTextura("Bala","resources/bala.png");
         recursos.CargarTextura("Enemigo-Volador","resources/enemigo-pajaro.png");
         recursos.CargarTextura("Cangrejo","resources/CrabSprite.png");
-        //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");
         
         // Temporal
         recursos.CargarTextura("Ayuda","resources/ayuda.png");
+        recursos.CargarTextura("Mambo","resources/Mambo-old.png");
         
         maquina.Anyadir(EstadoMenu::Instance());
         
