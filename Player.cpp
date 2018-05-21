@@ -172,8 +172,12 @@ namespace Crazy
         _arma->Dibujar();
     }
 
-    void Player::SetElixir(bool v) {
+    void Player::setElixir(bool v) {
         elixir = v;
+    }
+    
+    bool Player::getElixir(){
+        return elixir;
     }
 
     void Player::addPuntuacion(int puntos) {

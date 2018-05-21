@@ -22,7 +22,8 @@ namespace Crazy
         float GetEnfriamiento();
         float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);
-        void SetElixir(bool v);
+        void setElixir(bool v);
+        bool getElixir();
         void addPuntuacion(int puntos);
         void setPuntuacion(int puntos);
         int getPuntuacion();

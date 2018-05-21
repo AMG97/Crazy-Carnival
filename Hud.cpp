@@ -153,7 +153,7 @@ namespace Crazy
         spriteTimerSeg1 += (tiempo/10)*9;
         if(spriteTimerSeg1 > 45)
         {
-            spriteTimerSeg1 = 0;
+            spriteTimerSeg1 -= 54;
             spriteTimerMin += 9;
             spContador[1].setTextureRect(sf::IntRect(107 + spriteTimerMin+9, 60, 9, 11));
         }
@@ -182,7 +182,7 @@ namespace Crazy
     
     void Hud::ElixirEncontrado(bool v){
         elixir = v;
-        _jugador->SetElixir(elixir);
+        _jugador->setElixir(elixir);
     }
     bool Hud::getElixir(){
         return elixir;

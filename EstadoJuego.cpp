@@ -222,7 +222,22 @@ namespace Crazy
     {
         
         if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
-            _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
+            if(_jugador->getElixir() && _hud->getContador() >= 180)
+            {
+                _jugador->SetVida(_jugador->GetTotalVida());
+                _jugador->SetEnfriamiento(0.0);
+                _hud->aumentarTiempo(60);
+                _hud->ElixirEncontrado(false);
+            }
+            else if(_jugador->getElixir())
+            {
+                _jugador->SetVida(_jugador->GetTotalVida());
+                _jugador->SetEnfriamiento(0.0);
+                _hud->ElixirEncontrado(false);
+            }
+            else{
+                _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
+            }
         }
                 
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetDeslizarse())
