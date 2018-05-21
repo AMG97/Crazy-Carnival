@@ -22,6 +22,7 @@ namespace Crazy
         puntuacion = 0;
         elixir = false;
         rojo=false;
+        enfriamiento = 0.0f;
         caida=0;
         lastpared=0;
     }
@@ -240,6 +241,9 @@ namespace Crazy
     
     float Player::Gettpared(){
         return tpared.GetSegundos();
+    }
+    bool Player::isAttacking() {
+        return atacando;
     }
 
 

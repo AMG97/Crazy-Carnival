@@ -39,13 +39,18 @@ namespace Crazy
         recursos.CargarTextura("Playa","resources/SpritesPlaya.png");
         recursos.CargarTextura("Barrio","resources/Barrio.png");
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
+        recursos.CargarTextura("Espadachina-old","resources/espadachina-old.png");
         recursos.CargarTextura("Espada1","resources/espada1.png");
         recursos.CargarTextura("Espada2","resources/espada2.png");
+        recursos.CargarTextura("Espada3","resources/espada3.png");
+        recursos.CargarTextura("Espada4","resources/espada4.png");
         recursos.CargarTextura("Enemigo-Pistola1","resources/enemigo-pistola.png");
         recursos.CargarTextura("Puñal","resources/puñal.png");
         recursos.CargarTextura("Bala","resources/bala.png");
         recursos.CargarTextura("Enemigo-Volador","resources/enemigo-pajaro.png");
         recursos.CargarTextura("Cangrejo","resources/CrabSprite.png");
+        recursos.CargarTextura("Conejo","resources/BossConejo.png");
+        recursos.CargarTextura("Zanahoria","resources/zanahoria.png");
         //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");
         
         // Temporal

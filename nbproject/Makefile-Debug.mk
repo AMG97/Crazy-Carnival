@@ -37,6 +37,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Arma.o \
 	${OBJECTDIR}/BossCangrejo.o \
+	${OBJECTDIR}/BossConejo.o \
+	${OBJECTDIR}/Collision.o \
 	${OBJECTDIR}/Comportamiento.o \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/EnemigoPistola.o \
@@ -56,6 +58,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Motor.o \
 	${OBJECTDIR}/Nivel.o \
 	${OBJECTDIR}/Objeto.o \
+	${OBJECTDIR}/Pistolero.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Proyectil.o \
 	${OBJECTDIR}/box.o \
@@ -105,6 +108,16 @@ ${OBJECTDIR}/BossCangrejo.o: BossCangrejo.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossCangrejo.o BossCangrejo.cpp
+
+${OBJECTDIR}/BossConejo.o: BossConejo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BossConejo.o BossConejo.cpp
+
+${OBJECTDIR}/Collision.o: Collision.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Collision.o Collision.cpp
 
 ${OBJECTDIR}/Comportamiento.o: Comportamiento.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -200,6 +213,11 @@ ${OBJECTDIR}/Objeto.o: Objeto.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Objeto.o Objeto.cpp
+
+${OBJECTDIR}/Pistolero.o: Pistolero.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -IBox2D -Itinyxml -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pistolero.o Pistolero.cpp
 
 ${OBJECTDIR}/Player.o: Player.cpp 
 	${MKDIR} -p ${OBJECTDIR}

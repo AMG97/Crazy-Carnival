@@ -1,5 +1,6 @@
 #include "Motor.hpp"
 #include "EstadoJuego.hpp"
+#include "Collision.h"
 
 namespace Motor
 {
@@ -273,20 +274,37 @@ namespace Motor
     {
         move(x,y);
     } 
-    bool SpriteM::Interseccion1(SpriteM s)
+    bool SpriteM::InterseccionContiene(SpriteM s)
     {
+        if(s.getGlobalBounds().contains(getPosition().x,getPosition().y))
+            return InterseccionPixel(&s);
+            //return true;
+        else 
+            return false;
+    }
+
+    bool SpriteM::InterseccionContieneSP(SpriteM s) {
         return s.getGlobalBounds().contains(getPosition().x,getPosition().y);
     }
     
-        bool SpriteM::Interseccion1(SpriteM* s)
+    bool SpriteM::Interseccion(SpriteM s)
     {
-        return s->getGlobalBounds().contains(getPosition().x,getPosition().y);
+        if(s.getGlobalBounds().intersects(getGlobalBounds()))
+            return InterseccionPixel(&s);
+            //return true;
+        else 
+            return false;
     }
-    
-    bool SpriteM::Interseccion2(SpriteM s)
-    {
+
+    bool SpriteM::InterseccionSP(SpriteM s) {
         return s.getGlobalBounds().intersects(getGlobalBounds());
     }
+
+
+    bool SpriteM::InterseccionPixel(SpriteM* s) {
+        return Collision::PixelPerfectTest(*this,*s,100);        
+    }
+
 
 // Ventana
     Ventana* Ventana::_pinstance=0;

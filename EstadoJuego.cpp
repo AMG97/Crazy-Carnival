@@ -63,7 +63,10 @@ namespace Crazy
         _level = new Nivel();
         lvl_n=1;
         _level->cargarNivel(lvl_n);
-        _jugador = new Espadachina();
+        if(texturaJugador=="Espadachina")
+            _jugador = new Espadachina(1);
+        else
+            _jugador=new Pistolero(2);
         _hud = new Hud(contrarreloj);
         
         teclaPulsada = false;
