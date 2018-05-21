@@ -86,14 +86,4 @@ namespace Crazy
     {
         return titulo;
     }
-    
-    short int Juego::GetSlot()
-    {
-        return slot;
-    }
-    
-    void Juego::SetSlot(short int s)
-    {
-        slot = s;
-    }
 }

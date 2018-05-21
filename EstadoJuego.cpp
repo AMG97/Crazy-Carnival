@@ -34,15 +34,25 @@ namespace Crazy
         delete _pinstance;
         _pinstance = NULL;
     }
-    
-    void EstadoJuego::Personaje(string jugador, bool modoNormal, bool modoContrarreloj)
+   
+    void EstadoJuego::Personaje(string jugador, unsigned short int weapon, bool modoHardcore, bool modoContrarreloj)
     {
         texturaJugador = jugador;
-        normal = modoNormal;
+        hardcore = modoHardcore;
         contrarreloj = modoContrarreloj;
+        arma = weapon;
         
         // TODO: manejar esto:
         // modoNormal y modoContrareloj
+    }
+    
+    void EstadoJuego::getDatosGuardado(string* g_personaje, int* g_arma, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
+        *g_personaje = texturaJugador;
+        *g_arma = (int)arma;
+        *g_hardcore = hardcore;
+        *g_contrarreloj = contrarreloj;
+        *g_elixir = _hud->getElixir();
+        *g_puntos = _jugador->getPuntuacion();
     }
     
     void EstadoJuego::Init()
@@ -68,6 +78,7 @@ namespace Crazy
         tiempoDesplazamiento = new sf::Time();*/
         inercia = false;
         contador = 0;
+        arma = 1;
     }
     
     void EstadoJuego::ManejarEventos()

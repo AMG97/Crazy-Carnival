@@ -330,10 +330,10 @@ namespace Crazy
         switch(opcion)
         {
             case P1:
-                EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
+                EstadoJuego::Instance()->Personaje("Espadachina",1, modoNormal, modoContrarreloj);
                 break;
             case P2:
-                EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj); //MAMBO
+                EstadoJuego::Instance()->Personaje("Espadachina",1, modoNormal, modoContrarreloj); //MAMBO
                 break;
             /*case P3:
                 EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrarreloj);
