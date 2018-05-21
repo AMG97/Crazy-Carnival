@@ -404,4 +404,8 @@ namespace Crazy
         return lvl_n; 
     }
 
+    bool EstadoJuego::getContrarreloj() {
+        return contrarreloj;
+    }
+
 }

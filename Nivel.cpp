@@ -137,7 +137,11 @@ namespace Crazy{
                                         objects.push_back(new OBJ_HP(j,i,tilemap[name][i][j],100));
                                         break;
                                     case 2:
-                                        objects.push_back(new OBJ_Reloj(j,i,tilemap[name][i][j],200));
+                                        if(EstadoJuego::Instance()->getContrarreloj())objects.push_back(new OBJ_Reloj(j,i,tilemap[name][i][j],200));
+                                        else {
+                                            delete tilemap[name][i][j];
+                                            tilemap[name][i][j] = 0;
+                                        }
                                         break;
                                     case 3:
                                         objects.push_back(new OBJ_Elixir(j,i,tilemap[name][i][j],1000));
@@ -313,8 +317,10 @@ namespace Crazy{
             }
         }
         
-        for(int i=0;i<_enemigos.size();i++){
-            _enemigos[i]->Dibujar();
+        if(capa=="Objetos"){
+            for(int i=0;i<_enemigos.size();i++){
+                _enemigos[i]->Dibujar();
+            }
         }
     }
     void Nivel::setPosCamara(float _jugadorX, float _jugadorY){       
