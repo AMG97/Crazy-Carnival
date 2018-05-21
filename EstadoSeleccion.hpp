@@ -43,7 +43,8 @@ namespace Crazy
         /*SpriteM p3;
         SpriteM p4;*/
         SpriteM flecha;
-        short int contadorSpriteReposo;
+        short int contadorP1;
+        short int contadorP2;
         Reloj relojAnim;
         
         bool modoNormal;

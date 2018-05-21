@@ -35,7 +35,8 @@ namespace Crazy
     {
         _input = new Input();
         opcion = P1;
-        contadorSpriteReposo = 0;
+        contadorP1 = 0;
+        contadorP2 = 0;
         
         modoNormal = true;
         modoContrarreloj = false;
@@ -46,17 +47,17 @@ namespace Crazy
         t_titulo.CentrarOrigen();
         t_titulo.CambiarPosicion((_juego->GetAncho()/2), 75);
         
-        p1.CambiarTextura(_juego->recursos.GetTextura("Espadachina-old"));
+        p1.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
         p1.CambiarTextRect(0*60, 0*80, 60, 80);
         p1.CambiarOrigen(p1.GetAncho()/2, p1.GetAlto()/2);
         p1.CambiarPosicion((_juego->GetAncho()/2)-150, t_titulo.GetY()+200);
         p1.EscalarProporcion(1.5, 1.5);
         
-        p2.CambiarTextura(_juego->recursos.GetTextura("Espadachina-old"));
-        p2.CambiarTextRect(0*60, 0*80, 60, 80);
+        p2.CambiarTextura(_juego->recursos.GetTextura("Mambo-old"));
+        p2.CambiarTextRect(0*35, 0*40, 35, 40);
         p2.CambiarOrigen(p2.GetAncho()/2, p2.GetAlto()/2);
-        p2.CambiarPosicion(p1.GetX()+300, t_titulo.GetY()+200);
-        p2.EscalarProporcion(1.5, 1.5);
+        p2.CambiarPosicion(p1.GetX()+300, t_titulo.GetY()+210);
+        p2.EscalarProporcion(2.5, 2.5);
         
         t_modo.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_modo.CambiarTexto("Dificultad");
@@ -126,14 +127,14 @@ namespace Crazy
         
         flechaM.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flechaM.CambiarOrigen();
-        flechaM.CambiarPosicion(60, t_atras.GetY()-30);              // Cambiar
+        flechaM.CambiarPosicion(60, t_atras.GetY()-30);
         flechaM.Escalar(70.0f, 70.0f); // Escalar al 70%
         flechaM.CambiarColorRojo();
         CambiarFlecha(flechaM, t_normal);
         
         flechaMC.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flechaMC.CambiarOrigen();
-        flechaMC.CambiarPosicion(60, t_atras.GetY()-30);              // Cambiar
+        flechaMC.CambiarPosicion(60, t_atras.GetY()-30);
         flechaMC.Escalar(70.0f, 70.0f); // Escalar al 70%
         flechaMC.CambiarColorRojo();
         CambiarFlecha(flechaMC, t_no);
@@ -296,34 +297,30 @@ namespace Crazy
             switch(opcion)
             {
                 case P1:
-                    p1.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
+                    p1.CambiarTextRect(contadorP1*60, 0*80, 60, 80);
                     p1.CambiarOrigen(60/2,80/2);
                     break;
                 case P2:
-                    p2.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
-                    p2.CambiarOrigen(60/2,80/2);
+                    p2.CambiarTextRect(contadorP2*35, 0*40, 35, 40);
+                    p2.CambiarOrigen(35/2,40/2);
                     break;
                 /*case P3:
                     break;
                 case P4:
                     break;*/
             }
-            
-            contadorSpriteReposo++;
-            if(contadorSpriteReposo == 8)
-            {
-                contadorSpriteReposo = 0;
+            contadorP1++;
+            if(contadorP1 == 8) {
+                contadorP1 = 0;
+            }
+            contadorP2++;
+            if(contadorP2 == 3) {
+                contadorP2 = 0;
             }
             relojAnim.ReiniciarSegundos();
         }
     }
     
-    /*void EstadoSeleccion::Player4()
-    {
-        EstadoJuego::Instance(); // Creamos el puntero
-        EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrareloj);
-        CambiarEstadoMaquina();
-    }*/
     void EstadoSeleccion::Jugar()
     {
         EstadoJuego::Instance(); // Creamos el puntero
@@ -333,7 +330,7 @@ namespace Crazy
                 EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
                 break;
             case P2:
-                EstadoJuego::Instance()->Personaje("Mambo", modoNormal, modoContrarreloj); //MAMBO
+                EstadoJuego::Instance()->Personaje("Mambo", modoNormal, modoContrarreloj);
                 break;
             /*case P3:
                 EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrarreloj);
