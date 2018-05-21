@@ -187,7 +187,9 @@ namespace Crazy
     bool Hud::getElixir(){
         return elixir;
     }
-    
+    bool Hud::getContrarreloj(){
+        return contrarreloj;
+    }
     void Hud::SetAtaqueEspecial(bool ataque){
         ataqueEspecial = ataque;
     }

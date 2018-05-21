@@ -22,6 +22,7 @@ namespace Crazy
         void ModoContrarreloj();
         void ElixirEncontrado(bool v);
         bool getElixir();
+        bool getContrarreloj();
         int getContador();
         void aumentarTiempo(int tiempo);
         void SetAtaqueEspecial(bool ataque);

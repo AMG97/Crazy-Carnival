@@ -51,7 +51,7 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n=2;
+        lvl_n=1;
         _level->cargarNivel(lvl_n);
         if(texturaJugador=="Espadachina")
             _jugador = new Espadachina(1);
@@ -242,11 +242,18 @@ namespace Crazy
     {
         
         if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
-            if(_jugador->getElixir() && _hud->getContador() >= 180)
+            if(_jugador->getElixir() && _hud->getContrarreloj() && _hud->getContador() >= 150)
             {
                 _jugador->SetVida(_jugador->GetTotalVida());
                 _jugador->SetEnfriamiento(0.0);
                 _hud->aumentarTiempo(60);
+                _hud->ElixirEncontrado(false);
+            }
+            else if(_jugador->getElixir() && _hud->getContrarreloj() && _hud->getContador() >= 120)
+            {
+                _jugador->SetVida(_jugador->GetTotalVida());
+                _jugador->SetEnfriamiento(0.0);
+                _hud->aumentarTiempo(30);
                 _hud->ElixirEncontrado(false);
             }
             else if(_jugador->getElixir())
