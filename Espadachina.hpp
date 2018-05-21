@@ -17,10 +17,13 @@ namespace Crazy
     class Espadachina : public Player
     {
     public:
-        Espadachina();
+        Espadachina(int arma);
         void ModificarSprite();
         void Reposo(int n);  
         void Update(vector<Enemigo*> e);
+        void MoverY();
+        float GetTAtaque1();
+
 
     private:
 

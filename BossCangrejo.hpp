@@ -4,6 +4,10 @@
 #include "Juego.hpp"
 #include "Proyectil.hpp"
 
+#define T_ENTRADA 9
+#define T_MUERTE 4
+#define VIDA 300
+
 namespace Crazy
 {
     class Player;
@@ -22,6 +26,8 @@ namespace Crazy
         void MoverX(float x);
         void MoverY();
         void BorrarProyectil(int i);
+        
+        bool animacionMuerte();
     private:
         float danyo;
         int contadorSpriteAtaque2;
@@ -30,6 +36,19 @@ namespace Crazy
         Reloj tAtaque2;
         Reloj tAtaqueFinal;
         vector<Proyectil*> proyectiles;
+        bool muerto;
+        
+        //Animaciones
+        vector<Proyectil*> animacionExplote;
+        Reloj Clock_explotarBurbuja;
+        Reloj Clock_animacionEntrada;
+        int contadorEntrada;
+        Reloj Clock_animacionMuerte;
+        int contadorMuerte;
+        SpriteM* burbujasInicio[3];
+        
+        void animacionEntrada();
+        
     };
 
 }
