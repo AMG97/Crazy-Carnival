@@ -240,7 +240,7 @@ namespace Crazy{
                         _enemigos.erase(_enemigos.begin());
                         peleandoBoss=false;
                         bossMatado = true;
-                        
+                        EstadoJuego::Instance()->terminado=true;
                         //AQUI LANZAR EL NUEVO NIVEL
                         
                         delete boss;

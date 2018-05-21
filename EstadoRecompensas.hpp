@@ -2,6 +2,7 @@
 
 #include "Estado.hpp"
 #include "Juego.hpp"
+#include "EstadoJuego.hpp"
 
 // Constantes
 #define R1 0

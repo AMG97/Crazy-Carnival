@@ -13,6 +13,8 @@
 #include "Nivel.hpp"
 #include "Espadachina.hpp"
 #include "Pistolero.hpp"
+#include "EstadoRecompensas.hpp"
+#include "GestorArchivo.hpp"
 
 namespace Crazy
 {
@@ -58,6 +60,8 @@ namespace Crazy
         Nivel* GetNivel();
         void SetMundo(b2World* world);
         unsigned short int getNumNivel();
+        void setNumNivel(unsigned short int l);
+        void setArma(unsigned short int a);
         
         ~EstadoJuego();
     private:
