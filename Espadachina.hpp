@@ -21,6 +21,9 @@ namespace Crazy
         void ModificarSprite();
         void Reposo(int n);  
         void Update(vector<Enemigo*> e);
+        void MoverY();
+        float GetTAtaque1();
+
 
     private:
 

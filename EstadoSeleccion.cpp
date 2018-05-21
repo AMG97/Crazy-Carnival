@@ -333,7 +333,7 @@ namespace Crazy
                 EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj);
                 break;
             case P2:
-                EstadoJuego::Instance()->Personaje("Espadachina", modoNormal, modoContrarreloj); //MAMBO
+                EstadoJuego::Instance()->Personaje("Mambo", modoNormal, modoContrarreloj); //MAMBO
                 break;
             /*case P3:
                 EstadoJuego::Instance()->Personaje("x", modoNormal, modoContrarreloj);

@@ -202,36 +202,6 @@ namespace Crazy
             sprite.Mover(x,0);
     }
     
-    void Player::MoverY(){
-        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2) && velSalto==0){
-            if(estado==DESLIZARSE)
-                caida+=0.2;
-            else
-                caida+=0.4;
-            sprite.Mover(0,caida);
-        }else{
-            if(caida!=0){
-                caida=0;
-                velSalto=0;
-                sprite.CambiarPosicion(sprite.GetX(),floor(sprite.GetY()/48)*48+13);
-            }
-        }
-        
-        if((velSalto!=0 && estado!=DESLIZARSE) || (estado==DESLIZARSE && velSalto<0))
-        {
-            velSalto=velSalto+0.5;
-        }
-        if(velSalto>4)
-            velSalto=4;
-        if(sprite.GetY()-sprite.GetAlto()/2-20>0){
-            if(velSalto<0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()-sprite.GetAlto()/2+10)){
-                velSalto=0;
-            }
-        }else{
-            velSalto=0;
-        }
-        sprite.Mover(0,velSalto);
-    }
     int Player::GetLastPared() {
         return lastpared;
     }

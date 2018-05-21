@@ -51,12 +51,12 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n=1;
+        lvl_n=2;
         _level->cargarNivel(lvl_n);
         if(texturaJugador=="Espadachina")
             _jugador = new Espadachina(1);
         else
-            _jugador=new Pistolero(2);
+            _jugador=new Pistolero(5);//Las armas del pistolero son: 5 la primera y las recompesas 6,7 y 8
         _hud = new Hud(contrarreloj);
         
         teclaPulsada = false;
@@ -191,12 +191,20 @@ namespace Crazy
             if(_input->GetPosicionRatonX()>=_level->getCamara()->getX()-_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonX()<=_level->getCamara()->getX()+_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonY()>=_level->getCamara()->getY()-_level->getCamara()->getHeight()/2 && _input->GetPosicionRatonY()<=_level->getCamara()->getY()+_level->getCamara()->getHeight()/2){
                 if (_input->RatonIzq())
                 {
-                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse())
-                    {
-                        _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
-                        _jugador->SetEstado(_jugador->GetAtaque1());
+                    if(texturaJugador=="Espadachina"){
+                        if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse())
+                        {
+                            _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque1());
+                        }
+                    }else{
+                        if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse() && _jugador->GetTAtaque1()>1)
+                        {
+                            _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque1());
+                        }
                     }
-                    //cout << "Angulo"<<_jugador->GetAngulo()<<endl;
+
                 }
 
                 if (_input->RatonDer())
