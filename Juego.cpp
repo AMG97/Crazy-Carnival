@@ -39,6 +39,7 @@ namespace Crazy
         recursos.CargarTextura("Playa","resources/SpritesPlaya.png");
         recursos.CargarTextura("Barrio","resources/Barrio.png");
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
+        recursos.CargarTextura("Espadachina-old","resources/espadachina-old.png");
         recursos.CargarTextura("Espada1","resources/espada1.png");
         recursos.CargarTextura("Espada2","resources/espada2.png");
         recursos.CargarTextura("Espada3","resources/espada3.png");
