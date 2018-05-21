@@ -23,6 +23,7 @@
       <itemPath>EstadoPausa.hpp</itemPath>
       <itemPath>EstadoSeleccion.hpp</itemPath>
       <itemPath>EstadosManager.hpp</itemPath>
+      <itemPath>GestorArchivo.hpp</itemPath>
       <itemPath>Hud.hpp</itemPath>
       <itemPath>Juego.hpp</itemPath>
       <itemPath>Motor.hpp</itemPath>
@@ -58,6 +59,7 @@
       <itemPath>EstadoPausa.cpp</itemPath>
       <itemPath>EstadoSeleccion.cpp</itemPath>
       <itemPath>EstadosManager.cpp</itemPath>
+      <itemPath>GestorArchivo.cpp</itemPath>
       <itemPath>Hud.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
       <itemPath>Motor.cpp</itemPath>
@@ -254,6 +256,10 @@
       </item>
       <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="GestorArchivo.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GestorArchivo.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Hud.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Hud.hpp" ex="false" tool="3" flavor2="0">
@@ -321,13 +327,13 @@
       </item>
       <item path="BossCangrejo.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Collision.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Collision.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="BossConejo.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BossConejo.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Collision.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Collision.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Comportamiento.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -386,6 +392,10 @@
       <item path="EstadosManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="EstadosManager.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="GestorArchivo.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="GestorArchivo.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Hud.cpp" ex="false" tool="1" flavor2="0">
       </item>

@@ -30,6 +30,7 @@ namespace Crazy
         void CambiarDireccion();
         void Update(float x, float y, Player *p);
         void Update(float x, float y, vector<Enemigo*>e, Player *p);
+        int getTipoArma();
     private:
         float danyo;
         SpriteM sprite;

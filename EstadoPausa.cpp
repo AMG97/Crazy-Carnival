@@ -1,4 +1,6 @@
 #include "EstadoPausa.hpp"
+#include "EstadoJuego.hpp"
+#include "GestorArchivo.hpp"
 
 namespace Crazy
 {

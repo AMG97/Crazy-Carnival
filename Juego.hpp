@@ -19,8 +19,6 @@ namespace Crazy
         int GetAncho();
         int GetAlto();
         std::string GetTitulo();
-        short int GetSlot();
-        void SetSlot(short int s);
         
     private:
         Juego() { };
@@ -34,7 +32,5 @@ namespace Crazy
         float tiempoActual;
         Reloj reloj;
         
-        // Slot guardado
-        short int slot;
     };
 }

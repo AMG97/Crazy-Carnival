@@ -212,6 +212,11 @@ namespace Crazy
         Proyectil *p=new Proyectil(t,danyo,angulo,sprite);
         proyectiles.push_back(p);
     }
+
+    int Arma::getTipoArma() {
+        return tipo;
+    }
+
 }
 
 

@@ -42,13 +42,15 @@ namespace Crazy
         
         Nivel* _level;
         
-        void Personaje(string jugador, bool modoNormal, bool modoContrareloj);
+        void Personaje(string jugador, unsigned short int weapon, bool modoHardcore, bool modoContrareloj);
         void Init();
         void ManejarEventos();
         void Actualizar(float tiempoActual);
         void Dibujar(float tiempoActual);
         void Pausar();
         void Reanudar();
+        void getDatosGuardado(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos);
+        void cargarDatosGuardados(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos);
         b2World* GetMundo();
         Nivel* GetNivel();
         void SetMundo(b2World* world);
@@ -63,6 +65,7 @@ namespace Crazy
         Input* _input;
         bool teclaPulsada;
         string texturaJugador;
+        unsigned short int arma;
         
         b2World* _mundo;
         

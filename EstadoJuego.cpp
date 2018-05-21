@@ -4,7 +4,9 @@ namespace Crazy
 {
     EstadoJuego::EstadoJuego()
     {
-        _juego = Juego::Instance();
+        arma = 0;
+        lvl_n = 1;
+        texturaJugador = "";
     }
     
     EstadoJuego* EstadoJuego::_pinstance=0;
@@ -34,30 +36,63 @@ namespace Crazy
         delete _pinstance;
         _pinstance = NULL;
     }
-    
-    void EstadoJuego::Personaje(string jugador, bool modoNormal, bool modoContrarreloj)
+   
+    void EstadoJuego::Personaje(string jugador, unsigned short int weapon, bool modoHardcore, bool modoContrarreloj)
     {
         texturaJugador = jugador;
-        normal = modoNormal;
+        normal = modoHardcore;
         contrarreloj = modoContrarreloj;
+        arma = weapon;
         
         // TODO: manejar esto:
         // modoNormal y modoContrareloj
     }
+    bool elixir = false;
+    int puntos = 0;
+    void EstadoJuego::getDatosGuardado(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
+        *g_personaje = texturaJugador;
+        *g_arma = _jugador->GetArma()->getTipoArma();
+        *g_hardcore = normal;
+        *g_contrarreloj = contrarreloj;
+        *g_elixir = _hud->getElixir();
+        *g_puntos = _jugador->getPuntuacion();
+        *g_nivel = lvl_n;
+    }
+        
+    void EstadoJuego::cargarDatosGuardados(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
+        texturaJugador = *g_personaje;
+        arma = *g_arma;
+        lvl_n = *g_nivel;
+        normal = *g_hardcore;
+        contrarreloj = *g_contrarreloj;
+        elixir = *g_elixir;
+        puntos = *g_puntos;
+    }
+
     
     void EstadoJuego::Init()
     {
+        _juego = Juego::Instance();
         _mundo = new b2World(b2Vec2(0.0, 9.8));
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n=1;
+        
+        if(arma==1){
+            lvl_n=1;
+        }
+        
         _level->cargarNivel(lvl_n);
+        
         if(texturaJugador=="Espadachina")
-            _jugador = new Espadachina(1);
+            _jugador = new Espadachina(arma);
         else
-            _jugador=new Pistolero(5);//Las armas del pistolero son: 5 la primera y las recompesas 6,7 y 8
+            _jugador=new Pistolero(arma);
+            //_jugador=new Pistolero(5);//Las armas del pistolero son: 5 la primera y las recompesas 6,7 y 8
         _hud = new Hud(contrarreloj);
+        
+        _jugador->setElixir(elixir);
+        _jugador->setPuntuacion(puntos);
         
         teclaPulsada = false;
         
@@ -360,7 +395,8 @@ namespace Crazy
     void EstadoJuego::SetMundo(b2World* world) {
         _mundo = world;
     }
-        Nivel* EstadoJuego::GetNivel() {
+        
+    Nivel* EstadoJuego::GetNivel() {
             return _level;
     }
 
