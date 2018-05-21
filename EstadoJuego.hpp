@@ -60,7 +60,7 @@ namespace Crazy
     private:
         static EstadoJuego* _pinstance;
         
-        bool hardcore;
+        bool normal;
         bool contrarreloj;
         Input* _input;
         bool teclaPulsada;

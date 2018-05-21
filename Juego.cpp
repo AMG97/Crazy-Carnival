@@ -27,7 +27,6 @@ namespace Crazy
         titulo = "Crazy Carnival";
         _ventana = Ventana::Instance();
         _ventana->CrearVentana(ancho, alto, titulo);
-        cout<<"Juego vale: "<<this<<endl;
         
         // Cargar fuentes
         recursos.CargarFuente("DK","resources/font/dk-face-your-fears.ttf");

@@ -40,7 +40,7 @@ namespace Crazy
     void EstadoJuego::Personaje(string jugador, unsigned short int weapon, bool modoHardcore, bool modoContrarreloj)
     {
         texturaJugador = jugador;
-        hardcore = modoHardcore;
+        normal = modoHardcore;
         contrarreloj = modoContrarreloj;
         arma = weapon;
         
@@ -51,8 +51,8 @@ namespace Crazy
     int puntos = 0;
     void EstadoJuego::getDatosGuardado(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
         *g_personaje = texturaJugador;
-        *g_arma = (int)arma;
-        *g_hardcore = hardcore;
+        *g_arma = _jugador->GetArma()->getTipoArma();
+        *g_hardcore = normal;
         *g_contrarreloj = contrarreloj;
         *g_elixir = _hud->getElixir();
         *g_puntos = _jugador->getPuntuacion();
@@ -63,7 +63,7 @@ namespace Crazy
         texturaJugador = *g_personaje;
         arma = *g_arma;
         lvl_n = *g_nivel;
-        hardcore = *g_hardcore;
+        normal = *g_hardcore;
         contrarreloj = *g_contrarreloj;
         elixir = *g_elixir;
         puntos = *g_puntos;
@@ -96,7 +96,6 @@ namespace Crazy
         
         teclaPulsada = false;
         
-        cout<<"Y ahora vale: "<<Juego::Instance()->_ventana<<endl;
         //_level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         
         /*reloj = new sf::Clock();
@@ -347,8 +346,6 @@ namespace Crazy
     
     void EstadoJuego::Dibujar(float tiempoActual)
     {
-        cout<<endl;
-        cout<<"Lo que le paso: "<<_juego<<endl;
         _juego->_ventana->Limpiar();
         _level->update();
         _level->draw("Fondo");
