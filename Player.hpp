@@ -12,6 +12,7 @@
 #define ATAQUE1 3
 #define ATAQUE2 4
 #define DESLIZARSE 6
+#define MORIR 7
 
 namespace Crazy
 {
@@ -22,7 +23,8 @@ namespace Crazy
         float GetEnfriamiento();
         float GetTotalEnfriamiento();
         void SetEnfriamiento(float e);
-        void SetElixir(bool v);
+        void setElixir(bool v);
+        bool getElixir();
         void addPuntuacion(int puntos);
         void setPuntuacion(int puntos);
         int getPuntuacion();
@@ -44,6 +46,7 @@ namespace Crazy
         short int GetAtaque1();
         short int GetAtaque2();
         short int GetDeslizarse();
+        short int GetMorir();
         void SetEstado(short int est);
         void CambiarDireccion();
         bool getDireccion();
@@ -54,6 +57,7 @@ namespace Crazy
         
         virtual void ModificarSprite()=0;
         float GetTAtque2();
+        virtual float GetTAtaque1()=0;
         virtual void Reposo(int n)=0;
         virtual void Update(vector<Enemigo*> e)=0;
         void SetVElocidadSalto(float v);

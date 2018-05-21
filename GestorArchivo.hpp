@@ -18,7 +18,7 @@ namespace Crazy{
         void guardarPartida();
         void guardarStats();
         void nuevoSlot();
-        void cargarPartida();
+        bool cargarPartida();
         bool exists(string nombre);
         void cargarStats();
         float getStat(string name);

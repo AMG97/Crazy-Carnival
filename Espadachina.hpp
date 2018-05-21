@@ -11,6 +11,7 @@
 #define ATAQUE1 3
 #define ATAQUE2 4
 #define DESLIZARSE 6
+#define MORIR 7
 
 namespace Crazy
 {
@@ -21,6 +22,9 @@ namespace Crazy
         void ModificarSprite();
         void Reposo(int n);  
         void Update(vector<Enemigo*> e);
+        void MoverY();
+        float GetTAtaque1();
+
 
     private:
 

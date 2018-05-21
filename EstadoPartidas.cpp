@@ -349,7 +349,10 @@ namespace Crazy
     
     void EstadoPartidas::CargarPartida()
     {
-        GestorArchivo::Instance()->cargarPartida();
+        if(GestorArchivo::Instance()->cargarPartida())
+            _juego->maquina.Anyadir(EstadoJuego::Instance(), true);
+        else
+            GestorArchivo::Instance()->borrarGuardado();
     }
     
     void EstadoPartidas::BorrarPartida()

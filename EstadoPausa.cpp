@@ -124,8 +124,6 @@ namespace Crazy
                     break;
             }
         }
-        
-        GestorArchivo::Instance()->guardarPartida();
     }
     
     void EstadoPausa::Dibujar(float tiempoActual)

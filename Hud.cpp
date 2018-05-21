@@ -148,6 +148,18 @@ namespace Crazy
         contador++;
     }
     
+    void Hud::CambiarTexturaContadorAumentar(int tiempo)
+    {
+        spriteTimerSeg1 += (tiempo/10)*9;
+        if(spriteTimerSeg1 > 45)
+        {
+            spriteTimerSeg1 -= 54;
+            spriteTimerMin += 9;
+            spContador[1].setTextureRect(sf::IntRect(107 + spriteTimerMin+9, 60, 9, 11));
+        }
+        spContador[3].setTextureRect(sf::IntRect(107 + spriteTimerSeg1, 60, 9, 11));
+    }
+    
     void Hud::ModificarVida(float vida, float totalVida){
         float porcentaje = vida/totalVida;
         spVida.setTextureRect(sf::IntRect(3*13, 2*20, porcentaje * 136, 4));
@@ -170,12 +182,14 @@ namespace Crazy
     
     void Hud::ElixirEncontrado(bool v){
         elixir = v;
-        _jugador->SetElixir(elixir);
+        _jugador->setElixir(elixir);
     }
     bool Hud::getElixir(){
         return elixir;
     }
-    
+    bool Hud::getContrarreloj(){
+        return contrarreloj;
+    }
     void Hud::SetAtaqueEspecial(bool ataque){
         ataqueEspecial = ataque;
     }
@@ -185,5 +199,10 @@ namespace Crazy
     }
     int Hud::getContador(){
         return contador;
+    }
+    void Hud::aumentarTiempo(int tiempo)
+    {
+        contador -= tiempo;
+        CambiarTexturaContadorAumentar(tiempo);
     }
 }

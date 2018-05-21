@@ -1,4 +1,4 @@
-#include "Espadachina.hpp"
+#include "Pistolero.hpp"
 #include "Motor.hpp"
 #include "EstadoJuego.hpp"
 
@@ -8,17 +8,17 @@ namespace Crazy
     {
         totalVida = 60.0f;
         vida = totalVida;
-        totalEnfriamiento = 30.0f;        
-        sprite.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
-        sprite.CambiarTextRect(0*60, 0*80, 60, 80);
+        totalEnfriamiento = 35.0f;        
+        sprite.CambiarTextura(_juego->recursos.GetTextura("Mambo"));
+        sprite.CambiarTextRect(0,0,35,40);
         sprite.CambiarOrigen(sprite.GetAncho()/2, sprite.GetAlto()/2);
         
         posIniX = 200;
-        posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-2-sprite.GetAlto();
+        posIniY =  EstadoJuego::Instance()->_level->getAltura()*48-48*3-28-sprite.GetAlto();
         
         sprite.CambiarPosicion(posIniX, posIniY);
         _arma=new Arma(arma,sprite.GetX(),sprite.GetY());
-        sprite.EscalarProporcion(1.5, 1.5);
+        sprite.EscalarProporcion(2.5, 2.5);
     }
     
     void Pistolero::ModificarSprite()
@@ -28,8 +28,9 @@ namespace Crazy
             switch(estado)
             {
                 case CORRER:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 65, 80);
-                    sprite.CambiarOrigen(65/2,80/2);
+                    sprite.CambiarTextRect(contadorSpriteCorrer*35, 40, 35, 40);
+                    if(contadorSpriteCorrer==0)
+                        sprite.CambiarOrigen(35/2,40/2);
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer++;
                     if(contadorSpriteCorrer == 6)
@@ -44,8 +45,9 @@ namespace Crazy
                 break;
                 
                 case CORRERATRAS:
-                    sprite.CambiarTextRect(contadorSpriteCorrer*65, 1*80, 60, 80);
-                    sprite.CambiarOrigen(60/2,80/2);
+                    sprite.CambiarTextRect(contadorSpriteCorrer*35, 40, 35, 40);
+                    if(contadorSpriteCorrer==0)
+                        sprite.CambiarOrigen(35/2,40/2);
                     _arma->ModificarSprite(estado,contadorSpriteCorrer,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteCorrer--;
                     if(contadorSpriteCorrer == -1)
@@ -60,8 +62,9 @@ namespace Crazy
                 break;
 
                 case SALTO:
-                    sprite.CambiarTextRect(contadorSpriteSalto*65, 560, 65, 90);
-                    sprite.CambiarOrigen(60/2,90/2);
+                    sprite.CambiarTextRect(contadorSpriteSalto*35, 120, 35, 45);
+                    if(contadorSpriteSalto==0)
+                        sprite.CambiarOrigen(35/2,45/2);
                     _arma->ModificarSprite(estado,contadorSpriteSalto,sprite.GetX(),sprite.GetY(),angulo);
                     if((contadorSpriteSalto==0 && velSalto>-9 ) || (contadorSpriteSalto==1 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+48*2)))
                         contadorSpriteSalto++;
@@ -77,17 +80,18 @@ namespace Crazy
                 break;
                 
                 case DESLIZARSE:
-                    sprite.CambiarTextRect(65, 560,65,90);
-                    sprite.CambiarOrigen(60/2,90/2);
-                    _arma->ModificarSprite(SALTO,1,sprite.GetX(),sprite.GetY(),angulo);
+                    sprite.CambiarTextRect(70, 120,35,40);
+                    sprite.CambiarOrigen(35/2,40/2);
+                    _arma->ModificarSprite(SALTO,2,sprite.GetX(),sprite.GetY(),angulo);
                 break;
 
                 case REPOSO:
-                    sprite.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
-                    sprite.CambiarOrigen(60/2,80/2);
+                    sprite.CambiarTextRect(contadorSpriteReposo*35, 0, 35, 40);
+                    if(contadorSpriteReposo==0)
+                        sprite.CambiarOrigen(35/2,40/2);
                     _arma->ModificarSprite(estado,contadorSpriteReposo,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteReposo++;
-                    if(contadorSpriteReposo == 8)
+                    if(contadorSpriteReposo == 3)
                     {
                         contadorSpriteReposo = 0;
                     }
@@ -96,15 +100,20 @@ namespace Crazy
                 case ATAQUE1:
                         if(contadorSpriteAtaque1==0)
                         {
-                            sprite.CambiarOrigen(100/2,90/2);
-                            //sprite.Mover(0,-22);
+                            sprite.CambiarOrigen(50/2,40/2);
                             golpear=true;
                         }
-                        sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 80);
-                        sprite.CambiarOrigen(100/2,80/2);
+                        sprite.CambiarTextRect(contadorSpriteAtaque1*50, 80, 50, 40);
+                        //sprite.CambiarOrigen(100/2,80/2);
                         _arma->ModificarSprite(estado,contadorSpriteAtaque1,sprite.GetX(),sprite.GetY(),angulo);
-                        contadorSpriteAtaque1++;                        
-                        if(contadorSpriteAtaque1==6)
+                        contadorSpriteAtaque1++;
+                        if(contadorSpriteAtaque1==3 && tAtaque1.GetSegundos()>1)
+                        {
+                            _arma->Disparar(angulo);
+                            cout<<tAtaque1.GetSegundos()<<endl;
+                            tAtaque1.ReiniciarSegundos();
+                        }                        
+                        if(contadorSpriteAtaque1==5)
                         {
                             Reposo(1);
                         }
@@ -113,7 +122,7 @@ namespace Crazy
                 case ATAQUE2:
                     if(contadorSpriteAtaque2==0)
                     {
-                        sprite.CambiarOrigen(100/2, 80/2);
+                        sprite.CambiarOrigen(50/2, 40/2);
                         //sprite.Mover(0,-15);
                         if(AtaqueEspecialActivado())
                         {
@@ -122,16 +131,18 @@ namespace Crazy
                             tAtaque2.ReiniciarSegundos();
                         }
                     }
-                    sprite.CambiarTextRect(contadorSpriteAtaque2*100,360,100,80);
+                    sprite.CambiarTextRect(contadorSpriteAtaque2*50,80,50,40);
                     _arma->ModificarSprite(estado,contadorSpriteAtaque2,sprite.GetX(),sprite.GetY(),angulo);
                     contadorSpriteAtaque2++;
                     if(contadorSpriteAtaque2==3)
                     {
                         _arma->Disparar(angulo);
+                        _arma->Disparar(angulo+5);
+                        _arma->Disparar(angulo-5);
                     }
-                    if(contadorSpriteAtaque2==9)
+                    if(contadorSpriteAtaque2==5)
                     {
-                        Reposo(2);
+                        Reposo(1);
                     }
                     
                 break;
@@ -139,19 +150,22 @@ namespace Crazy
             }
             relojAnim.ReiniciarSegundos();
         }
+        if(estado == MORIR){
+            sprite.CambiarTextRect(0, 120, 35, 45);
+            sprite.CambiarOrigen(35/2,45/2);
+            _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),angulo);
+            _arma->GetSprite().CambiarColorRojo();
+        }
     }
     
     void Pistolero::Reposo(int n){
-        sprite.CambiarTextRect(0,0,60,80);
-        sprite.CambiarOrigen(60/2,80/2);
+        sprite.CambiarTextRect(0,0,35,40);
+        sprite.CambiarOrigen(35/2,40/2);
         estado=REPOSO;
         if(n==1)
         {
             contadorSpriteAtaque1 = 0;
-        }
-        else if(n==2)
-        {
-            contadorSpriteAtaque2=0;
+            contadorSpriteAtaque2= 0;
         }
         _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),0);
     }
@@ -178,7 +192,7 @@ namespace Crazy
         if(abs(velocidad)<=0.5)
             velocidad=0;
         MoverX(velocidad);
-        if(contadorSpriteAtaque1==3 && golpear){
+        /*if(contadorSpriteAtaque1==3 && golpear){
             for(int j=0;j<e.size();j++){
                 if(sprite.Interseccion(e[j]->GetSprite()))
                 {
@@ -187,7 +201,7 @@ namespace Crazy
                     golpear=false;
                 }
             }
-        }
+        }*/
         
         if(rojo && relojrojo.GetSegundos()<=0.2)
             sprite.CambiarColorRojo();
@@ -225,6 +239,42 @@ namespace Crazy
         }
         
     }
+    
+    
+    void Pistolero::MoverY(){
+        if(!EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()+sprite.GetAlto()/2) && velSalto==0){
+            if(estado==DESLIZARSE)
+                caida+=0.2;
+            else
+                caida+=0.4;
+            sprite.Mover(0,caida);
+        }else{
+            if(caida!=0){
+                caida=0;
+                velSalto=0;
+                sprite.CambiarPosicion(sprite.GetX(),floor(sprite.GetY()/48)*48+28);
+            }
+        }
+        
+        if((velSalto!=0 && estado!=DESLIZARSE) || (estado==DESLIZARSE && velSalto<0))
+        {
+            velSalto=velSalto+0.5;
+        }
+        if(velSalto>4)
+            velSalto=4;
+        if(sprite.GetY()-sprite.GetAlto()/2-20>0){
+            if(velSalto<0 && EstadoJuego::Instance()->_level->ComprobarColision(sprite.GetX(),sprite.GetY()-sprite.GetAlto()/2+10)){
+                velSalto=0;
+            }
+        }else{
+            velSalto=0;
+        }
+        sprite.Mover(0,velSalto);
+    }
+    float Pistolero::GetTAtaque1() {
+            return tAtaque1.GetSegundos();
+    }
+
 
 
 }

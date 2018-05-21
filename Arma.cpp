@@ -32,11 +32,34 @@ namespace Crazy
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Espada4"));
                 danyo=12;
             break;
+            case 5:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Pistola5"));
+                danyo=9;
+            break;
+            case 6:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Pistola6"));
+                danyo=10.5;
+            break;
+            case 7:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Pistola7"));
+                danyo=11.5;
+            break;
+            case 8:
+                sprite.CambiarTextura(_juego->recursos.GetTextura("Pistola8"));
+                danyo=11;
+            break;
         }
-        sprite.CambiarTextRect(0,0,60,80);
-        sprite.CambiarOrigen(60/2,80/2);
-        sprite.CambiarPosicion(x,y);
-        sprite.EscalarProporcion(1.5, 1.5);
+        if(tipo<5){
+            sprite.CambiarTextRect(0,0,60,80);
+            sprite.CambiarOrigen(60/2,80/2);
+            sprite.CambiarPosicion(x,y);
+            sprite.EscalarProporcion(1.5, 1.5);
+        }else{
+            sprite.CambiarTextRect(0,0,35,40);
+            sprite.CambiarOrigen(35/2,40/2);
+            sprite.CambiarPosicion(x,y);
+            sprite.EscalarProporcion(2.5, 2.5);
+        }
     }
 
     Arma::Arma(const Arma& orig) {
@@ -55,34 +78,69 @@ namespace Crazy
     
     void Arma::ModificarSprite(int estado, int n, int x, int y, float angulo)
     {
-                sprite.CambiarPosicion(x,y);
-        switch (estado)
-        {
-            case REPOSO:
-                sprite.CambiarTextRect(n*60,0,60,80);
-                sprite.CambiarOrigen(30, 40);
-            break;
-            
-            case SALTO:
-                sprite.CambiarTextRect(n*65,7*80,65,90);
-                sprite.CambiarOrigen(65/2, 45);
-            break;
-            
-            case CORRERATRAS:
-            case CORRER:
-                sprite.CambiarTextRect(n*65,80,65,65);
-                sprite.CambiarOrigen(65/2, 40);
-            break;
-            
-            case ATAQUE2:
-                sprite.CambiarTextRect(n*100,360,100,80);
-                sprite.CambiarOrigen(50, 40);
-            break;
-            
-            case ATAQUE1:
-                    sprite.CambiarTextRect(n*100,150,100,90);
-                    sprite.CambiarOrigen(50, 45);
-            break;
+        sprite.CambiarPosicion(x,y);
+        if(tipo<5){
+            switch (estado)
+            {
+                case REPOSO:
+                    sprite.CambiarTextRect(n*60,0,60,80);
+                    sprite.CambiarOrigen(30, 40);
+                break;
+
+                case SALTO:
+                    sprite.CambiarTextRect(n*65,7*80,65,90);
+                    sprite.CambiarOrigen(65/2, 45);
+                break;
+
+                case CORRERATRAS:
+                case CORRER:
+                    sprite.CambiarTextRect(n*65,80,65,65);
+                    sprite.CambiarOrigen(65/2, 40);
+                break;
+
+                case ATAQUE2:
+                    sprite.CambiarTextRect(n*100,360,100,80);
+                    sprite.CambiarOrigen(50, 40);
+                break;
+
+                case ATAQUE1:
+                        sprite.CambiarTextRect(n*100,150,100,90);
+                        sprite.CambiarOrigen(50, 45);
+                break;
+                case MORIR:
+                        sprite.CambiarTextRect(n*100,280,60,80);
+                        sprite.CambiarOrigen(30, 40);
+                break;
+            }
+        }else{
+            switch (estado)
+            {
+                case REPOSO:
+                    sprite.CambiarTextRect(n*35,0,35,40);
+                    sprite.CambiarOrigen(35/2, 20);
+                break;
+
+                case SALTO:
+                    sprite.CambiarTextRect(n*35,120,35,45);
+                    sprite.CambiarOrigen(35/2, 45/2);
+                break;
+
+                case CORRERATRAS:
+                case CORRER:
+                    sprite.CambiarTextRect(n*35,40,35,40);
+                    sprite.CambiarOrigen(35/2, 20);
+                break;
+                
+                case ATAQUE1:
+                case ATAQUE2:
+                    sprite.CambiarTextRect(n*50,80,50,40);
+                    sprite.CambiarOrigen(50/2, 20);
+                break;
+                case MORIR:
+                        sprite.CambiarTextRect(n*100,120,35,45);
+                        sprite.CambiarOrigen(35/2, 45/2);
+                break;
+            }
         }
     }
     
@@ -130,6 +188,11 @@ namespace Crazy
                 BorrarProyectil(i);
             }
         }
+    }
+    
+    SpriteM Arma::GetSprite()
+    {
+        return sprite;
     }
     
     void Arma::BorrarProyectil(int i)

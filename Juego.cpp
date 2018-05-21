@@ -27,6 +27,7 @@ namespace Crazy
         titulo = "Crazy Carnival";
         _ventana = Ventana::Instance();
         _ventana->CrearVentana(ancho, alto, titulo);
+        cout<<"Juego vale: "<<this<<endl;
         
         // Cargar fuentes
         recursos.CargarFuente("DK","resources/font/dk-face-your-fears.ttf");
@@ -52,7 +53,12 @@ namespace Crazy
         recursos.CargarTextura("Conejo","resources/BossConejo.png");
         recursos.CargarTextura("Zanahoria","resources/zanahoria.png");
         //recursos.CargarTextura("TipoDuro","resources/tipoDuro.png");
-        
+        recursos.CargarTextura("Mambo","resources/Mambo.png");
+        recursos.CargarTextura("Mambo-old","resources/Mambo-old.png");
+        recursos.CargarTextura("Pistola5","resources/Pistola5.png");
+        recursos.CargarTextura("Pistola6","resources/Pistola6.png");
+        recursos.CargarTextura("Pistola7","resources/Pistola7.png");
+        recursos.CargarTextura("Pistola8","resources/Pistola8.png");
         // Temporal
         recursos.CargarTextura("Ayuda","resources/ayuda.png");
         

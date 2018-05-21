@@ -5,6 +5,8 @@ namespace Crazy
     EstadoJuego::EstadoJuego()
     {
         arma = 0;
+        lvl_n = 1;
+        texturaJugador = "";
     }
     
     EstadoJuego* EstadoJuego::_pinstance=0;
@@ -70,14 +72,14 @@ namespace Crazy
     
     void EstadoJuego::Init()
     {
+        _juego = Juego::Instance();
         _mundo = new b2World(b2Vec2(0.0, 9.8));
         
         _input = new Input();
         _level = new Nivel();
         
-        if(arma==0){
-            lvl_n=1;arma = 1;texturaJugador="Espadachina";contrarreloj=false;hardcore=false;
-            cout<<"entra"<<endl;
+        if(arma==1){
+            lvl_n=1;
         }
         
         _level->cargarNivel(lvl_n);
@@ -86,13 +88,15 @@ namespace Crazy
             _jugador = new Espadachina(arma);
         else
             _jugador=new Pistolero(arma);
+            //_jugador=new Pistolero(5);//Las armas del pistolero son: 5 la primera y las recompesas 6,7 y 8
         _hud = new Hud(contrarreloj);
         
-        _jugador->SetElixir(elixir);
+        _jugador->setElixir(elixir);
         _jugador->setPuntuacion(puntos);
         
         teclaPulsada = false;
         
+        cout<<"Y ahora vale: "<<Juego::Instance()->_ventana<<endl;
         //_level->setPosCamara(_jugador->GetPosX(), _jugador->GetPosY());
         
         /*reloj = new sf::Clock();
@@ -223,25 +227,42 @@ namespace Crazy
             if(_input->GetPosicionRatonX()>=_level->getCamara()->getX()-_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonX()<=_level->getCamara()->getX()+_level->getCamara()->getWidth()/2 && _input->GetPosicionRatonY()>=_level->getCamara()->getY()-_level->getCamara()->getHeight()/2 && _input->GetPosicionRatonY()<=_level->getCamara()->getY()+_level->getCamara()->getHeight()/2){
                 if (_input->RatonIzq())
                 {
-                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse())
-                    {
-                        _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
-                        _jugador->SetEstado(_jugador->GetAtaque1());
+                    if(texturaJugador=="Espadachina"){
+                        if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse())
+                        {
+                            _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque1());
+                        }
+                    }else{
+                        if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && estado!=_jugador->GetDeslizarse() && _jugador->GetTAtaque1()>1)
+                        {
+                            _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque1());
+                        }
                     }
-                    //cout << "Angulo"<<_jugador->GetAngulo()<<endl;
+
                 }
 
                 if (_input->RatonDer())
                 {
-                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
-                    {
-                        _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
-                        _jugador->SetEstado(_jugador->GetAtaque2());
-                        if(_jugador->AtaqueEspecialActivado()){
-                            _hud->Parpadear(false);
-                            _hud->EnfriamientoVacio();
-                        }
+                    if(texturaJugador=="Espadachina"){
+                        if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
+                        {
+                            _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque2());
+                            if(_jugador->AtaqueEspecialActivado()){
+                                _hud->Parpadear(false);
+                                _hud->EnfriamientoVacio();
+                            }
 
+                        }
+                    }else if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<2.5)){
+                       _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque2());
+                            if(_jugador->AtaqueEspecialActivado()){
+                                _hud->Parpadear(false);
+                                _hud->EnfriamientoVacio();
+                            } 
                     }
                 }
             }
@@ -254,12 +275,45 @@ namespace Crazy
     }
     
     void EstadoJuego::Actualizar(float tiempoActual)
-    {
-        
+    { 
         if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
-            _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
+                _jugador->SetEstado(_jugador->GetMorir());
+                _jugador->ModificarSprite();
+                _jugador->Dibujar();
+            if(_jugador->getElixir() && _hud->getContrarreloj() && _hud->getContador() >= 150)
+            {
+                _jugador->SetVida(_jugador->GetTotalVida());
+                _jugador->SetEnfriamiento(0.0);
+                _hud->aumentarTiempo(60);
+                _hud->ElixirEncontrado(false);
+            }
+            else if(_jugador->getElixir() && _hud->getContrarreloj() && _hud->getContador() >= 120)
+            {
+                _jugador->SetVida(_jugador->GetTotalVida());
+                _jugador->SetEnfriamiento(0.0);
+                _hud->aumentarTiempo(30);
+                _hud->ElixirEncontrado(false);
+            }
+            else if(_jugador->getElixir())
+            {
+                _jugador->SetVida(_jugador->GetTotalVida());
+                _jugador->SetEnfriamiento(0.0);
+                _hud->ElixirEncontrado(false);
+            }
+            else{
+                _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
+            }
         }
-                
+        else if(_jugador->GetEstado() == _jugador->GetMorir() && contador >= 8)
+        {
+            _jugador->SetEstado(_jugador->GetReposo());
+            contador = 0;
+        }
+        else if(_jugador->GetEstado() == _jugador->GetMorir() && contador < 8)
+        {
+            contador++;
+        }
+                        
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetDeslizarse())
         {
             
@@ -293,6 +347,8 @@ namespace Crazy
     
     void EstadoJuego::Dibujar(float tiempoActual)
     {
+        cout<<endl;
+        cout<<"Lo que le paso: "<<_juego<<endl;
         _juego->_ventana->Limpiar();
         _level->update();
         _level->draw("Fondo");
