@@ -209,15 +209,24 @@ namespace Crazy
 
                 if (_input->RatonDer())
                 {
-                    if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
-                    {
-                        _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
-                        _jugador->SetEstado(_jugador->GetAtaque2());
-                        if(_jugador->AtaqueEspecialActivado()){
-                            _hud->Parpadear(false);
-                            _hud->EnfriamientoVacio();
-                        }
+                    if(texturaJugador=="Espadachina"){
+                        if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<4))
+                        {
+                            _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque2());
+                            if(_jugador->AtaqueEspecialActivado()){
+                                _hud->Parpadear(false);
+                                _hud->EnfriamientoVacio();
+                            }
 
+                        }
+                    }else if(estado!=_jugador->GetAtaque1() && estado!=_jugador->GetAtaque2() && (_jugador->AtaqueEspecialActivado() || _jugador->GetTAtque2()<2.5)){
+                       _jugador->SetAngulo(_input->GetPosicionRatonX(),_input->GetPosicionRatonY());
+                            _jugador->SetEstado(_jugador->GetAtaque2());
+                            if(_jugador->AtaqueEspecialActivado()){
+                                _hud->Parpadear(false);
+                                _hud->EnfriamientoVacio();
+                            } 
                     }
                 }
             }
