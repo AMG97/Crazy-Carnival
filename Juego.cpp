@@ -57,7 +57,10 @@ namespace Crazy
         recursos.CargarTextura("Pistola5","resources/Pistola5.png");
         recursos.CargarTextura("Pistola6","resources/Pistola6.png");
         recursos.CargarTextura("Pistola7","resources/Pistola7.png");
-        recursos.CargarTextura("Pistola8","resources/Pistola8.png");
+        
+        //Recompensas
+        recursos.CargarTextura("Recompensas","resources/recompensas.png");
+        
         // Temporal
         recursos.CargarTextura("Ayuda","resources/ayuda.png");
         
