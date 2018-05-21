@@ -85,6 +85,7 @@ namespace Crazy
         
         short int estado;
         Reloj tAtaque2;
+        Reloj tInvulnerable;
         bool Atacado2;
         bool atacando;
         

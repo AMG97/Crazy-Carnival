@@ -227,7 +227,10 @@ namespace Crazy
     }
     void Player::AumentarContadorInvulnerable()
     {
-        contadorInvulnerable++;
+        if(tInvulnerable.GetSegundos() >= 1){
+            contadorInvulnerable++;
+            tInvulnerable.ReiniciarSegundos();
+        }
     }
     
     bool Player::isAttacking() {
@@ -235,6 +238,7 @@ namespace Crazy
     }
     void Player::setInvulnerable(bool esInvulnerable)
     {
+        tInvulnerable.ReiniciarSegundos();
         invulnerable = esInvulnerable;
         if(invulnerable)
             sprite.CambiarColorAmarillo();
