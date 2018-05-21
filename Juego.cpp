@@ -41,6 +41,7 @@ namespace Crazy
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
         recursos.CargarTextura("Espada1","resources/espada1.png");
         recursos.CargarTextura("Espada2","resources/espada2.png");
+        recursos.CargarTextura("Espadas","resources/espadas.png");
         recursos.CargarTextura("Enemigo-Pistola1","resources/enemigo-pistola.png");
         recursos.CargarTextura("Puñal","resources/puñal.png");
         recursos.CargarTextura("Bala","resources/bala.png");
@@ -52,7 +53,6 @@ namespace Crazy
         recursos.CargarTextura("Ayuda","resources/ayuda.png");
         
         maquina.Anyadir(EstadoMenu::Instance());
-        //maquina.Anyadir(EstadoJuego::Instance());
         
         while (_ventana->EstaAbierta())
         {

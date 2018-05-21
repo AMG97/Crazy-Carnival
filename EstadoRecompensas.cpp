@@ -46,26 +46,23 @@ namespace Crazy
         t_titulo.CentrarOrigen();
         t_titulo.CambiarPosicion((_juego->GetAncho()/2), 75);
         
-        r1.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
-        r1.CambiarTextRect(0*60, 0*80, 60, 80);
-        r1.CambiarOrigen(r1.GetAncho()/2, r1.GetAlto()/2);
+        r1.CambiarTextura(_juego->recursos.GetTextura("Espadas"));
+        r1.CambiarTextRect(0*72, 0*72, 72, 72);
+        r1.CambiarOrigen(72/2,72/2);
         r1.CambiarPosicion((_juego->GetAncho()/2)-separacion, t_titulo.GetY()+altura);
         r1.EscalarProporcion(proporcion, proporcion);
-        r1.CambiarColorAmarillo();
         
-        r2.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
-        r2.CambiarTextRect(0*60, 0*80, 60, 80);
-        r2.CambiarOrigen(r2.GetAncho()/2, r2.GetAlto()/2);
+        r2.CambiarTextura(_juego->recursos.GetTextura("Espadas"));
+        r2.CambiarTextRect(1*72, 0*72, 72, 72);
+        r2.CambiarOrigen(72/2,72/2);
         r2.CambiarPosicion((_juego->GetAncho()/2), t_titulo.GetY()+altura);
         r2.EscalarProporcion(proporcion, proporcion);
-        r2.CambiarColorMagenta();
         
-        r3.CambiarTextura(_juego->recursos.GetTextura("Espadachina"));
-        r3.CambiarTextRect(0*60, 0*80, 60, 80);
-        r3.CambiarOrigen(r3.GetAncho()/2, r3.GetAlto()/2);
+        r3.CambiarTextura(_juego->recursos.GetTextura("Espadas"));
+        r3.CambiarTextRect(2*72, 0*72, 72, 72);
+        r3.CambiarOrigen(72/2,72/2);
         r3.CambiarPosicion((_juego->GetAncho()/2)+separacion, t_titulo.GetY()+altura);
         r3.EscalarProporcion(proporcion, proporcion);
-        r3.CambiarColorVerde();
         
         flecha.CambiarTextura(_juego->recursos.GetTextura("Flecha"));
         flecha.CambiarOrigen();
@@ -155,30 +152,40 @@ namespace Crazy
     
     void EstadoRecompensas::Animar()
     {
-        if (relojAnim.GetSegundos() >= 0.1f)
+        if (relojAnim.GetSegundos() >= 0.11f)
         {
             switch(opcion)
             {
                 case R1:
-                    r1.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
-                    r1.CambiarOrigen(60/2,80/2);
+                    r1.ColorTransparente();
+                    r2.CambiarColorBlanco();
+                    r3.CambiarColorBlanco();
                     break;
                 case R2:
-                    r2.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
-                    r2.CambiarOrigen(60/2,80/2);
+                    r2.ColorTransparente();
+                    r1.CambiarColorBlanco();
+                    r3.CambiarColorBlanco();
                     break;
                 case R3:
-                    r3.CambiarTextRect(contadorSpriteReposo*60, 0*80, 60, 80);
-                    r3.CambiarOrigen(60/2,80/2);
+                    r3.ColorTransparente();
+                    r1.CambiarColorBlanco();
+                    r2.CambiarColorBlanco();
                     break;
             }
-            
-            contadorSpriteReposo++;
-            if(contadorSpriteReposo == 8)
-            {
-                contadorSpriteReposo = 0;
-            }
             relojAnim.ReiniciarSegundos();
+        } else {
+            switch(opcion)
+            {
+                case R1:
+                    r1.CambiarColorBlanco();
+                    break;
+                case R2:
+                    r2.CambiarColorBlanco();
+                    break;
+                case R3:
+                    r3.CambiarColorBlanco();
+                    break;
+            }
         }
     }
     
