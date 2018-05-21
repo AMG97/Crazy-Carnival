@@ -107,6 +107,10 @@ namespace Crazy
                         sprite.CambiarTextRect(n*100,150,100,90);
                         sprite.CambiarOrigen(50, 45);
                 break;
+                case MORIR:
+                        sprite.CambiarTextRect(n*100,280,60,80);
+                        sprite.CambiarOrigen(30, 40);
+                break;
             }
         }else{
             switch (estado)
@@ -131,6 +135,10 @@ namespace Crazy
                 case ATAQUE2:
                     sprite.CambiarTextRect(n*50,80,50,40);
                     sprite.CambiarOrigen(50/2, 20);
+                break;
+                case MORIR:
+                        sprite.CambiarTextRect(n*100,120,35,45);
+                        sprite.CambiarOrigen(35/2, 45/2);
                 break;
             }
         }
@@ -180,6 +188,11 @@ namespace Crazy
                 BorrarProyectil(i);
             }
         }
+    }
+    
+    SpriteM Arma::GetSprite()
+    {
+        return sprite;
     }
     
     void Arma::BorrarProyectil(int i)

@@ -1,4 +1,4 @@
-#include "Espadachina.hpp"
+#include "Pistolero.hpp"
 #include "Motor.hpp"
 #include "EstadoJuego.hpp"
 
@@ -149,6 +149,12 @@ namespace Crazy
                     
             }
             relojAnim.ReiniciarSegundos();
+        }
+        if(estado == MORIR){
+            sprite.CambiarTextRect(0, 120, 35, 45);
+            sprite.CambiarOrigen(35/2,45/2);
+            _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),angulo);
+            _arma->GetSprite().CambiarColorRojo();
         }
     }
     

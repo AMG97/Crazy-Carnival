@@ -8,6 +8,7 @@
 #define ATAQUE1  3
 #define ATAQUE2  4
 #define CORRERATRAS 5
+#define MORIR 7
 
 namespace Crazy
 {
@@ -25,6 +26,7 @@ namespace Crazy
         void ModificarSprite(int estado, int n, int x, int y, float angulo);
         void Disparar(float angulo);
         float GetDanyo();
+        SpriteM GetSprite();
         void CambiarDireccion();
         void Update(float x, float y, Player *p);
         void Update(float x, float y, vector<Enemigo*>e, Player *p);

@@ -239,9 +239,11 @@ namespace Crazy
     }
     
     void EstadoJuego::Actualizar(float tiempoActual)
-    {
-        
+    { 
         if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
+                _jugador->SetEstado(_jugador->GetMorir());
+                _jugador->ModificarSprite();
+                _jugador->Dibujar();
             if(_jugador->getElixir() && _hud->getContrarreloj() && _hud->getContador() >= 150)
             {
                 _jugador->SetVida(_jugador->GetTotalVida());
@@ -266,7 +268,16 @@ namespace Crazy
                 _juego->maquina.Anyadir(EstadoMuerte::Instance(), true);
             }
         }
-                
+        else if(_jugador->GetEstado() == _jugador->GetMorir() && contador >= 8)
+        {
+            _jugador->SetEstado(_jugador->GetReposo());
+            contador = 0;
+        }
+        else if(_jugador->GetEstado() == _jugador->GetMorir() && contador < 8)
+        {
+            contador++;
+        }
+                        
         if(_jugador->GetEstado()!=_jugador->GetAtaque1() && _jugador->GetEstado()!=_jugador->GetAtaque2() && _jugador->GetEstado()!=_jugador->GetDeslizarse())
         {
             

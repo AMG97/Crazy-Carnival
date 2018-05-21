@@ -135,9 +135,14 @@ namespace Crazy
                     }
                     
                 break;
-                    
             }
             relojAnim.ReiniciarSegundos();
+        }
+        if(estado == MORIR){
+            sprite.CambiarTextRect(0, 280, 60, 80);
+            sprite.CambiarOrigen(60/2,80/2);
+            _arma->ModificarSprite(estado,0,sprite.GetX(),sprite.GetY(),angulo);
+            _arma->GetSprite().CambiarColorRojo();
         }
     }
     

@@ -11,6 +11,7 @@
 #define ATAQUE1 3
 #define ATAQUE2 4
 #define DESLIZARSE 6
+#define MORIR 7
 
 namespace Crazy
 {

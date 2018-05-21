@@ -132,6 +132,9 @@ namespace Crazy
         return DESLIZARSE;
     }
     
+    short int Player::GetMorir(){
+        return MORIR;
+    }
     void Player::SetEstado(short int est)
     {
         estado = est;

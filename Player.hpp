@@ -12,6 +12,7 @@
 #define ATAQUE1 3
 #define ATAQUE2 4
 #define DESLIZARSE 6
+#define MORIR 7
 
 namespace Crazy
 {
@@ -45,6 +46,7 @@ namespace Crazy
         short int GetAtaque1();
         short int GetAtaque2();
         short int GetDeslizarse();
+        short int GetMorir();
         void SetEstado(short int est);
         void CambiarDireccion();
         bool getDireccion();
