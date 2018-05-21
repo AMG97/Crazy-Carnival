@@ -93,13 +93,11 @@ namespace Crazy{
         doc_save = TiXmlDocument(("saves/Save"+to_string(slot)+".xml").c_str());
         
         string personaje;
-        int arma, puntos;
+        int arma, puntos, nivel;
         bool hardcore, contrarreloj, elixir;
         
         
-        EstadoJuego::Instance()->getDatosGuardado(&personaje,&arma,&hardcore,&contrarreloj,&elixir,&puntos);
-        
-        cout<<"Entra"<<endl;
+        EstadoJuego::Instance()->getDatosGuardado(&personaje,&arma,&nivel,&hardcore,&contrarreloj,&elixir,&puntos);
         
         TiXmlElement xml_player("player");
         doc_save.LinkEndChild(&xml_player);
@@ -109,6 +107,7 @@ namespace Crazy{
         xml_player.SetAttribute("contrarreloj",contrarreloj);
         xml_player.SetAttribute("elixir",elixir);
         xml_player.SetAttribute("puntos",puntos);
+        xml_player.SetAttribute("nivel",nivel);
         
         
             
@@ -125,8 +124,20 @@ namespace Crazy{
             cerr<<"Ha habido alguna clase de error al guardar Stats"<<endl;
     }
 
-    bool GestorArchivo::cargarPartida() {
+    void GestorArchivo::cargarPartida() {
+        TiXmlElement* xml_player = doc_save.FirstChildElement("player");
         
+        string personaje; personaje = xml_player->Attribute("personaje");
+        int arma; xml_player->QueryIntAttribute("arma",&arma);
+        int puntos; xml_player->QueryIntAttribute("puntos",&puntos);
+        int nivel; xml_player->QueryIntAttribute("nivel",&nivel);
+        bool hardcore; xml_player->QueryBoolAttribute("hardcore",&hardcore);
+        bool contrarreloj; xml_player->QueryBoolAttribute("contrarreloj",&contrarreloj);
+        bool elixir; xml_player->QueryBoolAttribute("elixir",&elixir);
+        
+        
+        
+        EstadoJuego::Instance()->cargarDatosGuardados(&personaje,&arma,&nivel,&hardcore,&contrarreloj,&elixir,&puntos);
     }
 
 

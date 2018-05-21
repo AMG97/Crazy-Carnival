@@ -327,13 +327,13 @@
       </item>
       <item path="BossCangrejo.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Collision.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Collision.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="BossConejo.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BossConejo.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Collision.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Collision.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Comportamiento.cpp" ex="false" tool="1" flavor2="0">
       </item>

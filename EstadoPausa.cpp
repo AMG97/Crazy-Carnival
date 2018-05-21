@@ -1,5 +1,6 @@
 #include "EstadoPausa.hpp"
 #include "EstadoJuego.hpp"
+#include "GestorArchivo.hpp"
 
 namespace Crazy
 {
@@ -123,6 +124,8 @@ namespace Crazy
                     break;
             }
         }
+        
+        GestorArchivo::Instance()->guardarPartida();
     }
     
     void EstadoPausa::Dibujar(float tiempoActual)

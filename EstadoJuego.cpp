@@ -4,7 +4,7 @@ namespace Crazy
 {
     EstadoJuego::EstadoJuego()
     {
-        _juego = Juego::Instance();
+        arma = 0;
     }
     
     EstadoJuego* EstadoJuego::_pinstance=0;
@@ -45,15 +45,28 @@ namespace Crazy
         // TODO: manejar esto:
         // modoNormal y modoContrareloj
     }
-    
-    void EstadoJuego::getDatosGuardado(string* g_personaje, int* g_arma, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
+    bool elixir = false;
+    int puntos = 0;
+    void EstadoJuego::getDatosGuardado(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
         *g_personaje = texturaJugador;
         *g_arma = (int)arma;
         *g_hardcore = hardcore;
         *g_contrarreloj = contrarreloj;
         *g_elixir = _hud->getElixir();
         *g_puntos = _jugador->getPuntuacion();
+        *g_nivel = lvl_n;
     }
+        
+    void EstadoJuego::cargarDatosGuardados(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos) {
+        texturaJugador = *g_personaje;
+        arma = *g_arma;
+        lvl_n = *g_nivel;
+        hardcore = *g_hardcore;
+        contrarreloj = *g_contrarreloj;
+        elixir = *g_elixir;
+        puntos = *g_puntos;
+    }
+
     
     void EstadoJuego::Init()
     {
@@ -61,13 +74,22 @@ namespace Crazy
         
         _input = new Input();
         _level = new Nivel();
-        lvl_n=1;
+        
+        if(arma==0){
+            lvl_n=1;arma = 1;texturaJugador="Espadachina";contrarreloj=false;hardcore=false;
+            cout<<"entra"<<endl;
+        }
+        
         _level->cargarNivel(lvl_n);
+        
         if(texturaJugador=="Espadachina")
-            _jugador = new Espadachina(1);
+            _jugador = new Espadachina(arma);
         else
-            _jugador=new Pistolero(2);
+            _jugador=new Pistolero(arma);
         _hud = new Hud(contrarreloj);
+        
+        _jugador->SetElixir(elixir);
+        _jugador->setPuntuacion(puntos);
         
         teclaPulsada = false;
         
@@ -81,7 +103,6 @@ namespace Crazy
         tiempoDesplazamiento = new sf::Time();*/
         inercia = false;
         contador = 0;
-        arma = 1;
     }
     
     void EstadoJuego::ManejarEventos()
@@ -313,7 +334,8 @@ namespace Crazy
     void EstadoJuego::SetMundo(b2World* world) {
         _mundo = world;
     }
-        Nivel* EstadoJuego::GetNivel() {
+        
+    Nivel* EstadoJuego::GetNivel() {
             return _level;
     }
 

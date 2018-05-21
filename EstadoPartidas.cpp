@@ -349,7 +349,7 @@ namespace Crazy
     
     void EstadoPartidas::CargarPartida()
     {
-        cout<<"Cargar"<<endl;
+        GestorArchivo::Instance()->cargarPartida();
     }
     
     void EstadoPartidas::BorrarPartida()

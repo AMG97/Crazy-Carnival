@@ -49,7 +49,8 @@ namespace Crazy
         void Dibujar(float tiempoActual);
         void Pausar();
         void Reanudar();
-        void getDatosGuardado(string* g_personaje, int* g_arma, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos);
+        void getDatosGuardado(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos);
+        void cargarDatosGuardados(string* g_personaje, int* g_arma, int* g_nivel, bool* g_hardcore, bool* g_contrarreloj, bool* g_elixir, int* g_puntos);
         b2World* GetMundo();
         Nivel* GetNivel();
         void SetMundo(b2World* world);
