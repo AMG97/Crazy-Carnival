@@ -41,6 +41,8 @@ namespace Crazy
         int contador;
         
         Nivel* _level;
+        bool terminado;
+        bool dibujado_terminado;
         
         void Personaje(string jugador, unsigned short int weapon, bool modoHardcore, bool modoContrareloj);
         void Init();

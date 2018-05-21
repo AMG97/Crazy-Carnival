@@ -6,7 +6,7 @@
 
 #define T_ENTRADA 9
 #define T_MUERTE 4
-#define VIDA 300
+#define VIDA 250
 
 namespace Crazy
 {

@@ -110,7 +110,6 @@ namespace Crazy
                         if(contadorSpriteAtaque1==3 && tAtaque1.GetSegundos()>1)
                         {
                             _arma->Disparar(angulo);
-                            cout<<tAtaque1.GetSegundos()<<endl;
                             tAtaque1.ReiniciarSegundos();
                         }                        
                         if(contadorSpriteAtaque1==5)

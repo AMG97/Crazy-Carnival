@@ -25,6 +25,7 @@ namespace Crazy
         enfriamiento = 0.0f;
         caida=0;
         lastpared=0;
+        atacando=false;
         invulnerable=false;
     }
     

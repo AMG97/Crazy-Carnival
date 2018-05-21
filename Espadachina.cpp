@@ -99,6 +99,7 @@ namespace Crazy
                             sprite.CambiarOrigen(100/2,90/2);
                             //sprite.Mover(0,-22);
                             golpear=true;
+                            atacando=true;
                         }
                         sprite.CambiarTextRect(contadorSpriteAtaque1*100, 160, 100, 80);
                         sprite.CambiarOrigen(100/2,80/2);
@@ -107,6 +108,7 @@ namespace Crazy
                         if(contadorSpriteAtaque1==6)
                         {
                             Reposo(1);
+                            atacando=false;
                         }
                 break;
                 

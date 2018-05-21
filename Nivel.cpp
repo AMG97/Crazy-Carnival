@@ -273,8 +273,7 @@ namespace Crazy{
                         _enemigos.erase(_enemigos.begin());
                         peleandoBoss=false;
                         bossMatado = true;
-                        
-                        //AQUI LANZAR EL NUEVO NIVEL
+                        EstadoJuego::Instance()->terminado=true;
                         
                         delete boss;
                     }else if(boss->GetVida()>0){
