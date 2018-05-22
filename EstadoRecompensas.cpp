@@ -1,4 +1,5 @@
 #include "EstadoRecompensas.hpp"
+#include "GestorArchivo.hpp"
 
 namespace Crazy
 {
@@ -215,11 +216,40 @@ namespace Crazy
     {
         //Hacer cosas, supongo
         //pasar la variable opcion
+        short int a;
+        if(personaje==1){//Espadachina
+            switch (opcion){
+                case R1:
+                    a=2;
+                    break;
+                case R2:
+                    a=3;
+                    break;
+                case R3:
+                    a=4;
+                    break;
+            }
+        }else{
+            switch (opcion){
+                case R1:
+                    a=6;
+                    break;
+                case R2:
+                    a=7;
+                    break;
+                case R3:
+                    a=8;
+                    break;
+            }
+        }
+        EstadoJuego::Instance()->setArma(a);
+        EstadoJuego::Instance()->setNumNivel(2);
+        EstadoJuego::Instance()->Init();
+        GestorArchivo::Instance()->guardarPartida();
         CambiarEstadoMaquina();
     }
     void EstadoRecompensas::CambiarEstadoMaquina()
     {
-        // Cambiamos de estado la maquina
-        //_juego->maquina.Anyadir(xxxxxxxxxxxxxxxx, true);
+        _juego->maquina.Eliminar();
     }
 }

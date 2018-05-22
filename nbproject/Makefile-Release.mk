@@ -51,8 +51,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/EstadoMuerte.o \
 	${OBJECTDIR}/EstadoPartidas.o \
 	${OBJECTDIR}/EstadoPausa.o \
+	${OBJECTDIR}/EstadoRecompensas.o \
 	${OBJECTDIR}/EstadoSeleccion.o \
 	${OBJECTDIR}/EstadosManager.o \
+	${OBJECTDIR}/GestorArchivo.o \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/Motor.o \
@@ -81,11 +83,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-final
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-final: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-final ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Arma.o: Arma.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -167,6 +169,11 @@ ${OBJECTDIR}/EstadoPausa.o: EstadoPausa.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoPausa.o EstadoPausa.cpp
 
+${OBJECTDIR}/EstadoRecompensas.o: EstadoRecompensas.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadoRecompensas.o EstadoRecompensas.cpp
+
 ${OBJECTDIR}/EstadoSeleccion.o: EstadoSeleccion.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -176,6 +183,11 @@ ${OBJECTDIR}/EstadosManager.o: EstadosManager.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/EstadosManager.o EstadosManager.cpp
+
+${OBJECTDIR}/GestorArchivo.o: GestorArchivo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/GestorArchivo.o GestorArchivo.cpp
 
 ${OBJECTDIR}/Hud.o: Hud.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -223,7 +235,7 @@ ${OBJECTDIR}/Proyectil.o: Proyectil.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-carnival
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/crazy-final
 
 # Subprojects
 .clean-subprojects:

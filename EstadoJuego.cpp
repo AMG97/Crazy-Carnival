@@ -1,5 +1,6 @@
 #include "EstadoJuego.hpp"
 #include "Hud.hpp"
+#include "GestorArchivo.hpp"
 namespace Crazy
 {
     EstadoJuego::EstadoJuego()
@@ -91,7 +92,7 @@ namespace Crazy
             //_jugador=new Pistolero(5);//Las armas del pistolero son: 5 la primera y las recompesas 6,7 y 8
         _hud = new Hud(contrarreloj);
         
-        _jugador->setElixir(elixir);
+        _hud->ElixirEncontrado(elixir);
         _jugador->setPuntuacion(puntos);
         
         teclaPulsada = false;
@@ -290,6 +291,7 @@ namespace Crazy
     
     void EstadoJuego::Actualizar(float tiempoActual)
     { 
+        puntos = _jugador->getPuntuacion();
         if(!terminado){
             if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
                     _jugador->SetEstado(_jugador->GetMorir());
@@ -364,6 +366,14 @@ namespace Crazy
                 _hud->CambiarTexturaContador();
                 relojContrarreloj.ReiniciarSegundos();
             }
+        }else if(lvl_n==1){
+            short int p;
+            if(texturaJugador=="Espadachina")
+                p=1;
+            else
+                p=2;
+            _juego->_ventana->SetCamaraPorDefecto();
+            _juego->maquina.Anyadir(EstadoRecompensas::Instance(p),false);
         }
         
         
@@ -393,7 +403,8 @@ namespace Crazy
             _level->draw("Delante");
 
             _juego->_ventana->Mostrar();
-        }else if(dibujado_terminado==false && lvl_n==2){
+        }else if(dibujado_terminado==false && lvl_n==MAX_LVL){
+            GestorArchivo::Instance()->borrarGuardado();
             dibujado_terminado=true;
             Texto t_titulo;
             Texto t_atras;
@@ -426,8 +437,10 @@ namespace Crazy
     
     void EstadoJuego::Pausar()
     {
-        cout << "Juego pausado"<<endl;
-        _juego->maquina.Anyadir(EstadoPausa::Instance(), false);
+        if(!terminado){
+            cout << "Juego pausado"<<endl;
+            _juego->maquina.Anyadir(EstadoPausa::Instance(), false);
+        }
     }
     
     void EstadoJuego::Reanudar()
@@ -453,6 +466,12 @@ namespace Crazy
 
     bool EstadoJuego::getContrarreloj() {
         return contrarreloj;
+    }
+    void EstadoJuego::setNumNivel(unsigned short int l) {
+        lvl_n=l;
+    }
+    void EstadoJuego::setArma(unsigned short int a) {
+        arma=a;
     }
 
 }

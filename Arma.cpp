@@ -18,19 +18,19 @@ namespace Crazy
             break;
             case 1:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Espada1"));
-                danyo=10;
+                danyo=15;
             break;
             case 2:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Espada2"));
-                danyo=11.5;
+                danyo=17;
             break;
             case 3:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Espada3"));
-                danyo=11;
+                danyo=20;
             break;
             case 4:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Espada4"));
-                danyo=12;
+                danyo=25;
             break;
             case 5:
                 sprite.CambiarTextura(_juego->recursos.GetTextura("Pistola5"));
@@ -204,12 +204,9 @@ namespace Crazy
     
     void Arma::Disparar(float angulo)
     {
-        int t;
-        if(tipo==1 || tipo==2)
-            t=1;
-        else
-            t=2;
-        Proyectil *p=new Proyectil(t,danyo,angulo,sprite);
+        Proyectil *p;
+        if(tipo>0) p=new Proyectil(1+(tipo-1)/4,danyo,angulo,sprite);
+        else p=new Proyectil(2,danyo,angulo,sprite);
         proyectiles.push_back(p);
     }
 

@@ -40,10 +40,10 @@ namespace Crazy
         recursos.CargarTextura("Barrio","resources/Barrio.png");
         recursos.CargarTextura("Espadachina","resources/espadachina.png");
         recursos.CargarTextura("Espadachina-old","resources/espadachina-old.png");
-        recursos.CargarTextura("Espada1","resources/espada1.png");
-        recursos.CargarTextura("Espada2","resources/espada2.png");
-        recursos.CargarTextura("Espada3","resources/espada3.png");
-        recursos.CargarTextura("Espada4","resources/espada4.png");
+        recursos.CargarTextura("Espada1","resources/espadas/espada1.png");
+        recursos.CargarTextura("Espada2","resources/espadas/espada2.png");
+        recursos.CargarTextura("Espada3","resources/espadas/espada3.png");
+        recursos.CargarTextura("Espada4","resources/espadas/espada4.png");
         recursos.CargarTextura("Enemigo-Pistola1","resources/enemigo-pistola.png");
         recursos.CargarTextura("Puñal","resources/puñal.png");
         recursos.CargarTextura("Bala","resources/bala.png");
@@ -57,6 +57,7 @@ namespace Crazy
         recursos.CargarTextura("Pistola5","resources/Pistola5.png");
         recursos.CargarTextura("Pistola6","resources/Pistola6.png");
         recursos.CargarTextura("Pistola7","resources/Pistola7.png");
+        recursos.CargarTextura("Pistola8","resources/Pistola8.png");
         
         //Recompensas
         recursos.CargarTextura("Recompensas","resources/recompensas.png");
