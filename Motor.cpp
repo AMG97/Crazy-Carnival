@@ -718,4 +718,9 @@ namespace Motor
         return TeclaPulsada(sf::Keyboard::F9);
     }
 
+    bool Input::F12() {
+        return TeclaPulsada(sf::Keyboard::F12);
+    }
+
+
 }

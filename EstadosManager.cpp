@@ -65,5 +65,6 @@ namespace Crazy
             estados.top()->Vaciar();
             estados.pop();
         }
+        estados.top()->Reanudar();
     }
 }

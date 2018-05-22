@@ -253,6 +253,7 @@ namespace Motor
         bool E();
         bool Q();
         bool F9();
+        bool F12();
         
     private:
         Ventana* _ventana;

@@ -23,6 +23,8 @@ namespace Crazy{
     void GestorArchivo::Iniciar(unsigned short int n_slot) {
         slot = n_slot;
         
+        doc_save.Clear(); doc_stat.Clear();
+        doc_save.ClearError(); doc_stat.ClearError();
         doc_save = TiXmlDocument(("saves/Save"+to_string(slot)+".xml").c_str());
         doc_stat = TiXmlDocument(("saves/Stats"+to_string(slot)+".xml").c_str());
     }
