@@ -24,6 +24,7 @@ namespace Crazy
         Juego* _juego;
         Input* _input;
         Texto t_titulo;
+        Texto t_texto;
         Texto t_atras;
         SpriteM flecha;
         

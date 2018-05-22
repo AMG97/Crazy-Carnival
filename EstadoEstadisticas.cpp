@@ -41,6 +41,14 @@ namespace Crazy
         t_titulo.CentrarOrigen();
         t_titulo.CambiarPosicion((_juego->GetAncho()/2), 150);
         
+        t_texto.CambiarFuente(_juego->recursos.GetFuente("DK"));
+        t_texto.CambiarTexto("Proximamente");
+        t_texto.CambiarTamanyo(80);
+        t_texto.CentrarOrigen();
+        t_texto.CambiarPosicion((_juego->GetAncho()/2-20), t_titulo.GetY()+200);
+        t_texto.CambiarColorRojo();
+        t_texto.rotate(-20);
+        
         t_atras.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_atras.CambiarTexto("Volver");
         t_atras.CambiarTamanyo(50);
@@ -88,6 +96,7 @@ namespace Crazy
         _juego->_ventana->Limpiar();
         
         _juego->_ventana->DibujarTexto(t_titulo);
+        _juego->_ventana->DibujarTexto(t_texto);
         _juego->_ventana->DibujarTexto(t_atras);
         _juego->_ventana->DibujarSprite(flecha);
         
