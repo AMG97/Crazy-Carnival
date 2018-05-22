@@ -6,6 +6,11 @@ namespace Crazy
     EstadoPartidas::EstadoPartidas()
     {
         _juego = Juego::Instance();
+        for (int i = 0; i < 3; i++) {
+            partidas[i][0]=false;
+            partidas[i][1]=false;
+        }
+
     }
     
     EstadoPartidas* EstadoPartidas::_pinstance=0;
@@ -204,8 +209,8 @@ namespace Crazy
             _juego->_ventana->DibujarTexto(t_op1);
             _juego->_ventana->DibujarTexto(t_op2);
             
-            if ((partidas[SLOT1][1]) || (partidas[SLOT2][1]) ||
-                    (partidas[SLOT3][1])) {
+            if ((partidas[SLOT1-1][1]) || (partidas[SLOT2-1][1]) ||
+                    (partidas[SLOT3-1][1])) {
                 _juego->_ventana->DibujarTexto(t_op3);
             }
         }
@@ -233,24 +238,23 @@ namespace Crazy
             ruta = CARPETA+STATS+to_string(num)+EXTENSION;
             
             leerEstadisticas.open(ruta);
-            if (leerEstadisticas.is_open()) // Si hay estadisticas
-            {
-                hayPartidas = true;
-                partidas[num][1] = true;
+            if(leerEstadisticas.is_open()){
+                partidas[num-1][1]=true;
                 CambiarSlot(num);
                 
                 ruta = CARPETA+PARTIDA+to_string(num)+EXTENSION;
                 leerPartida.open(ruta);
-
-                if (leerPartida.is_open()) { // Si hay partida
-                    partidas[num][0] = true;
-                } else {
-                    partidas[num][0] = false;
+                
+                if(leerPartida.is_open()){
+                    partidas[num-1][0]=true;
+                }else{
+                    partidas[num-1][0]=false;
                 }
-
+                
                 leerPartida.close();
-            } else {
-                partidas[num][1] = false;
+                hayPartidas=true;
+            }else{
+                partidas[num-1][1]=false;
             }
             leerEstadisticas.close();
         }
@@ -277,11 +281,13 @@ namespace Crazy
         ComprobarPartidas();
         GestorArchivo* _gestor = GestorArchivo::Instance();
         _gestor->Iniciar((unsigned short int)slotGuardar);
-        if (!(partidas[slotGuardar][1])) {
+        if (!(partidas[slotGuardar-1][1])) {
+            //cout<<endl<<slotGuardar<<":"<<partidas[slotGuardar-1][0]<<partidas[slotGuardar-1][1]<<endl;
             t_op1.CambiarTexto("Nueva partida");
             t_op2.CambiarTexto("");
             t_op3.CambiarTexto("");
-        } else if (partidas[slotGuardar][1]&&partidas[slotGuardar][0]) {
+        } else if (partidas[slotGuardar-1][1]&&partidas[slotGuardar-1][0]) {
+            //cout<<endl<<slotGuardar<<":"<<partidas[slotGuardar-1][0]<<partidas[slotGuardar-1][1]<<endl;
             t_op1.CambiarTexto("Reanudar partida");
             t_op2.CambiarTexto("Borrar partida");
             t_op3.CambiarTexto("Ver estadisticas");
@@ -302,24 +308,26 @@ namespace Crazy
     
     void EstadoPartidas::Elegir()
     {
+        cout<<partidas[SLOT3-1][0]<<endl;
         switch(slotGuardar)
         {
             case SLOT1:
-                if (!partidas[SLOT1][0]) {
+                if (!partidas[SLOT1-1][0]) {
                     NuevaPartida();
                 } else {
                     CargarPartida();
                 }
                 break;
             case SLOT2:
-                if (!partidas[SLOT2][0]) {
+                if (!partidas[SLOT2-1][0]) {
                     NuevaPartida();
                 } else {
                     CargarPartida();
                 }
                 break;
             case SLOT3:
-                if (!partidas[SLOT3][0]) {
+                if (!partidas[SLOT3-1][0]) {
+                    cout<<"Entra"<<endl;
                     NuevaPartida();
                 } else {
                     CargarPartida();

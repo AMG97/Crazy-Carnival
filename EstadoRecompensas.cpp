@@ -1,4 +1,5 @@
 #include "EstadoRecompensas.hpp"
+#include "GestorArchivo.hpp"
 
 namespace Crazy
 {
@@ -244,6 +245,7 @@ namespace Crazy
         EstadoJuego::Instance()->setArma(a);
         EstadoJuego::Instance()->setNumNivel(2);
         EstadoJuego::Instance()->Init();
+        GestorArchivo::Instance()->guardarPartida();
         CambiarEstadoMaquina();
     }
     void EstadoRecompensas::CambiarEstadoMaquina()

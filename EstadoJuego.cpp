@@ -291,6 +291,7 @@ namespace Crazy
     
     void EstadoJuego::Actualizar(float tiempoActual)
     { 
+        puntos = _jugador->getPuntuacion();
         if(!terminado){
             if(_jugador->GetVida()<=0 || _hud->getContador() >= 180){
                     _jugador->SetEstado(_jugador->GetMorir());
@@ -402,7 +403,8 @@ namespace Crazy
             _level->draw("Delante");
 
             _juego->_ventana->Mostrar();
-        }else if(dibujado_terminado==false && lvl_n==2){
+        }else if(dibujado_terminado==false && lvl_n==MAX_LVL){
+            GestorArchivo::Instance()->borrarGuardado();
             dibujado_terminado=true;
             Texto t_titulo;
             Texto t_atras;

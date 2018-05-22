@@ -16,6 +16,8 @@
 #include "EstadoRecompensas.hpp"
 #include "GestorArchivo.hpp"
 
+#define MAX_LVL 2
+
 namespace Crazy
 {
     class EstadoJuego : public Estado

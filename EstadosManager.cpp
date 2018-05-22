@@ -59,7 +59,7 @@ namespace Crazy
     
     void EstadosManager::SaltarAlMenu()
     {
-        for (short int est=0; est<estados.size(); est++)
+        for (short int est=1; est<estados.size(); est++)
         {
             estados.top()->Vaciar();
             estados.pop();
