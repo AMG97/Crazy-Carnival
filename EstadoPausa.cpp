@@ -1,6 +1,4 @@
 #include "EstadoPausa.hpp"
-#include "EstadoJuego.hpp"
-#include "GestorArchivo.hpp"
 
 namespace Crazy
 {
@@ -82,15 +80,15 @@ namespace Crazy
     {
         if (_input->GetTipoEvento() == _input->Evento().KeyPressed)
         {
-            if (_input->Enter()) {
+            /*if (_input->Enter()) {
                 CambiarEstado();
-            }
+            }*/
             
             if ((_input->BackSpace()) || (_input->Escape())){
                Atras();
             }
             
-            if (abandonar) {
+            /*if (abandonar) {
                 if (_input->Arriba()) {
                     opcion--;
                     if (opcion < OP1)
@@ -106,13 +104,49 @@ namespace Crazy
                         opcion = OP1;
                     }
                 }
+            }*/
+        } else {
+            // Color rojo/blanco del texto
+            _input->RatonSobre(t_atras);
+            if (!abandonar) {
+                _input->RatonSobre(t_frase);
+            }
+            if (_input->RatonSobre(t_op))
+            {
+                CambiarFlecha(t_op);
+            }
+            if (_input->RatonSobre(t_op2))
+            {
+                CambiarFlecha(t_op2);
+            }
+            
+            // Clic sobre texto
+            if (_input->RatonIzq()) {
+                if(_input->IsTextoClicked(t_atras))
+                {
+                    Atras();
+                }
+                
+                if(_input->IsTextoClicked(t_frase))
+                {
+                    abandonar = true;
+                    Confirmar();
+                }
+                if(_input->IsTextoClicked(t_op))
+                {
+                    _juego->maquina.SaltarAlMenu();
+                }
+                if(_input->IsTextoClicked(t_op2))
+                {
+                    _juego->maquina.Eliminar();
+                }
             }
         }
     }
     
     void EstadoPausa::Actualizar(float tiempoActual)
     {
-        if (abandonar)
+        /*if (abandonar)
         {
             switch (opcion)
             {
@@ -123,7 +157,7 @@ namespace Crazy
                     CambiarFlecha(t_op2);
                     break;
             }
-        }
+        }*/
     }
     
     void EstadoPausa::Dibujar(float tiempoActual)
@@ -170,7 +204,7 @@ namespace Crazy
     
     void EstadoPausa::CambiarEstado()
     {
-        switch (opcion)
+        /*switch (opcion)
         {
             case ABANDONAR:
                 abandonar = true;
@@ -183,7 +217,7 @@ namespace Crazy
             case OP2:
                 _juego->maquina.Eliminar();
                 break;
-        }
+        }*/
     }
     
     void EstadoPausa::Abandonar()
@@ -197,6 +231,7 @@ namespace Crazy
     {
         t_frase.CambiarTexto("Seguro que quieres salir?");
         t_frase.CentrarOrigen();
+        t_frase.CambiarColorBlanco();
         
         t_op.CambiarFuente(_juego->recursos.GetFuente("DK"));
         t_op.CambiarTexto("Si");
