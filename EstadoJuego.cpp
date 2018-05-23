@@ -180,8 +180,7 @@ namespace Crazy
 
                 if (_input->F9()) _level->toggleFreeCamera();
                 if (_input->F12()){
-                    _jugador->SetPosX(0.92*_level->getAnchura()*48);
-                    cout<<"Esto vale: "<<_jugador->GetPosX()<<endl;
+                    _jugador->MoverX(_level->getAnchura()*0.9*48-_jugador->GetPosX());
                     _jugador->setInvulnerable(true);
                 }
             }
